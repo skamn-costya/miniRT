@@ -4,31 +4,19 @@ CCFLAGS = -Wall -Wextra -Werror
 
 INCLUDE_PATH = ./include/
 
-MANDATORY_PATH = ./source/
+MANDATORY_PATH = ./src/
 MANDATORY = \
-fdf \
-file/file_lst_utils \
-file/file_lst \
-file/lst_arr \
-file/fdf_arr \
-graphics/fdf_point \
-graphics/fdf_rotation_x \
-graphics/fdf_rotation_y \
-graphics/fdf_zoom \
-graphics/fdf_line \
-graphics/fdf_min_nax \
-graphics/fdf_prep \
-graphics/fdf_draw \
-graphics/fdf_rotation_z \
-graphics/camera \
-graphics/fdf_rotation
+minirt \
+graphics/ksx_init \
+graphics/ksx_prep
 
 MANDATORY_SRC = $(addprefix $(MANDATORY_PATH), $(addsuffix .c, $(MANDATORY)))
 MANDATORY_OBJ = $(MANDATORY_SRC:.c=.o)
 
 NO_BONUS = \
 graphics/fdf_utils \
-graphics/init
+graphics/init \
+graphics/ksx_prep
 
 NO_BONUS_SRC = $(addprefix $(MANDATORY_PATH), $(addsuffix .c, $(NO_BONUS)))
 NO_BONUS_OBJ = $(NO_BONUS_SRC:.c=.o)
@@ -57,8 +45,8 @@ LIBMLX_NAME = libmlx.a
 LIBS_PATH = ./libs/
 LIBS = -l${LIBFT} -l${LIBMLX} -lm -lXext -lX11
 
-$(NAME): ${LIBMLX_NAME} ${LIBFT_NAME} ${MANDATORY_OBJ} ${NO_BONUS_OBJ}
-	${CC} ${CCFLAGS} -I${INCLUDE_PATH} -L${LIBS_PATH} ${MANDATORY_OBJ} ${NO_BONUS_OBJ} ${LIBS} -o ${NAME}
+$(NAME): ${LIBMLX_NAME} ${LIBFT_NAME} ${MANDATORY_OBJ}
+	${CC} ${CCFLAGS} -I${INCLUDE_PATH} -L${LIBS_PATH} ${MANDATORY_OBJ} ${LIBS} -o ${NAME}
 
 all: $(NAME)
 

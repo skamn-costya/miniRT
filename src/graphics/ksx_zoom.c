@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_zoom.c                                         :+:      :+:    :+:   */
+/*   ksx_zoom.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 10:23:13 by ksorokol          #+#    #+#             */
-/*   Updated: 2024/11/01 18:08:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/06 23:03:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf_graphics.h"
+#include "ksx_graphics.h"
 #include <math.h>
 
 void	fdf_zoom(t_vars *vars, int d)
 {
 	int		idx_xy[2];
-	t_fdf	*pfdf;
 	int		mm[6];
 
 	idx_xy[1] = 0;

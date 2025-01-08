@@ -6,29 +6,29 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2024/12/26 18:03:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/06 23:03:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include <math.h>
 
-static void	fdf_draw_parallel(t_vars *vars);
-static void	fdf_draw_zord(t_vars *vars);
+static void	ksx_draw(t_vars *vars);
+static void	ksx_draw_zord(t_vars *vars);
 static void	fdf_lines(t_vars *vars, int idx_xy[]);
 
-void	fdf_draw(t_vars *vars)
+void	ksx_draw(t_vars *vars)
 {
 	if (vars->flags & PERSPEC)
 		impl_matrix2arr (vars->xy, vars->fdf, vars->cm);
 	if (vars->flags & Z_ORD)
-		fdf_draw_zord (vars);
+		ksx_draw_zord (vars);
 	else
-		fdf_draw_parallel(vars);
+		ksx_draw(vars);
 	print_statuses (vars);
 }
 
-static void	fdf_draw_parallel(t_vars *vars)
+static void	ksx_draw(t_vars *vars)
 {
 	int	idx_xy[2];
 
@@ -45,7 +45,7 @@ static void	fdf_draw_parallel(t_vars *vars)
 	}
 }
 
-static void	fdf_draw_zord(t_vars *vars)
+static void	ksx_draw_zord(t_vars *vars)
 {
 	int	idx_xy[2];
 	int	mm[6];
@@ -69,7 +69,7 @@ static void	fdf_draw_zord(t_vars *vars)
 	}
 }
 
-static void	fdf_lines(t_vars *vars, int idx_xy[])
+static void	ksx_lines(t_vars *vars, int idx_xy[])
 {
 	t_fdf	*fdf;
 
