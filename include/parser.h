@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser01.c                                         :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/25 00:16:31 by ksorokol         ###   ########.fr       */
+/*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/01/25 00:14:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
-#include "libft.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-int	check_file(char	*f_name)
-{
-	if(!f_name)
-		return (ft_printf("Warning: Please, check the filename.\n"), FALSE);
-	return (TRUE);
-}
+// parser01.c
+int	check_file(char	*f_name);
+
+#endif	// PARSER_H

@@ -34,17 +34,20 @@ OBJ_DIR = ./build/
 OBJS = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 LIBFT_DIR = ./lib/libft/
-LIBFT_INCLUDE = ./lib/libft/
-LIBFT = $(LIBFT_DIR)libft.a
+LIBFT_INCLUDE = ./lib/libft/include
+LIBFT_NAME = libft.a
+LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 
 MINILIBX_DIR = ./lib/minilibx/
 MINILIBX_INCLUDE = ./lib/minilibx/
-MINILIBX = $(MINILIBX_DIR)libx.a
+MINILIBX_NAME = libmlx.a
+MINILIBX = $(MINILIBX_DIR)$(MINILIBX_NAME)
 
-LIB_DIRS =	$(LIBFT_DIR) \
-			$(MINILIBX_DIR)
-LIBS =	$(LIBFT) \
-		$(MINILIBX)
+LIB_DIRS =	$(addprefix -L, $(LIBFT_DIR)) \
+			$(addprefix -L, $(MINILIBX_DIR))
+LIBS =	$(LIBFT_NAME:lib%.a=-l%) \
+		$(MINILIBX_NAME:lib%.a=-l%) \
+
 
 # Includes
 DIR_INCLUDE = ./include/
@@ -57,7 +60,7 @@ CC = cc
 CCFLAGS = -g -Wall -Wextra -Werror
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(LIBS)
-	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_DIRS) -o $(NAME)
+	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_DIRS) $(LIB_DIRS) $(LIBS) -o $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
