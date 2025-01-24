@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/06 23:03:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/24 23:50:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int	main(int argc, char *argv[])
 {
-	t_vars vars;
+	// t_vars vars;
 
 	(void) argc;
 	(void) argv;
-	init(&vars);
+	// init(&vars);
 	return (EXIT_SUCCESS);
 }

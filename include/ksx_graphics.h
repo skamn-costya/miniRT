@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/08 10:15:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/24 23:42:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ typedef struct s_vars
 {
 	void			*mlx;
 	void			*win;
-	t_img			img;
+	// t_img			img;
 	int				xy[2];
 	int				as_xyz[7];
 	float			zoom;
@@ -148,8 +148,8 @@ void	ksx_prep(t_vars *vars);
 // fdf_<obj>.c
 // t_point	get_point(t_fdf *fdf, int as_xyz[]);
 t_point	get_point(int xyz[], unsigned char flags);
-void	fdf_point(t_img img, t_point point);
-void	fdf_line(t_img	img, t_point point1, t_point point2);
+// void	fdf_point(t_img img, t_point point);
+// void	fdf_line(t_img	img, t_point point1, t_point point2);
 
 // fdf_draw.c
 void	fdf_draw(t_vars *vars);
