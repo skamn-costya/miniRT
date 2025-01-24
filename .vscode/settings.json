@@ -1,7 +1,7 @@
 {
 	"C_Cpp.default.includePath": [
 		"${workspaceRoot}/include",
-		"${workspaceRoot}/libft",
-		"${workspaceRoot}/minilibx-linux"
+		"${workspaceRoot}/lib/libft",
+		"${workspaceRoot}/lib/minilibx"
 	]
 }

@@ -8,7 +8,7 @@
 			"name": "C/C++: gcc build and debug",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceRoot}/miniRT",
+			"program": "${workspaceRoot}/minirt",
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
 			"environment": [],
