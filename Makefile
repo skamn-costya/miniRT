@@ -1,26 +1,28 @@
 # main() function in
 MAIN = minirt.c
 
-# Parser for argument file
+# Argument file Parser
 PARSER_DIR = parser/
-PARSER_FILE_NAME = parser01.c
-PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FILE_NAME))
+PARSER_FN = parser01.c
+PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 
-# Camera
+# Camera object
 CAMERA_DIR = graphics/camera/
-CAMERA_FILE_NAME =	ksx_camera_01.c \
+CAMERA_FN =	ksx_camera_01.c \
 					ksx_camera_02.c
-CAMERA = $(addprefix $(CAMERA_DIR), $(CAMERA_FILE_NAME))
+CAMERA = $(addprefix $(CAMERA_DIR), $(CAMERA_FN))
 
+# Cylinder object
 CYLINDER_DIR = graphics/cylinder/
-CYLINDER_FILE_NAME = ksx_cylinder01.c
-CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FILE_NAME))
+CYLINDER_FN = ksx_cylinder01.c
+CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FN))
 
+# Draw line
 LINE_DIR = graphics/line/
-LINE_FILE_NAME = ksx_line01.c
-LINE = $(addprefix $(LINE_DIR), $(LINE_FILE_NAME))
+LINE_FN = ksx_line01.c
+LINE = $(addprefix $(LINE_DIR), $(LINE_FN))
 
-# Sources
+# All sources
 SRC_DIR = ./src/
 SRC = 	$(CAMERA) \
 		$(CYLINDER) \
@@ -43,24 +45,24 @@ MINILIBX_INCLUDE = ./lib/minilibx/
 MINILIBX_NAME = libmlx.a
 MINILIBX = $(MINILIBX_DIR)$(MINILIBX_NAME)
 
-LIB_DIRS =	$(addprefix -L, $(LIBFT_DIR)) \
-			$(addprefix -L, $(MINILIBX_DIR))
-LIBS =	$(LIBFT_NAME:lib%.a=-l%) \
-		$(MINILIBX_NAME:lib%.a=-l%) \
+LIB_DIRS =	$(LIBFT_DIR) \
+			$(MINILIBX_DIR)
+LIBS =	$(LIBFT_NAME) \
+		$(MINILIBX_NAME) \
 
 
 # Includes
 DIR_INCLUDE = ./include/
-INCLUDE_DIRS =	$(addprefix -I, $(DIR_INCLUDE)) \
-				$(addprefix -I, $(LIBFT_INCLUDE)) \
-				$(addprefix -I, $(MINILIBX_INCLUDE))
+INCLUDE_DIRS =	$(DIR_INCLUDE) \
+				$(LIBFT_INCLUDE) \
+				$(MINILIBX_INCLUDE)
 
 NAME = minirt
 CC = cc
 CCFLAGS = -g -Wall -Wextra -Werror
 
-$(NAME): $(OBJ_DIR) $(OBJS) $(LIBS)
-	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_DIRS) $(LIB_DIRS) $(LIBS) -o $(NAME)
+$(NAME): $(OBJ_DIR) $(OBJS) make_lib
+	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_DIRS:%=-I%) $(LIB_DIRS:%=-L%) $(LIBS:lib%.a=-l%) -o $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
@@ -70,9 +72,9 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(LINE_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	$(CC) $(CCFLAGS) $(INCLUDE_DIRS) -c $< -o $@
+	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -c $< -o $@
 
-$(LIBS):
+make_lib:
 	$(MAKE) -C $(MINILIBX_DIR)
 	$(MAKE) -C $(LIBFT_DIR)
 
