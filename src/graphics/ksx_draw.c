@@ -6,14 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/25 12:10:22 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/25 22:29:30 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include <math.h>
 
-void	ksx_draw(t_vars *vars);
+// void	ksx_draw(t_vars *vars);
 // static void	ksx_draw_zord(t_vars *vars);
 // static void	fdf_lines(t_vars *vars, int idx_xy[]);
 
@@ -28,22 +28,22 @@ void	ksx_draw(t_vars *vars);
 // 	print_statuses (vars);
 // }
 
-void	ksx_draw(t_vars *vars)
-{
-	int	idx_xy[2];
+// void	ksx_draw(t_vars *vars)
+// {
+// 	int	idx_xy[2];
 
-	idx_xy[1] = 0;
-	while (idx_xy[1] < vars->xy[1])
-	{
-		idx_xy[0] = 0;
-		while (idx_xy[0] < vars->xy[0])
-		{
-			// fdf_lines (vars, idx_xy);
-			idx_xy[0]++;
-		}
-		idx_xy[1]++;
-	}
-}
+// 	idx_xy[1] = 0;
+// 	while (idx_xy[1] < vars->xy[1])
+// 	{
+// 		idx_xy[0] = 0;
+// 		while (idx_xy[0] < vars->xy[0])
+// 		{
+// 			// fdf_lines (vars, idx_xy);
+// 			idx_xy[0]++;
+// 		}
+// 		idx_xy[1]++;
+// 	}
+// }
 
 // static void	ksx_draw_zord(t_vars *vars)
 // {

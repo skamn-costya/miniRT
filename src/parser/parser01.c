@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/25 16:26:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/25 22:55:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 static t_list	*create_list(int fd);
 static t_fline	*create_fline(t_list **pp_list, char *str);
 static void		free_t_fline(void *p_fline);
+static int		is_obj (char *id);
 
 int	check_file(char	*f_name)
 {
@@ -70,6 +71,11 @@ static t_fline	*create_fline(t_list **pp_list, char *str)
 	p_fline->words = ft_split(str, ' ');
 	p_lst = ft_lstnew(p_fline);
 	ft_lstadd_back(pp_list, p_lst);
+	if (!is_obj(p_fline->words[0]))
+	{
+		ft_lstclear(pp_list, &free_t_fline);
+		return (printf("Error: Wrong file format!\n"), NULL);
+	}
 	if (!*pp_list)
 		*pp_list = p_lst;
 	return (p_fline);
@@ -80,10 +86,36 @@ static void	free_t_fline(void *p_fline)
 	t_fline	*p_fline_;
 
 	if (!p_fline)
-		return;
-	p_fline_ = (t_fline	*) p_fline;
+		return ;
+	p_fline_ = (t_fline *) p_fline;
 	if (p_fline_->words)
 		free_pp_obj((void **) p_fline_->words);
 	free (p_fline_->str);
 	free(p_fline);
+}
+
+static int	is_obj(char *id)
+{
+	static int	a = 0;
+	static int	c = 0;
+	static int	l = 0;
+
+	if (!ft_strcmp(id, AMBIENT_ID) && a)
+		return (FALSE);
+	if (!ft_strcmp(id, CAMERA_ID) && c)
+		return (FALSE);
+	if (!ft_strcmp(id, LIGHT_ID) && l)
+		return (FALSE);
+	if (!ft_strcmp(id, AMBIENT_ID))
+		return (a++, TRUE);
+	if (!ft_strcmp(id, CAMERA_ID))
+		return (c++, TRUE);
+	if (!ft_strcmp(id, LIGHT_ID))
+		return (l++, TRUE);
+	if (!ft_strcmp(id, SPHERE_ID)
+		|| !ft_strcmp(id, PLANE_ID)
+		|| !ft_strcmp(id, CYLINDER_ID))
+		return (TRUE);
+	else
+		return (FALSE);
 }

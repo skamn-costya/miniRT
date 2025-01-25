@@ -3,7 +3,9 @@ MAIN = minirt.c
 
 # Argument file parser
 PARSER_DIR = parser/
-PARSER_FN = parser01.c
+PARSER_FN =	parser01.c \
+			parser02.c \
+			parser03.c
 PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 
 # Camera object
