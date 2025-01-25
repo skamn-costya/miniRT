@@ -1,7 +1,7 @@
 # main() function in
 MAIN = minirt.c
 
-# Argument file Parser
+# Argument file parser
 PARSER_DIR = parser/
 PARSER_FN = parser01.c
 PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
@@ -9,7 +9,7 @@ PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 # Camera object
 CAMERA_DIR = graphics/camera/
 CAMERA_FN =	ksx_camera_01.c \
-					ksx_camera_02.c
+			ksx_camera_02.c
 CAMERA = $(addprefix $(CAMERA_DIR), $(CAMERA_FN))
 
 # Cylinder object
@@ -17,41 +17,54 @@ CYLINDER_DIR = graphics/cylinder/
 CYLINDER_FN = ksx_cylinder01.c
 CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FN))
 
-# Draw line
+# Draw line function
 LINE_DIR = graphics/line/
 LINE_FN = ksx_line01.c
 LINE = $(addprefix $(LINE_DIR), $(LINE_FN))
+
+# Graphics utilites
+GRAPHICS_DIR = graphics/
+GRAPHICS_FN =	ksx_draw.c
+GRAPHICS =	$(addprefix $(GRAPHICS_DIR), $(GRAPHICS_FN))
 
 # All sources
 SRC_DIR = ./src/
 SRC = 	$(CAMERA) \
 		$(CYLINDER) \
 		$(LINE) \
+		$(GRAPHICS) \
 		$(PARSER) \
-		$(MAIN)
-
+		$(MAIN) \
+		utils01.c
 SRCS =	$(addprefix $(SRC_DIR), $(SRC))
 
+# All .o files
 OBJ_DIR = ./build/
 OBJS = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
+# My libft library
 LIBFT_DIR = ./lib/libft/
 LIBFT_INCLUDE = ./lib/libft/include
 LIBFT_NAME = libft.a
 LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 
+# The MinilibX
 MINILIBX_DIR = ./lib/minilibx/
 MINILIBX_INCLUDE = ./lib/minilibx/
 MINILIBX_NAME = libmlx.a
 MINILIBX = $(MINILIBX_DIR)$(MINILIBX_NAME)
 
+# The math library
+LIBM_NAME = libm.a
+
+# All libraries
 LIB_DIRS =	$(LIBFT_DIR) \
 			$(MINILIBX_DIR)
 LIBS =	$(LIBFT_NAME) \
 		$(MINILIBX_NAME) \
+		$(LIBM_NAME)
 
-
-# Includes
+# Include pathes
 DIR_INCLUDE = ./include/
 INCLUDE_DIRS =	$(DIR_INCLUDE) \
 				$(LIBFT_INCLUDE) \

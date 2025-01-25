@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/24 23:42:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/25 14:13:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@
 # define WIDTH 1920
 # define HEIGHT 1044
 # define PI 3.14159265358979323846
-
-# define AMBIENT "A"
-# define CAMERA "C"
-# define LIGHT "L"
-# define SPHERE "sp"
-# define PLANE "pl"
-# define CYLINDER "cy"
 
 // Vector3D
 typedef struct s_vec3f

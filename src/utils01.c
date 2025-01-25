@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.h                                           :+:      :+:    :+:   */
+/*   utils01.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/25 15:27:18 by ksorokol         ###   ########.fr       */
+/*   Created: 2025/01/25 12:38:54 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/01/25 15:58:14 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSER_H
-# define PARSER_H
+#include "minirt.h"
 
-#include "libft.h"
-
-# define AMBIENT_ID		"A"
-# define CAMERA_ID		"C"
-# define LIGHT_ID		"L"
-# define SPHERE_ID		"sp"
-# define PLANE_ID		"pl"
-# define CYLINDER_ID	"cy"
-
-#define TRIM_SYMBOLS	" \\\a\b\f\n\r\t\v"
-
-struct s_fline
+void	free_pp_obj(void **pp_obj)
 {
-	char	*str;
-	char	**words;
+	size_t	idx;
+
+	if (!pp_obj)
+		return ;
+	if (!pp_obj[0])
+		return (free (pp_obj));
+	idx = 0;
+	while (pp_obj[idx])
+	{
+		free (pp_obj[idx]);
+		idx++;
+	}
+	free (pp_obj);
 }
-typedef t_fline;
-
-// parser01.c
-int		check_file(char	*f_name);
-
-#endif	// PARSER_H
