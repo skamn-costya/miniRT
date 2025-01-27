@@ -6,29 +6,32 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/25 22:02:33 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/27 11:41:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KSX_GRAPHICS_H
 # define KSX_GRAPHICS_H
 
-# define WIDTH 1920
-# define HEIGHT 1044
 # define PI 3.14159265358979323846
 
-typedef struct	s_rgb
+// Indexes of color in s_argb structure
+#define A 3
+#define R 2
+#define G 1
+#define B 0
+
+// Data type for colors, 32 bites: 8 - alfa, 8 - red, 8 - green, 8 - blue
+typedef struct	s_argb
 {
-	unsigned char	R;
-	unsigned char	G;
-	unsigned char	B;
-}	t_rgb;
+	unsigned char	argb[4];
+}	t_argb;
 
 typedef struct s_pixel
 {
 	long	x;
 	long	y;
-	t_rgb	color;
+	t_argb	color;
 }	t_pixel;
 
 typedef struct s_point
@@ -36,7 +39,7 @@ typedef struct s_point
 	float	x;
 	float	y;
 	float	z;
-	t_rgb	color;
+	t_argb	color;
 }	t_point;
 
 typedef struct s_vector

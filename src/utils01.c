@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:38:54 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/25 15:58:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:31:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-void	free_pp_obj(void **pp_obj)
+// move to libft !!!
+void	ft_free_pp_obj(void **pp_obj)
 {
 	size_t	idx;
 

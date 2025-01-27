@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/25 22:04:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:50:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,19 @@ struct s_fline
 typedef t_fline;
 
 // parser01.c
-int		check_file(char	*f_name);
+t_list	*check_file(char *f_name);
+void	free_t_fline(void *p_fline);
+
+// parser02.c
+t_list	*create_obj_list(t_list **pp_line_list);
+
+
+// parser03.c
+int		is_f_number(char *str);
+int		is_i_number(char *str);
+
+// parser04.c
+void	free_t_object(void *p_obj);
+void	parser_crash_exit(t_list **pp_line_list, t_list **pp_obj_list);
 
 #endif	// PARSER_H

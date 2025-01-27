@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/25 14:10:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:00:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,15 @@
 
 int	main(int argc, char *argv[])
 {
+	t_list	*p_obj_list;
 	// t_vars vars;
 
 	if (argc !=2)
 		return (printf("Warning: Incorrect number of arguments.\n"), EXIT_SUCCESS);
-	if (!check_file(argv[1]))
+	p_obj_list = check_file(argv[1]);
+	if (!p_obj_list)
 		return (printf("Warning: Incorrect the scene description file.\n"), EXIT_SUCCESS);
+	ft_lstclear(&p_obj_list, &free_t_object);
 	// init(&vars);
 	return (EXIT_SUCCESS);
 }

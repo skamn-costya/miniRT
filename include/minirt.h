@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/25 22:20:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/27 19:31:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # define RETURN_ERR -1
 # define TRUE 1
 # define FALSE 0
+
+// # define WIDTH 1920
+// # define HEIGHT 1044
+# define WIDTH 800
+# define HEIGHT 600
 
 typedef enum e_obj
 {
@@ -57,15 +62,16 @@ typedef struct s_object
 {
 	t_obj_id	id;
 	float		ratio;
-	t_rgb		rgb;
+	t_argb		argb;
 	t_vector	coord;
 	t_vector	vector;
 	int			fov;
 	float		d;
 	float		h;
+	char		*texture;
 }	t_object;
 
 // utils01.c
-void	free_pp_obj(void **ppp_obj);
+void	ft_free_pp_obj(void **pp_obj);
 
 #endif	// MINIRT_H
