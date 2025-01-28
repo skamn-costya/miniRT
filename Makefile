@@ -6,7 +6,8 @@ PARSER_DIR = parser/
 PARSER_FN =	parser01.c \
 			parser02.c \
 			parser03.c \
-			parser04.c
+			parser04.c \
+			parser05.c
 PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 
 # Camera object

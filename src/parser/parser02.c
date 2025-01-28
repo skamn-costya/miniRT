@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 22:57:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/29 00:22:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ t_list	*create_obj_list(t_list **pp_line_list)
 			create_camera(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], LIGHT_ID))
 			create_light(pp_line_list, &p_obj_list, p_fline);
+		else if (!ft_strcmp(p_fline->words[0], SPHERE_ID))
+			create_sphere(pp_line_list, &p_obj_list, p_fline);
+		else if (!ft_strcmp(p_fline->words[0], PLANE_ID))
+			create_plane(pp_line_list, &p_obj_list, p_fline);
+		else if (!ft_strcmp(p_fline->words[0], CYLINDER_ID))
+			create_cylinder(pp_line_list, &p_obj_list, p_fline);
 		p_list = p_list->next;
 	}
 	return (p_obj_list);
@@ -101,6 +107,8 @@ static t_object	*create_camera(t_list **pp_line_list,
 	p_obj->fov = ft_atoi(p_fline->words[3]);
 	if (p_obj->fov < 0 || p_obj->fov > 180)
 		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (p_fline->words[4])
+		parser_crash_exit(pp_line_list, pp_obj_list);
 	return (p_obj);
 }
 
@@ -119,6 +127,8 @@ static t_object	*create_light(t_list **pp_line_list,
 	if (p_obj->ratio < 0 || p_obj->ratio > 1)
 		parser_crash_exit(pp_line_list, pp_obj_list);
 	if (!get_rgb(p_fline->words, 3, p_obj, R))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (p_fline->words[4])
 		parser_crash_exit(pp_line_list, pp_obj_list);
 	return (p_obj);
 }

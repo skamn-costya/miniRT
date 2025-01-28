@@ -6,120 +6,70 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 22:51:29 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/29 00:24:38 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
-#include <sys/stat.h>
-#include <fcntl.h>
 
-int	is_f_number(char *str)
+t_object	*create_sphere(t_list **pp_line_list,
+	t_list **pp_obj_list, t_fline *p_fline)
 {
-	size_t	idx;
-	int		dot;
+	t_object	*p_obj;
 
-	idx = 0;
-	dot = 0;
-	if (str[idx] == '-' || str[idx] == '+')
-		idx++;
-	while (str[idx])
-	{
-		if (!ft_isdigit(str[idx]) && str[idx] != '.')
-			return (FALSE);
-		if (str[idx] == '.')
-			dot++;
-		if (dot > 1)
-			return (FALSE);
-		idx++;
-	}
-	return (TRUE);
+	p_obj = create_obj(pp_line_list, pp_obj_list);
+	p_obj->id = SPHERE;
+	if (!get_coord(p_fline->words, 1, p_obj))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (p_fline->words[2] && !is_f_number(p_fline->words[2]))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	p_obj->d = ft_atof(p_fline->words[2]);
+	if (!get_rgb(p_fline->words, 3, p_obj, R))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (p_fline->words[4])
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	return (p_obj);
 }
 
-int	is_i_number(char *str)
+t_object	*create_plane(t_list **pp_line_list,
+	t_list **pp_obj_list, t_fline *p_fline)
 {
-	size_t	idx;
+	t_object	*p_obj;
 
-	idx = 0;
-	if (str[idx] == '-' || str[idx] == '+')
-		idx++;
-	while (str[idx])
-	{
-		if (!ft_isdigit(str[idx]))
-			return (FALSE);
-		idx++;
-	}
-	return (TRUE);
+	p_obj = create_obj(pp_line_list, pp_obj_list);
+	p_obj->id = PLANE;
+	if (!get_coord(p_fline->words, 1, p_obj))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (!get_vector(p_fline->words, 2, p_obj))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (!get_rgb(p_fline->words, 3, p_obj, R))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (p_fline->words[4])
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	return (p_obj);
 }
 
-int	get_rgb(char **pp_str, size_t idx, t_object *p_obj, int idx_rgb)
+t_object	*create_cylinder(t_list **pp_line_list,
+	t_list **pp_obj_list, t_fline *p_fline)
 {
-	char	**pp_str_;
-	size_t	size;
-	int		i;
+	t_object	*p_obj;
 
-	if (!pp_str || !pp_str[idx])
-		return (FALSE);
-	pp_str_ = ft_split(pp_str[idx], ',');
-	size = ft_parrsize((void **) pp_str_);
-	if (size != 3)
-		return (ft_parrclear((void **)pp_str_), FALSE);
-	while (size--)
-	{
-		if (!is_i_number(pp_str_[size]))
-			return (ft_parrclear((void **)pp_str_), FALSE);
-		i = ft_atoi(pp_str_[size]);
-		if (i < 0 || i > 255)
-			return (ft_parrclear((void **)pp_str_), FALSE);
-		p_obj->color.argb[idx_rgb] = i;
-		idx_rgb--;
-	}
-	return (ft_parrclear((void **)pp_str_), TRUE);
-}
-
-int	get_coord(char **pp_str, size_t idx, t_object *p_obj)
-{
-	char	**pp_str_;
-	size_t	size;
-	float	f;
-
-	if (!pp_str || !pp_str[idx])
-		return (FALSE);
-	pp_str_ = ft_split(pp_str[idx], ',');
-	size = ft_parrsize((void **) pp_str_);
-	if (size != 3)
-		return (ft_parrclear((void **)pp_str_), FALSE);
-	while (size--)
-	{
-		if (!is_f_number(pp_str_[size]))
-			return (ft_parrclear((void **)pp_str_), FALSE);
-		f = ft_atof(pp_str_[size]);
-		p_obj->coord.xyz[size] = f;
-	}
-	return (ft_parrclear((void **)pp_str_), TRUE);
-}
-
-int	get_vector(char **pp_str, size_t idx, t_object *p_obj)
-{
-	char	**pp_str_;
-	size_t	size;
-	float	f;
-
-	if (!pp_str || !pp_str[idx])
-		return (FALSE);
-	pp_str_ = ft_split(pp_str[idx], ',');
-	size = ft_parrsize((void **) pp_str_);
-	if (size != 3)
-		return (ft_parrclear((void **)pp_str_), FALSE);
-	while (size--)
-	{
-		if (!is_f_number(pp_str_[size]))
-			return (ft_parrclear((void **)pp_str_), FALSE);
-		f = ft_atof(pp_str_[size]);
-		if (f < -1 || f > 1)
-			return (ft_parrclear((void **)pp_str_), FALSE);
-		p_obj->vector.xyz[size] = f;
-	}
-	return (ft_parrclear((void **)pp_str_), TRUE);
+	p_obj = create_obj(pp_line_list, pp_obj_list);
+	p_obj->id = CYLINDER;
+	if (!get_coord(p_fline->words, 1, p_obj))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (!get_vector(p_fline->words, 2, p_obj))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (p_fline->words[3] && !is_f_number(p_fline->words[3]))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	p_obj->d = ft_atof(p_fline->words[3]);
+	if (p_fline->words[4] && !is_f_number(p_fline->words[4]))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	p_obj->h = ft_atof(p_fline->words[4]);
+	if (!get_rgb(p_fline->words, 5, p_obj, R))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (p_fline->words[6])
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	return (p_obj);
 }
