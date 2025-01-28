@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 21:53:35 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:57:04 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,29 +73,52 @@ static t_object	*create_ambient(t_list **pp_line_list,
 
 	p_obj = create_obj(pp_line_list, pp_obj_list);
 	p_obj->id = AMBIENT;
-	if (p_fline->words && p_fline->words[1] && !is_f_number(p_fline->words[1]))
+	if (p_fline->words[1] && !is_f_number(p_fline->words[1]))
 		parser_crash_exit(pp_line_list, pp_obj_list);
 	p_obj->ratio = ft_atof(p_fline->words[1]);
 	if (p_obj->ratio < 0 || p_obj->ratio > 1)
 		parser_crash_exit(pp_line_list, pp_obj_list);
-	get_rgb(p_fline->words, 2, p_obj, R);
+	if (!get_rgb(p_fline->words, 2, p_obj, R))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (p_fline->words[3])
+		parser_crash_exit(pp_line_list, pp_obj_list);
 	return (p_obj);
 }
 
 static t_object	*create_camera(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
-	(void) pp_line_list;
-	(void) pp_obj_list;
-	(void) p_fline;
-	return (NULL);
+	t_object	*p_obj;
+
+	p_obj = create_obj(pp_line_list, pp_obj_list);
+	p_obj->id = CAMERA;
+	if (!get_coord(p_fline->words, 1, p_obj))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (!get_vector(p_fline->words, 2, p_obj))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (p_fline->words && p_fline->words[3] && !is_i_number(p_fline->words[3]))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	p_obj->fov = ft_atoi(p_fline->words[3]);
+	if (p_obj->fov < 0 || p_obj->fov > 180)
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	return (p_obj);
 }
 
 static t_object	*create_light(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
-	(void) pp_line_list;
-	(void) pp_obj_list;
-	(void) p_fline;
-	return (NULL);
+	t_object	*p_obj;
+
+	p_obj = create_obj(pp_line_list, pp_obj_list);
+	p_obj->id = LIGHT;
+	if (!get_coord(p_fline->words, 1, p_obj))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (p_fline->words[2] && !is_f_number(p_fline->words[2]))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	p_obj->ratio = ft_atof(p_fline->words[2]);
+	if (p_obj->ratio < 0 || p_obj->ratio > 1)
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	if (!get_rgb(p_fline->words, 3, p_obj, R))
+		parser_crash_exit(pp_line_list, pp_obj_list);
+	return (p_obj);
 }

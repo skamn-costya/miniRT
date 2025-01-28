@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/27 11:41:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:26:11 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ typedef struct s_point
 
 typedef struct s_vector
 {
-	float	x;
-	float	y;
-	float	z;
+	float	xyz[3];
 }	t_vector;
 
 // # include "ksx_camera.h"
