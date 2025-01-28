@@ -51,27 +51,34 @@ LIBFT_INCLUDE = ./lib/libft
 LIBFT_NAME = libft.a
 LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 
-# The MinilibX
-MINILIBX_DIR = ./lib/minilibx/
-MINILIBX_INCLUDE = ./lib/minilibx/
-MINILIBX_NAME = libmlx.a
-MINILIBX = $(MINILIBX_DIR)$(MINILIBX_NAME)
+# # The MinilibX
+# MINILIBX_DIR = ./lib/minilibx/
+# MINILIBX_INCLUDE = ./lib/minilibx/
+# MINILIBX_NAME = libmlx.a
+# MINILIBX = $(MINILIBX_DIR)$(MINILIBX_NAME)
+
+# The MLX42
+MLX42_BUILD_DIR = ./lib/MLX42/
+MLX42_DIR = ./lib/MLX42/build/
+MLX42_INCLUDE = ./lib/MLX42/include/MLX42/
+MLX42_NAME = libmlx42.a
+MLX42 = $(MLX42_DIR)$(MLX42_NAME)
 
 # The math library
 LIBM_NAME = libm.a
 
 # All libraries
 LIB_DIRS =	$(LIBFT_DIR) \
-			$(MINILIBX_DIR)
+			$(MLX42_DIR)
 LIBS =	$(LIBFT_NAME) \
-		$(MINILIBX_NAME) \
+		$(MLX42_NAME) \
 		$(LIBM_NAME)
 
 # Include pathes
 DIR_INCLUDE = ./include/
 INCLUDE_DIRS =	$(DIR_INCLUDE) \
 				$(LIBFT_INCLUDE) \
-				$(MINILIBX_INCLUDE)
+				$(MLX42_INCLUDE)
 
 NAME = minirt
 CC = cc
@@ -91,14 +98,15 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -c $< -o $@
 
 make_lib:
-	$(MAKE) -C $(MINILIBX_DIR)
 	$(MAKE) -C $(LIBFT_DIR)
+	cd $(MLX42_BUILD_DIR) && cmake -B build
+	cd $(MLX42_BUILD_DIR) && cmake --build build
 
 all: $(NAME)
 
 clean:
-	$(MAKE) clean -C $(MINILIBX_DIR)
 	$(MAKE) clean -C $(LIBFT_DIR)
+	cd $(MLX42_BUILD_DIR) && cmake --build build --target clean
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
