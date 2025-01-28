@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 19:06:54 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:12:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static t_list	*create_line_list(int fd)
 	{
 		p_str[1] = ft_strtrim(p_str[0], TRIM_SYMBOLS);
 		free (p_str[0]);
-		// p_str[0] = ft_strreplace(p_str[1], TRIM_SYMBOLS, ' ');
 		p_str[0] = comma_trim(p_str[1]);
 		free (p_str[1]);
 		if (ft_strlen(p_str[0]) > 0)
@@ -84,9 +83,6 @@ static t_fline	*create_fline(t_list **pp_line_list, char *str)
 	p_fline->words = ft_split(str, ' ');
 	p_lst = ft_lstnew(p_fline);
 	ft_lstadd_back(pp_line_list, p_lst);
-	// if (!is_obj(p_fline->words[0]))
-	// 	printf("\"%s\" object isn't correct or dublicate!\n", str);
-	 	// parser_crash_exit(pp_line_list, NULL);
 	if (!*pp_line_list)
 		*pp_line_list = p_lst;
 	return (p_fline);

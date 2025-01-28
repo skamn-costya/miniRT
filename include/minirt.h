@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/27 23:55:56 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 21:50:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef struct s_object
 {
 	t_obj_id	id;
 	float		ratio;
-	t_argb		argb;
+	t_argb		color;
 	t_vector	coord;
 	t_vector	vector;
 	int			fov;
@@ -72,6 +72,8 @@ typedef struct s_object
 }	t_object;
 
 // utils01.c
-// void	ft_free_pp_obj(void **pp_obj);
 
 #endif	// MINIRT_H
+
+// sudo apt updatesudo apt update
+// sudo apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev

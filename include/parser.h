@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 19:06:30 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 21:48:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_list	*create_obj_list(t_list **pp_line_list);
 // parser03.c
 int		is_f_number(char *str);
 int		is_i_number(char *str);
-int		get_rgb(char **pp_str, size_t idx, unsigned char *argb, int idx_rgb);
+int		get_rgb(char **pp_str, size_t idx, t_object *p_obj, int idx_rgb);
 
 // parser04.c
 char	*comma_trim(char *str);

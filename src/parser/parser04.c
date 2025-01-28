@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 19:12:29 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 22:11:49 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,10 @@ char	*comma_trim(char *str)
 		return (ft_parrclear((void **) p_str), ft_strdup(str));
 	idx = 0;
 	str_ = ft_strtrim(p_str[idx], TRIM_SYMBOLS);
-	while (idx < size)
+	while (++idx < size)
 	{
 		str_ = ft_new_strcmp(str_, ",", 1);
 		str_ = ft_new_strcmp(str_, ft_strtrim(p_str[idx], TRIM_SYMBOLS), 3);
-		idx++;
 	}
 	return (ft_parrclear((void **) p_str), str_);
 }
