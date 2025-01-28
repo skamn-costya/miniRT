@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/27 19:34:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:56:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ int	is_f_number(char *str)
 int	is_i_number(char *str)
 {
 	size_t	idx;
-	int		dot;
 
 	idx = 0;
-	dot = 0;
 	if (str[idx] == '-' || str[idx] == '+')
 		idx++;
 	while (str[idx])
@@ -62,7 +60,7 @@ int	get_rgb(char **pp_str, size_t idx, t_argb *argb, int idx_rgb)
 
 	if (!pp_str || !pp_str[idx])
 		return (FALSE);
-	str = ft_strtrim(pp_str[idx], ',');
+	str = ft_strtrim(pp_str[idx], ",");
 	if (is_i_number(str))
 	{
 		argb->argb[idx_rgb] = ft_atoi(str);
@@ -72,9 +70,10 @@ int	get_rgb(char **pp_str, size_t idx, t_argb *argb, int idx_rgb)
 	else
 	{
 		pp_str_ = ft_split (str, ',');
-		get_rgb ()
-		ft_free_pp_obj (pp_str_);
+		// get_rgb ()
+		ft_parrclear ((void **) pp_str_);
 	}
+	return (FALSE);
 }
 
 // int	get_coord(t_list *p_list, t_vector)

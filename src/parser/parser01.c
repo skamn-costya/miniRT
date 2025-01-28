@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/27 14:12:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:57:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,12 @@ static t_list	*create_line_list(int fd)
 	{
 		p_str[1] = ft_strtrim(p_str[0], TRIM_SYMBOLS);
 		free (p_str[0]);
-		if (ft_strlen(p_str[1]) > 0)
-			create_fline(&p_line_list, p_str[1]);
+		p_str[0] = ft_strreplace(p_str[1], TRIM_SYMBOLS, ' ');
+		free (p_str[1]);
+		if (ft_strlen(p_str[0]) > 0)
+			create_fline(&p_line_list, p_str[0]);
 		else
-			free (p_str[1]);
+			free (p_str[0]);
 		p_str[0] = get_next_line(fd);
 	}
 	return (p_line_list);
@@ -84,7 +86,7 @@ void	free_t_fline(void *p_fline)
 		return ;
 	p_fline_ = (t_fline *) p_fline;
 	if (p_fline_->words)
-		ft_free_pp_obj((void **) p_fline_->words);
+		ft_parrclear((void **) p_fline_->words);
 	free (p_fline_->str);
 	free(p_fline);
 }

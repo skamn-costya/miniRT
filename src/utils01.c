@@ -6,26 +6,9 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:38:54 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/27 19:31:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 00:26:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 
-// move to libft !!!
-void	ft_free_pp_obj(void **pp_obj)
-{
-	size_t	idx;
-
-	if (!pp_obj)
-		return ;
-	if (!pp_obj[0])
-		return (free (pp_obj));
-	idx = 0;
-	while (pp_obj[idx])
-	{
-		free (pp_obj[idx]);
-		idx++;
-	}
-	free (pp_obj);
-}

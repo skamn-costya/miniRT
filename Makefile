@@ -5,7 +5,8 @@ MAIN = minirt.c
 PARSER_DIR = parser/
 PARSER_FN =	parser01.c \
 			parser02.c \
-			parser03.c
+			parser03.c \
+			parser04.c
 PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 
 # Camera object
@@ -46,7 +47,7 @@ OBJS = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
 # My libft library
 LIBFT_DIR = ./lib/libft/
-LIBFT_INCLUDE = ./lib/libft/include
+LIBFT_INCLUDE = ./lib/libft
 LIBFT_NAME = libft.a
 LIBFT = $(LIBFT_DIR)$(LIBFT_NAME)
 
