@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/27 23:57:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 13:05:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_list	*check_file(char *f_name)
 		return (printf("Warning: \"%s\" couldn't be open.\n", f_name), NULL);
 	p_list = create_line_list (fd);
 	close (fd);
-	result = create_obj_list(&p_list);
+	result = NULL; //create_obj_list(&p_list);
 	ft_lstclear(&p_list, &free_t_fline);
 	return (result);
 }
@@ -51,7 +51,10 @@ static t_list	*create_line_list(int fd)
 		p_str[0] = ft_strreplace(p_str[1], TRIM_SYMBOLS, ' ');
 		free (p_str[1]);
 		if (ft_strlen(p_str[0]) > 0)
-			create_fline(&p_line_list, p_str[0]);
+		{
+			if (!create_fline(&p_line_list, p_str[0]))
+				printf("Memory allocation failed\nSome object may be lost ...\n");
+		}
 		else
 			free (p_str[0]);
 		p_str[0] = get_next_line(fd);
@@ -66,13 +69,14 @@ static t_fline	*create_fline(t_list **pp_line_list, char *str)
 
 	p_fline = (t_fline *) malloc(sizeof (t_fline));
 	if (!p_fline)
-		parser_crash_exit(pp_line_list, NULL);
+		return (NULL);
 	p_fline->str = str;
 	p_fline->words = ft_split(str, ' ');
 	p_lst = ft_lstnew(p_fline);
 	ft_lstadd_back(pp_line_list, p_lst);
 	if (!is_obj(p_fline->words[0]))
-		parser_crash_exit(pp_line_list, NULL);
+		printf("\"%s\" object isn't correct or dublicate!\n", str);
+	 	// parser_crash_exit(pp_line_list, NULL);
 	if (!*pp_line_list)
 		*pp_line_list = p_lst;
 	return (p_fline);
