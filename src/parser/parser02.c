@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 00:26:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:54:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,12 @@ static t_object	*create_ambient(t_list **pp_line_list,
 
 	p_obj = create_obj(pp_line_list, pp_obj_list);
 	p_obj->id = AMBIENT;
-	if (!is_f_number(p_fline->words[1]))
+	if (p_fline->words && p_fline->words[1] && !is_f_number(p_fline->words[1]))
 		parser_crash_exit(pp_line_list, pp_obj_list);
 	p_obj->ratio = ft_atof(p_fline->words[1]);
 	if (p_obj->ratio < 0 || p_obj->ratio > 1)
 		parser_crash_exit(pp_line_list, pp_obj_list);
+	get_rgb(p_fline->words, 2, p_obj->argb.argb, R);
 	return (p_obj);
 }
 

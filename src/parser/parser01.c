@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 13:05:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 19:06:54 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,27 @@ static int		is_obj (char *id);
 t_list	*check_file(char *f_name)
 {
 	int		fd;
-	t_list	*p_list;
+	t_list	*p_list[2];
 	t_list	*result;
+	t_fline	*p_fline;
 
 	if (!f_name)
 		return (printf("Warning: The filename is NULL.\n"), NULL);
 	fd = open (f_name, O_RDONLY);
 	if (fd < 0)
 		return (printf("Warning: \"%s\" couldn't be open.\n", f_name), NULL);
-	p_list = create_line_list (fd);
+	p_list[0] = create_line_list (fd);
 	close (fd);
-	result = NULL; //create_obj_list(&p_list);
-	ft_lstclear(&p_list, &free_t_fline);
+	p_list[1] = p_list[0];
+	while (p_list[1])
+	{
+		p_fline = p_list[1]->content;
+		if (!is_obj(p_fline->words[0]))
+			parser_crash_exit(&p_list[0], NULL);
+		p_list[1] = p_list[1]->next;
+	}
+	result = create_obj_list(&p_list[0]);
+	ft_lstclear(&p_list[0], &free_t_fline);
 	return (result);
 }
 
@@ -48,7 +57,8 @@ static t_list	*create_line_list(int fd)
 	{
 		p_str[1] = ft_strtrim(p_str[0], TRIM_SYMBOLS);
 		free (p_str[0]);
-		p_str[0] = ft_strreplace(p_str[1], TRIM_SYMBOLS, ' ');
+		// p_str[0] = ft_strreplace(p_str[1], TRIM_SYMBOLS, ' ');
+		p_str[0] = comma_trim(p_str[1]);
 		free (p_str[1]);
 		if (ft_strlen(p_str[0]) > 0)
 		{
@@ -74,8 +84,8 @@ static t_fline	*create_fline(t_list **pp_line_list, char *str)
 	p_fline->words = ft_split(str, ' ');
 	p_lst = ft_lstnew(p_fline);
 	ft_lstadd_back(pp_line_list, p_lst);
-	if (!is_obj(p_fline->words[0]))
-		printf("\"%s\" object isn't correct or dublicate!\n", str);
+	// if (!is_obj(p_fline->words[0]))
+	// 	printf("\"%s\" object isn't correct or dublicate!\n", str);
 	 	// parser_crash_exit(pp_line_list, NULL);
 	if (!*pp_line_list)
 		*pp_line_list = p_lst;

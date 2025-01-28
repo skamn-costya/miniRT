@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/27 23:56:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/28 17:59:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,38 @@ int	is_i_number(char *str)
 	return (TRUE);
 }
 
-int	get_rgb(char **pp_str, size_t idx, t_argb *argb, int idx_rgb)
+int	get_rgb(char **pp_str, size_t idx, unsigned char *argb, int idx_rgb)
 {
 	char	*str;
 	char	**pp_str_;
+	size_t	size;
+	int		i;
 
 	if (!pp_str || !pp_str[idx])
-		return (FALSE);
-	str = ft_strtrim(pp_str[idx], ",");
-	if (is_i_number(str))
+		return (-1);
+	if (idx_rgb < 0)
+		return (TRUE);
+	pp_str_ = ft_split(pp_str[idx], ',');
+	size = ft_parrsize((void **) pp_str_);
+	if (size > 3)
+		return (ft_parrclear((void **)pp_str_), FALSE);
+	while (size--)
 	{
-		argb->argb[idx_rgb] = ft_atoi(str);
-		if (argb->argb[idx_rgb] < 0 || argb->argb[idx_rgb] > 255)
-			return (free (str), FALSE);
+		str = ft_strtrim(pp_str_[size], TRIM_SYMBOLS);
+		if (!is_i_number(str))
+			return (free (str), ft_parrclear((void **)pp_str_), FALSE);
+		i = ft_atoi(str);
+		free (str);
+		if (i < 0 || i > 255)
+			return (free (str), ft_parrclear((void **)pp_str_), FALSE);
+		argb[idx_rgb] = i;
+		idx_rgb--;
 	}
-	else
-	{
-		pp_str_ = ft_split (str, ',');
-		// get_rgb ()
-		ft_parrclear ((void **) pp_str_);
-	}
-	return (FALSE);
+	if (idx_rgb != 0)
+		get_rgb(pp_str, idx + 1, argb, idx_rgb);
+	return (ft_parrclear((void **)pp_str_), TRUE);
 }
 
 // int	get_coord(t_list *p_list, t_vector)
 // {
-	
 // }
