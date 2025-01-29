@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/29 18:19:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/29 23:34:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,22 @@ int	main(int argc, char *argv[])
 	// t_vars vars;
 
 	t_vector	v[3];
+	t_point		p;
 
 	v[0].xyz[X] = 1;
-	v[0].xyz[Y] = 1;
-	v[0].xyz[Z] = 1;
-	v[1].xyz[X] = -1;
+	v[0].xyz[Y] = 0;
+	v[0].xyz[Z] = 0;
+	v[1].xyz[X] = 0;
 	v[1].xyz[Y] = 1;
-	v[1].xyz[Z] = 1;
+	v[1].xyz[Z] = 0;
 	v[2].xyz[X] = 0;
 	v[2].xyz[Y] = 0;
 	v[2].xyz[Z] = 0;
-	get_cross_product(v[0], v[1], v[2]);
+	p.xyz[X] = 2;
+	p.xyz[Y] = 2;
+	p.xyz[Z] = 2;
+	get_cross_product(v[0], v[1], &v[2]);
+	is_point_on_ray(p, v[0]);
 
 	t_matrix_f3 m;
 	m.e[M_11] = 0;

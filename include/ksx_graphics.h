@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/29 18:12:37 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/29 23:05:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define KSX_GRAPHICS_H
 
 # define PI 3.14159265358979323846
-# define PRECISION	0.0001
+# define PRECISION	0.0001f
 
 // Indexes of color in s_argb structure
 # define A 3

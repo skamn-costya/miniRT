@@ -6,53 +6,81 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/29 18:20:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/29 23:16:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
-#include "ksx_graphics.h"
+#include "ksx_utils.h"
 
+static float	determinant4_1(t_matrix_f4 m);
+static float	determinant4_2(t_matrix_f4 m);
 
-// void	fdf_draw_image(t_vars *vars)
-// {
-// 	mlx_destroy_image (vars->mlx, vars->img.img);
-// 	vars->img.img = mlx_new_image(vars->mlx, WIDTH, HEIGHT);
-// 	vars->img.addr = mlx_get_data_addr (vars->img.img, &vars->img.bpp,
-// 			&vars->img.line_len, &vars->img.endian);
-// 	vars->img.size = HEIGHT * vars->img.line_len;
-// 	fdf_draw (vars);
-// 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
-// 	print_statuses (vars);
-// }
+float	determinant2(t_matrix_f2 m)
+{
+	float	f;
 
-// float	fraction(t_point p, t_point p1, t_point p2)
-// {
-// 	int		dx;
-// 	int		dy;
-// 	float	fraction;
+	f = m.e[M_11] * m.e[M_22];
+	f -= m.e[M_12] * m.e[M_21];
+	return (f);
+}
 
-// 	dx = (p2.x - p1.x);
-// 	dy = (p2.y - p1.y);
-// 	if (abs(dx) > abs(dy))
-// 	{
-// 		if (p1.x != p2.x)
-// 			fraction = (float)(p.x - p1.x) / dx;
-// 		else
-// 			fraction = 0;
-// 	}
-// 	else
-// 	{
-// 		if (p1.y != p2.y)
-// 			fraction = (float)(p.y - p1.y) / dy;
-// 		else
-// 			fraction = 0;
-// 	}
-// 	return (fraction);
-// }
+float	determinant3(t_matrix_f3 m)
+{
+	float	f;
 
-// void	print_statuses(t_vars *vars)
-// {
-// 	mlx_string_put(vars->mlx, vars->win, 25, 25, 0X88888888,
-// 		"This is an isometric projection");
-// }
+	f = m.e[M_11] * m.e[M_22] * m.e[M_33];
+	f += m.e[M_12] * m.e[M_23] * m.e[M_31];
+	f += m.e[M_13] * m.e[M_21] * m.e[M_32];
+	f -= m.e[M_13] * m.e[M_22] * m.e[M_31];
+	f -= m.e[M_11] * m.e[M_23] * m.e[M_32];
+	f -= m.e[M_12] * m.e[M_21] * m.e[M_33];
+	return (f);
+}
+
+float	determinant4(t_matrix_f4 m)
+{
+	float	f;
+
+	f = determinant4_1(m);
+	f += determinant4_2(m);
+	return (f);
+}
+
+static float	determinant4_1(t_matrix_f4 m)
+{
+	float	f;
+
+	f = m.e[M_11] * m.e[M_22] * m.e[M_33] * m.e[M_44];
+	f -= m.e[M_11] * m.e[M_22] * m.e[M_34] * m.e[M_43];
+	f -= m.e[M_11] * m.e[M_23] * m.e[M_32] * m.e[M_44];
+	f += m.e[M_11] * m.e[M_23] * m.e[M_34] * m.e[M_42];
+	f += m.e[M_11] * m.e[M_24] * m.e[M_32] * m.e[M_43];
+	f -= m.e[M_11] * m.e[M_24] * m.e[M_33] * m.e[M_42];
+	f -= m.e[M_12] * m.e[M_21] * m.e[M_33] * m.e[M_44];
+	f += m.e[M_12] * m.e[M_21] * m.e[M_34] * m.e[M_43];
+	f += m.e[M_12] * m.e[M_23] * m.e[M_31] * m.e[M_44];
+	f -= m.e[M_12] * m.e[M_23] * m.e[M_34] * m.e[M_41];
+	f -= m.e[M_12] * m.e[M_24] * m.e[M_31] * m.e[M_43];
+	f += m.e[M_12] * m.e[M_24] * m.e[M_33] * m.e[M_41];
+	return (f);
+}
+
+static float	determinant4_2(t_matrix_f4 m)
+{
+	float	f;
+
+	f = m.e[M_13] * m.e[M_21] * m.e[M_32] * m.e[M_44];
+	f -= m.e[M_13] * m.e[M_21] * m.e[M_34] * m.e[M_42];
+	f -= m.e[M_13] * m.e[M_22] * m.e[M_31] * m.e[M_44];
+	f += m.e[M_13] * m.e[M_22] * m.e[M_34] * m.e[M_41];
+	f += m.e[M_13] * m.e[M_24] * m.e[M_31] * m.e[M_42];
+	f -= m.e[M_13] * m.e[M_24] * m.e[M_32] * m.e[M_41];
+	f -= m.e[M_14] * m.e[M_21] * m.e[M_32] * m.e[M_43];
+	f += m.e[M_14] * m.e[M_21] * m.e[M_33] * m.e[M_42];
+	f += m.e[M_14] * m.e[M_22] * m.e[M_31] * m.e[M_43];
+	f -= m.e[M_14] * m.e[M_22] * m.e[M_33] * m.e[M_41];
+	f -= m.e[M_14] * m.e[M_23] * m.e[M_31] * m.e[M_42];
+	f += m.e[M_14] * m.e[M_23] * m.e[M_32] * m.e[M_41];
+	return (f);
+}
