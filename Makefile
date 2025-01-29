@@ -10,6 +10,12 @@ PARSER_FN =	parser01.c \
 			parser05.c
 PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 
+# KSX utilites
+UTILS_DIR = graphics/utils/
+UTILS_FN =	ksx_utils01.c \
+			ksx_utils02.c
+UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
+
 # Camera object
 CAMERA_DIR = graphics/camera/
 CAMERA_FN =	ksx_camera_01.c \
@@ -33,7 +39,8 @@ GRAPHICS =	$(addprefix $(GRAPHICS_DIR), $(GRAPHICS_FN))
 
 # All sources
 SRC_DIR = ./src/
-SRC = 	$(CAMERA) \
+SRC = 	$(UTILS) \
+		$(CAMERA) \
 		$(CYLINDER) \
 		$(LINE) \
 		$(GRAPHICS) \
@@ -91,6 +98,7 @@ $(NAME): $(OBJ_DIR) $(OBJS) make_lib
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)$(PARSER_DIR)
+	mkdir -p $(OBJ_DIR)$(UTILS_DIR)
 	mkdir -p $(OBJ_DIR)$(CAMERA_DIR)
 	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)
 	mkdir -p $(OBJ_DIR)$(LINE_DIR)

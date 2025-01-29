@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 21:50:37 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/29 11:00:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_object
 	t_obj_id	id;
 	float		ratio;
 	t_argb		color;
-	t_vector	coord;
+	t_point		coord;
 	t_vector	vector;
 	int			fov;
 	float		d;
