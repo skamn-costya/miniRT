@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/29 23:21:51 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:28:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	get_normal(t_vector v1, t_vector *v);
 int		is_point_on_ray(const t_point p, const t_vector v);
 
 // ksx_utils03.c
-float	determinant2(t_matrix_f2 m);
-float	determinant3(t_matrix_f3 m);
-float	determinant4(t_matrix_f4 m);
+float	determinant2(t_matrix2 m);
+float	determinant3(t_matrix3 m);
+float	determinant4(t_matrix4 m);
 
 // ksx_utils04.c
 

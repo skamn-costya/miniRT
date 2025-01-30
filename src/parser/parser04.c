@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/29 00:10:51 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:11:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	get_rgb(char **pp_str, size_t idx, t_object *p_obj, int idx_rgb)
 		return (FALSE);
 	pp_str_ = ft_split(pp_str[idx], ',');
 	size = ft_parrsize((void **) pp_str_);
-	if (size != 3)
+	if (size != COLORE_SIZE)
 		return (ft_parrclear((void **)pp_str_), FALSE);
 	while (size--)
 	{
@@ -73,7 +73,7 @@ int	get_rgb(char **pp_str, size_t idx, t_object *p_obj, int idx_rgb)
 		if (i < 0 || i > 255)
 			return (ft_parrclear((void **)pp_str_), FALSE);
 		p_obj->color.argb[idx_rgb] = i;
-		idx_rgb--;
+		idx_rgb++;
 	}
 	return (ft_parrclear((void **)pp_str_), TRUE);
 }
@@ -119,7 +119,7 @@ int	get_vector(char **pp_str, size_t idx, t_object *p_obj)
 		f = ft_atof(pp_str_[size]);
 		if (f < -1 || f > 1)
 			return (ft_parrclear((void **)pp_str_), FALSE);
-		p_obj->vector.xyz[size] = f;
+		p_obj->vector.dir.xyz[size] = f;
 	}
 	return (ft_parrclear((void **)pp_str_), TRUE);
 }

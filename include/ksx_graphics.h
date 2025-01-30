@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/29 23:05:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:28:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,107 +16,146 @@
 # define PI 3.14159265358979323846
 # define PRECISION	0.0001f
 
-// Indexes of color in s_argb structure
-# define A 3
-# define R 2
-# define G 1
-# define B 0
+// Size if color structure 3 for RGB, 4 for ARGB
+# define COLORE_SIZE 3
+
+// Indexes of color in argb structure
+# define A 0
+# define R 1
+# define G 2
+# define B 3
 
 // Indexes of coordinate in xyz structure
 # define X 0
 # define Y 1
 # define Z 2
 
-// // Indexes of position in matrix structure s_matrix_f2
-// # define M2_11 0
-// # define M2_12 1
-// # define M2_21 2
-// # define M2_22 3
-
-// // Indexes of position in matrix structure s_matrix_f3
-// # define M3_11 0
-// # define M3_12 1
-// # define M3_13 2
-// # define M3_21 3
-// # define M3_22 4
-// # define M3_23 5
-// # define M3_31 6
-// # define M3_32 7
-// # define M3_33 8
-
-// // Indexes of position in matrix structure s_matrix_f4
-// # define M4_11 0
-// # define M4_12 1
-// # define M4_13 2
-// # define M4_14 3
-// # define M4_21 4
-// # define M4_22 5
-// # define M4_23 6
-// # define M4_24 7
-// # define M4_31 8
-// # define M4_32 9
-// # define M4_33 10
-// # define M4_34 11
-// # define M4_41 12
-// # define M4_42 13
-// # define M4_43 14
-// # define M4_44 15
-
-// Indexes of position in matrix structure s_matrix_fn
-# define M_11 0
-# define M_12 1
-# define M_21 2
-# define M_22 3
-# define M_13 4
-# define M_23 5
-# define M_31 6
-# define M_32 7
-# define M_33 8
-# define M_14 9
-# define M_24 10
-# define M_34 11
-# define M_41 12
-# define M_42 13
-# define M_43 14
-# define M_44 15
-
 // Data type for colors, 32 bites: 8 - alfa, 8 - red, 8 - green, 8 - blue
-typedef struct	s_argb
+typedef struct s_argb
 {
-	unsigned char	argb[4];
+	union
+	{
+		struct
+		{
+			unsigned char	a;
+			unsigned char	r;
+			unsigned char	g;
+			unsigned char	b;
+		};
+		unsigned char	argb[4];
+	};
 }	t_argb;
 
 typedef struct s_pixel
 {
-	long	xy[2];
+	union
+	{
+		struct
+		{
+			int	x;
+			int	y;
+		};
+		int	xy[2];
+	};
 	t_argb	color;
 }	t_pixel;
 
 typedef struct s_point
 {
-	float	xyz[3];
-	t_argb	color;
+	union
+	{
+		struct
+		{
+			float	x;
+			float	y;
+			float	z;
+		};
+		float	xyz[3];
+	};
 }	t_point;
 
 typedef struct s_vector
 {
-	float	xyz[3];
+	t_point	start;
+	t_point	dir;
 }	t_vector;
 
-typedef struct s_matrix_f2
+typedef struct s_matrix2
 {
-	float	e[4];
-}	t_matrix_f2;
+	union
+	{
+		struct
+		{
+			float	e_11;
+			float	e_12;
+			float	e_21;
+			float	e_22;
+		};
+		float	elems[4];
+	};
+}	t_matrix2;
 
-typedef struct s_matrix_f3
+typedef struct s_matrix3
 {
-	float	e[9];
-}	t_matrix_f3;
+	union
+	{
+		struct
+		{
+			float	e_11;
+			float	e_12;
+			float	e_13;
+			float	e_21;
+			float	e_22;
+			float	e_23;
+			float	e_31;
+			float	e_32;
+			float	e_33;
+		};
+		float	elems[9];
+	};
+}	t_matrix3;
 
-typedef struct s_matrix_f4
+typedef struct s_matrix4
 {
-	float	e[16];
-}	t_matrix_f4;
+	union
+	{
+		struct
+		{
+			float	e_11;
+			float	e_12;
+			float	e_13;
+			float	e_14;
+			float	e_21;
+			float	e_22;
+			float	e_23;
+			float	e_24;
+			float	e_31;
+			float	e_32;
+			float	e_33;
+			float	e_34;
+			float	e_41;
+			float	e_42;
+			float	e_43;
+			float	e_44;
+		};
+		float	elems[16];
+	};
+}	t_matrix4;
+
+typedef struct s_triangle
+{
+	union
+	{
+		struct
+		{
+			t_point	p1;
+			t_point	p2;
+			t_point	p3;
+		};
+		t_point	points[3];
+	};
+	t_argb	color;
+}	t_triangle;
 
 // # include "ksx_camera.h"
 // # include "mlx.h"
@@ -235,7 +274,7 @@ typedef struct s_matrix_f4
 // // fdf_<obj>.c
 // // t_point	get_point(t_fdf *fdf, int as_xyz[]);
 // t_point	get_point(int xyz[], unsigned char flags);
-// // void	fdf_point(t_img img, t_point point);
+// // void	fdf_point(t_img img, t_point float	elem_11;point);
 // // void	fdf_line(t_img	img, t_point point1, t_point point2);
 
 // // fdf_draw.c
