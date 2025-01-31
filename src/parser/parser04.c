@@ -6,14 +6,12 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/30 10:42:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:44:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
-#include <sys/stat.h>
-#include <fcntl.h>
 
 int	is_f_number(char *str)
 {
@@ -105,6 +103,7 @@ int	get_vector(char **pp_str, size_t idx, t_object *p_obj)
 	char	**pp_str_;
 	size_t	size;
 	float	f;
+	size_t	idx_;
 
 	if (!pp_str || !pp_str[idx])
 		return (FALSE);
@@ -112,6 +111,7 @@ int	get_vector(char **pp_str, size_t idx, t_object *p_obj)
 	size = ft_parrsize((void **) pp_str_);
 	if (size != 3)
 		return (ft_parrclear((void **)pp_str_), FALSE);
+	idx_ = 0;
 	while (size--)
 	{
 		if (!is_f_number(pp_str_[size]))
@@ -119,7 +119,8 @@ int	get_vector(char **pp_str, size_t idx, t_object *p_obj)
 		f = ft_atof(pp_str_[size]);
 		if (f < -1 || f > 1)
 			return (ft_parrclear((void **)pp_str_), FALSE);
-		p_obj->vector.dir.xyz[size] = f;
+		p_obj->norm.dir.xyz[idx_] = f;
+		idx_++;
 	}
 	return (ft_parrclear((void **)pp_str_), TRUE);
 }

@@ -6,11 +6,10 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 01:08:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:45:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
 #include "ksx_utils.h"
 
 

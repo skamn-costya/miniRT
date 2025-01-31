@@ -6,12 +6,15 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/30 10:43:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:43:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KSX_GRAPHICS_H
 # define KSX_GRAPHICS_H
+
+# define KSX_TRUE 1
+# define KSX_FALSE 0
 
 # define PI 3.14159265358979323846
 # define PRECISION	0.0001f
@@ -154,7 +157,20 @@ typedef struct s_triangle
 		};
 		t_point	points[3];
 	};
-	t_argb	color;
+	union
+	{
+		struct
+		{
+			t_point	g_p1;
+			t_point	g_p2;
+			t_point	g_p3;
+		};
+		t_point	g_points[3];
+	};
+	t_argb		color;
+	t_vector	norm;
+	int			generation;
+
 }	t_triangle;
 
 // # include "ksx_camera.h"

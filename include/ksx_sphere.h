@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_sphere.c                                       :+:      :+:    :+:   */
+/*   ksx_sphere.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 09:49:52 by ksorokol         ###   ########.fr       */
+/*   Created: 2025/01/31 09:45:42 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/01/31 09:46:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ksx_sphere.h"
-#include <math.h>
+#ifndef KSX_SPHERE_H
+# define KSX_SPHERE_H
 
-t_triangle	**creat_sphere()
-{}
+# include "ksx_graphics.h"
+# include "ksx_utils.h"
+# include <math.h>
+
+#endif

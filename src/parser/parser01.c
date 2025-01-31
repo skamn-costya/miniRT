@@ -6,18 +6,18 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 22:12:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:52:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
-#include <sys/stat.h>
+// #include <sys/stat.h>
 #include <fcntl.h>
 
 static t_list	*create_line_list(int fd);
 static t_fline	*create_fline(t_list **pp_list, char *str);
-static int		is_obj (char *id);
+static int		is_obj(char *id);
 
 t_list	*check_file(char *f_name)
 {
@@ -62,7 +62,10 @@ static t_list	*create_line_list(int fd)
 		if (ft_strlen(p_str[0]) > 0)
 		{
 			if (!create_fline(&p_line_list, p_str[0]))
-				printf("Memory allocation failed\nSome object may be lost ...\n");
+			{
+				printf("Memory allocation failed\n");
+				printf("Some object may be lost ...\n");
+			}
 		}
 		else
 			free (p_str[0]);

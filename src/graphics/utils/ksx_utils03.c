@@ -6,11 +6,10 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/30 10:28:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:45:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
 #include "ksx_utils.h"
 
 static float	determinant4_1(t_matrix4 m);

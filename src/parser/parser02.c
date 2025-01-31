@@ -6,14 +6,12 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/29 00:22:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:44:41 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
-#include <sys/stat.h>
-#include <fcntl.h>
 
 static t_object	*create_ambient(t_list **pp_line_list,
 					t_list **pp_obj_list, t_fline *p_fline);

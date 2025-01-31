@@ -6,11 +6,10 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/30 12:18:52 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 09:45:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minirt.h"
 #include "ksx_utils.h"
 
 void	get_cross_product(const t_vector v1, const t_vector v2, t_vector *v)
@@ -69,6 +68,6 @@ int	is_point_on_ray(const t_point p, const t_vector v)
 	f[0] = get_magnitude(v2);
 	f[1] = get_magnitude(v);
 	if (f[0] / f[1] > PRECISION / 2.0f)
-		return (FALSE);
-	return (TRUE);
+		return (KSX_FALSE);
+	return (KSX_TRUE);
 }
