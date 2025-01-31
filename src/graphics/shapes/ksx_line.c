@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_line01.c                                       :+:      :+:    :+:   */
+/*   ksx_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:52:47 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 18:23:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:52:46 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
-// #include "MLX42.h"
 #include <math.h>
 
 static void	ksx_line_(mlx_image_t *img, t_pixel p1, t_pixel p2, int32_t d_xy[]);
@@ -21,7 +20,7 @@ static void	ksx_line_x(mlx_image_t *img, t_pixel p1, t_pixel p2, int32_t d_xy[])
 
 void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2)
 {
-	float		m;
+	float	m;
 	int32_t	d_xy[4];
 
 	mlx_put_pixel(img, pix1.x, pix1.y, pix1.color.mlx_color);

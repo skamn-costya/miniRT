@@ -6,15 +6,15 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 16:17:11 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:57:36 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KSX_GRAPHICS_H
 # define KSX_GRAPHICS_H
 
-#include <stdint.h>
-#include "MLX42.h"
+# include "MLX42.h"
+# include <stdint.h>
 
 // # define WIDTH 1920
 // # define HEIGHT 1044
@@ -182,12 +182,14 @@ typedef struct s_triangle
 
 }	t_triangle;
 
-// ksx_line01.c
-void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
-
 // ksx_init.c
 mlx_t	*ksx_init(void);
 
+// ksx_prep.c
+int		ksx_prep(void *p_vars);
+
+void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
+void	ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);
 
 // # include "ksx_camera.h"
 // # include "mlx.h"
@@ -340,4 +342,4 @@ mlx_t	*ksx_init(void);
 // // void	rotation_z_p(t_fdf *fdf, float a);
 // // void	rotation_z_c(t_fdf *fdf, float a);
 
-#endif
+#endif	// KSX_GRAPHICS_H //

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:55:19 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 16:26:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 18:42:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,40 +18,11 @@
 mlx_t	*ksx_init(void)
 {
 	mlx_t		*mlx;
-	mlx_image_t	*img;
 	
-	mlx = mlx_init(WIDTH, HEIGHT, "Color Game", false);
+	mlx = mlx_init(WIDTH, HEIGHT, "miniRT by Stepan & Konstantin", false);
 	if (!mlx)
 		return (printf("MLX42 initialization failed!\n"), NULL);
-	img = mlx_new_image(mlx, WIDTH, HEIGHT);
-	mlx_put_pixel(img, 10, 10, 0xffffffff);
-	mlx_put_pixel(img, 9, 10, 0xffffffff);
-	mlx_put_pixel(img, 10, 9, 0xffffffff);
-	mlx_put_pixel(img, 11, 10, 0xffffffff);
-	mlx_put_pixel(img, 10, 11, 0xffffffff);
-
-	t_pixel p1, p2;
-
-	p1.x = 25;
-	p1.y = 25;
-	p1.color.a = 255;
-	p1.color.r = 255;
-	p1.color.g = 255;
-	p1.color.b = 255;
-
-	p2.x = 125;
-	p2.y = 50;
-	p2.color.a = 255;
-	p2.color.r = 255;
-	p2.color.g = 255;
-	p2.color.b = 255;
-
-	ksx_line(img, p1, p2);
-
-	if (mlx_image_to_window(mlx, img, 0, 0) < 0)
-        return (printf("Image to window failed!\n"), NULL);
-	mlx_loop(mlx);
-	return (NULL);
+	return (mlx);
 	// vars->mlx = mlx_init();
 	// vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "miniRT by ksorokol");
 	// mlx_hook(vars->win, 2, 1L << 0, esc_65307, vars);

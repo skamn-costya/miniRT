@@ -6,13 +6,13 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 09:45:42 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 14:42:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:03:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "ksx_graphics.h"
 
 #ifndef KSX_SPHERE_H
 # define KSX_SPHERE_H
 
-#endif
+# include "ksx_graphics.h"
+
+#endif	// KSX_SPHERE_H //

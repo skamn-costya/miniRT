@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 15:54:30 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:18:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,12 @@ typedef struct s_object
 	char		*texture;
 }	t_object;
 
-// utils01.c
+typedef struct s_graphics
+{
+	t_list		*objs;
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+}	t_graphics;
 
 #endif	// MINIRT_H
 

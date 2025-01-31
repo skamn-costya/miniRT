@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/29 00:22:36 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 19:04:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,4 @@ char		*comma_trim(char *str);
 void		free_t_object(void *p_obj);
 void		parser_crash_exit(t_list **pp_line_list, t_list **pp_obj_list);
 
-#endif	// PARSER_H
+#endif	// PARSER_H //

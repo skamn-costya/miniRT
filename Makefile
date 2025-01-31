@@ -29,15 +29,19 @@ CYLINDER_DIR = graphics/cylinder/
 CYLINDER_FN = ksx_cylinder01.c
 CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FN))
 
-# Draw line function
-LINE_DIR = graphics/line/
-LINE_FN = ksx_line01.c
-LINE = $(addprefix $(LINE_DIR), $(LINE_FN))
+# Draw shapes functions
+SHAPES_DIR = graphics/shapes/
+SHAPES_FN = ksx_pixel.c \
+			ksx_line.c \
+			ksx_circle.c
+			
+SHAPES = $(addprefix $(SHAPES_DIR), $(SHAPES_FN))
 
 # Graphics utilites
 GRAPHICS_DIR = graphics/
 GRAPHICS_FN =	ksx_draw.c \
-				ksx_init.c
+				ksx_init.c \
+				ksx_prep.c
 GRAPHICS =	$(addprefix $(GRAPHICS_DIR), $(GRAPHICS_FN))
 
 # All sources
@@ -45,7 +49,7 @@ SRC_DIR = ./src/
 SRC = 	$(UTILS) \
 		$(CAMERA) \
 		$(CYLINDER) \
-		$(LINE) \
+		$(SHAPES) \
 		$(GRAPHICS) \
 		$(PARSER) \
 		$(MAIN) \
@@ -100,7 +104,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(UTILS_DIR)
 	mkdir -p $(OBJ_DIR)$(CAMERA_DIR)
 	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)
-	mkdir -p $(OBJ_DIR)$(LINE_DIR)
+	mkdir -p $(OBJ_DIR)$(SHAPES_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -c $< -o $@
