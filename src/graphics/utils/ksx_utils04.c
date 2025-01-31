@@ -6,13 +6,45 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 09:45:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:20:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ksx_graphics.h"
 #include "ksx_utils.h"
+#include <math.h>
 
+float	fraction(t_pixel p, t_pixel p1, t_pixel p2)
+{
+	int		dx;
+	int		dy;
+	float	fraction;
 
+	dx = (p2.x - p1.x);
+	dy = (p2.y - p1.y);
+	if (ksx_abs(dx) > ksx_abs(dy))
+	{
+		if (p1.x != p2.x)
+			fraction = (float)(p.x - p1.x) / dx;
+		else
+			fraction = 0;
+	}
+	else
+	{
+		if (p1.y != p2.y)
+			fraction = (float)(p.y - p1.y) / dy;
+		else
+			fraction = 0;
+	}
+	return (fraction);
+}
+
+int32_t	ksx_abs(int32_t num)
+{
+	if (num < 0)
+		return (num * -1);
+	return (num);
+}
 
 // t_point	get_poit_sphere(t_vector v, t_point p, float r)
 // {

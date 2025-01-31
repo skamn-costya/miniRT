@@ -6,12 +6,20 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 09:43:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 16:17:11 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KSX_GRAPHICS_H
 # define KSX_GRAPHICS_H
+
+#include <stdint.h>
+#include "MLX42.h"
+
+// # define WIDTH 1920
+// # define HEIGHT 1044
+# define WIDTH 800
+# define HEIGHT 600
 
 # define KSX_TRUE 1
 # define KSX_FALSE 0
@@ -19,14 +27,14 @@
 # define PI 3.14159265358979323846
 # define PRECISION	0.0001f
 
-// Size if color structure 3 for RGB, 4 for ARGB
+// Size if color structure 3 for RGB, 4 for RGBA
 # define COLOR_SIZE 3
 
-// Indexes of color in argb structure
+// Indexes of color in colot structure
 # define A 0
-# define R 1
+# define B 1
 # define G 2
-# define B 3
+# define R 3
 
 // Indexes of coordinate in xyz structure
 # define X 0
@@ -34,20 +42,21 @@
 # define Z 2
 
 // Data type for colors, 32 bites: 8 - alfa, 8 - red, 8 - green, 8 - blue
-typedef struct s_argb
+typedef struct s_color
 {
 	union
 	{
 		struct
 		{
-			unsigned char	a;
-			unsigned char	r;
-			unsigned char	g;
-			unsigned char	b;
+			uint8_t	a;
+			uint8_t	b;
+			uint8_t	g;
+			uint8_t	r;
 		};
-		unsigned char	argb[4];
+		uint8_t		abgr[4];
+		uint32_t	mlx_color;
 	};
-}	t_argb;
+}	t_color;
 
 typedef struct s_pixel
 {
@@ -55,12 +64,12 @@ typedef struct s_pixel
 	{
 		struct
 		{
-			int	x;
-			int	y;
+			uint32_t	x;
+			uint32_t	y;
 		};
 		int	xy[2];
 	};
-	t_argb	color;
+	t_color	color;
 }	t_pixel;
 
 typedef struct s_point
@@ -167,11 +176,18 @@ typedef struct s_triangle
 		};
 		t_point	g_points[3];
 	};
-	t_argb		color;
+	t_color		color;
 	t_vector	norm;
 	int			generation;
 
 }	t_triangle;
+
+// ksx_line01.c
+void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
+
+// ksx_init.c
+mlx_t	*ksx_init(void);
+
 
 // # include "ksx_camera.h"
 // # include "mlx.h"

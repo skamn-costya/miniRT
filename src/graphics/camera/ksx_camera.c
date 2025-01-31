@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
+/*   ksx_camera.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:48:40 by ksorokol          #+#    #+#             */
-/*   Updated: 2024/12/26 18:01:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 14:41:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
-#include "ksx_camera.h"
-#include <math.h>
 
 void	set_camera_matrix(float a, float n, float f, t_cammtrx *cm)
 {

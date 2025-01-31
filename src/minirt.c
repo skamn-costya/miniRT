@@ -6,16 +6,17 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 01:11:21 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:39:56 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minirt.h"
+#include "libft.h"
+#include "parser.h"
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
 #include <stdlib.h>
-#include "minirt.h"
-#include "parser.h"
-#include "libft.h"
+#include <stdio.h>
 
 int	main(int argc, char *argv[])
 {
@@ -60,6 +61,8 @@ int	main(int argc, char *argv[])
 	// m.e[M_44] = 44;
 	float f = determinant3 (m);
 	(void) f;
+
+	ksx_init ();
 
 	if (argc !=2)
 		return (printf("Warning: Incorrect number of arguments.\n"), EXIT_SUCCESS);

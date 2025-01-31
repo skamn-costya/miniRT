@@ -6,26 +6,19 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 09:33:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 15:54:30 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
 
-# include <stdlib.h>
-# include <stdio.h>
 # include "libft.h"
 # include "ksx_graphics.h"
 
 # define RETURN_ERR -1
 # define TRUE 1
 # define FALSE 0
-
-// # define WIDTH 1920
-// # define HEIGHT 1044
-# define WIDTH 800
-# define HEIGHT 600
 
 typedef enum e_obj
 {
@@ -62,7 +55,7 @@ typedef struct s_object
 {
 	t_obj_id	id;
 	float		ratio;
-	t_argb		color;
+	t_color		color;
 	t_point		coord;
 	t_vector	norm;
 	int			fov;

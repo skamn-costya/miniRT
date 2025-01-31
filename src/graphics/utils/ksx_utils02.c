@@ -6,11 +6,13 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 09:45:08 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:33:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ksx_graphics.h"
 #include "ksx_utils.h"
+#include <math.h>
 
 void	get_cross_product(const t_vector v1, const t_vector v2, t_vector *v)
 {

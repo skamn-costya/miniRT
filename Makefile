@@ -14,13 +14,14 @@ PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 UTILS_DIR = graphics/utils/
 UTILS_FN =	ksx_utils01.c \
 			ksx_utils02.c \
-			ksx_utils03.c
+			ksx_utils03.c \
+			ksx_utils04.c
 UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
 
 # Camera object
 CAMERA_DIR = graphics/camera/
-CAMERA_FN =	ksx_camera_01.c \
-			ksx_camera_02.c
+CAMERA_FN =	ksx_camera01.c \
+			ksx_camera02.c
 CAMERA = $(addprefix $(CAMERA_DIR), $(CAMERA_FN))
 
 # Cylinder object
@@ -35,7 +36,8 @@ LINE = $(addprefix $(LINE_DIR), $(LINE_FN))
 
 # Graphics utilites
 GRAPHICS_DIR = graphics/
-GRAPHICS_FN =	ksx_draw.c
+GRAPHICS_FN =	ksx_draw.c \
+				ksx_init.c
 GRAPHICS =	$(addprefix $(GRAPHICS_DIR), $(GRAPHICS_FN))
 
 # All sources
@@ -73,15 +75,11 @@ MLX42_INCLUDE = ./lib/MLX42/include/MLX42/
 MLX42_NAME = libmlx42.a
 MLX42 = $(MLX42_DIR)$(MLX42_NAME)
 
-# The math library
-LIBM_NAME = libm.a
-
 # All libraries
 LIB_DIRS =	$(LIBFT_DIR) \
 			$(MLX42_DIR)
 LIBS =	$(LIBFT_NAME) \
-		$(MLX42_NAME) \
-		$(LIBM_NAME)
+		$(MLX42_NAME)
 
 # Include pathes
 DIR_INCLUDE = ./include/
@@ -94,7 +92,7 @@ CC = cc
 CCFLAGS = -g -Wall -Wextra -Werror
 
 $(NAME): $(OBJ_DIR) $(OBJS) make_lib
-	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_DIRS:%=-I%) $(LIB_DIRS:%=-L%) $(LIBS:lib%.a=-l%) -o $(NAME)
+	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_DIRS:%=-I%) $(LIB_DIRS:%=-L%) $(LIBS:lib%.a=-l%) -lm -ldl -lglfw -o $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)

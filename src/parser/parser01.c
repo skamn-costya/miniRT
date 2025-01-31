@@ -6,14 +6,15 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 09:52:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 12:39:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
-// #include <sys/stat.h>
+#include <sys/stat.h>
 #include <fcntl.h>
+#include <stdio.h>
 
 static t_list	*create_line_list(int fd);
 static t_fline	*create_fline(t_list **pp_list, char *str);
