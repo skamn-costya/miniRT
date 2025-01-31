@@ -6,12 +6,24 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/29 23:18:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:08:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "ksx_utils.h"
+
+
+
+// t_point	get_poit_sphere(t_vector v, t_point p, float r)
+// {
+// 	t_point p_;
+// 	float f;
+
+// 	p_.x = v.dir.x * (p_.y / v.dir.y);
+
+// 	p_.x
+// }
 
 // void	fdf_draw_image(t_vars *vars)
 // {

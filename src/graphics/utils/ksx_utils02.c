@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/30 10:11:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:18:52 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,29 +39,36 @@ void	get_normal(t_vector v1, t_vector *v)
 	v->dir.z = v1.dir.z * f;
 }
 
+float	get_angle(const t_vector v1, const t_vector v2)
+{
+	float	f;
+
+	f = acosf(((v1.dir.x * v2.dir.x) + (v1.dir.y * v2.dir.y)
+				+ (v1.dir.z * v2.dir.z))
+			/ (get_magnitude(v1) * get_magnitude(v2)));
+	return (f);
+}
+
 // function is_point_on_ray in debug ...
 int	is_point_on_ray(const t_point p, const t_vector v)
 {
 	t_vector	v1;
 	t_vector	v2;
 	t_vector	v3;
-	float		f;
+	float		f[2];
 
-	v1.dir.x = p.x;
-	v1.dir.y = p.y;
-	v1.dir.z = p.z;
-	v2.dir.x = 0;
-	v2.dir.y = 0;
-	v2.dir.z = 0;
-	v3.dir.x = 0;
-	v3.dir.y = 0;
-	v3.dir.z = 0;
+	v1.dir = p;
+	v2.dir = v1.dir;
+	v3.dir = v1.dir;
 	get_normal(v, &v2);
 	get_normal(v1, &v3);
-	f = get_dist_vector (v2, v3);
-	(void) f;
+	// f = get_dist_vector (v2, v3);
+	// if (f > PRECISION)
+	// 	return (FALSE);
 	get_cross_product(v, v1, &v2);
-	if (get_magnitude(v2) / get_magnitude(v) > PRECISION / 2.0f)
+	f[0] = get_magnitude(v2);
+	f[1] = get_magnitude(v);
+	if (f[0] / f[1] > PRECISION / 2.0f)
 		return (FALSE);
 	return (TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/30 10:11:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:42:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	get_rgb(char **pp_str, size_t idx, t_object *p_obj, int idx_rgb)
 		return (FALSE);
 	pp_str_ = ft_split(pp_str[idx], ',');
 	size = ft_parrsize((void **) pp_str_);
-	if (size != COLORE_SIZE)
+	if (size != COLOR_SIZE)
 		return (ft_parrclear((void **)pp_str_), FALSE);
 	while (size--)
 	{

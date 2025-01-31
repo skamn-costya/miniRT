@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/30 10:28:41 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:11:21 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ int	main(int argc, char *argv[])
 	t_vector	v[3];
 	t_point		p;
 
-	v[0].dir.x = 1;
+	v[0].dir.x = 2;
 	v[0].dir.y = 0;
-	v[0].dir.z = 0;
+	v[0].dir.z = 2;
 	v[1].dir.x = 0;
 	v[1].dir.y = 1;
 	v[1].dir.z = 0;
@@ -37,6 +37,7 @@ int	main(int argc, char *argv[])
 	p.x = 2;
 	p.y = 2;
 	p.z = 2;
+	vector_resize(v[0], 4, &v[1]);
 	get_cross_product(v[0], v[1], &v[2]);
 	is_point_on_ray(p, v[0]);
 

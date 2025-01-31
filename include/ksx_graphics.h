@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/30 10:28:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/30 10:43:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define PRECISION	0.0001f
 
 // Size if color structure 3 for RGB, 4 for ARGB
-# define COLORE_SIZE 3
+# define COLOR_SIZE 3
 
 // Indexes of color in argb structure
 # define A 0

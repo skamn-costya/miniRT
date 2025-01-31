@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/30 10:28:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 01:09:36 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ float	get_dist_xyz(const float xyz1[], const float xyz2[]);
 float	get_dist_vector(const t_vector v1, const t_vector v2);
 float	get_dist_point(const t_point p1, const t_point p2);
 void	get_middle_point(const t_point p1, const t_point p2, t_point *p);
+void	vector_resize(t_vector v1, float new_size, t_vector *v);
 
 // ksx_utils02.c
 void	get_cross_product(const t_vector v1, const t_vector v2, t_vector *v);
