@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:52:47 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 19:52:46 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:35:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@
 #include "ksx_utils.h"
 #include <math.h>
 
-static void	ksx_line_(mlx_image_t *img, t_pixel p1, t_pixel p2, int32_t d_xy[]);
-static void	ksx_line_y(mlx_image_t *img, t_pixel p1, t_pixel p2, int32_t d_xy[]);
-static void	ksx_line_x(mlx_image_t *img, t_pixel p1, t_pixel p2, int32_t d_xy[]);
+static void	ksx_line_(mlx_image_t *img,
+				t_pixel p1, t_pixel p2, int32_t d_xy[]);
+static void	ksx_line_y(mlx_image_t *img,
+				t_pixel p1, t_pixel p2, int32_t d_xy[]);
+static void	ksx_line_x(mlx_image_t *img,
+				t_pixel p1, t_pixel p2, int32_t d_xy[]);
 
 void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2)
 {
@@ -54,7 +57,7 @@ static t_color	get_color(t_pixel p, t_pixel p1, t_pixel p2)
 
 	color[0] = p1.color;
 	color[1] = p2.color;
-	f = fraction (p, p1, p2);
+	f = ksx_fraction (p, p1, p2);
 	color[2].r = color[0].r + (color[1].r - color[0].r) * f;
 	color[2].g = color[0].g + (color[1].g - color[0].g) * f;
 	color[2].b = color[0].b + (color[1].b - color[0].b) * f;
@@ -62,7 +65,8 @@ static t_color	get_color(t_pixel p, t_pixel p1, t_pixel p2)
 	return (color[2]);
 }
 
-static void	ksx_line_(mlx_image_t *img, t_pixel pix1, t_pixel pix2, int32_t d_xy[])
+static void	ksx_line_(mlx_image_t *img,
+				t_pixel pix1, t_pixel pix2, int32_t d_xy[])
 {
 	t_pixel	pix;
 	int32_t	xy[2];
@@ -86,7 +90,8 @@ static void	ksx_line_(mlx_image_t *img, t_pixel pix1, t_pixel pix2, int32_t d_xy
 	}
 }
 
-static void	ksx_line_x(mlx_image_t *img, t_pixel pix1, t_pixel pix2, int32_t d_xy[])
+static void	ksx_line_x(mlx_image_t *img,
+				t_pixel pix1, t_pixel pix2, int32_t d_xy[])
 {
 	t_pixel	pix;
 	int32_t	x;
@@ -112,7 +117,8 @@ static void	ksx_line_x(mlx_image_t *img, t_pixel pix1, t_pixel pix2, int32_t d_x
 	}
 }
 
-static void	ksx_line_y(mlx_image_t *img, t_pixel pix1, t_pixel pix2, int32_t d_xy[])
+static void	ksx_line_y(mlx_image_t *img,
+				t_pixel pix1, t_pixel pix2, int32_t d_xy[])
 {
 	t_pixel	pix;
 	int32_t	y;

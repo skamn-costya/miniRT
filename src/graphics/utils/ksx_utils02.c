@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 16:52:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:41:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,40 @@
 #include "ksx_utils.h"
 #include <math.h>
 
-void	get_cross_product(const t_vector v1, const t_vector v2, t_vector *v)
+void	ksx_cross_product(const t_vector3 v1, const t_vector3 v2, t_vector3 *v)
 {
-	v->dir.x = v1.dir.y * v2.dir.z - v1.dir.z * v2.dir.y;
-	v->dir.y = v1.dir.z * v2.dir.x - v1.dir.x * v2.dir.z;
-	v->dir.z = v1.dir.x * v2.dir.y - v1.dir.y * v2.dir.x;
+	v->x = v1.y * v2.z - v1.z * v2.y;
+	v->y = v1.z * v2.x - v1.x * v2.z;
+	v->z = v1.x * v2.y - v1.y * v2.x;
 }
 
-float	get_magnitude(const t_vector v)
+float	get_magnitude(const t_vector3 v)
 {
 	float	dis;
 
-	dis = sqrtf(powf(v.dir.x, 2.0f) + powf(v.dir.y, 2.0f)
-			+ powf(v.dir.z, 2.0f));
+	dis = sqrtf(powf(v.x, 2.f) + powf(v.y, 2.f)
+			+ powf(v.z, 2.f));
 	return (dis);
 }
 
-void	get_normal(t_vector v1, t_vector *v)
+float	get_angle(const t_vector3 v1, const t_vector3 v2)
 {
 	float	f;
 
-	f = 1.0f / get_magnitude(v1);
-	v->dir.x = v1.dir.x * f;
-	v->dir.y = v1.dir.y * f;
-	v->dir.z = v1.dir.z * f;
-}
-
-float	get_angle(const t_vector v1, const t_vector v2)
-{
-	float	f;
-
-	f = acosf(((v1.dir.x * v2.dir.x) + (v1.dir.y * v2.dir.y)
-				+ (v1.dir.z * v2.dir.z))
+	f = acosf(((v1.x * v2.x) + (v1.y * v2.y)
+				+ (v1.z * v2.z))
 			/ (get_magnitude(v1) * get_magnitude(v2)));
 	return (f);
 }
 
 // function is_point_on_ray in debug ...
-int	is_point_on_ray(const t_point p, const t_vector v)
+int	is_point_on_ray(const t_vector3 p, const t_vector3 v)
 {
-	t_vector	v1;
-	t_vector	v2;
-	t_vector	v3;
+	t_vector3	v1;
 	float		f[2];
 
-	v1.dir = p;
-	v2.dir = v1.dir;
-	v3.dir = v1.dir;
-	get_normal(v, &v2);
-	get_normal(v1, &v3);
-	// f = get_dist_vector (v2, v3);
-	// if (f > PRECISION)
-	// 	return (FALSE);
-	get_cross_product(v, v1, &v2);
-	f[0] = get_magnitude(v2);
+	ksx_cross_product(p, v, &v1);
+	f[0] = get_magnitude(v1);
 	f[1] = get_magnitude(v);
 	if (f[0] / f[1] > PRECISION * 0.5f)
 		return (KSX_FALSE);

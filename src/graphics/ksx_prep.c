@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 22:09:32 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 17:07:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:26:41 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,19 @@ int	ksx_prep(void *p_prep)
 {
 	t_graphics	*p_grph;
 	t_pixel		p1, p2, pc;
-	t_point		point;
-	t_vector	vector;
+	t_vector3	point;
+	t_vector3	vector;
 
 	p_grph = (t_graphics *)p_prep;
-	point.x = 400;
-	point.y = 300;
-	point.z = 200;
-	vector.dir = point;
-	p_grph->camera = create_camera(point, vector, 70.0f);
+	point.x = -100.f;
+	point.y = -100.f;
+	point.z = 200.f;
+	vector = point;
+	p_grph->camera = ksx_create_camera(point, vector, 70.f);
+	ksx_set_camera_pm(&p_grph->camera, 0.1f, 100.f);
 	point = ksx_point_m44(point, p_grph->camera.pm);
 
-	p_grph->img = create_new_image(p_grph->mlx);
+	p_grph->img = ksx_create_image(p_grph->mlx);
 	if (!p_grph->img)
 		return (FALSE);
 	p1.x = 25;

@@ -6,17 +6,18 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 14:37:22 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:33:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
+#include "MLX42.h"
 #include "ksx_utils.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-float	fraction(t_pixel p, t_pixel p1, t_pixel p2)
+float	ksx_fraction(const t_pixel p, const t_pixel p1, const t_pixel p2)
 {
 	int		dx;
 	int		dy;
@@ -41,14 +42,17 @@ float	fraction(t_pixel p, t_pixel p1, t_pixel p2)
 	return (fraction);
 }
 
-int32_t	ksx_abs(int32_t num)
+int32_t	ksx_abs(const int32_t num)
 {
+	int32_t	new_num;
+
+	new_num = num;
 	if (num < 0)
-		return (num * -1);
-	return (num);
+		new_num *= -1;
+	return (new_num);
 }
 
-mlx_image_t	*create_new_image(mlx_t *mlx)
+mlx_image_t	*ksx_create_image( mlx_t *mlx)
 {
 	mlx_image_t	*img;
 	uint32_t	size;
@@ -56,7 +60,7 @@ mlx_image_t	*create_new_image(mlx_t *mlx)
 
 	img = mlx_new_image(mlx, mlx->width, mlx->height);
 	if (!img)
-		return(printf("Error: MLX42 create mlx_image_t failed!\n"), NULL);
+		return (printf("Error: MLX42 create mlx_image_t failed!\n"), NULL);
 	size = mlx->width * mlx->height * BPP;
 	idx = 0;
 	while (idx < size)
@@ -70,14 +74,15 @@ mlx_image_t	*create_new_image(mlx_t *mlx)
 	return (img);
 }
 
-t_tris	*add_triangels(t_tris *p_tirs, uint32_t size)
+t_tris	*ksx_add_triangels(t_tris *p_tirs, uint32_t size)
 {
 	t_triangle	*p_triangle;
 
-	p_triangle = (t_triangle *) malloc (sizeof(t_triangle) * (p_tirs->size + size));
+	p_triangle = (t_triangle *) malloc (sizeof(t_triangle)
+			* (p_tirs->size + size));
 	if (!p_triangle)
-		return(printf("Error: memory allocation failed!\n"), NULL);
-	if(!p_tirs->p)
+		return (printf("Error: memory allocation failed!\n"), NULL);
+	if (!p_tirs->p)
 		return (p_tirs->p = p_triangle, p_tirs->size = size, p_tirs);
 	size += p_tirs->size;
 	while (p_tirs->size > 0)
@@ -86,8 +91,9 @@ t_tris	*add_triangels(t_tris *p_tirs, uint32_t size)
 	return (p_tirs->p = p_triangle, p_tirs->size = size, p_tirs);
 }
 
-// set three point for calculate a transformation matrix (1,1,1)(-1,-1,-1)(2,-3,4)
-t_triangle	init_tps(t_point center, t_vector norm)
+// set three point for calculate a transformation matrix
+// (1,1,1)(-1,-1,-1)(2,-3,4)
+t_triangle	ksx_init_tps(t_vector3 center, const t_vector3 norm)
 {
 	t_triangle	tps;
 
@@ -113,7 +119,8 @@ t_triangle	init_tps(t_point center, t_vector norm)
 	return (tps);
 }
 
-// t_triangle	*set_triangel_points(t_triangle *p_triangle, t_point p1, t_point p2, t_point p3)
+// t_triangle	*set_triangel_points(t_triangle *p_triangle,
+// t_point p1, t_point p2, t_point p3)
 // {
 // 	p_triangle->p1 = p1;
 

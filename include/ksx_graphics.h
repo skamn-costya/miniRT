@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 15:57:59 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:15:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 
 # define PI 3.14159265358979323846
 # define PRECISION	0.0001f
-# define BPP sizeof(int32_t) /* Only support RGBA */
+/* Only support RGBA */
+# define BPP 4
 
 // Size if color structure 3 for RGB, 4 for RGBA
 # define COLOR_SIZE 3
@@ -73,7 +74,43 @@ typedef struct s_pixel
 	t_color	color;
 }	t_pixel;
 
-typedef struct s_point
+// typedef struct s_point
+// {
+// 	union
+// 	{
+// 		struct
+// 		{
+// 			float	x;
+// 			float	y;
+// 			float	z;
+// 		};
+// 		float	xyz[3];
+// 	};
+// }	t_point;
+
+typedef struct s_vector2
+{
+	union
+	{
+		struct
+		{
+			float	x;
+			float	y;
+		};
+		float	xy[23];
+	};
+	union
+	{
+		struct
+		{
+			float	start_x;
+			float	start_y;
+		};
+		float	start_xy[2];
+	};
+}	t_vector2;
+
+typedef struct s_vector3
 {
 	union
 	{
@@ -85,13 +122,43 @@ typedef struct s_point
 		};
 		float	xyz[3];
 	};
-}	t_point;
+	union
+	{
+		struct
+		{
+			float	start_x;
+			float	start_y;
+			float	start_z;
+		};
+		float	start_xyz[3];
+	};
+}	t_vector3;
 
-typedef struct s_vector
+typedef struct s_vector4
 {
-	t_point	start;
-	t_point	dir;
-}	t_vector;
+	union
+	{
+		struct
+		{
+			float	x;
+			float	y;
+			float	z;
+			float	w;
+		};
+		float	xyzw[4];
+	};
+	union
+	{
+		struct
+		{
+			float	start_x;
+			float	start_y;
+			float	start_z;
+			float	start_w;
+		};
+		float	start_xyzw[4];
+	};
+}	t_vector4;
 
 typedef struct s_matrix22
 {
@@ -181,41 +248,40 @@ typedef struct s_matrix44
 // 	};
 // }	t_tps;
 
-
 typedef struct s_triangle
 {
 	union
 	{
 		struct
 		{
-			t_point	p1;
-			t_point	p2;
-			t_point	p3;
+			t_vector3	p1;
+			t_vector3	p2;
+			t_vector3	p3;
 		};
-		t_point	points[3];
+		t_vector3	points[3];
 	};
 	union
 	{
 		struct
 		{
-			t_point	w_p1;
-			t_point	w_p2;
-			t_point	w_p3;
+			t_vector3	w_p1;
+			t_vector3	w_p2;
+			t_vector3	w_p3;
 		};
-		t_point	w_points[3];
+		t_vector3	w_points[3];
 	};
 	union
 	{
 		struct
 		{
-			t_point	c_p1;
-			t_point	c_p2;
-			t_point	c_p3;
+			t_vector3	c_p1;
+			t_vector3	c_p2;
+			t_vector3	c_p3;
 		};
-		t_point	c_points[3];
+		t_vector3	c_points[3];
 	};
 	t_color		color;
-	t_vector	norm;
+	t_vector3	norm;
 	uint32_t	generation;
 
 }	t_triangle;
@@ -229,9 +295,10 @@ typedef struct s_tris
 
 typedef struct s_camera
 {
-	t_point		center;
-	t_vector	norm;
+	t_vector3	center;
+	t_vector3	norm;
 	float		hfov;
+	float		aspect;
 	float		vfov;
 	float		focal_len;
 	union
@@ -269,165 +336,22 @@ typedef struct s_camera
 	t_matrix44	tm;
 }	t_camera;
 
-// ksx_init.c
-mlx_t	*ksx_init(void);
+mlx_t		*ksx_init(void);
+int			ksx_prep(void *p_vars);
+void		ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
+void		ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);
 
-// ksx_prep.c
-int		ksx_prep(void *p_vars);
+// ksx_utils05.c
+t_vector3	ksx_point_rotation(t_vector3 point, float angle_x,
+				float angle_y, float angle_z);
+t_vector3	ksx_point_rotation_x(t_vector3 point, float angle);
+t_vector3	ksx_point_rotation_y(t_vector3 point, float angle);
+t_vector3	ksx_point_rotation_z(t_vector3 point, float angle);
 
-void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
-void	ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);
-t_tris	*create_sphere(t_point center, uint32_t diameter, t_color color);
+t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov);
+void		ksx_set_camera_pm(t_camera *p_camera, float near, float far);
 
-// # include "ksx_camera.h"
-// # include "mlx.h"
-
-// // Vector3D
-// typedef struct s_vec3f
-// {
-// 	float	x;
-// 	float	y;
-// 	float	z;
-// }	t_vec3f;
-
-// typedef struct s_rgb
-// {
-// 	unsigned char	r;
-// 	unsigned char	g;
-// 	unsigned char	b;
-// }	t_rgb;
-
-// // Ambient lightning
-// typedef struct s_ambient
-// {
-// 	// ambient lighting ratio in range [0.0,1.0]
-// 	float	ratio;
-// 	// R,G,B colors in range [0-255]
-// 	t_rgb	color;
-// }	t_ambient;
-
-// // Camera
-// typedef struct s_camera
-// {
-// 	// x,y,z coordinates of the view point
-// 	t_vec3f			view_point;
-// 	// 3d normalized orientation vector. In range [-1,1] for each x,y,z axis
-// 	t_vec3f			normal;
-// 	// Horizontal field of view in degrees in range [0,180]
-// 	unsigned char	fov;
-// }	t_camera;
-
-// // Light
-// typedef struct s_light
-// {
-// 	// x,y,z coordinates of the light point
-// 	t_vec3f	view_point;
-// 	// the light brightness ratio in range
-// 	float	ratio;
-// 	// (unused in mandatory part)R,G,B colors in range [0-255]
-// 	t_rgb	color;
-// }	t_light;
-
-// // Sphere
-// typedef struct s_sphere
-// {
-// 	// x,y,z coordinates of the sphere center
-// 	t_vec3f	centre;
-// 	// the sphere diameter
-// 	float	diameter;
-// 	// R,G,B colors in range [0-255]
-// 	t_rgb	color;
-// }	t_sphere;
-
-// // Plane
-// typedef struct s_plane
-// {
-// 	// x,y,z coordinates of a point in the plane
-// 	t_vec3f	point;
-// 	// 3d normalized normal vector. In range [-1,1] for each x,y,z axis
-// 	t_vec3f	normal;
-// 	// R,G,B colors in range [0-255]
-// 	t_rgb	color;
-// }	t_plane;
-
-// // Cylinder
-// typedef struct s_cylinder
-// {
-// 	// x,y,z coordinates of the center of the cylinder
-// 	t_vec3f	centre;
-// 	// 3d normalized vector of axis of cylinder.
-// 	// In range [-1,1] for each x,y,z axis
-// 	t_vec3f	normal;
-// 	// the cylinder diameter
-// 	float	diameter;
-// 	// the cylinder height
-// 	float	height;
-// 	// R,G,B colors in range [0-255]
-// 	t_rgb	color;
-// }	t_cylinder;
-
-// typedef struct s_vars
-// {
-// 	void			*mlx;
-// 	void			*win;
-// 	// t_img			img;
-// 	int				xy[2];
-// 	int				as_xyz[7];
-// 	float			zoom;
-// 	unsigned char	flags;
-// 	t_cammtrx		cm;
-// }	t_vars;
-
-// // init.c
-// void	init(t_vars *vars);
-// int		close_x(t_vars *vars);
-
-// // fdf_hook.c
-// int		key_hook(int keycode, t_vars *vars);
-// void	set_flag(t_vars *vars, unsigned char flag);
-
-// // fdf_utils.c
-// void	fdf_draw_image(t_vars *vars);
-// float	fraction(t_point p, t_point p1, t_point p2);
-
-// // fdf_prep_p.c
-// void	ksx_prep(t_vars *vars);
-
-// // fdf_<obj>.c
-// // t_point	get_point(t_fdf *fdf, int as_xyz[]);
-// t_point	get_point(int xyz[], unsigned char flags);
-// // void	fdf_point(t_img img, t_point float	elem_11;point);
-// // void	fdf_line(t_img	img, t_point point1, t_point point2);
-
-// // fdf_draw.c
-// void	fdf_draw(t_vars *vars);
-// // void	fdf_move_x(t_vars *vars, int d);
-// // void	fdf_move_y(t_vars *vars, int d);
-// void	print_statuses(t_vars *vars);
-
-// // fdf_zoom.c
-// void	fdf_zoom(t_vars *vars, int d);
-// void	fdf_zoom_p(t_vars *vars);
-// void	fdf_zoom_c(t_vars *vars);
-
-// // void	fdf_min_nax(t_fdf ***fdf, int xy[], int mm[]);
-
-// // // fdf_rotation.c
-// // void	fdf_rotation(t_fdf ***fdf, int xy[], int a[]);
-
-// // // fdf_rotation_x.c
-// // void	rotation_x(t_fdf ***fdf, int xy[], float a);
-// // void	rotation_x_p(t_fdf *fdf, float a);
-// // void	rotation_x_c(t_fdf *fdf, float a);
-
-// // // fdf_rotation_y.c
-// // void	rotation_y(t_fdf ***fdf, int xy[], float a);
-// // void	rotation_y_p(t_fdf *fdf, float a);
-// // void	rotation_y_c(t_fdf *fdf, float a);
-
-// // // fdf_rotation_z.c
-// // void	rotation_z(t_fdf ***fdf, int xy[], float a);
-// // void	rotation_z_p(t_fdf *fdf, float a);
-// // void	rotation_z_c(t_fdf *fdf, float a);
+t_tris		*ksx_create_sphere(t_vector3 center,
+				uint32_t diameter, t_color color);
 
 #endif	// KSX_GRAPHICS_H //

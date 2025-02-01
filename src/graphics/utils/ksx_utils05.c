@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 17:03:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:06:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_point	ksx_point_rotation(t_point point, float angle_x,
+t_vector3	ksx_point_rotation(t_vector3 point, float angle_x,
 	float angle_y, float angle_z)
 {
-	t_point		point_;
+	t_vector3	point_;
 	t_matrix33	rm;
 
 	if (angle_x == 0 && angle_y == 0 && angle_z == 0)
@@ -44,9 +44,9 @@ t_point	ksx_point_rotation(t_point point, float angle_x,
 	return (point_);
 }
 
-t_point	ksx_point_rotation_x(t_point point, float angle)
+t_vector3	ksx_point_rotation_x(t_vector3 point, float angle)
 {
-	t_point		point_;
+	t_vector3	point_;
 
 	if (angle == 0)
 		return (point);
@@ -57,9 +57,9 @@ t_point	ksx_point_rotation_x(t_point point, float angle)
 	return (point_);
 }
 
-t_point	ksx_point_rotation_y(t_point point, float angle)
+t_vector3	ksx_point_rotation_y(t_vector3 point, float angle)
 {
-	t_point		point_;
+	t_vector3	point_;
 
 	if (angle == 0)
 		return (point);
@@ -70,9 +70,9 @@ t_point	ksx_point_rotation_y(t_point point, float angle)
 	return (point_);
 }
 
-t_point	ksx_point_rotation_z(t_point point, float angle)
+t_vector3	ksx_point_rotation_z(t_vector3 point, float angle)
 {
-	t_point		point_;
+	t_vector3	point_;
 
 	if (angle == 0)
 		return (point);

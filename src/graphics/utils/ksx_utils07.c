@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 17:13:52 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:34:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-t_point ksx_point_m33(t_point point, t_matrix33 m)
+t_vector3	ksx_point_m33(const t_vector3 point, const t_matrix33 m)
 {
-	t_point		point_;
+	t_vector3		point_;
 
 	point_.x = point.x * m.e_11 + point.y * m.e_12 + point.z * m.e_13;
 	point_.y = point.x * m.e_21 + point.y * m.e_22 + point.z * m.e_23;
@@ -26,9 +26,9 @@ t_point ksx_point_m33(t_point point, t_matrix33 m)
 	return (point_);
 }
 
-t_point ksx_point_m44(t_point point, t_matrix44 m)
+t_vector3	ksx_point_m44(const t_vector3 point, const t_matrix44 m)
 {
-	t_point		point_;
+	t_vector3		point_;
 
 	point_.x = point.x * m.e_11 + point.y * m.e_12 + point.z * m.e_13 + m.e_14;
 	point_.y = point.x * m.e_21 + point.y * m.e_22 + point.z * m.e_23 + m.e_24;

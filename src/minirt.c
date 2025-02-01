@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 19:27:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:29:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	main(int argc, char *argv[])
 {
 	t_graphics	grph;
 
-	if (argc !=2)
-		return (printf("Warning: Incorrect number of arguments.\n"), EXIT_SUCCESS);
+	if (argc != 2)
+		return (printf("Incorrect number of arguments.\n"), EXIT_SUCCESS);
 	grph.objs = check_file(argv[1]);
 	if (!grph.objs)
-		return (printf("Warning: Incorrect the scene description file.\n"), EXIT_SUCCESS);
+		return (printf("Incorrect the scene file.\n"), EXIT_SUCCESS);
 	grph.mlx = ksx_init();
 	if (!grph.mlx)
 	{

@@ -6,14 +6,13 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 16:50:36 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 19:31:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
 #include <math.h>
-
 
 // in English
 // https://www.haroldserrano.com/blog/vectors-in-computer-graphics
@@ -22,49 +21,36 @@
 // https://www.mathnirvana.com/math-rules/equation-of-a-circle.htm
 
 // in Russin
-// https://www.mathnirvana.com/ru/vse-pravila-matematiki/uravneniye-okruzhnosti.htm
+// https://www.mathnirvana.com/ru/vse-pravila-matematiki
+// /uravneniye-okruzhnosti.htm
 
-float	get_dist_xyz(const float xyz1[], const float xyz2[])
+float	get_dist_vector3(const t_vector3 v1, const t_vector3 v2)
 {
 	float	dis;
 
-	dis = sqrtf(powf(xyz1[X] - xyz2[X], 2.0f) + powf(xyz1[Y] - xyz2[Y], 2.0f)
-			+ powf(xyz1[Z] - xyz2[Z], 2.0f));
+	dis = sqrtf(powf(v1.x - v2.x, 2.f) + powf(v1.y - v2.y, 2.f)
+			+ powf(v1.z - v2.z, 2.f));
 	return (dis);
 }
 
-float	get_dist_vector(const t_vector v1, const t_vector v2)
-{
-	float	dis;
-
-	dis = get_dist_xyz(v1.dir.xyz, v2.dir.xyz);
-	return (dis);
-}
-
-float	get_dist_point(const t_point p1, const t_point p2)
-{
-	float	dis;
-
-	dis = get_dist_xyz(p1.xyz, p2.xyz);
-	return (dis);
-}
-
-void	get_middle_point(const t_point p1, const t_point p2, t_point *p)
+void	middle_point(const t_vector3 p1, const t_vector3 p2, t_vector3 *p)
 {
 	p->x = (p1.x + p2.x) * 0.5f;
 	p->y = (p1.y + p2.y) * 0.5f;
 	p->z = (p1.z + p2.z) * 0.5f;
 }
 
-void	vector_resize(t_vector v1, float new_size, t_vector *v)
+void	vector3_resize(t_vector3 v1, float new_size, t_vector3 *v)
 {
-	float f;
+	float	f;
 
-	f= get_magnitude(v1);
+	f = new_size / get_magnitude(v1);
+	v->x = v1.x * f;
+	v->y = v1.y * f;
+	v->z = v1.z * f;
+}
 
-	f = new_size / f;
-
-	v->dir.x = v1.dir.x * f;
-	v->dir.y = v1.dir.y * f;
-	v->dir.z = v1.dir.z * f;
+void	vector3_norm(t_vector3 v1, t_vector3 *v)
+{
+	vector3_resize(v1, 1.f, v);
 }
