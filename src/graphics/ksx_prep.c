@@ -6,12 +6,13 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 22:09:32 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 19:59:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 09:32:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ksx_graphics.h"
 #include "minirt.h"
+#include "ksx_graphics.h"
+#include "ksx_utils.h"
 #include <math.h>
 #include <stdio.h>
 
@@ -21,8 +22,9 @@ int	ksx_prep(void *p_prep)
 	t_pixel		p1, p2, pc;
 
 	p_grph = (t_graphics *)p_prep;
-	p_grph->img = mlx_new_image(p_grph->mlx, p_grph->mlx->width, p_grph->mlx->height);
-	
+	p_grph->img = create_new_image(p_grph->mlx);
+	if (!p_grph->img)
+		return (FALSE);
 	p1.x = 25;
 	p1.y = 25;
 	p1.color.mlx_color = 0xffffffff;
@@ -34,6 +36,7 @@ int	ksx_prep(void *p_prep)
 	pc.y = 50;
 	pc.color.mlx_color = 0xff0000ff;
 	ksx_circle(p_grph->img, pc, 35);
+	
 	if (mlx_image_to_window(p_grph->mlx, p_grph->img, 0, 0) < 0)
         return (printf("Image to window failed!\n"), FALSE);
 	return (TRUE);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 19:57:36 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 01:00:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 # define PI 3.14159265358979323846
 # define PRECISION	0.0001f
+# define BPP sizeof(int32_t) /* Only support RGBA */
 
 // Size if color structure 3 for RGB, 4 for RGBA
 # define COLOR_SIZE 3
@@ -178,9 +179,16 @@ typedef struct s_triangle
 	};
 	t_color		color;
 	t_vector	norm;
-	int			generation;
+	uint32_t	generation;
 
 }	t_triangle;
+
+typedef struct s_tris
+{
+	t_triangle	*p;
+	uint32_t	size;
+	uint32_t	last_gen;
+}	t_tris;
 
 // ksx_init.c
 mlx_t	*ksx_init(void);
@@ -190,6 +198,7 @@ int		ksx_prep(void *p_vars);
 
 void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
 void	ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);
+t_tris	*creat_sphere(t_point center, uint32_t diameter, t_color color);
 
 // # include "ksx_camera.h"
 // # include "mlx.h"

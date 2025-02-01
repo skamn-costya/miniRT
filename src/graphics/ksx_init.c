@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:55:19 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 18:42:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:38:28 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ mlx_t	*ksx_init(void)
 	
 	mlx = mlx_init(WIDTH, HEIGHT, "miniRT by Stepan & Konstantin", false);
 	if (!mlx)
-		return (printf("MLX42 initialization failed!\n"), NULL);
+		return (printf("Error: MLX42 initialization failed!\n"), NULL);
 	return (mlx);
 	// vars->mlx = mlx_init();
 	// vars->win = mlx_new_window(vars->mlx, WIDTH, HEIGHT, "miniRT by ksorokol");

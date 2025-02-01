@@ -6,13 +6,15 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 15:20:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 01:10:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 float	fraction(t_pixel p, t_pixel p1, t_pixel p2)
 {
@@ -45,6 +47,50 @@ int32_t	ksx_abs(int32_t num)
 		return (num * -1);
 	return (num);
 }
+
+mlx_image_t	*create_new_image(mlx_t *mlx)
+{
+	mlx_image_t	*img;
+	uint32_t	size;
+	uint32_t	idx;
+
+	img = mlx_new_image(mlx, mlx->width, mlx->height);
+	if (!img)
+		return(printf("Error: MLX42 create mlx_image_t failed!\n"), NULL);
+	size = mlx->width * mlx->height * BPP;
+	idx = 0;
+	while (idx < size)
+	{
+		img->pixels[idx] = 0;
+		img->pixels[idx + 1] = 0;
+		img->pixels[idx + 2] = 0;
+		img->pixels[idx + 3] = 255;
+		idx += 4;
+	}
+	return (img);
+}
+
+t_tris	*add_triangels(t_tris *p_tirs, uint32_t size)
+{
+	t_triangle	*p_triangle;
+
+	p_triangle = (t_triangle *) malloc (sizeof(t_triangle) * (p_tirs->size + size));
+	if (!p_triangle)
+		return(printf("Error: memory allocation failed!\n"), NULL);
+	if(!p_tirs->p)
+		return (p_tirs->p = p_triangle, p_tirs->size = size, p_tirs);
+	size += p_tirs->size;
+	while (p_tirs->size > 0)
+		p_triangle[--p_tirs->size] = p_tirs->p[p_tirs->size];
+	free (p_tirs->p);
+	return (p_tirs->p = p_triangle, p_tirs->size = size, p_tirs);
+}
+
+// t_triangle	*set_triangel_points(t_triangle *p_triangle, t_point p1, t_point p2, t_point p3)
+// {
+// 	p_triangle->p1 = p1;
+
+// }
 
 // t_point	get_poit_sphere(t_vector v, t_point p, float r)
 // {

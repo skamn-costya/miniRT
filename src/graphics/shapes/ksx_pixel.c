@@ -6,14 +6,12 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:44:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 19:39:00 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/01/31 21:38:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "MLX42.h"
-
-# define BPP sizeof(int32_t) /* Only support RGBA */
 
 t_pixel	get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y)
 {
