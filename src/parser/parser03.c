@@ -6,14 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/29 00:24:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:44:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
 
-t_object	*create_sphere(t_list **pp_line_list,
+t_object	*par_create_sphere(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
 	t_object	*p_obj;
@@ -32,7 +32,7 @@ t_object	*create_sphere(t_list **pp_line_list,
 	return (p_obj);
 }
 
-t_object	*create_plane(t_list **pp_line_list,
+t_object	*par_create_plane(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
 	t_object	*p_obj;
@@ -50,7 +50,7 @@ t_object	*create_plane(t_list **pp_line_list,
 	return (p_obj);
 }
 
-t_object	*create_cylinder(t_list **pp_line_list,
+t_object	*par_create_cylinder(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
 	t_object	*p_obj;

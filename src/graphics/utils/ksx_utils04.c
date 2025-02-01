@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 01:10:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 14:37:22 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,33 @@ t_tris	*add_triangels(t_tris *p_tirs, uint32_t size)
 	return (p_tirs->p = p_triangle, p_tirs->size = size, p_tirs);
 }
 
+// set three point for calculate a transformation matrix (1,1,1)(-1,-1,-1)(2,-3,4)
+t_triangle	init_tps(t_point center, t_vector norm)
+{
+	t_triangle	tps;
+
+	(void) norm;
+	tps.p1.x = center.x + 1;
+	tps.p1.y = center.y + 1;
+	tps.p1.z = center.z + 1;
+	tps.p2.x = center.x - 1;
+	tps.p2.y = center.y - 1;
+	tps.p2.z = center.z - 1;
+	tps.p3.x = center.x + 2;
+	tps.p3.y = center.y - 3;
+	tps.p3.z = center.z + 4;
+	tps.w_p1.x = center.x + 1;
+	tps.w_p1.y = center.y + 1;
+	tps.w_p1.z = center.z + 1;
+	tps.w_p2.x = center.x - 1;
+	tps.w_p2.y = center.y - 1;
+	tps.w_p2.z = center.z - 1;
+	tps.w_p3.x = center.x + 2;
+	tps.w_p3.y = center.y - 3;
+	tps.w_p3.z = center.z + 4;
+	return (tps);
+}
+
 // t_triangle	*set_triangel_points(t_triangle *p_triangle, t_point p1, t_point p2, t_point p3)
 // {
 // 	p_triangle->p1 = p1;
@@ -112,31 +139,6 @@ t_tris	*add_triangels(t_tris *p_tirs, uint32_t size)
 // 	fdf_draw (vars);
 // 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img.img, 0, 0);
 // 	print_statuses (vars);
-// }
-
-// float	fraction(t_point p, t_point p1, t_point p2)
-// {
-// 	int		dx;
-// 	int		dy;
-// 	float	fraction;
-
-// 	dx = (p2.x - p1.x);
-// 	dy = (p2.y - p1.y);
-// 	if (abs(dx) > abs(dy))
-// 	{
-// 		if (p1.x != p2.x)
-// 			fraction = (float)(p.x - p1.x) / dx;
-// 		else
-// 			fraction = 0;
-// 	}
-// 	else
-// 	{
-// 		if (p1.y != p2.y)
-// 			fraction = (float)(p.y - p1.y) / dy;
-// 		else
-// 			fraction = 0;
-// 	}
-// 	return (fraction);
 // }
 
 // void	print_statuses(t_vars *vars)

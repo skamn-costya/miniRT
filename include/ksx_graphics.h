@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 01:00:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:57:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct s_vector
 	t_point	dir;
 }	t_vector;
 
-typedef struct s_matrix2
+typedef struct s_matrix22
 {
 	union
 	{
@@ -106,9 +106,9 @@ typedef struct s_matrix2
 		};
 		float	elems[4];
 	};
-}	t_matrix2;
+}	t_matrix22;
 
-typedef struct s_matrix3
+typedef struct s_matrix33
 {
 	union
 	{
@@ -126,9 +126,9 @@ typedef struct s_matrix3
 		};
 		float	elems[9];
 	};
-}	t_matrix3;
+}	t_matrix33;
 
-typedef struct s_matrix4
+typedef struct s_matrix44
 {
 	union
 	{
@@ -153,7 +153,34 @@ typedef struct s_matrix4
 		};
 		float	elems[16];
 	};
-}	t_matrix4;
+}	t_matrix44;
+
+// typedef struct s_tps
+// {
+// 	union
+// 	{
+// 		struct
+// 		{
+// 			t_point	w_p111;
+// 			t_point	w_p___;
+// 			t_point	w_p_1_;
+// 			t_point	w_p1_1;
+// 		};
+// 		t_point	w_p[4];
+// 	};
+// 	union
+// 	{
+// 		struct
+// 		{
+// 			t_point	p111;
+// 			t_point	p___;
+// 			t_point	p_1_;
+// 			t_point	p1_1;
+// 		};
+// 		t_point	p[4];
+// 	};
+// }	t_tps;
+
 
 typedef struct s_triangle
 {
@@ -171,11 +198,21 @@ typedef struct s_triangle
 	{
 		struct
 		{
-			t_point	g_p1;
-			t_point	g_p2;
-			t_point	g_p3;
+			t_point	w_p1;
+			t_point	w_p2;
+			t_point	w_p3;
 		};
-		t_point	g_points[3];
+		t_point	w_points[3];
+	};
+	union
+	{
+		struct
+		{
+			t_point	c_p1;
+			t_point	c_p2;
+			t_point	c_p3;
+		};
+		t_point	c_points[3];
 	};
 	t_color		color;
 	t_vector	norm;
@@ -190,6 +227,48 @@ typedef struct s_tris
 	uint32_t	last_gen;
 }	t_tris;
 
+typedef struct s_camera
+{
+	t_point		center;
+	t_vector	norm;
+	float		hfov;
+	float		vfov;
+	float		focal_len;
+	union
+	{
+		float	near;
+		float	n;
+	};
+	union
+	{
+		float	far;
+		float	f;
+	};
+	union
+	{
+		float	left;
+		float	l;
+	};
+	union
+	{
+		float	right;
+		float	r;
+	};
+	union
+	{
+		float	top;
+		float	t;
+	};
+	union
+	{
+		float	bottom;
+		float	b;
+	};
+	t_triangle	tps;
+	t_matrix44	pm;
+	t_matrix44	tm;
+}	t_camera;
+
 // ksx_init.c
 mlx_t	*ksx_init(void);
 
@@ -198,7 +277,7 @@ int		ksx_prep(void *p_vars);
 
 void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
 void	ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);
-t_tris	*creat_sphere(t_point center, uint32_t diameter, t_color color);
+t_tris	*create_sphere(t_point center, uint32_t diameter, t_color color);
 
 // # include "ksx_camera.h"
 // # include "mlx.h"

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 12:33:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:52:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	is_point_on_ray(const t_point p, const t_vector v)
 	get_cross_product(v, v1, &v2);
 	f[0] = get_magnitude(v2);
 	f[1] = get_magnitude(v);
-	if (f[0] / f[1] > PRECISION / 2.0f)
+	if (f[0] / f[1] > PRECISION * 0.5f)
 		return (KSX_FALSE);
 	return (KSX_TRUE);
 }

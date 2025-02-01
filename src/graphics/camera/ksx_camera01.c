@@ -6,27 +6,104 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 12:34:28 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 17:23:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
+#include "ksx_camera.h"
 #include <math.h>
 
-void	set_camera_matrix(float angle, float near, float far, t_matrix4 *cm)
+// x,y,z coordinates of the view point: -50.0,0,20
+// ∗ 3d normalized orientation vector. 0.0,0.0,1.0
+// In range [-1,1] for each x,y,z axis:
+// ∗ FOV : Horizontal field of view in degrees in range [0,180]: 70
+
+t_camera	create_camera(t_point center, t_vector norm, float fov)
+{
+	t_camera	camera;
+
+	camera.center = center;
+	camera.norm = norm;
+	camera.hfov = (fov * PI) / 180;
+	camera.near = (WIDTH * 0.5f) / tanf(camera.hfov * 0.5f);
+	camera.focal_len = camera.near * 0.5f;
+	camera.vfov = 2.0f * atanf((HEIGHT * 0.5f) / camera.near);
+	camera.right = ((WIDTH * 0.5f) / camera.focal_len) * camera.near;
+	camera.left = -camera.right;
+	camera.top = ((HEIGHT * 0.5f) / camera.focal_len) * camera.near;
+	camera.bottom = -camera.top;
+	camera.tps = init_tps(center, norm);
+	set_camera_pm(&camera, 1500.0f);
+	return (camera);
+}
+
+// void	init_camera(t_camera *p_cam, float near, float far)
+// {
+// 	int		idx;
+// 	float	scale;
+
+// 	idx = 15;
+// 	while (idx-- != -1)
+// 		p_cam->pm.elems[idx] = 0;
+// 	scale = WIDTH / HEIGHT;
+// 	p_cam->pm.e_11 = 1 / (scale * tanf((p_cam->fov / 2) * (PI / 180)));
+// 	p_cam->pm.e_22 = 1 / tanf((p_cam->fov / 2) * (PI / 180));
+// 	p_cam->pm.e_33 = (-(far + near)) / (far - near);
+// 	p_cam->pm.e_34 = (-(2 * far * near)) / (far - near);
+// 	p_cam->pm.e_43 = 1;
+// }
+
+// https://www.mauriciopoppe.com/notes/computer-graphics/viewing/projection-transform/
+
+void	set_camera_pm(t_camera *p_camera, float far)
 {
 	int		idx;
-	float	scale;
 
 	idx = 15;
 	while (idx-- != -1)
-		cm->elems[idx] = 0;
-	scale = WIDTH / HEIGHT;
-	cm->e_11 = 1 / (scale * tanf((angle * 0.5) * (PI / 180)));
-	cm->e_22 = 1 / tanf((angle * 0.5) * (PI / 180));
-	cm->e_33 = (-(far + near)) / (far - near);
-	cm->e_34 = (-(2 * far * near)) / (far - near);
-	cm->e_43 = 1;
+		p_camera->pm.elems[idx] = 0;
+	p_camera->far = far;
+	p_camera->pm.e_11 = (2 * p_camera->n) / (p_camera->r - p_camera->l);
+	p_camera->pm.e_22 = (2 * p_camera->n) / (p_camera->t - p_camera->b);
+	p_camera->pm.e_31
+		= (p_camera->r + p_camera->l) / (p_camera->r - p_camera->l);
+	p_camera->pm.e_32
+		= (p_camera->t + p_camera->b) / (p_camera->t - p_camera->b);
+	p_camera->pm.e_33
+		= - (p_camera->f + p_camera->n) / (p_camera->f - p_camera->n);
+	p_camera->pm.e_34 = -1;
+	p_camera->pm.e_43
+		= - (2 * p_camera->f * p_camera->n) / (p_camera->f - p_camera->n);
 }
 
+
+// void	set_camera_pm(t_camera *p_camera, float far)
+// {
+// 	int		idx;
+
+// 	idx = 15;
+// 	while (idx-- != -1)
+// 		p_camera->pm.elems[idx] = 0;
+// 	p_camera->far = far;
+// 	p_camera->pm.e_11 = (2 * p_camera->n) / (p_camera->r - p_camera->l);
+// 	p_camera->pm.e_22 = (2 * p_camera->n) / (p_camera->t - p_camera->b);
+// 	p_camera->pm.e_31
+// 		= (p_camera->r + p_camera->l) / (p_camera->r - p_camera->l);
+// 	p_camera->pm.e_32
+// 		= (p_camera->t + p_camera->b) / (p_camera->t - p_camera->b);
+// 	p_camera->pm.e_33
+// 		= - (p_camera->f + p_camera->n) / (p_camera->f - p_camera->n);
+// 	p_camera->pm.e_34 = -1;
+// 	p_camera->pm.e_43
+// 		= - (2 * p_camera->f * p_camera->n) / (p_camera->f - p_camera->n);
+// }
+	
+	// float	scale;
+	// scale = WIDTH / HEIGHT;
+	// p_camera->pm.e_11 = 1 / (scale * tanf((p_camera->hfov / 2) * (PI / 180)));
+	// p_camera->pm.e_22 = 1 / tanf((p_camera->hfov / 2) * (PI / 180));
+	// p_camera->pm.e_33 = (-(far + near)) / (far - near);
+	// p_camera->pm.e_34 = (-(2 * far * near)) / (far - near);
+	// p_camera->pm.e_43 = 1;

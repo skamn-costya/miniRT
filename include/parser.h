@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 19:04:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:41:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ t_list		*create_obj_list(t_list **pp_line_list);
 t_object	*create_obj(t_list **pp_line_list, t_list **pp_obj_list);
 
 // parser03.c
-t_object	*create_sphere(t_list **pp_line_list,
+t_object	*par_create_sphere(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);
-t_object	*create_plane(t_list **pp_line_list,
+t_object	*par_create_plane(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);
-t_object	*create_cylinder(t_list **pp_line_list,
+t_object	*par_create_cylinder(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);
 
 // parser04.c

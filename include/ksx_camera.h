@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:54:53 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 19:01:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:25:30 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 
 # include "ksx_graphics.h"
 
+
 // ksx_camera01.c
-void	set_camera_matrix(float angle, float near, float far, t_matrix4 *cm);
+t_camera	create_camera(t_point center, t_vector norm, float fov);
+void		set_camera_pm(t_camera *p_camera, float far);
 
 // typedef float	t_cammtrx[4][4];
 

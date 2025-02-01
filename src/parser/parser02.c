@@ -6,18 +6,18 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 16:17:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 11:42:50 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
 
-static t_object	*create_ambient(t_list **pp_line_list,
+static t_object	*par_create_ambient(t_list **pp_line_list,
 					t_list **pp_obj_list, t_fline *p_fline);
-static t_object	*create_camera(t_list **pp_line_list,
+static t_object	*par_create_camera(t_list **pp_line_list,
 					t_list **pp_obj_list, t_fline *p_fline);
-static t_object	*create_light(t_list **pp_line_list,
+static t_object	*par_create_light(t_list **pp_line_list,
 					t_list **pp_obj_list, t_fline *p_fline);
 
 t_list	*create_obj_list(t_list **pp_line_list)
@@ -32,17 +32,17 @@ t_list	*create_obj_list(t_list **pp_line_list)
 	{
 		p_fline = (t_fline *) p_list->content;
 		if (!ft_strcmp(p_fline->words[0], AMBIENT_ID))
-			create_ambient(pp_line_list, &p_obj_list, p_fline);
+			par_create_ambient(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], CAMERA_ID))
-			create_camera(pp_line_list, &p_obj_list, p_fline);
+			par_create_camera(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], LIGHT_ID))
-			create_light(pp_line_list, &p_obj_list, p_fline);
+			par_create_light(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], SPHERE_ID))
-			create_sphere(pp_line_list, &p_obj_list, p_fline);
+			par_create_sphere(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], PLANE_ID))
-			create_plane(pp_line_list, &p_obj_list, p_fline);
+			par_create_plane(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], CYLINDER_ID))
-			create_cylinder(pp_line_list, &p_obj_list, p_fline);
+			par_create_cylinder(pp_line_list, &p_obj_list, p_fline);
 		p_list = p_list->next;
 	}
 	return (p_obj_list);
@@ -70,7 +70,7 @@ t_object	*create_obj(t_list **pp_line_list, t_list **pp_obj_list)
 	return (p_obj);
 }
 
-static t_object	*create_ambient(t_list **pp_line_list,
+static t_object	*par_create_ambient(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
 	t_object	*p_obj;
@@ -89,7 +89,7 @@ static t_object	*create_ambient(t_list **pp_line_list,
 	return (p_obj);
 }
 
-static t_object	*create_camera(t_list **pp_line_list,
+static t_object	*par_create_camera(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
 	t_object	*p_obj;
@@ -100,9 +100,9 @@ static t_object	*create_camera(t_list **pp_line_list,
 		parser_crash_exit(pp_line_list, pp_obj_list);
 	if (!get_vector(p_fline->words, 2, p_obj))
 		parser_crash_exit(pp_line_list, pp_obj_list);
-	if (p_fline->words && p_fline->words[3] && !is_i_number(p_fline->words[3]))
+	if (p_fline->words && p_fline->words[3] && !is_f_number(p_fline->words[3]))
 		parser_crash_exit(pp_line_list, pp_obj_list);
-	p_obj->fov = ft_atoi(p_fline->words[3]);
+	p_obj->fov = ft_atof(p_fline->words[3]);
 	if (p_obj->fov < 0 || p_obj->fov > 180)
 		parser_crash_exit(pp_line_list, pp_obj_list);
 	if (p_fline->words[4])
@@ -110,7 +110,7 @@ static t_object	*create_camera(t_list **pp_line_list,
 	return (p_obj);
 }
 
-static t_object	*create_light(t_list **pp_line_list,
+static t_object	*par_create_light(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
 	t_object	*p_obj;

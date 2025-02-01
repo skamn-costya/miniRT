@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 00:58:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:50:21 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static t_tris	*init_sphere(t_tris *p_tris, uint32_t radius);
 static t_tris	*init_sphere_(t_tris *p_tris, t_point points[]);
 
 
-t_tris	*creat_sphere(t_point center, uint32_t diameter, t_color color)
+t_tris	*create_sphere(t_point center, uint32_t diameter, t_color color)
 {
 	uint32_t	radius;
 	uint32_t	gen;
 	t_tris		*p_tris;
 
-	radius = diameter / 2.0f;
+	radius = diameter * 0.5f;
 	p_tris = (t_tris *) malloc (sizeof(t_tris));
 	if (!p_tris)
 		return(printf("Error: memory allocation failed!\n"), NULL);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 00:10:45 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 17:03:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,39 @@ void		get_middle_point(const t_point p1, const t_point p2, t_point *p);
 void		vector_resize(t_vector v1, float new_size, t_vector *v);
 
 // ksx_utils02.c
-void		get_cross_product(const t_vector v1, const t_vector v2, t_vector *v);
+void		get_cross_product(const t_vector v1, const t_vector v2,
+				t_vector *v);
 float		get_magnitude(const t_vector v);
 void		get_normal(t_vector v1, t_vector *v);
 int			is_point_on_ray(const t_point p, const t_vector v);
 
 // ksx_utils03.c
-float		determinant2(t_matrix2 m);
-float		determinant3(t_matrix3 m);
-float		determinant4(t_matrix4 m);
+float		determinant2(t_matrix22 m);
+float		determinant3(t_matrix33 m);
+float		determinant4(t_matrix44 m);
 
 // ksx_utils04.c
 float		fraction(t_pixel p, t_pixel p1, t_pixel p2);
 int32_t		ksx_abs(int32_t num);
 mlx_image_t	*create_new_image(mlx_t *mlx);
 t_tris		*add_triangels(t_tris *p_tirs, uint32_t size);
+t_triangle	init_tps(t_point center, t_vector norm);
+
+// ksx_utils05.c
+t_point		ksx_point_rotation(t_point point, float angle_x,
+				float angle_y, float angle_z);
+t_point		ksx_point_rotation_x(t_point point, float angle);
+t_point		ksx_point_rotation_y(t_point point, float angle);
+t_point		ksx_point_rotation_z(t_point point, float angle);
+
+// ksx_utils06.c
+void		ksx_triangle_rotation_w(t_triangle *p_triangle, float angle_x,
+				float angle_y, float angle_z);
+void		ksx_triangle_rotation_c(t_triangle *p_triangle, float angle_x,
+				float angle_y, float angle_z);
+
+// ksx_utils07.c
+t_point ksx_point_m33(t_point point, t_matrix33 m);
+t_point ksx_point_m44(t_point point, t_matrix44 m);
 
 #endif	// KSX_UTILS_H //

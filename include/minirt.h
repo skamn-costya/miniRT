@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 19:18:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:12:50 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_object
 	t_color		color;
 	t_point		coord;
 	t_vector	norm;
-	int			fov;
+	float		fov;
 	float		d;
 	float		h;
 	char		*texture;
@@ -69,6 +69,7 @@ typedef struct s_graphics
 	t_list		*objs;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	t_camera	camera;
 }	t_graphics;
 
 #endif	// MINIRT_H

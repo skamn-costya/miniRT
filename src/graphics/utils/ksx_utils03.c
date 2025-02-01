@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 12:33:40 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 15:10:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include "ksx_utils.h"
 #include <math.h>
 
-static float	determinant4_1(t_matrix4 m);
-static float	determinant4_2(t_matrix4 m);
+static float	determinant4_1(t_matrix44 m);
+static float	determinant4_2(t_matrix44 m);
 
-float	determinant2(t_matrix2 m)
+float	determinant2(t_matrix22 m)
 {
 	float	f;
 
@@ -26,7 +26,7 @@ float	determinant2(t_matrix2 m)
 	return (f);
 }
 
-float	determinant3(t_matrix3 m)
+float	determinant3(t_matrix33 m)
 {
 	float	f;
 
@@ -39,7 +39,7 @@ float	determinant3(t_matrix3 m)
 	return (f);
 }
 
-float	determinant4(t_matrix4 m)
+float	determinant4(t_matrix44 m)
 {
 	float	f;
 
@@ -48,7 +48,7 @@ float	determinant4(t_matrix4 m)
 	return (f);
 }
 
-static float	determinant4_1(t_matrix4 m)
+static float	determinant4_1(t_matrix44 m)
 {
 	float	f;
 
@@ -67,7 +67,7 @@ static float	determinant4_1(t_matrix4 m)
 	return (f);
 }
 
-static float	determinant4_2(t_matrix4 m)
+static float	determinant4_2(t_matrix44 m)
 {
 	float	f;
 

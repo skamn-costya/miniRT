@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 12:33:08 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 16:50:36 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ float	get_dist_point(const t_point p1, const t_point p2)
 
 void	get_middle_point(const t_point p1, const t_point p2, t_point *p)
 {
-	p->x = (p1.x + p2.x) / 2.0f;
-	p->y = (p1.y + p2.y) / 2.0f;
-	p->z = (p1.z + p2.z) / 2.0f;
+	p->x = (p1.x + p2.x) * 0.5f;
+	p->y = (p1.y + p2.y) * 0.5f;
+	p->z = (p1.z + p2.z) * 0.5f;
 }
 
 void	vector_resize(t_vector v1, float new_size, t_vector *v)
