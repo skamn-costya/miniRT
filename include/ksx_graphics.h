@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 23:34:47 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/02 23:02:45 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # define Y 1
 # define Z 2
 
-// Data type for colors, 32 bites: 8 - alfa, 8 - red, 8 - green, 8 - blue
+// Data type for colors, 32 bites: 8 - alfa, 8 - blue, 8 - green, 8 - red
 typedef struct s_color
 {
 	union
@@ -66,10 +66,10 @@ typedef struct s_pixel
 	{
 		struct
 		{
-			uint32_t	x;
-			uint32_t	y;
+			uint64_t	x;
+			uint64_t	y;
 		};
-		int	xy[2];
+		uint64_t	xy[2];
 	};
 	t_color	color;
 }	t_pixel;
@@ -248,51 +248,6 @@ typedef struct s_matrix44
 // 	};
 // }	t_tps;
 
-typedef struct s_triangle
-{
-	union
-	{
-		struct
-		{
-			t_vector3	p1;
-			t_vector3	p2;
-			t_vector3	p3;
-		};
-		t_vector3	points[3];
-	};
-	union
-	{
-		struct
-		{
-			t_vector3	w_p1;
-			t_vector3	w_p2;
-			t_vector3	w_p3;
-		};
-		t_vector3	w_points[3];
-	};
-	union
-	{
-		struct
-		{
-			t_vector3	c_p1;
-			t_vector3	c_p2;
-			t_vector3	c_p3;
-		};
-		t_vector3	c_points[3];
-	};
-	t_color		color;
-	t_vector3	norm;
-	uint32_t	generation;
-
-}	t_triangle;
-
-typedef struct s_tris
-{
-	t_triangle	*p;
-	uint32_t	size;
-	uint32_t	last_gen;
-}	t_tris;
-
 typedef struct s_camera
 {
 	t_vector3	center;
@@ -331,20 +286,85 @@ typedef struct s_camera
 		float	bottom;
 		float	b;
 	};
-	t_triangle	tps;
 	t_matrix44	pm;
 	t_matrix44	tm;
 }	t_camera;
 
+typedef struct s_triangle
+{
+	union
+	{
+		struct
+		{
+			t_vector3	o_p1;
+			t_vector3	o_p2;
+			t_vector3	o_p3;
+		};
+		t_vector3	o_points[3];
+	};
+	union
+	{
+		struct
+		{
+			t_vector3	p1;
+			t_vector3	p2;
+			t_vector3	p3;
+		};
+		t_vector3	points[3];
+	};
+	union
+	{
+		struct
+		{
+			t_vector3	w_p1;
+			t_vector3	w_p2;
+			t_vector3	w_p3;
+		};
+		t_vector3	w_points[3];
+	};
+	union
+	{
+		struct
+		{
+			t_vector3	c_p1;
+			t_vector3	c_p2;
+			t_vector3	c_p3;
+		};
+		t_vector3	c_points[3];
+	};
+	t_color		color;
+	t_vector3	norm;
+	uint32_t	generation;
+
+}	t_triangle;
+
+typedef struct s_obj
+{
+	t_triangle	*p;
+	uint32_t	size;
+	uint32_t	last_gen;
+}	t_obj;
+
+typedef struct s_world
+{
+	t_obj		**objs;
+	uint32_t	size;
+}	t_world;
+
 mlx_t		*ksx_init(void);
 int			ksx_prep(void *p_vars);
+t_pixel		ksx_get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y);
+void		ksx_set_pixel(mlx_image_t *p_img, t_pixel pix);
+
 void		ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
 void		ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);
+
+t_obj		**ksx_obj2world(t_obj *p_obj, t_world *p_world);
 
 t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov);
 void		ksx_set_camera_pm(t_camera *p_camera, float near, float far);
 
-t_tris		*ksx_create_sphere(t_vector3 center,
+t_obj		*ksx_create_sphere(t_vector3 center,
 				uint32_t diameter, t_color color);
 
 #endif	// KSX_GRAPHICS_H //

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 19:39:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/02 23:23:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,31 @@
 #include "ksx_utils.h"
 #include "ksx_sphere.h"
 #include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-static t_tris	*ksx_init_sphere(t_tris *p_tris, uint32_t radius);
-static t_tris	*ksx_init_sphere_(t_tris *p_tris, t_vector3 points[]);
+static void	ksx_init_sphere(t_obj *p_tris, uint32_t radius);
+static void	ksx_init_sphere_1(t_obj *p_tris, t_vector3 points[]);
 
-t_tris	*ksx_create_sphere(t_vector3 center, uint32_t diameter, t_color color)
+t_obj	*ksx_create_sphere(t_vector3 center, uint32_t diameter, t_color color)
 {
 	uint32_t	radius;
-	uint32_t	gen;
-	t_tris		*p_tris;
+	// uint32_t	gen;
+	t_obj		*p_obj;
 
-	radius = diameter * 0.5f;
-	p_tris = (t_tris *) malloc (sizeof(t_tris));
-	if (!p_tris)
+	radius = diameter * .5f;
+	p_obj = (t_obj *) malloc (sizeof(t_obj));
+	if (!p_obj)
 		return (printf("Error: memory allocation failed!\n"), NULL);
-	p_tris->p = NULL;
-	p_tris->size = 0;
-	init_sphere(p_tris, radius);
+	p_obj->p = NULL;
+	p_obj->size = 0;
+	ksx_init_sphere(p_obj, radius);
+	(void) center;
+	(void) color;
+	return (p_obj);
 }
 
-static t_tris	*ksx_init_sphere(t_tris *p_tris, uint32_t radius)
+static void	ksx_init_sphere(t_obj *p_obj, uint32_t radius)
 {
 	t_vector3	points[6];
 
@@ -55,35 +60,35 @@ static t_tris	*ksx_init_sphere(t_tris *p_tris, uint32_t radius)
 	points[5].x = 0;
 	points[5].y = 0;
 	points[5].z = -radius;
-	add_triangels(p_tris, 8);
-	init_sphere_1(p_tris, points);
-	add_triangels(p_tris, 8 * 4);
+	ksx_add_triangels(p_obj, 8);
+	ksx_init_sphere_1(p_obj, points);
+	// ksx_add_triangels(p_tris, 8 * 4);
 }
 
-static t_tris	*ksx_init_sphere_(t_tris *p_tris, t_vector3 points[])
+static void	ksx_init_sphere_1(t_obj *p_obj, t_vector3 points[])
 {
-	p_tris->p[0].p1 = points[0];
-	p_tris->p[0].p2 = points[1];
-	p_tris->p[0].p3 = points[2];
-	p_tris->p[1].p1 = points[0];
-	p_tris->p[1].p2 = points[2];
-	p_tris->p[1].p3 = points[4];
-	p_tris->p[2].p1 = points[0];
-	p_tris->p[2].p2 = points[4];
-	p_tris->p[2].p3 = points[5];
-	p_tris->p[3].p1 = points[0];
-	p_tris->p[3].p2 = points[5];
-	p_tris->p[3].p3 = points[1];
-	p_tris->p[4].p1 = points[3];
-	p_tris->p[4].p2 = points[1];
-	p_tris->p[4].p3 = points[2];
-	p_tris->p[5].p1 = points[3];
-	p_tris->p[5].p2 = points[2];
-	p_tris->p[5].p3 = points[4];
-	p_tris->p[6].p1 = points[3];
-	p_tris->p[6].p2 = points[4];
-	p_tris->p[6].p3 = points[5];
-	p_tris->p[7].p1 = points[3];
-	p_tris->p[7].p2 = points[5];
-	p_tris->p[7].p3 = points[1];
+	p_obj->p[0].p1 = points[0];
+	p_obj->p[0].p2 = points[1];
+	p_obj->p[0].p3 = points[2];
+	p_obj->p[1].p1 = points[0];
+	p_obj->p[1].p2 = points[2];
+	p_obj->p[1].p3 = points[4];
+	p_obj->p[2].p1 = points[0];
+	p_obj->p[2].p2 = points[4];
+	p_obj->p[2].p3 = points[5];
+	p_obj->p[3].p1 = points[0];
+	p_obj->p[3].p2 = points[5];
+	p_obj->p[3].p3 = points[1];
+	p_obj->p[4].p1 = points[3];
+	p_obj->p[4].p2 = points[1];
+	p_obj->p[4].p3 = points[2];
+	p_obj->p[5].p1 = points[3];
+	p_obj->p[5].p2 = points[2];
+	p_obj->p[5].p3 = points[4];
+	p_obj->p[6].p1 = points[3];
+	p_obj->p[6].p2 = points[4];
+	p_obj->p[6].p3 = points[5];
+	p_obj->p[7].p1 = points[3];
+	p_obj->p[7].p2 = points[5];
+	p_obj->p[7].p3 = points[1];
 }

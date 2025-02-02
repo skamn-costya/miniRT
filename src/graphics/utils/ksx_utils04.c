@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 23:43:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:27:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ mlx_image_t	*ksx_create_image( mlx_t *mlx)
 	return (img);
 }
 
-t_tris	*ksx_add_triangels(t_tris *p_tirs, uint32_t size)
+t_obj	*ksx_add_triangels(t_obj *p_tirs, uint32_t size)
 {
 	t_triangle	*p_triangle;
 

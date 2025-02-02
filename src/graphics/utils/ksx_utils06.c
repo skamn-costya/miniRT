@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 23:40:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:28:33 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ksx_triangle_rotation_c(t_triangle *p_triangle, const float angle_x,
 		(p_triangle->p3, angle_x, angle_y, angle_z);
 }
 
-void	ksx_rotation_w(t_tris *p_tris, const float angle_x,
+void	ksx_rotation_w(t_obj *p_tris, const float angle_x,
 	const float angle_y, const float angle_z)
 {
 	uint32_t	idx;
@@ -51,7 +51,7 @@ void	ksx_rotation_w(t_tris *p_tris, const float angle_x,
 	}
 }
 
-void	ksx_rotation_c(t_tris *p_tris, const float angle_x,
+void	ksx_rotation_c(t_obj *p_tris, const float angle_x,
 	const float angle_y, const float angle_z)
 {
 	uint32_t	idx;

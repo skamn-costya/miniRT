@@ -18,7 +18,8 @@ UTILS_FN =	ksx_utils01.c \
 			ksx_utils04.c \
 			ksx_utils05.c \
 			ksx_utils06.c \
-			ksx_utils07.c
+			ksx_utils07.c \
+			ksx_utils08.c
 UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
 
 # Camera object
@@ -26,6 +27,11 @@ CAMERA_DIR = graphics/camera/
 CAMERA_FN =	ksx_camera01.c \
 			ksx_camera02.c
 CAMERA = $(addprefix $(CAMERA_DIR), $(CAMERA_FN))
+
+# Sphere object
+SPHERE_DIR = graphics/sphere/
+SPHERE_FN = ksx_sphere01.c
+SPHERE = $(addprefix $(SPHERE_DIR), $(SPHERE_FN))
 
 # Cylinder object
 CYLINDER_DIR = graphics/cylinder/
@@ -44,13 +50,15 @@ SHAPES = $(addprefix $(SHAPES_DIR), $(SHAPES_FN))
 GRAPHICS_DIR = graphics/
 GRAPHICS_FN =	ksx_draw.c \
 				ksx_init.c \
-				ksx_prep.c
+				ksx_prep.c \
+				ksx_world.c
 GRAPHICS =	$(addprefix $(GRAPHICS_DIR), $(GRAPHICS_FN))
 
 # All sources
 SRC_DIR = ./src/
 SRC = 	$(UTILS) \
 		$(CAMERA) \
+		$(SPHERE) \
 		$(CYLINDER) \
 		$(SHAPES) \
 		$(GRAPHICS) \
@@ -106,6 +114,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(PARSER_DIR)
 	mkdir -p $(OBJ_DIR)$(UTILS_DIR)
 	mkdir -p $(OBJ_DIR)$(CAMERA_DIR)
+	mkdir -p $(OBJ_DIR)$(SPHERE_DIR)
 	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)
 	mkdir -p $(OBJ_DIR)$(SHAPES_DIR)
 

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 19:27:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/02 21:28:51 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	// camera.left = -camera.right;
 	// camera.top = ((HEIGHT * 0.5f) / camera.focal_len) * camera.near;
 	// camera.bottom = -camera.top;
-	camera.tps = ksx_init_tps(center, norm);
 	return (camera);
 }
 
