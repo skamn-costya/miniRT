@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:37:26 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 19:02:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:40:46 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 
 # include "ksx_graphics.h"
 
-t_pixel	get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y);
+t_pixel	ksx_get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y);
 
 #endif	// KSX_PIXEL_H //

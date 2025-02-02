@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 13:07:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:40:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void	ksx_triangle_rotation_w(t_triangle *p_triangle, float angle_x,
-	float angle_y, float angle_z)
+void	ksx_triangle_rotation_w(t_triangle *p_triangle, const float angle_x,
+	const float angle_y, const float angle_z)
 {
 	p_triangle->w_p1 = ksx_point_rotation
 		(p_triangle->p1, angle_x, angle_y, angle_z);
@@ -27,8 +27,8 @@ void	ksx_triangle_rotation_w(t_triangle *p_triangle, float angle_x,
 		(p_triangle->p3, angle_x, angle_y, angle_z);
 }
 
-void	ksx_triangle_rotation_c(t_triangle *p_triangle, float angle_x,
-	float angle_y, float angle_z)
+void	ksx_triangle_rotation_c(t_triangle *p_triangle, const float angle_x,
+	const float angle_y, const float angle_z)
 {
 	p_triangle->c_p1 = ksx_point_rotation
 		(p_triangle->p1, angle_x, angle_y, angle_z);
@@ -38,8 +38,8 @@ void	ksx_triangle_rotation_c(t_triangle *p_triangle, float angle_x,
 		(p_triangle->p3, angle_x, angle_y, angle_z);
 }
 
-void	ksx_rotation_w(t_tris *p_tris, float angle_x,
-	float angle_y, float angle_z)
+void	ksx_rotation_w(t_tris *p_tris, const float angle_x,
+	const float angle_y, const float angle_z)
 {
 	uint32_t	idx;
 
@@ -51,8 +51,8 @@ void	ksx_rotation_w(t_tris *p_tris, float angle_x,
 	}
 }
 
-void	ksx_rotation_c(t_tris *p_tris, float angle_x,
-	float angle_y, float angle_z)
+void	ksx_rotation_c(t_tris *p_tris, const float angle_x,
+	const float angle_y, const float angle_z)
 {
 	uint32_t	idx;
 

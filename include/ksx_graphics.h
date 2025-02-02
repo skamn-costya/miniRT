@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 19:15:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:34:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,13 +340,6 @@ mlx_t		*ksx_init(void);
 int			ksx_prep(void *p_vars);
 void		ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
 void		ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);
-
-// ksx_utils05.c
-t_vector3	ksx_point_rotation(t_vector3 point, float angle_x,
-				float angle_y, float angle_z);
-t_vector3	ksx_point_rotation_x(t_vector3 point, float angle);
-t_vector3	ksx_point_rotation_y(t_vector3 point, float angle);
-t_vector3	ksx_point_rotation_z(t_vector3 point, float angle);
 
 t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov);
 void		ksx_set_camera_pm(t_camera *p_camera, float near, float far);

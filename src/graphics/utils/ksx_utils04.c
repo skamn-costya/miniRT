@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 19:33:24 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:43:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_tris	*ksx_add_triangels(t_tris *p_tirs, uint32_t size)
 
 // set three point for calculate a transformation matrix
 // (1,1,1)(-1,-1,-1)(2,-3,4)
-t_triangle	ksx_init_tps(t_vector3 center, const t_vector3 norm)
+t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm)
 {
 	t_triangle	tps;
 

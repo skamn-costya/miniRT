@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:52:47 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 19:35:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:23:05 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2)
 	mlx_put_pixel(img, pix2.x, pix2.y, pix2.color.mlx_color);
 }
 
-static t_color	get_color(t_pixel p, t_pixel p1, t_pixel p2)
+static t_color	ksx_get_color(t_pixel p, t_pixel p1, t_pixel p2)
 {
 	t_color	color[3];
 	float	f;
@@ -84,7 +84,7 @@ static void	ksx_line_(mlx_image_t *img,
 			pix.y += d_xy[3];
 		if (d_xy[1] == 0)
 			pix.x += d_xy[2];
-		pix.color = get_color (pix, pix1, pix2);
+		pix.color = ksx_get_color (pix, pix1, pix2);
 		mlx_put_pixel(img, pix.x, pix.y, pix.color.mlx_color);
 		xy[0]++;
 	}
@@ -111,7 +111,7 @@ static void	ksx_line_x(mlx_image_t *img,
 			pix.y += d_xy[3];
 			c = c + 2 * d_xy[1] - 2 * d_xy[0];
 		}
-		pix.color = get_color (pix, pix1, pix2);
+		pix.color = ksx_get_color (pix, pix1, pix2);
 		mlx_put_pixel(img, pix.x, pix.y, pix.color.mlx_color);
 		x++;
 	}
@@ -138,7 +138,7 @@ static void	ksx_line_y(mlx_image_t *img,
 			pix.x += d_xy[2];
 			c = c + 2 * d_xy[0] - 2 * d_xy[1];
 		}
-		pix.color = get_color (pix, pix1, pix2);
+		pix.color = ksx_get_color (pix, pix1, pix2);
 		mlx_put_pixel(img, pix.x, pix.y, pix.color.mlx_color);
 		y++;
 	}

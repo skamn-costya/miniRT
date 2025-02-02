@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 19:41:01 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/01 23:32:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ksx_cross_product(const t_vector3 v1, const t_vector3 v2, t_vector3 *v)
 	v->z = v1.x * v2.y - v1.y * v2.x;
 }
 
-float	get_magnitude(const t_vector3 v)
+float	ksx_get_magnitude(const t_vector3 v)
 {
 	float	dis;
 
@@ -30,25 +30,25 @@ float	get_magnitude(const t_vector3 v)
 	return (dis);
 }
 
-float	get_angle(const t_vector3 v1, const t_vector3 v2)
+float	ksx_get_angle(const t_vector3 v1, const t_vector3 v2)
 {
 	float	f;
 
 	f = acosf(((v1.x * v2.x) + (v1.y * v2.y)
 				+ (v1.z * v2.z))
-			/ (get_magnitude(v1) * get_magnitude(v2)));
+			/ (ksx_get_magnitude(v1) * ksx_get_magnitude(v2)));
 	return (f);
 }
 
 // function is_point_on_ray in debug ...
-int	is_point_on_ray(const t_vector3 p, const t_vector3 v)
+int	ksx_point_on_ray(const t_vector3 p, const t_vector3 v)
 {
 	t_vector3	v1;
 	float		f[2];
 
 	ksx_cross_product(p, v, &v1);
-	f[0] = get_magnitude(v1);
-	f[1] = get_magnitude(v);
+	f[0] = ksx_get_magnitude(v1);
+	f[1] = ksx_get_magnitude(v);
 	if (f[0] / f[1] > PRECISION * 0.5f)
 		return (KSX_FALSE);
 	return (KSX_TRUE);
