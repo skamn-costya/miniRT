@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 00:43:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:30:54 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,9 +347,18 @@ typedef struct s_obj
 
 typedef struct s_world
 {
-	t_obj		**objs;
+	t_triangle	*p_tris;
+	t_obj		**pp_obj;
 	uint32_t	size;
 }	t_world;
+
+typedef struct s_graphics
+{
+	mlx_t		*mlx;
+	mlx_image_t	*img;
+	t_world		world;
+	t_camera	camera;
+}	t_graphics;
 
 mlx_t		*ksx_init(void);
 int			ksx_prep(void *p_vars);
@@ -366,5 +375,6 @@ void		ksx_set_camera_pm(t_camera *p_camera, float near, float far);
 
 t_obj		*ksx_create_sphere(t_vector3 center,
 				uint32_t diameter, t_color color);
+void		ksx_draw(t_graphics *p_grph);
 
 #endif	// KSX_GRAPHICS_H //

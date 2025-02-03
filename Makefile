@@ -19,7 +19,8 @@ UTILS_FN =	ksx_utils01.c \
 			ksx_utils05.c \
 			ksx_utils06.c \
 			ksx_utils07.c \
-			ksx_utils08.c
+			ksx_utils08.c \
+			ksx_utils09.c
 UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
 
 # Camera object

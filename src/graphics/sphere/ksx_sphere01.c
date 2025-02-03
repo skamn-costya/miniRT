@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 01:12:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:40:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void	ksx_init_sphere(t_obj *p_obj, t_vector3 center, uint32_t radius);
-static void	ksx_init_sphere_1(t_obj *p_obj, t_vector3 points[]);
-static void	ksx_init_sphere_2(t_obj *p_obj, t_vector3 center);
+static void			ksx_init_sphere(t_obj *p_obj,
+						t_vector3 center, uint32_t radius);
+static void			ksx_init_sphere_1(t_obj *p_obj, t_vector3 points[]);
+static void			ksx_init_sphere_2(t_obj *p_obj, t_vector3 center);
+static t_triangle	**ksx_init_sphere_tri(t_obj *p_obj);
 
 t_obj	*ksx_create_sphere(t_vector3 center, uint32_t diameter, t_color color)
 {
+	t_obj		*p_obj;
 	uint32_t	radius;
 	// uint32_t	gen;
-	t_obj		*p_obj;
 
 	radius = diameter * .5f;
 	p_obj = (t_obj *) malloc (sizeof(t_obj));
 	if (!p_obj)
 		return (printf("Error: memory allocation failed!\n"), NULL);
-	p_obj->pp_tris = NULL;
-	p_obj->size = 0;
+	if (!ksx_init_sphere_tri(p_obj))
+		return (NULL);
 	ksx_init_sphere(p_obj, center, radius);
 	(void) color;
 	return (p_obj);
@@ -60,7 +62,6 @@ static void	ksx_init_sphere(t_obj *p_obj, t_vector3 center, uint32_t radius)
 	points[5].x = 0;
 	points[5].y = 0;
 	points[5].z = -radius;
-	ksx_add_triangels(p_obj, 8);
 	ksx_init_sphere_1(p_obj, points);
 	ksx_init_sphere_2(p_obj, center);
 }
@@ -103,4 +104,25 @@ static void	ksx_init_sphere_2(t_obj *p_obj, t_vector3 center)
 	ksx_set_world_coords(p_obj->pp_tris[5], center);
 	ksx_set_world_coords(p_obj->pp_tris[6], center);
 	ksx_set_world_coords(p_obj->pp_tris[7], center);
+}
+
+static t_triangle	**ksx_init_sphere_tri(t_obj *p_obj)
+{
+	uint32_t	idx;
+	t_triangle	*p_tri;
+	t_triangle	**pp_tri;
+
+	p_obj->size = 0;
+	p_obj->last_gen = 1;
+	idx = 0;
+	while (idx < 8)
+	{
+		p_tri = (t_triangle *) malloc (sizeof(t_triangle));
+		if (!p_tri)
+			return (printf("Error: memory allocation failed!\n"), NULL);
+		p_tri->generation = 1;
+		pp_tri = ksx_tri2obj(p_tri, p_obj);
+		idx++;
+	}
+	return (pp_tri);
 }

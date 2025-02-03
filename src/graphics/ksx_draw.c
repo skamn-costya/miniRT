@@ -6,11 +6,12 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 01:09:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 16:34:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
+#include "ksx_utils.h"
 #include <math.h>
 
 
@@ -18,23 +19,43 @@
 // static void	ksx_draw_zord(t_vars *vars);
 // static void	fdf_lines(t_vars *vars, int idx_xy[]);
 
-void	ksx_draw(t_world *p_world)
+void	ksx_draw(t_graphics *p_grph)
 {
-	t_obj		**pp_objs;
+	t_obj		**pp_obj;
 	t_obj		*p_obj;
-	uint32_t	idx;
+	uint32_t	idx[2];
+	t_pixel		pixel;
 
-	if (!p_world->objs)
+	if (!p_grph->world.pp_obj)
 		return ;
-	idx = 0;
-	pp_objs = p_world->objs;
-	while (pp_objs[idx])
+	pixel.color.mlx_color = 0xff0000ff;
+	idx[0] = 0;
+	pp_obj = p_grph->world.pp_obj;
+	while (pp_obj[idx[0]])
 	{
-		p_obj = pp_objs[idx];
-		(void) p_obj;
-		idx++;
+		p_obj = pp_obj[idx[0]];
+		idx[1] = 0;
+		while (idx[1] < p_obj->size)
+		{
+			// p_grph->camera
+			p_obj->pp_tris[idx[1]]->c_p1 =
+				ksx_point_m44(p_obj->pp_tris[idx[1]]->p1, p_grph->camera.pm);
+			p_obj->pp_tris[idx[1]]->c_p2 =
+				ksx_point_m44(p_obj->pp_tris[idx[1]]->p2, p_grph->camera.pm);
+			p_obj->pp_tris[idx[1]]->c_p3 =
+				ksx_point_m44(p_obj->pp_tris[idx[1]]->p3, p_grph->camera.pm);
+			pixel.x = roundf(p_obj->pp_tris[idx[1]]->c_p1.x);
+			pixel.y = roundf(p_obj->pp_tris[idx[1]]->c_p1.y);
+			ksx_set_pixel(p_grph->img, pixel);
+			idx[1]++;
+		}
+		idx[0]++;
 	}
 }
+
+	// point[0] = ksx_point_m44(point[0], p_grph->camera.pm);
+	// point[1] = ksx_point_m44(point[1], p_grph->camera.pm);
+	// point[2] = ksx_point_m44(point[2], p_grph->camera.pm);
 
 // void	ksx_draw(t_vars *vars)
 // {

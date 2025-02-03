@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 01:10:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 12:50:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ float		ksx_determinant4(const t_matrix44 m);
 float		ksx_fraction(const t_pixel p, const t_pixel p1, const t_pixel p2);
 int32_t		ksx_abs(const int32_t num);
 mlx_image_t	*ksx_create_image(mlx_t *mlx);
-t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_obj *p_obj);
-t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm);
 
 // ksx_utils05.c
 t_vector3	ksx_point_rotation(const t_vector3 point, const float angle_x,
@@ -69,5 +67,10 @@ void		ksx_rotation_c(t_obj *p_obj, float angle_x,
 // ksx_utils08.c
 uint32_t	ksx_get_count_pointers(void **pointers);
 void		ksx_free_pointers(void **pointers);
+
+// ksx_utils09.c
+t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_obj *p_obj);
+t_triangle	**ksx_tris2obj(t_triangle *p_tris[], uint32_t size, t_obj *p_obj);
+t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm);
 
 #endif	// KSX_UTILS_H //
