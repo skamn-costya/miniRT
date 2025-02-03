@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 23:06:32 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/02 23:32:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,12 @@ int	main(int argc, char *argv[])
 		ft_lstclear(&grph.objs, &free_t_object);
 		return (EXIT_FAILURE);
 	}
+	ksx_init_world(&grph);
 	if (!ksx_prep(&grph))
 	{
 		ft_lstclear(&grph.objs, &free_t_object);
 		return (EXIT_FAILURE);
 	}
-	ksx_init_world(&grph);
 	mlx_loop(grph.mlx);
 	ft_lstclear(&grph.objs, &free_t_object);
 	return (EXIT_SUCCESS);

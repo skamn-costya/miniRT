@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 23:02:45 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 00:43:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,16 +292,16 @@ typedef struct s_camera
 
 typedef struct s_triangle
 {
-	union
-	{
-		struct
-		{
-			t_vector3	o_p1;
-			t_vector3	o_p2;
-			t_vector3	o_p3;
-		};
-		t_vector3	o_points[3];
-	};
+	// union
+	// {
+	// 	struct
+	// 	{
+	// 		t_vector3	o_p1;
+	// 		t_vector3	o_p2;
+	// 		t_vector3	o_p3;
+	// 	};
+	// 	t_vector3	o_points[3];
+	// };
 	union
 	{
 		struct
@@ -340,7 +340,7 @@ typedef struct s_triangle
 
 typedef struct s_obj
 {
-	t_triangle	*p;
+	t_triangle	**pp_tris;
 	uint32_t	size;
 	uint32_t	last_gen;
 }	t_obj;

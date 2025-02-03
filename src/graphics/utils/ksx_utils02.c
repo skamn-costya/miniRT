@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 23:32:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 00:10:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,11 @@ int	ksx_point_on_ray(const t_vector3 p, const t_vector3 v)
 	if (f[0] / f[1] > PRECISION * 0.5f)
 		return (KSX_FALSE);
 	return (KSX_TRUE);
+}
+
+void	ksx_set_world_coords(t_triangle *triangle, const t_vector3 v)
+{
+	ksx_vector3_sum(triangle->p1, v, &triangle->w_p1);
+	ksx_vector3_sum(triangle->p2, v, &triangle->w_p2);
+	ksx_vector3_sum(triangle->p3, v, &triangle->w_p3);
 }

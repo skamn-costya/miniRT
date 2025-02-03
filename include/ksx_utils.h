@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 23:16:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 01:10:10 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void		ksx_middle_point(const t_vector3 p1,
 void		ksx_vector3_resize(const t_vector3 v1,
 				const float new_size, t_vector3 *v);
 void		ksx_vector3_norm(const t_vector3 v1, t_vector3 *v);
+void		ksx_vector3_sum(const t_vector3 v1,
+				const t_vector3 v2, t_vector3 *v);
 
 // ksx_utils02.c
 void		ksx_cross_product(const t_vector3 v1, const t_vector3 v2,
@@ -29,6 +31,7 @@ void		ksx_cross_product(const t_vector3 v1, const t_vector3 v2,
 float		ksx_get_magnitude(const t_vector3 v);
 float		ksx_get_angle(const t_vector3 v1, const t_vector3 v2);
 int			ksx_point_on_ray(const t_vector3 p, const t_vector3 v);
+void		ksx_set_world_coords(t_triangle *triangle, const t_vector3 v);
 
 // ksx_utils03.c
 float		ksx_determinant2(const t_matrix22 m);
@@ -39,7 +42,7 @@ float		ksx_determinant4(const t_matrix44 m);
 float		ksx_fraction(const t_pixel p, const t_pixel p1, const t_pixel p2);
 int32_t		ksx_abs(const int32_t num);
 mlx_image_t	*ksx_create_image(mlx_t *mlx);
-t_obj		*ksx_add_triangels(t_obj *p_tirs, uint32_t size);
+t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_obj *p_obj);
 t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm);
 
 // ksx_utils05.c
@@ -58,9 +61,9 @@ void		ksx_triangle_rotation_c(t_triangle *p_triangle, const float angle_x,
 // ksx_utils07.c
 t_vector3	ksx_point_m33(t_vector3 point, t_matrix33 m);
 t_vector3	ksx_point_m44(t_vector3 point, t_matrix44 m);
-void		ksx_rotation_w(t_obj *p_tris, float angle_x,
+void		ksx_rotation_w(t_obj *p_obj, float angle_x,
 				float angle_y, float angle_z);
-void		ksx_rotation_c(t_obj *p_tris, float angle_x,
+void		ksx_rotation_c(t_obj *p_obj, float angle_x,
 				float angle_y, float angle_z);
 
 // ksx_utils08.c

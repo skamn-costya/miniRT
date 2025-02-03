@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 21:59:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/02 23:52:22 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,11 @@ void	ksx_vector3_resize(const t_vector3 v1,
 void	ksx_vector3_norm(const t_vector3 v1, t_vector3 *v)
 {
 	ksx_vector3_resize(v1, 1.f, v);
+}
+
+void	ksx_vector3_sum(const t_vector3 v1, const t_vector3 v2, t_vector3 *v)
+{
+	v->x = v1.x + v2.x;
+	v->y = v1.y + v2.y;
+	v->z = v1.z + v2.z;
 }

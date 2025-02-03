@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 21:27:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 01:14:51 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,34 @@ t_obj	*ksx_add_triangels(t_obj *p_tirs, uint32_t size)
 		p_triangle[--p_tirs->size] = p_tirs->p[p_tirs->size];
 	free (p_tirs->p);
 	return (p_tirs->p = p_triangle, p_tirs->size = size, p_tirs);
+}
+
+t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_obj *p_obj)
+{
+	t_triangle	**pp_tris;
+	uint32_t	idx;
+
+	if (!p_obj->pp_tris)
+		pp_tris = (t_triangle **) malloc (sizeof(t_triangle *) * 2);
+	else
+		pp_tris = (t_triangle **) malloc (sizeof(t_triangle *)
+				* (ksx_get_count_pointers((void **) p_obj->pp_tris) + 1));
+	if (!pp_tris)
+		return (printf("Error: memory allocation failed!\n"), NULL);
+	idx = 0;
+	if (p_obj->pp_tris)
+	{
+		while (p_obj->pp_tris[idx])
+		{
+			pp_tris[idx] = p_obj->pp_tris[idx];
+			idx++;
+		}
+		free (p_obj->pp_tris);
+	}
+	pp_tris[idx] = p_tri;
+	pp_tris[idx + 1] = NULL;
+	p_obj->pp_tris = pp_tris;
+	return (pp_tris);
 }
 
 // set three point for calculate a transformation matrix

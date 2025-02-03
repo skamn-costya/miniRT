@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 23:02:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 00:50:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_obj	**ksx_obj2world(t_obj *p_obj, t_world *p_world)
 	if (!pp_obj)
 		return (printf("Error: memory allocation failed!\n"), NULL);
 	idx = 0;
-	if (p_world->objs && p_world->objs[0])
+	if (p_world->objs)
 	{
 		while (p_world->objs[idx])
 		{

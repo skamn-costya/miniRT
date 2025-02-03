@@ -6,27 +6,35 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/25 22:29:30 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 01:09:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include <math.h>
 
+
 // void	ksx_draw(t_vars *vars);
 // static void	ksx_draw_zord(t_vars *vars);
 // static void	fdf_lines(t_vars *vars, int idx_xy[]);
 
-// void	ksx_draw(t_vars *vars)
-// {
-// 	if (vars->flags & PERSPEC)
-// 		impl_matrix2arr (vars->xy, vars->fdf, vars->cm);
-// 	if (vars->flags & Z_ORD)
-// 		ksx_draw_zord (vars);
-// 	else
-// 		ksx_draw(vars);
-// 	print_statuses (vars);
-// }
+void	ksx_draw(t_world *p_world)
+{
+	t_obj		**pp_objs;
+	t_obj		*p_obj;
+	uint32_t	idx;
+
+	if (!p_world->objs)
+		return ;
+	idx = 0;
+	pp_objs = p_world->objs;
+	while (pp_objs[idx])
+	{
+		p_obj = pp_objs[idx];
+		(void) p_obj;
+		idx++;
+	}
+}
 
 // void	ksx_draw(t_vars *vars)
 // {
