@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 12:28:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 22:48:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,19 @@ mlx_image_t	*ksx_create_image( mlx_t *mlx)
 		idx += 4;
 	}
 	return (img);
+}
+
+/**
+ * @brief puts the coordinates of the midpoint (between p1 and p2) into p.
+ * 
+ * @param p1 The first point
+ * @param p2 The second point
+ * @param p The pointer to result point
+ */
+void	ksx_mid_point(const t_vector3 p1,
+			const t_vector3 p2, t_vector3 *p)
+{
+	p->x = (p1.x + p2.x) * 0.5f;
+	p->y = (p1.y + p2.y) * 0.5f;
+	p->z = (p1.z + p2.z) * 0.5f;
 }

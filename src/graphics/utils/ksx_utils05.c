@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 23:56:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 00:07:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_vector3	ksx_point_rotation(const t_vector3 point, const float angle_x,
 	const float angle_y, const float angle_z)
 {
 	t_vector3	point_;
-	t_matrix33	rm;
+	t_matrix3	rm;
 
 	if (angle_x == 0 && angle_y == 0 && angle_z == 0)
 		return (point);

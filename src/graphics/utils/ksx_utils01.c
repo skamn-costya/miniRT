@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 23:52:22 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 00:24:56 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,14 @@
 // https://www.mathnirvana.com/ru/vse-pravila-matematiki
 // /uravneniye-okruzhnosti.htm
 
-float	ksx_get_dist_vector3(const t_vector3 v1, const t_vector3 v2)
+
+/**
+ * @brief returns the distance between v1 and v2.
+ * 
+ * @param v1 The first vecot
+ * @param v2 The second vecot
+ */
+float	ksx_dist_vec3(const t_vector3 v1, const t_vector3 v2)
 {
 	float	dis;
 
@@ -33,31 +40,60 @@ float	ksx_get_dist_vector3(const t_vector3 v1, const t_vector3 v2)
 	return (dis);
 }
 
-void	ksx_middle_point(const t_vector3 p1,
-			const t_vector3 p2, t_vector3 *p)
+/**
+ * @brief returns the lenght of v1.
+ * 
+ * @param v1 The first vecot
+  */
+float	ksx_magnit_vec3(const t_vector3 v)
 {
-	p->x = (p1.x + p2.x) * 0.5f;
-	p->y = (p1.y + p2.y) * 0.5f;
-	p->z = (p1.z + p2.z) * 0.5f;
+	float	dis;
+
+	dis = sqrtf(powf(v.x, 2.f) + powf(v.y, 2.f)
+			+ powf(v.z, 2.f));
+	return (dis);
 }
 
-void	ksx_vector3_resize(const t_vector3 v1,
-			const float new_size, t_vector3 *v)
-{
-	float	f;
 
-	f = new_size / ksx_get_magnitude(v1);
-	v->x = v1.x * f;
-	v->y = v1.y * f;
-	v->z = v1.z * f;
+/**
+ * @brief returns resizeed vector
+ * 
+ * @param v1 Original vector
+ * @param new_size Size of new vector
+  */
+t_vector3	ksx_resize_vec3(const t_vector3 v1,	const float new_size)
+{
+	float		f;
+	t_vector3	result;
+
+	f = new_size / ksx_magnit_vec3(v1);
+	result.x = v1.x * f;
+	result.y = v1.y * f;
+	result.z = v1.z * f;
+	return (result);
 }
 
-void	ksx_vector3_norm(const t_vector3 v1, t_vector3 *v)
+/**
+ * @brief makes the vector into a unit vector, which means a vector of length 1
+ * and puts the result into v
+ * 
+ * @param v1 Original vector
+ * @param v The pointer to result vector
+ */
+t_vector3	ksx_norm_vec3(const t_vector3 v1)
 {
-	ksx_vector3_resize(v1, 1.f, v);
+	return (ksx_resize_vec3(v1, 1.f));
 }
 
-void	ksx_vector3_sum(const t_vector3 v1, const t_vector3 v2, t_vector3 *v)
+/**
+ * @brief makes the vector as sum of v1 and v2
+ * and and puts the result into v
+ * 
+ * @param v1 The first vecot
+ * @param v2 The second vecot
+ * @param v The pointer to result vector
+ */
+void	ksx_sum_vec3(const t_vector3 v1, const t_vector3 v2, t_vector3 *v)
 {
 	v->x = v1.x + v2.x;
 	v->y = v1.y + v2.y;

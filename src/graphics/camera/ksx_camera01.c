@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 21:28:51 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:20:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,21 @@
 #include "ksx_utils.h"
 #include "ksx_camera.h"
 #include <math.h>
+
+// https://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
+
+// We (traditionally) have these coordinate systems to work with:
+
+// Model space (sometimes called "Object space"): The coordinates inside the model.
+// World space: The coordinates in the world.
+// Camera space: The coordinates relative to the camera.
+// Screen space (sometimes called "Window space" or "Device space"): The coordinates for the screen.
+// And of course, there are matrices to transform between them:
+
+// Model matrix (sometimes called “Object matrix”): from Model space to World space. You use this matrix to place objects in the world.
+// View matrix (sometimes called “Camera Transformation matrix”): from World space to Camera space.
+// Projection Matrix (Sometimes called “Camera Projection matrix”): from Camera space to Clip space.
+
 
 // x,y,z coordinates of the view point: -50.0,0,20
 // ∗ 3d normalized orientation vector. 0.0,0.0,1.0

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 12:39:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 23:42:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static t_list	*create_line_list(int fd)
 		free (p_str[0]);
 		p_str[0] = comma_trim(p_str[1]);
 		free (p_str[1]);
-		if (ft_strlen(p_str[0]) > 0)
+		if (ft_strlen(p_str[0]) > 0 && p_str[0][0] != '#')
 		{
 			if (!create_fline(&p_line_list, p_str[0]))
 			{
