@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 16:40:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:11:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,42 +68,42 @@ static void	ksx_init_sphere(t_obj *p_obj, t_vector3 center, uint32_t radius)
 
 static void	ksx_init_sphere_1(t_obj *p_obj, t_vector3 points[])
 {
-	p_obj->pp_tris[0]->p1 = points[0];
-	p_obj->pp_tris[0]->p2 = points[1];
-	p_obj->pp_tris[0]->p3 = points[2];
-	p_obj->pp_tris[1]->p1 = points[0];
-	p_obj->pp_tris[1]->p2 = points[2];
-	p_obj->pp_tris[1]->p3 = points[4];
-	p_obj->pp_tris[2]->p1 = points[0];
-	p_obj->pp_tris[2]->p2 = points[4];
-	p_obj->pp_tris[2]->p3 = points[5];
-	p_obj->pp_tris[3]->p1 = points[0];
-	p_obj->pp_tris[3]->p2 = points[5];
-	p_obj->pp_tris[3]->p3 = points[1];
-	p_obj->pp_tris[4]->p1 = points[3];
-	p_obj->pp_tris[4]->p2 = points[1];
-	p_obj->pp_tris[4]->p3 = points[2];
-	p_obj->pp_tris[5]->p1 = points[3];
-	p_obj->pp_tris[5]->p2 = points[2];
-	p_obj->pp_tris[5]->p3 = points[4];
-	p_obj->pp_tris[6]->p1 = points[3];
-	p_obj->pp_tris[6]->p2 = points[4];
-	p_obj->pp_tris[6]->p3 = points[5];
-	p_obj->pp_tris[7]->p1 = points[3];
-	p_obj->pp_tris[7]->p2 = points[5];
-	p_obj->pp_tris[7]->p3 = points[1];
+	p_obj->pp_otri[0]->p1 = points[0];
+	p_obj->pp_otri[0]->p2 = points[1];
+	p_obj->pp_otri[0]->p3 = points[2];
+	p_obj->pp_otri[1]->p1 = points[0];
+	p_obj->pp_otri[1]->p2 = points[2];
+	p_obj->pp_otri[1]->p3 = points[4];
+	p_obj->pp_otri[2]->p1 = points[0];
+	p_obj->pp_otri[2]->p2 = points[4];
+	p_obj->pp_otri[2]->p3 = points[5];
+	p_obj->pp_otri[3]->p1 = points[0];
+	p_obj->pp_otri[3]->p2 = points[5];
+	p_obj->pp_otri[3]->p3 = points[1];
+	p_obj->pp_otri[4]->p1 = points[3];
+	p_obj->pp_otri[4]->p2 = points[1];
+	p_obj->pp_otri[4]->p3 = points[2];
+	p_obj->pp_otri[5]->p1 = points[3];
+	p_obj->pp_otri[5]->p2 = points[2];
+	p_obj->pp_otri[5]->p3 = points[4];
+	p_obj->pp_otri[6]->p1 = points[3];
+	p_obj->pp_otri[6]->p2 = points[4];
+	p_obj->pp_otri[6]->p3 = points[5];
+	p_obj->pp_otri[7]->p1 = points[3];
+	p_obj->pp_otri[7]->p2 = points[5];
+	p_obj->pp_otri[7]->p3 = points[1];
 }
 
 static void	ksx_init_sphere_2(t_obj *p_obj, t_vector3 center)
 {
-	ksx_set_world_coords(p_obj->pp_tris[0], center);
-	ksx_set_world_coords(p_obj->pp_tris[1], center);
-	ksx_set_world_coords(p_obj->pp_tris[2], center);
-	ksx_set_world_coords(p_obj->pp_tris[3], center);
-	ksx_set_world_coords(p_obj->pp_tris[4], center);
-	ksx_set_world_coords(p_obj->pp_tris[5], center);
-	ksx_set_world_coords(p_obj->pp_tris[6], center);
-	ksx_set_world_coords(p_obj->pp_tris[7], center);
+	ksx_set_world_coords(p_obj->pp_otri[0], center);
+	ksx_set_world_coords(p_obj->pp_otri[1], center);
+	ksx_set_world_coords(p_obj->pp_otri[2], center);
+	ksx_set_world_coords(p_obj->pp_otri[3], center);
+	ksx_set_world_coords(p_obj->pp_otri[4], center);
+	ksx_set_world_coords(p_obj->pp_otri[5], center);
+	ksx_set_world_coords(p_obj->pp_otri[6], center);
+	ksx_set_world_coords(p_obj->pp_otri[7], center);
 }
 
 static t_triangle	**ksx_init_sphere_tri(t_obj *p_obj)
@@ -112,8 +112,9 @@ static t_triangle	**ksx_init_sphere_tri(t_obj *p_obj)
 	t_triangle	*p_tri;
 	t_triangle	**pp_tri;
 
-	p_obj->size = 0;
 	p_obj->last_gen = 1;
+	p_obj->pp_otri = NULL;
+	p_obj->size_otri = 0;
 	idx = 0;
 	while (idx < 8)
 	{

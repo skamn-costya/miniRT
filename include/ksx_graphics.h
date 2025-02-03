@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 16:30:54 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:11:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -340,16 +340,16 @@ typedef struct s_triangle
 
 typedef struct s_obj
 {
-	t_triangle	**pp_tris;
-	uint32_t	size;
+	t_triangle	**pp_otri;
+	uint32_t	size_otri;
 	uint32_t	last_gen;
 }	t_obj;
 
 typedef struct s_world
 {
 	t_triangle	*p_tris;
-	t_obj		**pp_obj;
-	uint32_t	size;
+	t_obj		**pp_wobj;
+	uint32_t	size_wobj;
 }	t_world;
 
 typedef struct s_graphics

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 14:13:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:13:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,45 +39,37 @@ t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_obj *p_obj)
 	t_triangle	**pp_tris;
 	uint32_t	idx;
 
-	if (!p_obj->pp_tris)
-		pp_tris = (t_triangle **) malloc (sizeof(t_triangle *) * 2);
-	else
-		pp_tris = (t_triangle **) malloc (sizeof(t_triangle *)
-				* (ksx_get_count_pointers((void **) p_obj->pp_tris) + 1));
+	pp_tris = (t_triangle **) malloc (sizeof(t_triangle *) * (p_obj->size_otri + 1));
 	if (!pp_tris)
 		return (printf("Error: memory allocation failed!\n"), NULL);
 	idx = 0;
-	if (p_obj->pp_tris)
+	while (idx < p_obj->size_otri)
 	{
-		while (p_obj->pp_tris[idx])
-		{
-			pp_tris[idx] = p_obj->pp_tris[idx];
-			idx++;
-		}
-		free (p_obj->pp_tris);
+		pp_tris[idx] = p_obj->pp_otri[idx];
+		idx++;
 	}
 	pp_tris[idx] = p_tri;
-	pp_tris[idx + 1] = NULL;
-	p_obj->pp_tris = pp_tris;
-	p_obj->size++;
+	free(p_obj->pp_otri);
+	p_obj->pp_otri = pp_tris;
+	p_obj->size_otri++;
 	return (pp_tris);
 }
 
 t_triangle	**ksx_tris2obj(t_triangle *p_tris[], uint32_t size, t_obj *p_obj)
 {
-	t_triangle	**pp_tris;
+	t_triangle	**pp_tri;
 	uint32_t	idx;
 
 	if (!p_tris || !p_tris[0])
-		return (p_obj->pp_tris);
-	pp_tris = NULL;
+		return (p_obj->pp_otri);
+	pp_tri = NULL;
 	idx = 0;
 	while (idx < size)
 	{
-		pp_tris = ksx_tri2obj(p_tris[idx], p_obj);
+		pp_tri = ksx_tri2obj(p_tris[idx], p_obj);
 		idx++;
 	}
-	return (pp_tris);
+	return (pp_tri);
 }
 
 // set three point for calculate a transformation matrix

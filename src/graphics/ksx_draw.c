@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 16:34:31 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:15:51 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,26 @@ void	ksx_draw(t_graphics *p_grph)
 	uint32_t	idx[2];
 	t_pixel		pixel;
 
-	if (!p_grph->world.pp_obj)
+	if (!p_grph->world.pp_wobj)
 		return ;
 	pixel.color.mlx_color = 0xff0000ff;
 	idx[0] = 0;
-	pp_obj = p_grph->world.pp_obj;
-	while (pp_obj[idx[0]])
+	pp_obj = p_grph->world.pp_wobj;
+	while (idx[0] < p_grph->world.size_wobj)
 	{
 		p_obj = pp_obj[idx[0]];
 		idx[1] = 0;
-		while (idx[1] < p_obj->size)
+		while (idx[1] < p_obj->size_otri)
 		{
 			// p_grph->camera
-			p_obj->pp_tris[idx[1]]->c_p1 =
-				ksx_point_m44(p_obj->pp_tris[idx[1]]->p1, p_grph->camera.pm);
-			p_obj->pp_tris[idx[1]]->c_p2 =
-				ksx_point_m44(p_obj->pp_tris[idx[1]]->p2, p_grph->camera.pm);
-			p_obj->pp_tris[idx[1]]->c_p3 =
-				ksx_point_m44(p_obj->pp_tris[idx[1]]->p3, p_grph->camera.pm);
-			pixel.x = roundf(p_obj->pp_tris[idx[1]]->c_p1.x);
-			pixel.y = roundf(p_obj->pp_tris[idx[1]]->c_p1.y);
+			p_obj->pp_otri[idx[1]]->c_p1 =
+				ksx_point_m44(p_obj->pp_otri[idx[1]]->p1, p_grph->camera.pm);
+			p_obj->pp_otri[idx[1]]->c_p2 =
+				ksx_point_m44(p_obj->pp_otri[idx[1]]->p2, p_grph->camera.pm);
+			p_obj->pp_otri[idx[1]]->c_p3 =
+				ksx_point_m44(p_obj->pp_otri[idx[1]]->p3, p_grph->camera.pm);
+			pixel.x = roundf(p_obj->pp_otri[idx[1]]->c_p1.x);
+			pixel.y = roundf(p_obj->pp_otri[idx[1]]->c_p1.y);
 			ksx_set_pixel(p_grph->img, pixel);
 			idx[1]++;
 		}

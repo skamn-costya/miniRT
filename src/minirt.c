@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 16:38:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:54:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	main(int argc, char *argv[])
 	if (!p_list)
 		return (printf("Incorrect the scene file.\n"), EXIT_SUCCESS);
 	grph.mlx = ksx_init();
-	grph.world.pp_obj = NULL;
+	grph.world.pp_wobj = NULL;
+	grph.world.size_wobj = 0;
 	if (!grph.mlx)
 	{
 		ft_lstclear(&p_list, &free_t_object);
