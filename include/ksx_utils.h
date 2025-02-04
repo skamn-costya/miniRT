@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 00:25:22 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 08:41:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,12 @@ float		ksx_dist_vec3(const t_vector3 v1, const t_vector3 v2);
 float		ksx_magnit_vec3(const t_vector3 v);
 t_vector3	ksx_resize_vec3(const t_vector3 v1, const float new_size);
 t_vector3	ksx_norm_vec3(const t_vector3 v1);
-void		ksx_sum_vec3(const t_vector3 v1,
-				const t_vector3 v2, t_vector3 *v);
+t_vector3	ksx_sum_vec3(const t_vector3 v1, const t_vector3 v2);
 
 // ksx_utils02.c
-void		ksx_cross_vec3(const t_vector3 v1, const t_vector3 v2,
-				t_vector3 *v);
+t_vector3	ksx_cross_vec3(const t_vector3 v1, const t_vector3 v2);
 float		ksx_angle_vec3(const t_vector3 v1, const t_vector3 v2);
-int			ksx_point_on_ray(const t_vector3 p, const t_vector3 v);
-void		ksx_set_world_coords(t_triangle *triangle, const t_vector3 v);
+t_vector3	ksx_multi_vec3(const t_vector3 v1, const t_vector3 v2);
 
 // ksx_utils03.c
 float		ksx_determinant2(const t_matrix22 m);
@@ -39,8 +36,7 @@ float		ksx_determinant4(const t_matrix4 m);
 float		ksx_fraction(const t_pixel p, const t_pixel p1, const t_pixel p2);
 int32_t		ksx_abs(const int32_t num);
 mlx_image_t	*ksx_create_image(mlx_t *mlx);
-void		ksx_mid_point(const t_vector3 p1,
-				const t_vector3 p2, t_vector3 *p);
+t_vector3	ksx_mid_point(const t_vector3 p1, const t_vector3 p2);
 
 // ksx_utils05.c
 t_vector3	ksx_point_rotation(const t_vector3 point, const float angle_x,
@@ -64,8 +60,12 @@ void		ksx_rotation_c(t_obj *p_obj, float angle_x,
 				float angle_y, float angle_z);
 
 // ksx_utils08.c
-uint32_t	ksx_get_count_pointers(void **pointers);
+uint32_t	ksx_count_pointers(void **pointers);
 void		ksx_free_pointers(void **pointers);
+int			ksx_point_on_ray(const t_vector3 p, const t_vector3 v);
+t_vector3	ksx_translate_vec3(t_vector3 v1, const t_vector3 v2);
+void		ksx_translate_tri(t_triangle *tri, const t_vector3 norm);
+t_vector3	ksx_rationing_vec3(t_vector3 v1, const t_vector3 norm);
 
 // ksx_utils09.c
 t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_obj *p_obj);

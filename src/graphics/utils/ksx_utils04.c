@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 22:48:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 08:27:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,35 @@ float	ksx_fraction(const t_pixel p, const t_pixel p1, const t_pixel p2)
 {
 	int		dx;
 	int		dy;
-	float	fraction;
+	float	result;
 
 	dx = (p2.x - p1.x);
 	dy = (p2.y - p1.y);
 	if (ksx_abs(dx) > ksx_abs(dy))
 	{
 		if (p1.x != p2.x)
-			fraction = (float)(p.x - p1.x) / dx;
+			result = (float)(p.x - p1.x) / dx;
 		else
-			fraction = 0;
+			result = 0;
 	}
 	else
 	{
 		if (p1.y != p2.y)
-			fraction = (float)(p.y - p1.y) / dy;
+			result = (float)(p.y - p1.y) / dy;
 		else
-			fraction = 0;
+			result = 0;
 	}
-	return (fraction);
+	return (result);
 }
 
 int32_t	ksx_abs(const int32_t num)
 {
-	int32_t	new_num;
+	int32_t	result;
 
-	new_num = num;
+	result = num;
 	if (num < 0)
-		new_num *= -1;
-	return (new_num);
+		result *= -1;
+	return (result);
 }
 
 mlx_image_t	*ksx_create_image( mlx_t *mlx)
@@ -81,10 +81,12 @@ mlx_image_t	*ksx_create_image( mlx_t *mlx)
  * @param p2 The second point
  * @param p The pointer to result point
  */
-void	ksx_mid_point(const t_vector3 p1,
-			const t_vector3 p2, t_vector3 *p)
+t_vector3	ksx_mid_point(const t_vector3 p1, const t_vector3 p2)
 {
-	p->x = (p1.x + p2.x) * 0.5f;
-	p->y = (p1.y + p2.y) * 0.5f;
-	p->z = (p1.z + p2.z) * 0.5f;
+	t_vector3	result;
+
+	result.x = (p1.x + p2.x) * 0.5f;
+	result.y = (p1.y + p2.y) * 0.5f;
+	result.z = (p1.z + p2.z) * 0.5f;
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 18:11:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 08:42:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,14 @@ static void	ksx_init_sphere_1(t_obj *p_obj, t_vector3 points[])
 
 static void	ksx_init_sphere_2(t_obj *p_obj, t_vector3 center)
 {
-	ksx_set_world_coords(p_obj->pp_otri[0], center);
-	ksx_set_world_coords(p_obj->pp_otri[1], center);
-	ksx_set_world_coords(p_obj->pp_otri[2], center);
-	ksx_set_world_coords(p_obj->pp_otri[3], center);
-	ksx_set_world_coords(p_obj->pp_otri[4], center);
-	ksx_set_world_coords(p_obj->pp_otri[5], center);
-	ksx_set_world_coords(p_obj->pp_otri[6], center);
-	ksx_set_world_coords(p_obj->pp_otri[7], center);
+	ksx_translate_tri(p_obj->pp_otri[0], center);
+	ksx_translate_tri(p_obj->pp_otri[1], center);
+	ksx_translate_tri(p_obj->pp_otri[2], center);
+	ksx_translate_tri(p_obj->pp_otri[3], center);
+	ksx_translate_tri(p_obj->pp_otri[4], center);
+	ksx_translate_tri(p_obj->pp_otri[5], center);
+	ksx_translate_tri(p_obj->pp_otri[6], center);
+	ksx_translate_tri(p_obj->pp_otri[7], center);
 }
 
 static t_triangle	**ksx_init_sphere_tri(t_obj *p_obj)

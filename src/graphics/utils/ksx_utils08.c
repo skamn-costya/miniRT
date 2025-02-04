@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 22:30:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 08:42:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-uint32_t	ksx_get_count_pointers(void **pointers)
+uint32_t	ksx_count_pointers(void **pointers)
 {
 	uint32_t	idx;
 
@@ -41,4 +41,41 @@ void	ksx_free_pointers(void **pointers)
 		idx++;
 	}
 	free (pointers);
+}
+
+// function is_point_on_ray in debug ...
+int	ksx_point_on_ray(const t_vector3 p, const t_vector3 v)
+{
+	t_vector3	v1;
+	float		f[2];
+
+	v1 = ksx_cross_vec3(p, v);
+	f[0] = ksx_magnit_vec3(v1);
+	f[1] = ksx_magnit_vec3(v);
+	if (f[0] / f[1] > PRECISION * 0.5f)
+		return (KSX_FALSE);
+	return (KSX_TRUE);
+}
+
+t_vector3	ksx_translate_vec3(t_vector3 v1, const t_vector3 v2)
+{
+	t_vector3	result;
+
+	result = ksx_sum_vec3(v1, v2);
+	return (result);
+}
+
+void	ksx_translate_tri(t_triangle *tri, const t_vector3 norm)
+{
+	tri->w_p1 = ksx_translate_vec3(tri->p1, norm);
+	tri->w_p2 = ksx_translate_vec3(tri->p2, norm);
+	tri->w_p3 = ksx_translate_vec3(tri->p3, norm);
+}
+
+t_vector3	ksx_rationing_vec3(t_vector3 v1, const t_vector3 norm)
+{
+	t_vector3	result;
+
+	result = ksx_multi_vec3(v1, norm);
+	return (result);
 }
