@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 12:16:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 23:06:54 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,20 +74,6 @@ typedef struct s_pixel
 	t_color	color;
 }	t_pixel;
 
-// typedef struct s_point
-// {
-// 	union
-// 	{
-// 		struct
-// 		{
-// 			float	x;
-// 			float	y;
-// 			float	z;
-// 		};
-// 		float	xyz[3];
-// 	};
-// }	t_point;
-
 typedef struct s_vector2
 {
 	union
@@ -97,7 +83,7 @@ typedef struct s_vector2
 			float	x;
 			float	y;
 		};
-		float	xy[23];
+		float	xy[2];
 	};
 	union
 	{
@@ -292,16 +278,6 @@ typedef struct s_camera
 
 typedef struct s_triangle
 {
-	// union
-	// {
-	// 	struct
-	// 	{
-	// 		t_vector3	o_p1;
-	// 		t_vector3	o_p2;
-	// 		t_vector3	o_p3;
-	// 	};
-	// 	t_vector3	o_points[3];
-	// };
 	union
 	{
 		struct
@@ -332,8 +308,17 @@ typedef struct s_triangle
 		};
 		t_vector3	c_points[3];
 	};
+	union
+	{
+		struct
+		{
+			t_vector3	norm1;
+			t_vector3	norm2;
+			t_vector3	norm3;
+		};
+		t_vector3	norms[3];
+	};
 	t_color		color;
-	t_vector3	norm;
 	uint32_t	generation;
 
 }	t_triangle;

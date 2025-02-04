@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 14:20:47 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 23:05:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ static void	ksx_init_sphere(t_obj *p_obj, t_vector3 center, float radius)
 	points[2].y = 0;
 	points[2].z = radius;
 	points[3].x = -radius;
-	points[4].y = 0;
-	points[5].z = 0;
+	points[3].y = 0;
+	points[3].z = 0;
 	points[4].x = 0;
 	points[4].y = -radius;
 	points[4].z = 0;
