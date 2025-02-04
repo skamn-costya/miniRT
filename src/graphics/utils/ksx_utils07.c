@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 00:07:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:27:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_vector3	ksx_point_m33(const t_vector3 point, const t_matrix3 m)
 	return (point_);
 }
 
-t_vector3	ksx_point_m44(const t_vector3 point, const t_matrix4 m)
+t_vector3	ksx_point_m4(const t_vector3 point, const t_matrix4 m)
 {
 	t_vector3		point_;
 

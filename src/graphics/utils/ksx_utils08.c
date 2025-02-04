@@ -6,12 +6,13 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 08:42:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:14:38 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
+#include "ksx_vec3_math.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -50,8 +51,8 @@ int	ksx_point_on_ray(const t_vector3 p, const t_vector3 v)
 	float		f[2];
 
 	v1 = ksx_cross_vec3(p, v);
-	f[0] = ksx_magnit_vec3(v1);
-	f[1] = ksx_magnit_vec3(v);
+	f[0] = ksx_mag_vec3(v1);
+	f[1] = ksx_mag_vec3(v);
 	if (f[0] / f[1] > PRECISION * 0.5f)
 		return (KSX_FALSE);
 	return (KSX_TRUE);
@@ -61,7 +62,7 @@ t_vector3	ksx_translate_vec3(t_vector3 v1, const t_vector3 v2)
 {
 	t_vector3	result;
 
-	result = ksx_sum_vec3(v1, v2);
+	result = ksx_add_vec3(v1, v2);
 	return (result);
 }
 
@@ -70,12 +71,4 @@ void	ksx_translate_tri(t_triangle *tri, const t_vector3 norm)
 	tri->w_p1 = ksx_translate_vec3(tri->p1, norm);
 	tri->w_p2 = ksx_translate_vec3(tri->p2, norm);
 	tri->w_p3 = ksx_translate_vec3(tri->p3, norm);
-}
-
-t_vector3	ksx_rationing_vec3(t_vector3 v1, const t_vector3 norm)
-{
-	t_vector3	result;
-
-	result = ksx_multi_vec3(v1, norm);
-	return (result);
 }

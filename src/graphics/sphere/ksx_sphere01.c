@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 08:42:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:20:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 #include <stdlib.h>
 
 static void			ksx_init_sphere(t_obj *p_obj,
-						t_vector3 center, uint32_t radius);
+						t_vector3 center, float radius);
 static void			ksx_init_sphere_1(t_obj *p_obj, t_vector3 points[]);
 static void			ksx_init_sphere_2(t_obj *p_obj, t_vector3 center);
 static t_triangle	**ksx_init_sphere_tri(t_obj *p_obj);
 
 t_obj	*ksx_create_sphere(t_vector3 center, uint32_t diameter, t_color color)
 {
-	t_obj		*p_obj;
-	uint32_t	radius;
+	t_obj	*p_obj;
+	float	radius;
 	// uint32_t	gen;
 
 	radius = diameter * .5f;
@@ -40,7 +40,7 @@ t_obj	*ksx_create_sphere(t_vector3 center, uint32_t diameter, t_color color)
 	return (p_obj);
 }
 
-static void	ksx_init_sphere(t_obj *p_obj, t_vector3 center, uint32_t radius)
+static void	ksx_init_sphere(t_obj *p_obj, t_vector3 center, float radius)
 {
 	t_vector3	points[6];
 
@@ -96,6 +96,7 @@ static void	ksx_init_sphere_1(t_obj *p_obj, t_vector3 points[])
 
 static void	ksx_init_sphere_2(t_obj *p_obj, t_vector3 center)
 {
+	
 	ksx_translate_tri(p_obj->pp_otri[0], center);
 	ksx_translate_tri(p_obj->pp_otri[1], center);
 	ksx_translate_tri(p_obj->pp_otri[2], center);

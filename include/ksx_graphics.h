@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 00:07:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:16:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ typedef struct s_matrix22
 		};
 		float	elems[4];
 	};
-}	t_matrix22;
+}	t_matrix2;
 
 typedef struct s_matrix33
 {

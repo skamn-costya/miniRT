@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 08:41:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:27:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,8 @@
 
 # include "ksx_graphics.h"
 
-// ksx_utils01.c
-float		ksx_dist_vec3(const t_vector3 v1, const t_vector3 v2);
-float		ksx_magnit_vec3(const t_vector3 v);
-t_vector3	ksx_resize_vec3(const t_vector3 v1, const float new_size);
-t_vector3	ksx_norm_vec3(const t_vector3 v1);
-t_vector3	ksx_sum_vec3(const t_vector3 v1, const t_vector3 v2);
-
-// ksx_utils02.c
-t_vector3	ksx_cross_vec3(const t_vector3 v1, const t_vector3 v2);
-float		ksx_angle_vec3(const t_vector3 v1, const t_vector3 v2);
-t_vector3	ksx_multi_vec3(const t_vector3 v1, const t_vector3 v2);
-
 // ksx_utils03.c
-float		ksx_determinant2(const t_matrix22 m);
+float		ksx_determinant2(const t_matrix2 m);
 float		ksx_determinant3(const t_matrix3 m);
 float		ksx_determinant4(const t_matrix4 m);
 
@@ -53,7 +41,7 @@ void		ksx_triangle_rotation_c(t_triangle *p_triangle, const float angle_x,
 
 // ksx_utils07.c
 t_vector3	ksx_point_m33(t_vector3 point, t_matrix3 m);
-t_vector3	ksx_point_m44(t_vector3 point, t_matrix4 m);
+t_vector3	ksx_point_m4(t_vector3 point, t_matrix4 m);
 void		ksx_rotation_w(t_obj *p_obj, float angle_x,
 				float angle_y, float angle_z);
 void		ksx_rotation_c(t_obj *p_obj, float angle_x,
@@ -65,7 +53,7 @@ void		ksx_free_pointers(void **pointers);
 int			ksx_point_on_ray(const t_vector3 p, const t_vector3 v);
 t_vector3	ksx_translate_vec3(t_vector3 v1, const t_vector3 v2);
 void		ksx_translate_tri(t_triangle *tri, const t_vector3 norm);
-t_vector3	ksx_rationing_vec3(t_vector3 v1, const t_vector3 norm);
+
 
 // ksx_utils09.c
 t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_obj *p_obj);
