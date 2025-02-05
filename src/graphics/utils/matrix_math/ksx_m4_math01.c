@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:22:40 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 16:57:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:00:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ksx_m4_reset(t_matrix4 *p_m4)
 }
 
 static void	ksx_m4_multi_(const t_matrix4 m4_1,
-						const t_matrix4 m4_2, t_matrix4 *p_m4);
+			const t_matrix4 m4_2, t_matrix4 *p_m4);
 
 t_matrix4	ksx_m4_multi(const t_matrix4 m4_1, const t_matrix4 m4_2)
 {

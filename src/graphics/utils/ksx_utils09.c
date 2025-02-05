@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 18:13:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:19:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,39 +34,41 @@
 // 	return (p_obj->p = p_triangle, p_obj->size = size, p_obj);
 // }
 
-t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_obj *p_obj)
+t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_object *p_object)
 {
 	t_triangle	**pp_tris;
 	uint32_t	idx;
 
-	pp_tris = (t_triangle **) malloc (sizeof(t_triangle *) * (p_obj->size_otri + 1));
+	pp_tris = (t_triangle **) malloc (sizeof(t_triangle *)
+			* (p_object->size_otri + 1));
 	if (!pp_tris)
 		return (printf("Error: memory allocation failed!\n"), NULL);
 	idx = 0;
-	while (idx < p_obj->size_otri)
+	while (idx < p_object->size_otri)
 	{
-		pp_tris[idx] = p_obj->pp_otri[idx];
+		pp_tris[idx] = p_object->pp_otri[idx];
 		idx++;
 	}
 	pp_tris[idx] = p_tri;
-	free(p_obj->pp_otri);
-	p_obj->pp_otri = pp_tris;
-	p_obj->size_otri++;
+	free(p_object->pp_otri);
+	p_object->pp_otri = pp_tris;
+	p_object->size_otri++;
 	return (pp_tris);
 }
 
-t_triangle	**ksx_tris2obj(t_triangle *p_tris[], uint32_t size, t_obj *p_obj)
+t_triangle	**ksx_tris2obj(t_triangle *p_tris[],
+			uint32_t size, t_object *p_object)
 {
 	t_triangle	**pp_tri;
 	uint32_t	idx;
 
 	if (!p_tris || !p_tris[0])
-		return (p_obj->pp_otri);
+		return (p_object->pp_otri);
 	pp_tri = NULL;
 	idx = 0;
 	while (idx < size)
 	{
-		pp_tri = ksx_tri2obj(p_tris[idx], p_obj);
+		pp_tri = ksx_tri2obj(p_tris[idx], p_object);
 		idx++;
 	}
 	return (pp_tri);

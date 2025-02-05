@@ -1,0 +1,28 @@
+{
+    ignore_libnvidia_leaks
+    Memcheck:Leak
+	match-leak-kinds:all
+	...
+    obj:*/libnvidia-glcore.so.*
+}
+{
+	ignore_libGLX_nvidia_leaks
+    Memcheck:Leak
+	match-leak-kinds:all
+	...
+	obj:*/libGLX_nvidia.so.*
+}
+{
+	ignore_libglfw_leaks
+    Memcheck:Leak
+	match-leak-kinds:all
+	...
+	obj:*/libglfw.so.*
+}
+{
+	ignore_libglfw_leaks
+    Memcheck:Leak
+	match-leak-kinds:all
+	...
+	obj:*/libX11.so.*
+}

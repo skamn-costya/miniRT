@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 16:35:51 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 21:41:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,7 @@ typedef struct s_basis
 		};
 		t_vector3	wuv[3];
 	};
+	t_vector3	o;
 }	t_basis;
 
 typedef struct s_matrix22
@@ -252,10 +253,13 @@ typedef struct s_camera
 {
 	t_vector3	center;
 	t_vector3	norm;
+	t_basis		basis;
 	float		hfov;
 	float		aspect;
 	float		vfov;
-	float		focal_len;
+	t_matrix4	vm;
+	t_matrix4	pm;
+	// float		focal_len;
 	union
 	{
 		float	near;
@@ -286,9 +290,6 @@ typedef struct s_camera
 		float	bottom;
 		float	b;
 	};
-	t_basis		basis;
-	t_matrix4	pm;
-	t_matrix4	tm;
 }	t_camera;
 
 typedef struct s_triangle
@@ -338,17 +339,17 @@ typedef struct s_triangle
 
 }	t_triangle;
 
-typedef struct s_obj
+typedef struct s_object
 {
 	t_triangle	**pp_otri;
 	uint32_t	size_otri;
 	uint32_t	last_gen;
-}	t_obj;
+}	t_object;
 
 typedef struct s_world
 {
 	t_triangle	*p_tris;
-	t_obj		**pp_wobj;
+	t_object	**pp_wobj;
 	uint32_t	size_wobj;
 }	t_world;
 
@@ -368,12 +369,13 @@ void		ksx_set_pixel(mlx_image_t *p_img, t_pixel pix);
 void		ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
 void		ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);
 
-t_obj		**ksx_obj2world(t_obj *p_obj, t_world *p_world);
+t_object	**ksx_obj2world(t_object *p_object, t_world *p_world);
+void		ksx_clean_world(t_world *p_world);
 
 t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov);
 void		ksx_set_camera_pm(t_camera *p_camera, float near, float far);
 
-t_obj		*ksx_create_sphere(t_vector3 center,
+t_object	*ksx_create_sphere(t_vector3 center,
 				uint32_t diameter, t_color color);
 void		ksx_draw(t_graphics *p_grph);
 

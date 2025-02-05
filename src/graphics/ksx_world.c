@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 17:56:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 23:40:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,44 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-t_obj	**ksx_obj2world(t_obj *p_obj, t_world *p_world)
+t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 {
-	t_obj		**pp_obj;
+	t_object	**pp_object;
 	uint32_t	idx;
 
-	pp_obj = (t_obj **) malloc (sizeof(t_obj *) * (p_world->size_wobj + 1));
-	if (!pp_obj)
+	pp_object = (t_object **) malloc
+		(sizeof(t_object *) * (p_world->size_wobj + 1));
+	if (!pp_object)
 		return (printf("Error: memory allocation failed!\n"), NULL);
 	idx = 0;
 	while (idx < p_world->size_wobj)
 	{
-		pp_obj[idx] = p_world->pp_wobj[idx];
+		pp_object[idx] = p_world->pp_wobj[idx];
 		idx++;
 	}
-	pp_obj[idx] = p_obj;
+	pp_object[idx] = p_object;
 	free (p_world->pp_wobj);
-	p_world->pp_wobj = pp_obj;
+	p_world->pp_wobj = pp_object;
 	p_world->size_wobj++;
-	return (pp_obj);
+	return (pp_object);
+}
+
+void	ksx_clean_world(t_world *p_world)
+{
+	uint32_t	idx[3];
+	t_object	*p_object;
+
+	free(p_world->p_tris);
+	idx[0] = 0;
+	while (idx[0] < p_world->size_wobj)
+	{
+		p_object = p_world->pp_wobj[idx[0]];
+		idx[1] = 0;
+		while (idx[1] < p_object->size_otri)
+			free(p_object->pp_otri[idx[1]++]);
+		free(p_object->pp_otri);
+		free(p_object);
+		idx[0]++;
+	}
+	free(p_world->pp_wobj);
 }

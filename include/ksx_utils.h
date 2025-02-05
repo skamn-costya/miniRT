@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 16:52:47 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 21:43:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ void		ksx_triangle_rotation_w(t_triangle *p_triangle, const float angle_x,
 				const float angle_y, float angle_z);
 void		ksx_triangle_rotation_c(t_triangle *p_triangle, const float angle_x,
 				const float angle_y, const float angle_z);
-void		ksx_rotation_w(t_obj *p_obj, float angle_x,
+void		ksx_rotation_w(t_object *p_object, float angle_x,
 				float angle_y, float angle_z);
-void		ksx_rotation_c(t_obj *p_obj, float angle_x,
+void		ksx_rotation_c(t_object *p_object, float angle_x,
 				float angle_y, float angle_z);
 
 // ksx_utils07.c
 t_vector3	ksx_point_m3(t_vector3 point, t_matrix3 m);
 void		ksx_m3_reset(t_matrix3 *p_m3);
-t_basis		ksx_get_basis(t_vector3 norm, t_vector3 point);
+t_basis		ksx_get_basis(const t_vector3 norm, const t_vector3 center);
 
 // ksx_utils08.c
 uint32_t	ksx_count_pointers(void **pointers);
@@ -55,10 +55,10 @@ int			ksx_point_on_ray(const t_vector3 p, const t_vector3 v);
 t_vector3	ksx_translate_vec3(t_vector3 v1, const t_vector3 v2);
 void		ksx_translate_tri(t_triangle *tri, const t_vector3 norm);
 
-
 // ksx_utils09.c
-t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_obj *p_obj);
-t_triangle	**ksx_tris2obj(t_triangle *p_tris[], uint32_t size, t_obj *p_obj);
+t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_object *p_object);
+t_triangle	**ksx_tris2obj(t_triangle *p_tris[],
+				uint32_t size, t_object *p_object);
 t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm);
 
 #endif	// KSX_UTILS_H //

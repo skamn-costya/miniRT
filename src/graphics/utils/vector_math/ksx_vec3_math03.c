@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 15:52:40 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 21:59:22 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "ksx_vec3_math.h"
 #include <math.h>
 
-float		ksx_vec3_dot(const t_vector3 v1, const t_vector3 v2)
+float	ksx_vec3_dot(const t_vector3 v1, const t_vector3 v2)
 {
-	float result;
+	float	result;
 
 	result = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
 	return (result);

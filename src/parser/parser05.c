@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/31 12:39:46 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 21:11:29 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,15 @@ char	*comma_trim(char *str)
 	return (ft_parrclear((void **) p_str), str_);
 }
 
-void	free_t_object(void *p_obj)
+void	free_t_obj_descr(void *p_obj_descr)
 {
-	t_object	*p_obj_;
+	t_obj_descr	*p_obj_descr_;
 
-	if (!p_obj)
+	if (!p_obj_descr)
 		return ;
-	p_obj_ = (t_object *) p_obj;
-	free (p_obj_->texture);
-	free (p_obj);
+	p_obj_descr_ = (t_obj_descr *) p_obj_descr;
+	free (p_obj_descr_->texture);
+	free (p_obj_descr);
 }
 
 void	parser_crash_exit(t_list **pp_line_list, t_list **pp_obj_list)
@@ -55,6 +55,6 @@ void	parser_crash_exit(t_list **pp_line_list, t_list **pp_obj_list)
 	if (pp_line_list)
 		ft_lstclear(pp_line_list, &free_t_fline);
 	if (pp_obj_list)
-		ft_lstclear(pp_obj_list, &free_t_object);
+		ft_lstclear(pp_obj_list, &free_t_obj_descr);
 	exit (EXIT_FAILURE);
 }

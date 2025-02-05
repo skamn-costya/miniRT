@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 16:56:05 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 22:01:04 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@
 static void	ksx_set_elems_vm(t_matrix4 *p_vm, const t_basis basis);
 static void	ksx_set_elems_(t_matrix4 *p_vm, const t_vector3 point);
 
-t_matrix4	ksx_create_vm(const t_vector3 norm,
-				const t_basis basis, const t_vector3 point)
+t_matrix4	ksx_create_vm(const t_basis basis)
 {
 	t_matrix4	vm;
-	t_vector3	tmp_v3;
 	t_matrix4	tmp_m4;
-	
+
 	ksx_set_elems_vm(&vm, basis);
-	ksx_set_elems_(&tmp_m4, point);
+	ksx_set_elems_(&tmp_m4, basis.o);
 	vm = ksx_m4_multi(vm, tmp_m4);
 	return (vm);
 }
@@ -51,6 +49,7 @@ static void	ksx_set_elems_vm(t_matrix4 *p_vm, const t_basis basis)
 	p_vm->e_34 = 0;
 	p_vm->e_44 = 1;
 }
+
 static void	ksx_set_elems_(t_matrix4 *p_m4, const t_vector3 point)
 {
 	p_m4->e_11 = 1;

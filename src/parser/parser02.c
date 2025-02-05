@@ -6,19 +6,19 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/01 11:42:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 21:12:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
 
-static t_object	*par_create_ambient(t_list **pp_line_list,
-					t_list **pp_obj_list, t_fline *p_fline);
-static t_object	*par_create_camera(t_list **pp_line_list,
-					t_list **pp_obj_list, t_fline *p_fline);
-static t_object	*par_create_light(t_list **pp_line_list,
-					t_list **pp_obj_list, t_fline *p_fline);
+static t_obj_descr	*par_create_ambient(t_list **pp_line_list,
+						t_list **pp_obj_list, t_fline *p_fline);
+static t_obj_descr	*par_create_camera(t_list **pp_line_list,
+						t_list **pp_obj_list, t_fline *p_fline);
+static t_obj_descr	*par_create_light(t_list **pp_line_list,
+						t_list **pp_obj_list, t_fline *p_fline);
 
 t_list	*create_obj_list(t_list **pp_line_list)
 {
@@ -48,12 +48,12 @@ t_list	*create_obj_list(t_list **pp_line_list)
 	return (p_obj_list);
 }
 
-t_object	*create_obj(t_list **pp_line_list, t_list **pp_obj_list)
+t_obj_descr	*create_obj(t_list **pp_line_list, t_list **pp_obj_list)
 {
-	t_object	*p_obj;
+	t_obj_descr	*p_obj;
 	t_list		*p_list;
 
-	p_obj = (t_object *) malloc (sizeof (t_object));
+	p_obj = (t_obj_descr *) malloc (sizeof (t_obj_descr));
 	if (!p_obj)
 		parser_crash_exit(pp_line_list, pp_obj_list);
 	p_list = ft_lstnew (p_obj);
@@ -70,10 +70,10 @@ t_object	*create_obj(t_list **pp_line_list, t_list **pp_obj_list)
 	return (p_obj);
 }
 
-static t_object	*par_create_ambient(t_list **pp_line_list,
+static t_obj_descr	*par_create_ambient(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
-	t_object	*p_obj;
+	t_obj_descr	*p_obj;
 
 	p_obj = create_obj(pp_line_list, pp_obj_list);
 	p_obj->id = AMBIENT;
@@ -89,10 +89,10 @@ static t_object	*par_create_ambient(t_list **pp_line_list,
 	return (p_obj);
 }
 
-static t_object	*par_create_camera(t_list **pp_line_list,
+static t_obj_descr	*par_create_camera(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
-	t_object	*p_obj;
+	t_obj_descr	*p_obj;
 
 	p_obj = create_obj(pp_line_list, pp_obj_list);
 	p_obj->id = CAMERA;
@@ -110,10 +110,10 @@ static t_object	*par_create_camera(t_list **pp_line_list,
 	return (p_obj);
 }
 
-static t_object	*par_create_light(t_list **pp_line_list,
+static t_obj_descr	*par_create_light(t_list **pp_line_list,
 	t_list **pp_obj_list, t_fline *p_fline)
 {
-	t_object	*p_obj;
+	t_obj_descr	*p_obj;
 
 	p_obj = create_obj(pp_line_list, pp_obj_list);
 	p_obj->id = LIGHT;

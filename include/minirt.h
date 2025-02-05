@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 16:36:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 21:34:33 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef enum e_obj
 }	t_obj_id;
 
 /*
-*	s_object:
+*	s_obj_descr:
 *
 *	Ambient lightning:	"A", ratio, rgb
 *	Camera:				"C", coord, vector, fov
@@ -51,19 +51,18 @@ typedef enum e_obj
 *	d		the sphere & the cylinder diameter
 *	h		the cylinder height
 */
-typedef struct s_object
+typedef struct s_obj_descr
 {
 	t_obj_id	id;
 	float		ratio;
 	t_color		color;
 	t_vector3	coord;
 	t_vector3	norm;
-	t_basis		basis;
 	float		fov;
 	float		d;
 	float		h;
 	char		*texture;
-}	t_object;
+}	t_obj_descr;
 
 #endif	// MINIRT_H
 
