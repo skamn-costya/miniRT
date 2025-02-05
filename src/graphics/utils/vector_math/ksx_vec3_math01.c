@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 11:27:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:53:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
  * @param v1 The first vecot
  * @param v2 The second vecot
  */
-t_vector3	ksx_add_vec3(const t_vector3 v1, const t_vector3 v2)
+t_vector3	ksx_vec3_add(const t_vector3 v1, const t_vector3 v2)
 {
 	t_vector3	result;
 
@@ -45,7 +45,7 @@ t_vector3	ksx_add_vec3(const t_vector3 v1, const t_vector3 v2)
  * @param v1 The first vecot
  * @param v2 The second vecot
  */
-t_vector3	ksx_sub_vec3(const t_vector3 v1, const t_vector3 v2)
+t_vector3	ksx_vec3_sub(const t_vector3 v1, const t_vector3 v2)
 {
 	t_vector3	result;
 
@@ -55,16 +55,16 @@ t_vector3	ksx_sub_vec3(const t_vector3 v1, const t_vector3 v2)
 	return (result);
 }
 
-float	ksx_angle_vec3(const t_vector3 v1, const t_vector3 v2)
+float	ksx_vec3_angle(const t_vector3 v1, const t_vector3 v2)
 {
 	float	result;
 
 	result = acosf(((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z))
-			/ (ksx_mag_vec3(v1) * ksx_mag_vec3(v2)));
+			/ (ksx_vec3_mag(v1) * ksx_vec3_mag(v2)));
 	return (result);
 }
 
-t_vector3	ksx_cross_vec3(const t_vector3 v1, const t_vector3 v2)
+t_vector3	ksx_vec3_cross(const t_vector3 v1, const t_vector3 v2)
 {
 	t_vector3	result;
 
@@ -79,7 +79,7 @@ t_vector3	ksx_cross_vec3(const t_vector3 v1, const t_vector3 v2)
  * 
  * @param v1 The vecot
   */
-float	ksx_mag_vec3(const t_vector3 v)
+float	ksx_vec3_mag(const t_vector3 v)
 {
 	float	result;
 

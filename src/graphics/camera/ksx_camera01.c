@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 23:09:28 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 14:26:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	ksx_set_camera_pm(t_camera *p_camera, float near, float far)
 		p_camera->pm.elems[idx] = 0;
 	p_camera->near = near;
 	p_camera->far = far;
-	p_camera->pm.e_11 = p_camera->aspect * 1.f / tanf(p_camera->hfov * .5f);
-	p_camera->pm.e_22 = 1.f / tanf(p_camera->vfov * .5f);
+	p_camera->pm.e_11 = 1.f / tanf(p_camera->hfov * .5f);
+	p_camera->pm.e_22 = 1.f / (p_camera->aspect* tanf(p_camera->vfov * .5f));
 	p_camera->pm.e_33 = -((p_camera->far + p_camera->near) / (p_camera->far - p_camera->near));
 	p_camera->pm.e_34 = -1.f;
 	p_camera->pm.e_43 = -((2.f * p_camera->far * p_camera->near)

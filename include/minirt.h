@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 16:15:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:36:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_object
 	t_color		color;
 	t_vector3	coord;
 	t_vector3	norm;
+	t_basis		basis;
 	float		fov;
 	float		d;
 	float		h;

@@ -21,12 +21,18 @@ UTILS_FN =	ksx_utils03.c \
 			ksx_utils09.c
 UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
 
-# KSX t_vector3 math
-VEC3_MATH_DIR = graphics/utils/vec3_math/
-VEC3_MATH_FN =	ksx_vec3_math01.c \
-				ksx_vec3_math02.c \
-				ksx_vec3_math03.c
-VEC3_MATH = $(addprefix $(VEC3_MATH_DIR), $(VEC3_MATH_FN))
+# KSX t_vector math
+VECTOR_MATH_DIR = graphics/utils/vector_math/
+VECTOR_MATH_FN =	ksx_vec3_math01.c \
+					ksx_vec3_math02.c \
+					ksx_vec3_math03.c
+VECTOR_MATH = $(addprefix $(VECTOR_MATH_DIR), $(VECTOR_MATH_FN))
+
+# KSX t_vector math
+MATRIX_MATH_DIR = graphics/utils/matrix_math/
+MATRIX_MATH_FN =	ksx_m4_math01.c
+MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
+
 
 # Camera object
 CAMERA_DIR = graphics/camera/
@@ -63,7 +69,8 @@ GRAPHICS =	$(addprefix $(GRAPHICS_DIR), $(GRAPHICS_FN))
 # All sources
 SRC_DIR = ./src/
 SRC = 	$(UTILS) \
-		$(VEC3_MATH) \
+		$(VECTOR_MATH) \
+		$(MATRIX_MATH) \
 		$(CAMERA) \
 		$(SPHERE) \
 		$(CYLINDER) \
@@ -120,7 +127,8 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)$(PARSER_DIR)
 	mkdir -p $(OBJ_DIR)$(UTILS_DIR)
-	mkdir -p $(OBJ_DIR)$(VEC3_MATH_DIR)
+	mkdir -p $(OBJ_DIR)$(VECTOR_MATH_DIR)
+	mkdir -p $(OBJ_DIR)$(MATRIX_MATH_DIR)
 	mkdir -p $(OBJ_DIR)$(CAMERA_DIR)
 	mkdir -p $(OBJ_DIR)$(SPHERE_DIR)
 	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)

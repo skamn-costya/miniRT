@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 14:14:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 15:57:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	ksx_point_on_ray(const t_vector3 p, const t_vector3 v)
 	t_vector3	v1;
 	float		f[2];
 
-	v1 = ksx_cross_vec3(p, v);
-	f[0] = ksx_mag_vec3(v1);
-	f[1] = ksx_mag_vec3(v);
+	v1 = ksx_vec3_cross(p, v);
+	f[0] = ksx_vec3_mag(v1);
+	f[1] = ksx_vec3_mag(v);
 	if (f[0] / f[1] > PRECISION * 0.5f)
 		return (KSX_FALSE);
 	return (KSX_TRUE);
@@ -62,7 +62,7 @@ t_vector3	ksx_translate_vec3(t_vector3 v1, const t_vector3 v2)
 {
 	t_vector3	result;
 
-	result = ksx_add_vec3(v1, v2);
+	result = ksx_vec3_add(v1, v2);
 	return (result);
 }
 

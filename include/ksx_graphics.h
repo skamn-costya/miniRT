@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 23:06:54 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:35:51 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,20 @@ typedef struct s_vector4
 	};
 }	t_vector4;
 
+typedef struct s_basis
+{
+	union
+	{
+		struct
+		{
+			t_vector3	u;
+			t_vector3	v;
+			t_vector3	w;
+		};
+		t_vector3	wuv[3];
+	};
+}	t_basis;
+
 typedef struct s_matrix22
 {
 	union
@@ -272,6 +286,7 @@ typedef struct s_camera
 		float	bottom;
 		float	b;
 	};
+	t_basis		basis;
 	t_matrix4	pm;
 	t_matrix4	tm;
 }	t_camera;

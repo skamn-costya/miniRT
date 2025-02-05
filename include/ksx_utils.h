@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/04 20:57:46 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/05 16:52:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,15 @@ void		ksx_triangle_rotation_w(t_triangle *p_triangle, const float angle_x,
 				const float angle_y, float angle_z);
 void		ksx_triangle_rotation_c(t_triangle *p_triangle, const float angle_x,
 				const float angle_y, const float angle_z);
-
-// ksx_utils07.c
-t_vector3	ksx_point_m3(t_vector3 point, t_matrix3 m);
-// t_vector3	ksx_point_m4(t_vector3 point, t_matrix4 m);
-t_vector3	ksx_point_m4(const t_vector3 point, const t_matrix4 m);
-t_vector4	ksx_vec4_mtrx4(const t_vector4 v, const t_matrix4 m);
-
 void		ksx_rotation_w(t_obj *p_obj, float angle_x,
 				float angle_y, float angle_z);
 void		ksx_rotation_c(t_obj *p_obj, float angle_x,
 				float angle_y, float angle_z);
+
+// ksx_utils07.c
+t_vector3	ksx_point_m3(t_vector3 point, t_matrix3 m);
+void		ksx_m3_reset(t_matrix3 *p_m3);
+t_basis		ksx_get_basis(t_vector3 norm, t_vector3 point);
 
 // ksx_utils08.c
 uint32_t	ksx_count_pointers(void **pointers);
