@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 23:11:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 00:30:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char *argv[])
 	mlx_loop(grph.mlx);
 	ksx_clean_world(&grph.world);
 	mlx_delete_image(grph.mlx, grph.img);
-	// mlx_close_window(grph.mlx);
+	mlx_close_window(grph.mlx);
 	mlx_terminate(grph.mlx);
 	return (EXIT_SUCCESS);
 }
@@ -66,6 +66,7 @@ static void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 	t_list		*p_list_;
 	t_obj_descr	*p_obj_descr;
 	t_object	*p_object;
+	float		f[2];
 
 	p_list_ = p_list;
 	while (p_list_)
@@ -78,6 +79,13 @@ static void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 		if (p_obj_descr->id == SPHERE)
 			p_object = ksx_create_sphere (p_obj_descr->coord,
 					p_obj_descr->d, p_obj_descr->color);
+		if (p_obj_descr->id == CYLINDER)
+		{
+			f[0] = p_obj_descr->d;
+			f[1] = p_obj_descr->h;
+			p_object = ksx_create_cylinder(p_obj_descr->coord,
+					p_obj_descr->norm, f, p_obj_descr->color);
+		}
 		if (p_object)
 			ksx_obj2world(p_object, &p_grph->world);
 		p_list_ = p_list_->next;

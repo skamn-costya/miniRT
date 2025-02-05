@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 21:41:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 00:36:10 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,6 +341,7 @@ typedef struct s_triangle
 
 typedef struct s_object
 {
+	t_basis		basis;
 	t_triangle	**pp_otri;
 	uint32_t	size_otri;
 	uint32_t	last_gen;
@@ -377,6 +378,8 @@ void		ksx_set_camera_pm(t_camera *p_camera, float near, float far);
 
 t_object	*ksx_create_sphere(t_vector3 center,
 				uint32_t diameter, t_color color);
+t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
+				float dia_ht[], t_color color);
 void		ksx_draw(t_graphics *p_grph);
 
 #endif	// KSX_GRAPHICS_H //

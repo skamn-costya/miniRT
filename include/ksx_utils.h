@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 21:43:08 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 00:24:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_object *p_object);
 t_triangle	**ksx_tris2obj(t_triangle *p_tris[],
 				uint32_t size, t_object *p_object);
 t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm);
+t_object	*ksx_create_object(void);
 
 #endif	// KSX_UTILS_H //

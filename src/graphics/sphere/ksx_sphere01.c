@@ -6,9 +6,11 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 21:58:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 00:17:45 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// Sphere: "sp", coord, d, rgb
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
@@ -17,10 +19,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void			ksx_init_sphere(t_object *p_object,
-						t_vector3 center, float radius);
+static void			ksx_init_sphere(t_object *p_object, float radius);
 static void			ksx_init_sphere_1(t_object *p_object, t_vector3 points[]);
-static void			ksx_init_sphere_2(t_object *p_object, t_vector3 center);
+static void			ksx_init_sphere_2(t_object *p_object,
+						t_vector3 center, t_color color);
 static t_triangle	**ksx_init_sphere_tri(t_object *p_object);
 
 t_object	*ksx_create_sphere(t_vector3 center,
@@ -35,12 +37,12 @@ t_object	*ksx_create_sphere(t_vector3 center,
 		return (printf("Error: memory allocation failed!\n"), NULL);
 	if (!ksx_init_sphere_tri(p_object))
 		return (NULL);
-	ksx_init_sphere(p_object, center, radius);
-	(void) color;
+	ksx_init_sphere(p_object, radius);
+	ksx_init_sphere_2(p_object, center, color);
 	return (p_object);
 }
 
-static void	ksx_init_sphere(t_object *p_object, t_vector3 center, float radius)
+static void	ksx_init_sphere(t_object *p_object, float radius)
 {
 	t_vector3	points[6];
 
@@ -63,7 +65,6 @@ static void	ksx_init_sphere(t_object *p_object, t_vector3 center, float radius)
 	points[5].y = 0;
 	points[5].z = -radius;
 	ksx_init_sphere_1(p_object, points);
-	ksx_init_sphere_2(p_object, center);
 }
 
 static void	ksx_init_sphere_1(t_object *p_object, t_vector3 points[])
@@ -94,8 +95,17 @@ static void	ksx_init_sphere_1(t_object *p_object, t_vector3 points[])
 	p_object->pp_otri[7]->p3 = points[1];
 }
 
-static void	ksx_init_sphere_2(t_object *p_object, t_vector3 center)
+static void	ksx_init_sphere_2(t_object *p_object,
+			t_vector3 center, t_color color)
 {
+	p_object->pp_otri[0]->color = color;
+	p_object->pp_otri[1]->color = color;
+	p_object->pp_otri[2]->color = color;
+	p_object->pp_otri[3]->color = color;
+	p_object->pp_otri[4]->color = color;
+	p_object->pp_otri[5]->color = color;
+	p_object->pp_otri[6]->color = color;
+	p_object->pp_otri[7]->color = color;
 	ksx_translate_tri(p_object->pp_otri[0], center);
 	ksx_translate_tri(p_object->pp_otri[1], center);
 	ksx_translate_tri(p_object->pp_otri[2], center);

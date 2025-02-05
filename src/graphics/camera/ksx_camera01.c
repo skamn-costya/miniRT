@@ -6,9 +6,11 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 22:05:41 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 00:01:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// Camera: "C", coord, vector, fov
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
