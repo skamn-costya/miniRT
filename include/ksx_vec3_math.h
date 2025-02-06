@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:53:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 22:08:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:09:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ t_matrix3	ksx_vec3_tensor(const t_vector3 v1, const t_vector3 v2);
 float		ksx_vec3_dot(const t_vector3 v1, const t_vector3 v2);
 t_vector3	ksx_vec3_multi(const t_vector3 v, const float scalar);
 t_vector3	ksx_vec3_div(const t_vector3 v, const float scalar);
+t_vector3	ksx_vec3_set(float x, float y, float z);
+t_vector4	ksx_vec3_vec4(t_vector3 v, float w);
 
 #endif	// KSX_VEC3_MATH_H

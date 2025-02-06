@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 00:24:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:09:46 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void		ksx_rotation_c(t_object *p_object, float angle_x,
 // ksx_utils07.c
 t_vector3	ksx_point_m3(t_vector3 point, t_matrix3 m);
 void		ksx_m3_reset(t_matrix3 *p_m3);
-t_basis		ksx_get_basis(const t_vector3 norm, const t_vector3 center);
 
 // ksx_utils08.c
 uint32_t	ksx_count_pointers(void **pointers);

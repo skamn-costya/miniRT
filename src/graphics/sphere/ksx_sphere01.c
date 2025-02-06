@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 00:17:45 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:33:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,10 @@ t_object	*ksx_create_sphere(t_vector3 center,
 	float		radius;
 
 	radius = diameter * .5f;
-	p_object = (t_object *) malloc (sizeof(t_object));
+	p_object = ksx_create_object();
 	if (!p_object)
-		return (printf("Error: memory allocation failed!\n"), NULL);
+		return (NULL);
+	p_object->center = center;
 	if (!ksx_init_sphere_tri(p_object))
 		return (NULL);
 	ksx_init_sphere(p_object, radius);

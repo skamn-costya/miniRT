@@ -6,13 +6,16 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 00:10:59 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 16:08:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "MLX42.h"
 #include "ksx_utils.h"
+#include "ksx_vec3_math.h"
+#include "ksx_3D.h"
+#include "ksx_rotation.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -109,7 +112,13 @@ t_object	*ksx_create_object(void)
 	p_object = (t_object *) malloc (sizeof(t_object));
 	if (!p_object)
 		return (printf("Error: memory allocation failed!\n"), NULL);
-	p_object->pp_otri=NULL;
+	p_object->pp_otri = NULL;
+	p_object->last_gen = 0;
+	p_object->basis = ksx_get_basis(ksx_vec3_set(0, 0, 0),
+			ksx_vec3_set(0, 0, 0));
+	p_object->axis.p1 = ksx_vec3_set(1, 0, 0);
+	p_object->axis.p2 = ksx_vec3_set(0, 1, 0);
+	p_object->axis.p3 = ksx_vec3_set(0, 0, 1);
 	return (p_object);
 }
 

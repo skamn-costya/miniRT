@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 21:47:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 15:26:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
 #include "ksx_m4_math.h"
+#include "ksx_3D.h"
 #include <math.h>
 #include <stdio.h>
 
@@ -45,6 +46,7 @@ void	ksx_draw(t_graphics *p_grph)
 	while (idx[0] < p_grph->world.size_wobj)
 	{
 		p_object = pp_object[idx[0]];
+		ksx_draw_axis(p_object, p_grph->img, &p_grph->camera);
 		idx[1] = 0;
 		while (idx[1] < p_object->size_otri)
 		{

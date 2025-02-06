@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 21:58:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 12:17:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,6 @@ void	ksx_m3_reset(t_matrix3 *p_m3)
 	p_m3->e_31 = 0.f;
 	p_m3->e_32 = 0.f;
 	p_m3->e_33 = 0.f;
-}
-
-t_basis	ksx_get_basis(const t_vector3 norm, const t_vector3 center)
-{
-	t_basis		basis;
-	t_vector3	tmp_v3;
-
-	tmp_v3 = ksx_vec3_sub(norm, center);
-	basis.w = ksx_vec3_unit(tmp_v3);
-	tmp_v3.x = 0;
-	tmp_v3.y = 1;
-	tmp_v3.z = 0;
-	tmp_v3 = ksx_vec3_cross(basis.w, tmp_v3);
-	basis.u = ksx_vec3_div(tmp_v3, ksx_vec3_mag(tmp_v3));
-	basis.v = ksx_vec3_cross(basis.w, basis.u);
-	basis.o = center;
-	return (basis);
 }
 
 // t_matrix3	ksx_get_transfor_matrix(const t_vector3 v1, const t_vector3 v2)

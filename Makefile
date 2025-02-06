@@ -33,6 +33,11 @@ MATRIX_MATH_DIR = graphics/utils/matrix_math/
 MATRIX_MATH_FN =	ksx_m4_math01.c
 MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 
+3D_DIR = graphics/3D/
+3D_FN = ksx_basis.c \
+		ksx_draw_axis.c
+3D = $(addprefix $(3D_DIR), $(3D_FN))
+
 # Rotatin pints, vectors, triangles, matrixes (view, proection)
 ROTATION_DIR = graphics/rotation/
 ROTATION_FN = ksx_rotation_norm01.c
@@ -75,6 +80,7 @@ SRC_DIR = ./src/
 SRC = 	$(UTILS) \
 		$(VECTOR_MATH) \
 		$(MATRIX_MATH) \
+		$(3D) \
 		$(ROTATION) \
 		$(CAMERA) \
 		$(SPHERE) \
@@ -134,6 +140,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(UTILS_DIR)
 	mkdir -p $(OBJ_DIR)$(VECTOR_MATH_DIR)
 	mkdir -p $(OBJ_DIR)$(MATRIX_MATH_DIR)
+	mkdir -p $(OBJ_DIR)$(3D_DIR)
 	mkdir -p $(OBJ_DIR)$(ROTATION_DIR)
 	mkdir -p $(OBJ_DIR)$(CAMERA_DIR)
 	mkdir -p $(OBJ_DIR)$(SPHERE_DIR)

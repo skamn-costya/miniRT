@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 00:36:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/06 14:55:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,8 +156,9 @@ typedef struct s_basis
 			t_vector3	v;
 			t_vector3	w;
 		};
-		t_vector3	wuv[3];
+		t_vector3	uvw[3];
 	};
+	uint8_t		set;
 	t_vector3	o;
 }	t_basis;
 
@@ -341,7 +342,9 @@ typedef struct s_triangle
 
 typedef struct s_object
 {
+	t_vector3 	center;
 	t_basis		basis;
+	t_triangle	axis;
 	t_triangle	**pp_otri;
 	uint32_t	size_otri;
 	uint32_t	last_gen;
