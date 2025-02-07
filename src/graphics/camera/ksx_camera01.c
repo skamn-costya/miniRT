@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 00:39:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 14:27:54 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
+#include "ksx_vec3_math.h"
+#include "ksx_m4_math.h"
 #include "ksx_3D.h"
 #include "ksx_rotation.h"
 #include "ksx_camera.h"
@@ -51,13 +53,17 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.center = center;
 	camera.norm = norm;
 	camera.basis = ksx_get_basis(norm, center);
-	ksx_create_vm(&camera.vm, camera.basis);
-	camera.hfov = (fov * PI) / 180;
+	ksx_create_vm(&camera.vm, &camera.basis);
+	camera.hfov = fov * PI / 180.f;
 	camera.near = (WIDTH * .5f) * tanf(camera.hfov * .5f);
+	camera.right = WIDTH * .5f;
+	camera.left = - camera.right;
+	camera.top = HEIGHT * .5f;
+	camera.bottom = -camera.top;
 	if (camera.near < 1)
 		camera.near = 1;
-	camera.aspect = (WIDTH * 1.f) / (HEIGHT * 1.f);
-	camera.vfov = 2.0f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
+	camera.aspect = 1.f * WIDTH / HEIGHT;
+	camera.vfov = 2.f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
 	return (camera);
 }
 
@@ -82,14 +88,10 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 
 void	ksx_set_camera_pm(t_camera *p_camera, float far)
 {
-	int		idx;
-
-	idx = 15;
-	while (idx-- != -1)
-		p_camera->pm.elems[idx] = 0;
+	ksx_m4_reset(&p_camera->pm);
 	p_camera->far = far;
-	p_camera->pm.e_11 = 1.f / tanf(p_camera->hfov * .5f);
-	p_camera->pm.e_22 = 1.f / (p_camera->aspect * tanf(p_camera->vfov * .5f));
+	p_camera->pm.e_11 = p_camera->aspect * (1.f / tanf(p_camera->hfov * .5f));
+	p_camera->pm.e_22 = 1.f / (tanf(p_camera->vfov * .5f));
 	p_camera->pm.e_33 = -((p_camera->far + p_camera->near)
 			/ (p_camera->far - p_camera->near));
 	p_camera->pm.e_34 = -1.f;
@@ -97,13 +99,9 @@ void	ksx_set_camera_pm(t_camera *p_camera, float far)
 			/ (p_camera->far - p_camera->near));
 }
 
-// void	set_camera_pm(t_camera *p_camera, float far)
+// void	ksx_set_camera_pm(t_camera *p_camera, float far)
 // {
-// 	int		idx;
-
-// 	idx = 15;
-// 	while (idx-- != -1)
-// 		p_camera->pm.elems[idx] = 0;
+// 	ksx_m4_reset(&p_camera->pm);
 // 	p_camera->far = far;
 // 	p_camera->pm.e_11 = (2 * p_camera->n) / (p_camera->r - p_camera->l);
 // 	p_camera->pm.e_22 = (2 * p_camera->n) / (p_camera->t - p_camera->b);

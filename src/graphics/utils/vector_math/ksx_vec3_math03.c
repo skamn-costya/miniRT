@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 15:06:31 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:21:14 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ t_vector4	ksx_vec3_vec4(t_vector3 v, float w)
 	t_vector4	v4;
 
 	v4.x = v.x;
-	v4.y = v.x;
-	v4.z = v.x;
+	v4.y = v.y;
+	v4.z = v.z;
 	v4.w = w;
 	return (v4);
 }

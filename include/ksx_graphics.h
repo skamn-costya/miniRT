@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 01:27:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:33:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 // # define WIDTH 1920
 // # define HEIGHT 1044
-# define WIDTH 800
-# define HEIGHT 600
+# define WIDTH 1000
+# define HEIGHT 750
 
 # define KSX_TRUE 1
 # define KSX_FALSE 0
@@ -152,11 +152,11 @@ typedef struct s_basis
 	{
 		struct
 		{
-			t_vector3	u;
-			t_vector3	v;
-			t_vector3	w;
+			t_vector3	x_;
+			t_vector3	y_;
+			t_vector3	z_;
 		};
-		t_vector3	uvw[3];
+		t_vector3	x_y_z_[3];
 	};
 	uint8_t		set;
 	t_vector3	o;
@@ -223,32 +223,6 @@ typedef struct s_matrix44
 		float	elems[16];
 	};
 }	t_matrix4;
-
-// typedef struct s_tps
-// {
-// 	union
-// 	{
-// 		struct
-// 		{
-// 			t_point	w_p111;
-// 			t_point	w_p___;
-// 			t_point	w_p_1_;
-// 			t_point	w_p1_1;
-// 		};
-// 		t_point	w_p[4];
-// 	};
-// 	union
-// 	{
-// 		struct
-// 		{
-// 			t_point	p111;
-// 			t_point	p___;
-// 			t_point	p_1_;
-// 			t_point	p1_1;
-// 		};
-// 		t_point	p[4];
-// 	};
-// }	t_tps;
 
 typedef struct s_camera
 {
@@ -337,7 +311,6 @@ typedef struct s_triangle
 	};
 	t_color		color;
 	uint32_t	generation;
-
 }	t_triangle;
 
 typedef struct s_object
@@ -346,6 +319,7 @@ typedef struct s_object
 	t_vector3 	c_center;
 	t_basis		basis;
 	t_triangle	axis;
+	t_matrix4 	w_vm;
 	t_triangle	**pp_otri;
 	uint32_t	size_otri;
 	uint32_t	last_gen;

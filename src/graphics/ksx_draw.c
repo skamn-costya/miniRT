@@ -6,12 +6,13 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 15:26:37 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:23:33 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
+#include "ksx_vec3_math.h"
 #include "ksx_m4_math.h"
 #include "ksx_3D.h"
 #include <math.h>
@@ -51,10 +52,11 @@ void	ksx_draw(t_graphics *p_grph)
 		while (idx[1] < p_object->size_otri)
 		{
 			// p_grph->camera
-			vec4.x = p_object->pp_otri[idx[1]]->w_p1.x;
-			vec4.y = p_object->pp_otri[idx[1]]->w_p1.y;
-			vec4.z = p_object->pp_otri[idx[1]]->w_p1.z;
-			vec4.w = 1;
+			// vec4.x = p_object->pp_otri[idx[1]]->w_p1.x;
+			// vec4.y = p_object->pp_otri[idx[1]]->w_p1.y;
+			// vec4.z = p_object->pp_otri[idx[1]]->w_p1.z;
+			// vec4.w = 1;
+			vec4 = ksx_vec3_vec4(p_object->pp_otri[idx[1]]->w_p1, 1);
 			vec4 = ksx_m4_vec4(p_grph->camera.pm, vec4);
 			// printf("w_p1: (%f, %f, %f); vec4: (%f, %f, %f, %f);\n",
 			// 	p_obj->pp_otri[idx[1]]->w_p1.x,
@@ -65,19 +67,21 @@ void	ksx_draw(t_graphics *p_grph)
 			pixel.y = round(vec4.y) + HEIGHT / 2.f;
 			ksx_set_pixel(p_grph->img, pixel);
 
-			vec4.x = p_object->pp_otri[idx[1]]->w_p2.x;
-			vec4.y = p_object->pp_otri[idx[1]]->w_p2.y;
-			vec4.z = p_object->pp_otri[idx[1]]->w_p2.z;
-			vec4.w = 1;
+			// vec4.x = p_object->pp_otri[idx[1]]->w_p2.x;
+			// vec4.y = p_object->pp_otri[idx[1]]->w_p2.y;
+			// vec4.z = p_object->pp_otri[idx[1]]->w_p2.z;
+			// vec4.w = 1;
+			vec4 = ksx_vec3_vec4(p_object->pp_otri[idx[1]]->w_p2, 1);
 			vec4 = ksx_m4_vec4(p_grph->camera.pm, vec4);
 			pixel.x = roundf(vec4.x) + WIDTH / 2;
 			pixel.y = roundf(vec4.y) + HEIGHT / 2;
 			ksx_set_pixel(p_grph->img, pixel);
 
-			vec4.x = p_object->pp_otri[idx[1]]->w_p3.x;
-			vec4.y = p_object->pp_otri[idx[1]]->w_p3.y;
-			vec4.z = p_object->pp_otri[idx[1]]->w_p3.z;
-			vec4.w = 1;
+			// vec4.x = p_object->pp_otri[idx[1]]->w_p3.x;
+			// vec4.y = p_object->pp_otri[idx[1]]->w_p3.y;
+			// vec4.z = p_object->pp_otri[idx[1]]->w_p3.z;
+			// vec4.w = 1;
+			vec4 = ksx_vec3_vec4(p_object->pp_otri[idx[1]]->w_p3, 1);
 			vec4 = ksx_m4_vec4(p_grph->camera.pm, vec4);
 			pixel.x = roundf(vec4.x) + WIDTH / 2;
 			pixel.y = roundf(vec4.y) + HEIGHT / 2;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 01:28:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 13:15:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,13 @@ t_object	*ksx_create_object(t_vector3 center)
 	p_object->pp_otri = NULL;
 	p_object->size_otri = 0;
 	p_object->last_gen = 0;
-	p_object->basis = ksx_get_basis(ksx_vec3_set(0, 0, 0),
-			ksx_vec3_set(0, 0, 0));
-	p_object->axis.p1 = ksx_vec3_set(1, 0, 0);
-	p_object->axis.p2 = ksx_vec3_set(0, 1, 0);
-	p_object->axis.p3 = ksx_vec3_set(0, 0, 1);
+	p_object->basis = ksx_get_basis(ksx_vec3_set(0, 0, 0), center);
+	// p_object->axis.p1 = ksx_vec3_add(center, ksx_vec3_set(AXIS_LEN, 0, 0));
+	// p_object->axis.p2 = ksx_vec3_add(center, ksx_vec3_set(0, AXIS_LEN, 0));
+	// p_object->axis.p3 = ksx_vec3_add(center, ksx_vec3_set(0, 0, AXIS_LEN));
+	p_object->axis.p1 = ksx_vec3_set(AXIS_LEN, 0, 0);
+	p_object->axis.p2 = ksx_vec3_set(0, AXIS_LEN, 0);
+	p_object->axis.p3 = ksx_vec3_set(0, 0, AXIS_LEN);
 	return (p_object);
 }
 

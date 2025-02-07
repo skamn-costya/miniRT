@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 15:57:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:57:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_vector3	ksx_translate_vec3(t_vector3 v1, const t_vector3 v2)
 
 void	ksx_translate_tri(t_triangle *tri, const t_vector3 norm)
 {
-	tri->w_p1 = ksx_translate_vec3(tri->p1, norm);
-	tri->w_p2 = ksx_translate_vec3(tri->p2, norm);
-	tri->w_p3 = ksx_translate_vec3(tri->p3, norm);
+	tri->w_p1 = ksx_vec3_add(tri->p1, norm);
+	tri->w_p2 = ksx_vec3_add(tri->p2, norm);
+	tri->w_p3 = ksx_vec3_add(tri->p3, norm);
 }

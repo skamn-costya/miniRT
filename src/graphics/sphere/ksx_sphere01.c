@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 01:35:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 12:25:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ static void	ksx_init_sphere_2(t_object *p_object,
 	ksx_translate_tri(p_object->pp_otri[5], center);
 	ksx_translate_tri(p_object->pp_otri[6], center);
 	ksx_translate_tri(p_object->pp_otri[7], center);
+	ksx_translate_tri(&p_object->axis, center);
 }
 
 static t_triangle	**ksx_init_sphere_tri(t_object *p_object)
