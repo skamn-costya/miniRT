@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 16:33:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 01:35:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,13 @@ t_object	*ksx_create_sphere(t_vector3 center,
 			uint32_t diameter, t_color color)
 {
 	t_object	*p_object;
-	float		radius;
 
-	radius = diameter * .5f;
-	p_object = ksx_create_object();
+	p_object = ksx_create_object(center);
 	if (!p_object)
 		return (NULL);
-	p_object->center = center;
 	if (!ksx_init_sphere_tri(p_object))
 		return (NULL);
-	ksx_init_sphere(p_object, radius);
+	ksx_init_sphere(p_object, diameter * .5f);
 	ksx_init_sphere_2(p_object, center, color);
 	return (p_object);
 }
@@ -123,9 +120,6 @@ static t_triangle	**ksx_init_sphere_tri(t_object *p_object)
 	t_triangle	*p_tri;
 	t_triangle	**pp_tri;
 
-	p_object->last_gen = 1;
-	p_object->pp_otri = NULL;
-	p_object->size_otri = 0;
 	idx = 0;
 	while (idx < 8)
 	{
@@ -136,5 +130,6 @@ static t_triangle	**ksx_init_sphere_tri(t_object *p_object)
 		pp_tri = ksx_tri2obj(p_tri, p_object);
 		idx++;
 	}
+	p_object->last_gen = 1;
 	return (pp_tri);
 }

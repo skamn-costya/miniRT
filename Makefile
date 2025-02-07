@@ -51,7 +51,8 @@ CAMERA = $(addprefix $(CAMERA_DIR), $(CAMERA_FN))
 
 # Sphere object
 SPHERE_DIR = graphics/sphere/
-SPHERE_FN = ksx_sphere01.c
+SPHERE_FN = ksx_sphere01.c \
+			ksx_sphere02.c
 SPHERE = $(addprefix $(SPHERE_DIR), $(SPHERE_FN))
 
 # Cylinder object

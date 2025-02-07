@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 16:08:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 01:28:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,17 @@ t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm)
 	return (tps);
 }
 
-t_object	*ksx_create_object(void)
+t_object	*ksx_create_object(t_vector3 center)
 {
 	t_object	*p_object;
 
 	p_object = (t_object *) malloc (sizeof(t_object));
 	if (!p_object)
 		return (printf("Error: memory allocation failed!\n"), NULL);
+	p_object->center = center;
+	p_object->c_center = center;
 	p_object->pp_otri = NULL;
+	p_object->size_otri = 0;
 	p_object->last_gen = 0;
 	p_object->basis = ksx_get_basis(ksx_vec3_set(0, 0, 0),
 			ksx_vec3_set(0, 0, 0));

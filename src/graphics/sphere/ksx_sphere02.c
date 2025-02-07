@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_rotation.h                                     :+:      :+:    :+:   */
+/*   ksx_sphere02.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/05 14:30:32 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 00:37:28 by ksorokol         ###   ########.fr       */
+/*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/02/07 01:31:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KSX_ROTATION_H
-# define KSX_ROTATION_H
+// Sphere: "sp", coord, d, rgb
 
-void	ksx_create_vm(t_matrix4 *p_vm, const t_basis basis);
+#include "ksx_graphics.h"
+#include "ksx_utils.h"
+#include "ksx_sphere.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-#endif	// KSX_ROTATION_H

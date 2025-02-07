@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 12:20:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 00:39:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,12 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.center = center;
 	camera.norm = norm;
 	camera.basis = ksx_get_basis(norm, center);
-	camera.vm = ksx_create_vm(camera.basis);
+	ksx_create_vm(&camera.vm, camera.basis);
 	camera.hfov = (fov * PI) / 180;
-	camera.aspect = (WIDTH * 1.0f) / (HEIGHT * 1.0f);
+	camera.near = (WIDTH * .5f) * tanf(camera.hfov * .5f);
+	if (camera.near < 1)
+		camera.near = 1;
+	camera.aspect = (WIDTH * 1.f) / (HEIGHT * 1.f);
 	camera.vfov = 2.0f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
 	return (camera);
 }
@@ -77,14 +80,13 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 // https://www.mauriciopoppe.com
 //  /notes/computer-graphics/viewing/projection-transform/
 
-void	ksx_set_camera_pm(t_camera *p_camera, float near, float far)
+void	ksx_set_camera_pm(t_camera *p_camera, float far)
 {
 	int		idx;
 
 	idx = 15;
 	while (idx-- != -1)
 		p_camera->pm.elems[idx] = 0;
-	p_camera->near = near;
 	p_camera->far = far;
 	p_camera->pm.e_11 = 1.f / tanf(p_camera->hfov * .5f);
 	p_camera->pm.e_22 = 1.f / (p_camera->aspect * tanf(p_camera->vfov * .5f));

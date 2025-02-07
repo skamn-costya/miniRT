@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 00:30:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/07 00:40:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "parser.h"
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
+#include "ksx_camera.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -35,7 +36,7 @@ int	main(int argc, char *argv[])
 		return (ft_lstclear(&p_list, &free_t_obj_descr), EXIT_FAILURE);
 	ksx_init_world(&grph, p_list);
 	ft_lstclear(&p_list, &free_t_obj_descr);
-	ksx_set_camera_pm(&grph.camera, 1.f, 200.f);
+	ksx_set_camera_pm(&grph.camera, 1200.f);
 	ksx_draw(&grph);
 	mlx_loop(grph.mlx);
 	ksx_clean_world(&grph.world);
