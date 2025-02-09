@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:44:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 21:35:56 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/08 20:20:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ksx_set_pixel(mlx_image_t *p_img, t_pixel pix)
 
 	if (pix.x < 0 || pix.y < 0)
 		return ;
-	if (pix.x > INT32_MAX || pix.x > INT32_MAX)
+	if (pix.x >= WIDTH || pix.y >= HEIGHT)
 		return ;
 	x = pix.x;
 	y = pix.y;

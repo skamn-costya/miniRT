@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 12:25:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 00:42:11 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,31 @@
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
 #include "ksx_sphere.h"
+#include "ksx_sphere.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 static void			ksx_init_sphere(t_object *p_object, float radius);
 static void			ksx_init_sphere_1(t_object *p_object, t_vector3 points[]);
-static void			ksx_init_sphere_2(t_object *p_object,
-						t_vector3 center, t_color color);
+static void			ksx_init_sphere_2(t_object *p_object, t_color color);
 static t_triangle	**ksx_init_sphere_tri(t_object *p_object);
 
 t_object	*ksx_create_sphere(t_vector3 center,
 			uint32_t diameter, t_color color)
 {
 	t_object	*p_object;
+	float		radius;
 
 	p_object = ksx_create_object(center);
 	if (!p_object)
 		return (NULL);
 	if (!ksx_init_sphere_tri(p_object))
 		return (NULL);
+	radius = diameter * .5f;
 	ksx_init_sphere(p_object, diameter * .5f);
-	ksx_init_sphere_2(p_object, center, color);
+	ksx_init_sphere_2(p_object, color);
+	ksx_sphere_split (p_object, &radius);
 	return (p_object);
 }
 
@@ -44,20 +47,20 @@ static void	ksx_init_sphere(t_object *p_object, float radius)
 {
 	t_vector3	points[6];
 
-	points[0].x = radius;
-	points[0].y = 0;
+	points[0].x = 0;
+	points[0].y = radius;
 	points[0].z = 0;
-	points[1].x = 0;
-	points[1].y = radius;
+	points[1].x = radius;
+	points[1].y = 0;
 	points[1].z = 0;
 	points[2].x = 0;
 	points[2].y = 0;
 	points[2].z = radius;
-	points[3].x = -radius;
-	points[3].y = 0;
+	points[3].x = 0;
+	points[3].y = -radius;
 	points[3].z = 0;
-	points[4].x = 0;
-	points[4].y = -radius;
+	points[4].x = -radius;
+	points[4].y = 0;
 	points[4].z = 0;
 	points[5].x = 0;
 	points[5].y = 0;
@@ -93,8 +96,7 @@ static void	ksx_init_sphere_1(t_object *p_object, t_vector3 points[])
 	p_object->pp_otri[7]->p3 = points[1];
 }
 
-static void	ksx_init_sphere_2(t_object *p_object,
-			t_vector3 center, t_color color)
+static void	ksx_init_sphere_2(t_object *p_object, t_color color)
 {
 	p_object->pp_otri[0]->color = color;
 	p_object->pp_otri[1]->color = color;
@@ -104,15 +106,6 @@ static void	ksx_init_sphere_2(t_object *p_object,
 	p_object->pp_otri[5]->color = color;
 	p_object->pp_otri[6]->color = color;
 	p_object->pp_otri[7]->color = color;
-	ksx_translate_tri(p_object->pp_otri[0], center);
-	ksx_translate_tri(p_object->pp_otri[1], center);
-	ksx_translate_tri(p_object->pp_otri[2], center);
-	ksx_translate_tri(p_object->pp_otri[3], center);
-	ksx_translate_tri(p_object->pp_otri[4], center);
-	ksx_translate_tri(p_object->pp_otri[5], center);
-	ksx_translate_tri(p_object->pp_otri[6], center);
-	ksx_translate_tri(p_object->pp_otri[7], center);
-	ksx_translate_tri(&p_object->axis, center);
 }
 
 static t_triangle	**ksx_init_sphere_tri(t_object *p_object)

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 14:35:31 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 01:01:33 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 static int	ksx_init_grph(t_graphics *p_grph);
 static void	ksx_init_world(t_graphics *p_grph, t_list *p_list);
 
+void my_keyhook(mlx_key_data_t keydata, void* param);
+
 int	main(int argc, char *argv[])
 {
 	t_graphics	grph;
@@ -36,8 +38,9 @@ int	main(int argc, char *argv[])
 		return (ft_lstclear(&p_list, &free_t_obj_descr), EXIT_FAILURE);
 	ksx_init_world(&grph, p_list);
 	ft_lstclear(&p_list, &free_t_obj_descr);
-	ksx_set_camera_pm(&grph.camera, 500.f);
+	ksx_set_camera_pm(&grph.camera, 250.f);
 	ksx_draw(&grph);
+	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
 	mlx_loop(grph.mlx);
 	ksx_clean_world(&grph.world);
 	mlx_delete_image(grph.mlx, grph.img);
@@ -91,4 +94,14 @@ static void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 			ksx_obj2world(p_object, &p_grph->world);
 		p_list_ = p_list_->next;
 	}
+}
+
+void my_keyhook(mlx_key_data_t keydata, void* param)
+{
+	t_graphics	*p_grph;
+
+	p_grph = (t_graphics *) param;
+	// If we PRESS the 'J' key, print "Hello".
+	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
+		ksx_draw (p_grph);
 }

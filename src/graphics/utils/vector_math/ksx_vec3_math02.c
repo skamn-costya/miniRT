@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 22:00:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:51:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,13 @@
  * 
  * @param v Original vector
  */
-t_vector3	ksx_vec3_unit(const t_vector3 v)
+t_vector3	ksx_vec3_unit(const t_vector3 *p_v)
 {
-	return (ksx_vec3_resize(v, 1.f));
+	t_vector3	v;
+
+	v = *p_v;
+	ksx_vec3_resize(&v, 1.f);
+	return (v);
 }
 
 t_vector3	ksx_vec3_norm(const t_vector3 v, const t_vector3 norm)
@@ -53,16 +57,14 @@ float	ksx_vec3_dist(const t_vector3 v1, const t_vector3 v2)
  * @param v Original vector
  * @param size Size of new vector
   */
-t_vector3	ksx_vec3_resize(const t_vector3 v, const float size)
+void	ksx_vec3_resize(t_vector3 *p_v, const float size)
 {
 	float		f;
-	t_vector3	result;
 
-	f = size / ksx_vec3_mag(v);
-	result.x = v.x * f;
-	result.y = v.y * f;
-	result.z = v.z * f;
-	return (result);
+	f = size / ksx_vec3_mag(*p_v);
+	p_v->x = p_v->x * f;
+	p_v->y = p_v->y * f;
+	p_v->z = p_v->z * f;
 }
 
 t_matrix3	ksx_vec3_tensor(const t_vector3 v1, const t_vector3 v2)

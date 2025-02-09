@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 12:17:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/08 20:53:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,7 @@ t_vector3	ksx_point_m3(const t_vector3 point, const t_matrix3 m)
 	return (point_);
 }
 
-void	ksx_m3_reset(t_matrix3 *p_m3)
-{
-	p_m3->e_11 = 0.f;
-	p_m3->e_12 = 0.f;
-	p_m3->e_13 = 0.f;
-	p_m3->e_21 = 0.f;
-	p_m3->e_22 = 0.f;
-	p_m3->e_23 = 0.f;
-	p_m3->e_31 = 0.f;
-	p_m3->e_32 = 0.f;
-	p_m3->e_33 = 0.f;
-}
+
 
 // t_matrix3	ksx_get_transfor_matrix(const t_vector3 v1, const t_vector3 v2)
 // {

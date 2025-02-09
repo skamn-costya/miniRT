@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 10:44:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:52:33 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_basis	ksx_get_basis(const t_vector3 norm, const t_vector3 center)
 		return (basis);
 	}
 	tmp_v3 = ksx_vec3_sub(norm, center);
-	basis.z_ = ksx_vec3_unit(tmp_v3);
+	basis.z_ = ksx_vec3_unit(&tmp_v3);
 	tmp_v3 = ksx_vec3_set(0, 1, 0);
 	tmp_v3 = ksx_vec3_cross(basis.z_, tmp_v3);
 	basis.x_ = ksx_vec3_div(tmp_v3, ksx_vec3_mag(tmp_v3));

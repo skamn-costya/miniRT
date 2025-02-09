@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 14:27:54 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:15:54 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	ksx_create_vm(&camera.vm, &camera.basis);
 	camera.hfov = fov * PI / 180.f;
 	camera.near = (WIDTH * .5f) * tanf(camera.hfov * .5f);
+	// camera.near = 10;
 	camera.right = WIDTH * .5f;
 	camera.left = - camera.right;
 	camera.top = HEIGHT * .5f;
@@ -90,10 +91,14 @@ void	ksx_set_camera_pm(t_camera *p_camera, float far)
 {
 	ksx_m4_reset(&p_camera->pm);
 	p_camera->far = far;
-	p_camera->pm.e_11 = p_camera->aspect * (1.f / tanf(p_camera->hfov * .5f));
-	p_camera->pm.e_22 = 1.f / (tanf(p_camera->vfov * .5f));
+	p_camera->far = p_camera->near + 1000;
+	p_camera->pm.e_11 = 1.f / tanf(p_camera->hfov * .5f);
+	// p_camera->pm.e_22 = 1.f / (p_camera->aspect * tanf(p_camera->vfov * .5f));
 	p_camera->pm.e_33 = -((p_camera->far + p_camera->near)
 			/ (p_camera->far - p_camera->near));
+	p_camera->pm.e_22 = 1.f / tanf(p_camera->hfov * .5f);
+	// p_camera->pm.e_33 = -((p_camera->far)
+	// 		/ (p_camera->far - p_camera->near));
 	p_camera->pm.e_34 = -1.f;
 	p_camera->pm.e_43 = -((2.f * p_camera->far * p_camera->near)
 			/ (p_camera->far - p_camera->near));
@@ -103,17 +108,20 @@ void	ksx_set_camera_pm(t_camera *p_camera, float far)
 // {
 // 	ksx_m4_reset(&p_camera->pm);
 // 	p_camera->far = far;
-// 	p_camera->pm.e_11 = (2 * p_camera->n) / (p_camera->r - p_camera->l);
-// 	p_camera->pm.e_22 = (2 * p_camera->n) / (p_camera->t - p_camera->b);
-// 	p_camera->pm.e_31
-// 		= (p_camera->r + p_camera->l) / (p_camera->r - p_camera->l);
-// 	p_camera->pm.e_32
-// 		= (p_camera->t + p_camera->b) / (p_camera->t - p_camera->b);
+// 	p_camera->far = p_camera->near + 1000;
+// 	p_camera->pm.e_11 = p_camera->n / p_camera->r;
+// 	p_camera->pm.e_22 = p_camera->n / (p_camera->aspect * p_camera->t);
+// 	// p_camera->pm.e_31
+// 	// 	= (p_camera->r + p_camera->l) / (p_camera->r - p_camera->l);
+// 	// p_camera->pm.e_32
+// 	// 	= (p_camera->t + p_camera->b) / (p_camera->t - p_camera->b);
+// 	// p_camera->pm.e_33
+// 	// 	= - (p_camera->f + p_camera->n) / (p_camera->f - p_camera->n);
 // 	p_camera->pm.e_33
 // 		= - (p_camera->f + p_camera->n) / (p_camera->f - p_camera->n);
-// 	p_camera->pm.e_34 = -1;
+// 	p_camera->pm.e_34 = -1.f;
 // 	p_camera->pm.e_43
-// 		= - (2 * p_camera->f * p_camera->n) / (p_camera->f - p_camera->n);
+// 		= (-2.f * p_camera->f * p_camera->n) / (p_camera->f - p_camera->n);
 // }
 
 // float	scale;

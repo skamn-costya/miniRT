@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 13:15:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 00:42:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,23 +59,23 @@ t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_object *p_object)
 	return (pp_tris);
 }
 
-t_triangle	**ksx_tris2obj(t_triangle *p_tris[],
-			uint32_t size, t_object *p_object)
-{
-	t_triangle	**pp_tri;
-	uint32_t	idx;
+// t_triangle	**ksx_tris2obj(t_triangle *p_tris[],
+// 			uint32_t size, t_object *p_object)
+// {
+// 	t_triangle	**pp_tri;
+// 	uint32_t	idx;
 
-	if (!p_tris || !p_tris[0])
-		return (p_object->pp_otri);
-	pp_tri = NULL;
-	idx = 0;
-	while (idx < size)
-	{
-		pp_tri = ksx_tri2obj(p_tris[idx], p_object);
-		idx++;
-	}
-	return (pp_tri);
-}
+// 	if (!p_tris || !p_tris[0])
+// 		return (p_object->pp_otri);
+// 	pp_tri = NULL;
+// 	idx = 0;
+// 	while (idx < size)
+// 	{
+// 		pp_tri = ksx_tri2obj(p_tris[idx], p_object);
+// 		idx++;
+// 	}
+// 	return (pp_tri);
+// }
 
 // set three point for calculate a transformation matrix
 // (1,1,1)(-1,-1,-1)(2,-3,4)
@@ -113,6 +113,9 @@ t_object	*ksx_create_object(t_vector3 center)
 	if (!p_object)
 		return (printf("Error: memory allocation failed!\n"), NULL);
 	p_object->center = center;
+	p_object->angle.x = 0;
+	p_object->angle.y = 0;
+	p_object->angle.z = 0;
 	p_object->c_center = center;
 	p_object->pp_otri = NULL;
 	p_object->size_otri = 0;

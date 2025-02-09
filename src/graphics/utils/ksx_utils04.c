@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 11:16:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/08 23:07:14 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,18 +75,18 @@ mlx_image_t	*ksx_create_image(mlx_t *mlx)
 }
 
 /**
- * @brief puts the coordinates of the midpoint (between p1 and p2) into p.
+ * @brief returns coordinates of the midpoint (between p1 and p2)
  * 
- * @param p1 The first point
- * @param p2 The second point
- * @param p The pointer to result point
+ * @param p_p1 a pointer to the first point
+ * @param p_p2 a pointer to the second point
+ * @param p point
  */
-t_vector3	ksx_mid_point(const t_vector3 p1, const t_vector3 p2)
+t_vector3	ksx_mid_point(const t_vector3 *p_p1, const t_vector3 *p_p2)
 {
 	t_vector3	result;
 
-	result.x = (p1.x + p2.x) * 0.5f;
-	result.y = (p1.y + p2.y) * 0.5f;
-	result.z = (p1.z + p2.z) * 0.5f;
+	result.x = (p_p1->x + p_p2->x) * 0.5f;
+	result.y = (p_p1->y + p_p2->y) * 0.5f;
+	result.z = (p_p1->z + p_p2->z) * 0.5f;
 	return (result);
 }

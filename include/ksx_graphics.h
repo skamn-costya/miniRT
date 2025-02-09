@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 13:33:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/08 21:52:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@
 # define KSX_TRUE 1
 # define KSX_FALSE 0
 
-# define PI 3.14159265358979323846
-# define PRECISION	0.0001f
+# define PI 3.14159265358979323846f
+# define PRECISION	0.00001f
 /* Only support RGBA */
 # define BPP 4
 
@@ -316,6 +316,7 @@ typedef struct s_triangle
 typedef struct s_object
 {
 	t_vector3 	center;
+	t_vector3	angle;
 	t_vector3 	c_center;
 	t_basis		basis;
 	t_triangle	axis;

@@ -30,7 +30,8 @@ VECTOR_MATH = $(addprefix $(VECTOR_MATH_DIR), $(VECTOR_MATH_FN))
 
 # KSX t_vector math
 MATRIX_MATH_DIR = graphics/utils/matrix_math/
-MATRIX_MATH_FN =	ksx_m4_math01.c
+MATRIX_MATH_FN =	ksx_m4_math01.c \
+					ksx_m3_math01.c
 MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 
 3D_DIR = graphics/3D/
@@ -40,7 +41,9 @@ MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 
 # Rotatin pints, vectors, triangles, matrixes (view, proection)
 ROTATION_DIR = graphics/rotation/
-ROTATION_FN = ksx_rotation_norm01.c
+ROTATION_FN =	ksx_rotation_norm01.c \
+				ksx_rotation01.c \
+				ksx_rotation02.c
 ROTATION = $(addprefix $(ROTATION_DIR), $(ROTATION_FN))
 
 # Camera object
