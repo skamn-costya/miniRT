@@ -15,7 +15,7 @@
 #include "ksx_m3_math.h"
 #include <math.h>
 
-void	ksx_mreset(t_matrix3 *p_m)
+void	ksx_m3_reset(t_matrix3 *p_m)
 {
 	p_m->e_11 = 0.f;
 	p_m->e_12 = 0.f;
@@ -44,7 +44,7 @@ t_matrix3	ksx_m3_multi(const t_matrix3 *p_m1, const t_matrix3 *p_m2)
 	return (m3);
 }
 
-t_vector3	ksx_mvec3(const t_matrix3 *p_m, const t_vector3 *p_v)
+t_vector3	ksx_m3_vec3(const t_matrix3 *p_m, const t_vector3 *p_v)
 {
 	t_vector3	v3;
 
