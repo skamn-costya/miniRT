@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/08 21:52:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 11:38:41 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,9 +229,10 @@ typedef struct s_camera
 	t_vector3	center;
 	t_vector3	norm;
 	t_basis		basis;
+	float		fov;
 	float		hfov;
 	float		aspect;
-	float		vfov;
+	// float		vfov;
 	t_matrix4	vm;
 	t_matrix4	pm;
 	// float		focal_len;
@@ -316,6 +317,7 @@ typedef struct s_triangle
 typedef struct s_object
 {
 	t_vector3 	center;
+	float	 	radius;
 	t_vector3	angle;
 	t_vector3 	c_center;
 	t_basis		basis;

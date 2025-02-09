@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 01:01:33 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 11:45:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 static int	ksx_init_grph(t_graphics *p_grph);
 static void	ksx_init_world(t_graphics *p_grph, t_list *p_list);
+void my_scrollhook(double xdelta, double ydelta, void* param);
 
 void my_keyhook(mlx_key_data_t keydata, void* param);
 
@@ -38,9 +39,10 @@ int	main(int argc, char *argv[])
 		return (ft_lstclear(&p_list, &free_t_obj_descr), EXIT_FAILURE);
 	ksx_init_world(&grph, p_list);
 	ft_lstclear(&p_list, &free_t_obj_descr);
-	ksx_set_camera_pm(&grph.camera, 250.f);
+	ksx_set_camera_pm(&grph.camera, grph.camera.fov, 500.f);
 	ksx_draw(&grph);
 	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
+	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);
 	mlx_loop(grph.mlx);
 	ksx_clean_world(&grph.world);
 	mlx_delete_image(grph.mlx, grph.img);
@@ -96,12 +98,48 @@ static void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 	}
 }
 
+# define ANGLE 5
 void my_keyhook(mlx_key_data_t keydata, void* param)
 {
 	t_graphics	*p_grph;
 
 	p_grph = (t_graphics *) param;
 	// If we PRESS the 'J' key, print "Hello".
-	if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
-		ksx_draw (p_grph);
+	// if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_KP_4)
+		p_grph->world.pp_wobj[0]->angle.y = ANGLE;
+	if (keydata.key == MLX_KEY_KP_6)
+		p_grph->world.pp_wobj[0]->angle.y = -ANGLE;
+	if (keydata.key == MLX_KEY_KP_8)
+		p_grph->world.pp_wobj[0]->angle.x = ANGLE;
+	if (keydata.key == MLX_KEY_KP_2)
+		p_grph->world.pp_wobj[0]->angle.x = -ANGLE;
+	if (keydata.key == MLX_KEY_KP_9)
+		p_grph->world.pp_wobj[0]->angle.z = ANGLE;
+	if (keydata.key == MLX_KEY_KP_1)
+		p_grph->world.pp_wobj[0]->angle.z = -ANGLE;
+	ksx_draw (p_grph);
+	p_grph->world.pp_wobj[0]->angle.x = 0;
+	p_grph->world.pp_wobj[0]->angle.y = 0;
+	p_grph->world.pp_wobj[0]->angle.z = 0;
+}
+
+void my_scrollhook(double xdelta, double ydelta, void* param)
+{
+	t_graphics	*p_grph;
+
+	p_grph = (t_graphics *) param;
+	// Simple up or down detection.
+	if (ydelta > 0)
+		ksx_set_camera_pm(&p_grph->camera, p_grph->camera.fov - 1, 500.f);
+	else if (ydelta < 0)
+		ksx_set_camera_pm(&p_grph->camera, p_grph->camera.fov + 1, 500.f);
+	ksx_draw (p_grph);
+	printf ("FOV = %f, near = %f\n", p_grph->camera.fov, p_grph->camera.near);
+
+	// Can also detect a mousewheel that goes along the X (e.g: MX Master 3)
+	if (xdelta < 0)
+		puts("Sliiiide to the left!");
+	else if (xdelta > 0)
+		puts("Sliiiide to the right!");
 }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/08 19:15:54 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 10:32:51 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "ksx_rotation.h"
 #include "ksx_camera.h"
 #include <math.h>
+#include <stdio.h>
 
 // https://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/
 
@@ -54,17 +55,13 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.norm = norm;
 	camera.basis = ksx_get_basis(norm, center);
 	ksx_create_vm(&camera.vm, &camera.basis);
-	camera.hfov = fov * PI / 180.f;
-	camera.near = (WIDTH * .5f) * tanf(camera.hfov * .5f);
-	// camera.near = 10;
+	camera.fov = fov;
 	camera.right = WIDTH * .5f;
 	camera.left = - camera.right;
 	camera.top = HEIGHT * .5f;
 	camera.bottom = -camera.top;
-	if (camera.near < 1)
-		camera.near = 1;
 	camera.aspect = 1.f * WIDTH / HEIGHT;
-	camera.vfov = 2.f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
+	// camera.vfov = 2.f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
 	return (camera);
 }
 
@@ -87,11 +84,15 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 // https://www.mauriciopoppe.com
 //  /notes/computer-graphics/viewing/projection-transform/
 
-void	ksx_set_camera_pm(t_camera *p_camera, float far)
+void	ksx_set_camera_pm(t_camera *p_camera, float fov, float far)
 {
+	if (fov < 1 || fov > 179)
+		return;
+	p_camera->fov = fov;
+	p_camera->hfov = fov * PI / 180.f;
+	p_camera->near = (WIDTH * .5f) * tanf(p_camera->hfov * .5f);
+	p_camera->far = p_camera->near + far;
 	ksx_m4_reset(&p_camera->pm);
-	p_camera->far = far;
-	p_camera->far = p_camera->near + 1000;
 	p_camera->pm.e_11 = 1.f / tanf(p_camera->hfov * .5f);
 	// p_camera->pm.e_22 = 1.f / (p_camera->aspect * tanf(p_camera->vfov * .5f));
 	p_camera->pm.e_33 = -((p_camera->far + p_camera->near)

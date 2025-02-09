@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/08 22:37:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 01:55:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ void	ksx_rotation_obj(t_object *p_object, float angle_x,
 	idx = 0;
 	while (idx < p_object->size_otri)
 	{
-
 		ksx_rotation(&p_object->pp_otri[idx]->p1, angle_x, angle_y, angle_z);
 		ksx_rotation(&p_object->pp_otri[idx]->p2, angle_x, angle_y, angle_z);
 		ksx_rotation(&p_object->pp_otri[idx]->p3, angle_x, angle_y, angle_z);

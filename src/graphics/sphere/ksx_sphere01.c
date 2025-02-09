@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 00:42:11 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 11:41:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,22 @@ t_object	*ksx_create_sphere(t_vector3 center,
 			uint32_t diameter, t_color color)
 {
 	t_object	*p_object;
-	float		radius;
 
 	p_object = ksx_create_object(center);
 	if (!p_object)
 		return (NULL);
 	if (!ksx_init_sphere_tri(p_object))
 		return (NULL);
-	radius = diameter * .5f;
+	p_object->radius = diameter * .5f;
 	ksx_init_sphere(p_object, diameter * .5f);
 	ksx_init_sphere_2(p_object, color);
-	ksx_sphere_split (p_object, &radius);
+	ksx_sphere_split (p_object);	// 32
+	ksx_sphere_split (p_object);	// 128
+	ksx_sphere_split (p_object);	// 512
+	ksx_sphere_split (p_object);	// 2048
+	ksx_sphere_split (p_object);	// 8192
+	// ksx_sphere_split (p_object);	// 32768
+	// ksx_sphere_split (p_object);	// 131072
 	return (p_object);
 }
 
