@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 11:38:41 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 15:16:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,7 +346,7 @@ typedef struct s_graphics
 mlx_t		*ksx_init(void);
 int			ksx_prep(void *p_vars);
 t_pixel		ksx_get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y);
-void		ksx_set_pixel(mlx_image_t *p_img, t_pixel pix);
+void		ksx_set_pixel(mlx_image_t *p_img, t_pixel *p_pix);
 
 void		ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
 void		ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);

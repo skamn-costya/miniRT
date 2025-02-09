@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:52:47 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/02 13:22:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 15:17:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2)
 	float	m;
 	int32_t	d_xy[4];
 
-	ksx_set_pixel(img, pix1);
+	ksx_set_pixel(img, &pix1);
 	d_xy[0] = pix2.x - pix1.x;
 	d_xy[1] = pix2.y - pix1.y;
 	d_xy[2] = 0;
@@ -47,7 +47,7 @@ void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2)
 		ksx_line_x (img, pix1, pix2, d_xy);
 	else
 		ksx_line_y (img, pix1, pix2, d_xy);
-	ksx_set_pixel(img, pix2);
+	ksx_set_pixel(img, &pix2);
 }
 
 static t_color	ksx_get_color(t_pixel p, t_pixel p1, t_pixel p2)
@@ -85,7 +85,7 @@ static void	ksx_line_(mlx_image_t *img,
 		if (d_xy[1] == 0)
 			pix.x += d_xy[2];
 		pix.color = ksx_get_color (pix, pix1, pix2);
-		ksx_set_pixel(img, pix);
+		ksx_set_pixel(img, &pix);
 		xy[0]++;
 	}
 }
@@ -112,7 +112,7 @@ static void	ksx_line_x(mlx_image_t *img,
 			c = c + 2 * d_xy[1] - 2 * d_xy[0];
 		}
 		pix.color = ksx_get_color (pix, pix1, pix2);
-		ksx_set_pixel(img, pix);
+		ksx_set_pixel(img, &pix);
 		x++;
 	}
 }
@@ -139,7 +139,7 @@ static void	ksx_line_y(mlx_image_t *img,
 			c = c + 2 * d_xy[0] - 2 * d_xy[1];
 		}
 		pix.color = ksx_get_color (pix, pix1, pix2);
-		ksx_set_pixel(img, pix);
+		ksx_set_pixel(img, &pix);
 		y++;
 	}
 }

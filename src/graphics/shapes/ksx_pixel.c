@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:44:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/08 20:20:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/09 15:19:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,17 @@ t_pixel	ksx_get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y)
 // 	*p_pixel = pix.color.mlx_color;
 // }
 
-void	ksx_set_pixel(mlx_image_t *p_img, t_pixel pix)
+void	ksx_set_pixel(mlx_image_t *p_img, t_pixel *p_pix)
 {
 	uint8_t		*p_pixel;
-	uint32_t	x;
-	uint32_t	y;
 
-	if (pix.x >= WIDTH || pix.y >= HEIGHT)
+	if (p_pix->x >= p_img->width || p_pix->y >= p_img->height)
 		return ;
-	x = pix.x;
-	y = pix.y;
-	if (x > p_img->width || y > p_img->height)
-		return ;
-	p_pixel = &p_img->pixels[(p_img->width * y + x) * BPP];
-	p_pixel[0] = pix.color.abgr[0];
-	p_pixel[1] = pix.color.abgr[1];
-	p_pixel[2] = pix.color.abgr[2];
-	p_pixel[3] = pix.color.abgr[3];
+	p_pixel = &p_img->pixels[(p_img->width * p_pix->y + p_pix->x) * BPP];
+	p_pixel[0] = p_pix->color.abgr[0];
+	p_pixel[1] = p_pix->color.abgr[1];
+	p_pixel[2] = p_pix->color.abgr[2];
+	p_pixel[3] = p_pix->color.abgr[3];
 }
 
 	// *(p_pixel++) = (uint8_t)(pix.color.mlx_color >> 24);
