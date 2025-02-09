@@ -40,8 +40,6 @@ void	ksx_set_pixel(mlx_image_t *p_img, t_pixel pix)
 	uint32_t	x;
 	uint32_t	y;
 
-	if (pix.x < 0 || pix.y < 0)
-		return ;
 	if (pix.x >= WIDTH || pix.y >= HEIGHT)
 		return ;
 	x = pix.x;
