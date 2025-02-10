@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 00:42:01 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:01:18 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "MLX42.h"
 #include "ksx_utils.h"
+#include "ksx_basis.h"
 #include "ksx_vec3_math.h"
 #include "ksx_3D.h"
 #include "ksx_rotation.h"
@@ -105,25 +106,25 @@ t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm)
 	return (tps);
 }
 
-t_object	*ksx_create_object(t_vector3 center)
+t_object	*ksx_create_object(t_vector3 *p_center)
 {
 	t_object	*p_object;
+	t_vector3	v;
 
 	p_object = (t_object *) malloc (sizeof(t_object));
 	if (!p_object)
 		return (printf("Error: memory allocation failed!\n"), NULL);
-	p_object->center = center;
+	p_object->flags = 0x00000000;
+	p_object->center = *p_center;
 	p_object->angle.x = 0;
 	p_object->angle.y = 0;
 	p_object->angle.z = 0;
-	p_object->c_center = center;
+	p_object->c_center = p_object->center;
 	p_object->pp_otri = NULL;
 	p_object->size_otri = 0;
 	p_object->last_gen = 0;
-	p_object->basis = ksx_get_basis(ksx_vec3_set(0, 0, 0), center);
-	// p_object->axis.p1 = ksx_vec3_add(center, ksx_vec3_set(AXIS_LEN, 0, 0));
-	// p_object->axis.p2 = ksx_vec3_add(center, ksx_vec3_set(0, AXIS_LEN, 0));
-	// p_object->axis.p3 = ksx_vec3_add(center, ksx_vec3_set(0, 0, AXIS_LEN));
+	v = ksx_vec3_set(0, 0, 0);
+	p_object->basis = ksx_get_basis(&v, &p_object->center);
 	p_object->axis.p1 = ksx_vec3_set(AXIS_LEN, 0, 0);
 	p_object->axis.p2 = ksx_vec3_set(0, AXIS_LEN, 0);
 	p_object->axis.p3 = ksx_vec3_set(0, 0, AXIS_LEN);

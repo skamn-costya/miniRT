@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 11:40:00 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:11:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,17 @@ void	ksx_sphere_split(t_object *p_object)
 			v[0] = ksx_mid_point(&p_tris[0]->p1, &p_tris[0]->p2);
 			v[1] = ksx_mid_point(&p_tris[0]->p2, &p_tris[0]->p3);
 			v[2] = ksx_mid_point(&p_tris[0]->p3, &p_tris[0]->p1);
-			ksx_vec3_resize(&v[0], p_object->radius);
-			ksx_vec3_resize(&v[1], p_object->radius);
-			ksx_vec3_resize(&v[2], p_object->radius);
-			p_tris[1]->p1 = p_tris[0]->p1;
-			p_tris[1]->p2 = v[0];
-			p_tris[1]->p3 = v[2];
-			p_tris[2]->p1 = v[0];
-			p_tris[2]->p2 = p_tris[0]->p2;
-			p_tris[2]->p3 = v[1];
-			p_tris[3]->p1 = v[1];
-			p_tris[3]->p2 = p_tris[0]->p3;
-			p_tris[3]->p3 = v[2];
-			p_tris[4]->p1 = v[0];
-			p_tris[4]->p2 = v[1];
-			p_tris[4]->p3 = v[2];
+			ksx_vec3_resize(&v[0], p_object->size1);
+			ksx_vec3_resize(&v[1], p_object->size1);
+			ksx_vec3_resize(&v[2], p_object->size1);
+			ksx_tri_set_points (p_tris[1], &p_tris[0]->p1, &v[0], &v[2]);
+			ksx_tri_set_points (p_tris[2], &v[0], &p_tris[0]->p2, &v[1]);
+			ksx_tri_set_points (p_tris[3], &v[1], &p_tris[0]->p3, &v[2]);
+			ksx_tri_set_points (p_tris[4], &v[0], &v[1], &v[2]);
+			p_tris[1]->color = p_object->color;
+			p_tris[2]->color = p_object->color;
+			p_tris[3]->color = p_object->color;
+			p_tris[4]->color = p_object->color;
 			p_tris[1]->generation = p_object->last_gen;
 			p_tris[2]->generation = p_object->last_gen;
 			p_tris[3]->generation = p_object->last_gen;

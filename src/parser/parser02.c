@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 21:12:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:42:22 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static t_obj_descr	*par_create_ambient(t_list **pp_line_list,
 	p_obj->ratio = ft_atof(p_fline->words[1]);
 	if (p_obj->ratio < 0 || p_obj->ratio > 1)
 		parser_crash_exit(pp_line_list, pp_obj_list);
-	if (!get_rgb(p_fline->words, 2, p_obj, R))
+	if (!get_rgb(p_fline->words, 2, p_obj))
 		parser_crash_exit(pp_line_list, pp_obj_list);
 	if (p_fline->words[3])
 		parser_crash_exit(pp_line_list, pp_obj_list);
@@ -124,7 +124,7 @@ static t_obj_descr	*par_create_light(t_list **pp_line_list,
 	p_obj->ratio = ft_atof(p_fline->words[2]);
 	if (p_obj->ratio < 0 || p_obj->ratio > 1)
 		parser_crash_exit(pp_line_list, pp_obj_list);
-	if (!get_rgb(p_fline->words, 3, p_obj, R))
+	if (!get_rgb(p_fline->words, 3, p_obj))
 		parser_crash_exit(pp_line_list, pp_obj_list);
 	if (p_fline->words[4])
 		parser_crash_exit(pp_line_list, pp_obj_list);

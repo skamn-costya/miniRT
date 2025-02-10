@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 11:42:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/10 14:37:28 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	ksx_draw(t_graphics *p_grph)
 	t_pixel		pixel;
 	t_pixel		pixel2;
 	t_pixel		pixel3;
-	t_vector4	vec4;
 
 	if (!p_grph->world.pp_wobj)
 		return ;
@@ -45,8 +44,6 @@ void	ksx_draw(t_graphics *p_grph)
 	pixel2.x= WIDTH - 25;
 	pixel2.y= 25;
 	ksx_line (p_grph->img, pixel, pixel2);
-	
-	
 	idx[0] = 0;
 	pp_object = p_grph->world.pp_wobj;
 	while (idx[0] < p_grph->world.size_wobj)
@@ -58,11 +55,10 @@ void	ksx_draw(t_graphics *p_grph)
 		// else
 		// 	ksx_rotation_obj(p_object, 0.f, 115.f, 135.f);
 		// ksx_rotation_obj_x(p_object, 45.f);
-		ksx_translate_tri(&p_object->axis, p_object->center);
-
-		pixel.color.mlx_color = 0xffffffff;
-		pixel2.color.mlx_color = 0xffffffff;
-		pixel3.color.mlx_color = 0xffffffff;
+		// ksx_draw_box(p_object, p_grph->img, &p_grph->camera);
+		pixel.color.mlx_color = 0x88ffffff;
+		pixel2.color.mlx_color = 0x88ffffff;
+		pixel3.color.mlx_color = 0x88ffffff;
 		idx[1] = 0;
 		idx[2] = 0;
 		while (idx[1] < p_object->size_otri)
@@ -70,95 +66,21 @@ void	ksx_draw(t_graphics *p_grph)
 			if (p_object->pp_otri[idx[1]]->generation == p_object->last_gen)
 			{
 				idx[2]++;
-				ksx_translate_tri(p_object->pp_otri[idx[1]], p_object->center);
-				// p_grph->camera
-				// vec4.x = p_object->pp_otri[idx[1]]->w_p1.x;
-				// vec4.y = p_object->pp_otri[idx[1]]->w_p1.y;
-				// vec4.z = p_object->pp_otri[idx[1]]->w_p1.z;
-				// vec4.w = 1;
-				vec4 = ksx_vec3_vec4(p_object->pp_otri[idx[1]]->w_p1, 1);
-				vec4 = ksx_m4_vec4(&p_grph->camera.pm, &vec4);
-				// printf("w_p1: (%f, %f, %f); vec4: (%f, %f, %f, %f);\n",
-				// 	p_obj->pp_otri[idx[1]]->w_p1.x,
-				// 	p_obj->pp_otri[idx[1]]->w_p1.y,
-				// 	p_obj->pp_otri[idx[1]]->w_p1.z,
-				// 	vec4.x, vec4.y, vec4.z, vec4.w);
-				pixel.x = round(vec4.x) + WIDTH / 2.f;
-				pixel.y = round(vec4.y) + HEIGHT / 2.f;
-				// ksx_set_pixel(p_grph->img, pixel);
-
-				// vec4.x = p_object->pp_otri[idx[1]]->w_p2.x;
-				// vec4.y = p_object->pp_otri[idx[1]]->w_p2.y;
-				// vec4.z = p_object->pp_otri[idx[1]]->w_p2.z;
-				// vec4.w = 1;
-				vec4 = ksx_vec3_vec4(p_object->pp_otri[idx[1]]->w_p2, 1);
-				vec4 = ksx_m4_vec4(&p_grph->camera.pm, &vec4);
-				pixel2.x = roundf(vec4.x) + WIDTH / 2;
-				pixel2.y = roundf(vec4.y) + HEIGHT / 2;
-				// ksx_set_pixel(p_grph->img, pixel);
-
-				// vec4.x = p_object->pp_otri[idx[1]]->w_p3.x;
-				// vec4.y = p_object->pp_otri[idx[1]]->w_p3.y;
-				// vec4.z = p_object->pp_otri[idx[1]]->w_p3.z;
-				// vec4.w = 1;
-				vec4 = ksx_vec3_vec4(p_object->pp_otri[idx[1]]->w_p3, 1);
-				vec4 = ksx_m4_vec4(&p_grph->camera.pm, &vec4);
-				pixel3.x = roundf(vec4.x) + WIDTH / 2;
-				pixel3.y = roundf(vec4.y) + HEIGHT / 2;
-				// ksx_set_pixel(p_grph->img, pixel);
-				ksx_line(p_grph->img, pixel, pixel2);
-				ksx_line(p_grph->img, pixel, pixel3);
-				ksx_line(p_grph->img, pixel3, pixel2);
-				pixel.color.mlx_color -= 0x0001040f;
-				pixel2.color.mlx_color -= 0x0001040f;
-				pixel3.color.mlx_color -= 0x0001040f;
-				
-				// // p_obj->pp_otri[idx[1]]->c_p1 =
-				// // 	ksx_point_m4(p_obj->pp_otri[idx[1]]->w_p1, p_grph->camera.pm);
-				// printf("w_p1: (%f, %f, %f); vec4: (%f, %f, %f);\n",
-				// 	p_obj->pp_otri[idx[1]]->w_p1.x,
-				// 	p_obj->pp_otri[idx[1]]->w_p1.y,
-				// 	p_obj->pp_otri[idx[1]]->w_p1.z,
-				// 	vec4.x,
-				// 	vec4.y,
-				// 	vec4.z);
-				// 	// p_obj->pp_otri[idx[1]]->c_p1.x,
-				// 	// p_obj->pp_otri[idx[1]]->c_p1.x,
-				// 	// p_obj->pp_otri[idx[1]]->c_p1.x);
-				// p_obj->pp_otri[idx[1]]->c_p2 =
-				// 	ksx_point_m4(p_obj->pp_otri[idx[1]]->w_p2, p_grph->camera.pm);
-				// printf("w_p2: (%f, %f, %f); c_p2: (%f, %f, %f);\n",
-				// 	p_obj->pp_otri[idx[1]]->w_p2.x,
-				// 	p_obj->pp_otri[idx[1]]->w_p2.y,
-				// 	p_obj->pp_otri[idx[1]]->w_p2.z,
-				// 	p_obj->pp_otri[idx[1]]->c_p2.x,
-				// 	p_obj->pp_otri[idx[1]]->c_p2.x,
-				// 	p_obj->pp_otri[idx[1]]->c_p2.x);
-				// p_obj->pp_otri[idx[1]]->c_p3 =
-				// 	ksx_point_m4(p_obj->pp_otri[idx[1]]->w_p3, p_grph->camera.pm);
-				// printf("w_p3: (%f, %f, %f); c_p3: (%f, %f, %f);\n",
-				// 	p_obj->pp_otri[idx[1]]->w_p3.x,
-				// 	p_obj->pp_otri[idx[1]]->w_p3.y,
-				// 	p_obj->pp_otri[idx[1]]->w_p3.z,
-				// 	p_obj->pp_otri[idx[1]]->c_p3.x,
-				// 	p_obj->pp_otri[idx[1]]->c_p3.x,
-				// 	p_obj->pp_otri[idx[1]]->c_p3.x);			
-				// pixel.x = roundf(p_obj->pp_otri[idx[1]]->w_p1.x) + WIDTH / 2;
-				// pixel.y = roundf(p_obj->pp_otri[idx[1]]->w_p1.y) + HEIGHT / 2;
-				// printf("pixel: (%lu, %lu);\n", pixel.x, pixel.y);
-				// ksx_set_pixel(p_grph->img, pixel);
-				// pixel.x = roundf(p_obj->pp_otri[idx[1]]->w_p2.x) + WIDTH / 2;
-				// pixel.y = roundf(p_obj->pp_otri[idx[1]]->w_p2.y) + HEIGHT / 2;
-				// printf("pixel: (%lu, %lu);\n", pixel.x, pixel.y);
-				// ksx_set_pixel(p_grph->img, pixel);
-				// pixel.x = roundf(p_obj->pp_otri[idx[1]]->w_p3.x) + WIDTH / 2;
-				// pixel.y = roundf(p_obj->pp_otri[idx[1]]->w_p3.y) + HEIGHT / 2;
-				// printf("pixel: (%lu, %lu);\n", pixel.x, pixel.y);
-				// ksx_set_pixel(p_grph->img, pixel);
+				ksx_translate_tri(p_object->pp_otri[idx[1]], &p_object->center);
+				ksx_draw_tri(p_object->pp_otri[idx[1]], p_grph->img, &p_grph->camera);
 			}
-			ksx_draw_axis(p_object, p_grph->img, &p_grph->camera);
 			idx[1]++;
 		}
+		idx[1] = 0;
+		while (idx[1] < 12)
+		{
+			ksx_translate_tri(&p_object->box[idx[1]], &p_object->center);
+			ksx_draw_tri(&p_object->box[idx[1]], p_grph->img, &p_grph->camera);
+			idx[1]++;
+		}
+		ksx_draw_box(p_object, p_grph->img, &p_grph->camera);
+		ksx_translate_tri(&p_object->axis, &p_object->center);
+		ksx_draw_axis(p_object, p_grph->img, &p_grph->camera);
 		idx[0]++;
 	}
 }

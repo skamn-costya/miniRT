@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 21:11:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:49:46 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	is_i_number(char *str)
 	return (TRUE);
 }
 
-int	get_rgb(char **pp_str, size_t idx, t_obj_descr *p_obj_descr, int idx_rgb)
+int	get_rgb(char **pp_str, size_t idx, t_obj_descr *p_obj_descr)
 {
 	char	**pp_str_;
 	size_t	size;
@@ -63,6 +63,7 @@ int	get_rgb(char **pp_str, size_t idx, t_obj_descr *p_obj_descr, int idx_rgb)
 	size = ft_parrsize((void **) pp_str_);
 	if (size != COLOR_SIZE)
 		return (ft_parrclear((void **)pp_str_), FALSE);
+	p_obj_descr->color.rgba[3] = 255;
 	while (size--)
 	{
 		if (!is_i_number(pp_str_[size]))
@@ -70,8 +71,7 @@ int	get_rgb(char **pp_str, size_t idx, t_obj_descr *p_obj_descr, int idx_rgb)
 		i = ft_atoi(pp_str_[size]);
 		if (i < 0 || i > 255)
 			return (ft_parrclear((void **)pp_str_), FALSE);
-		p_obj_descr->color.abgr[idx_rgb] = i;
-		idx_rgb--;
+		p_obj_descr->color.rgba[size] = i;
 	}
 	return (ft_parrclear((void **)pp_str_), TRUE);
 }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 21:32:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:42:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,7 @@ t_obj_descr	*par_create_cylinder(t_list **pp_line_list,
 // parser04.c
 int			is_f_number(char *str);
 int			is_i_number(char *str);
-int			get_rgb(char **pp_str, size_t idx,
-				t_obj_descr *p_obj_descr, int idx_rgb);
+int			get_rgb(char **pp_str, size_t idx, t_obj_descr *p_obj_descr);
 int			get_coord(char **pp_str, size_t idx, t_obj_descr *p_obj_descr);
 int			get_vector(char **pp_str, size_t idx, t_obj_descr *p_obj_descr);
 

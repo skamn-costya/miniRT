@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 15:16:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:49:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,24 @@
 # define COLOR_SIZE 3
 
 // Indexes of color in colot structure
-# define A 0
-# define B 1
-# define G 2
-# define R 3
+# define R 0
+# define G 1
+# define B 2
+# define A 3
 
 // Indexes of coordinate in xyz structure
 # define X 0
 # define Y 1
 # define Z 2
+
+// FLAGS
+# define CHANGE 0x00000001
+# define RORATE_XYZ 0x00000010
+# define RORATE_X 0x00000100
+# define RORATE_Y 0x00001000
+# define RORATE_Z 0x00010000
+# define CHANGE_CENTER 0x00010000
+
 
 // Data type for colors, 32 bites: 8 - alfa, 8 - blue, 8 - green, 8 - red
 typedef struct s_color
@@ -50,12 +59,12 @@ typedef struct s_color
 	{
 		struct
 		{
-			uint8_t	a;
-			uint8_t	b;
-			uint8_t	g;
 			uint8_t	r;
+			uint8_t	g;
+			uint8_t	b;
+			uint8_t	a;			
 		};
-		uint8_t		abgr[4];
+		uint8_t		rgba[4];
 		uint32_t	mlx_color;
 	};
 }	t_color;
@@ -152,11 +161,31 @@ typedef struct s_basis
 	{
 		struct
 		{
-			t_vector3	x_;
-			t_vector3	y_;
-			t_vector3	z_;
+			t_vector3	i;
+			t_vector3	j;
+			t_vector3	k;
 		};
-		t_vector3	x_y_z_[3];
+		t_vector3	ijk[3];
+	};
+	union
+	{
+		struct
+		{
+			t_vector3	w_i;
+			t_vector3	w_j;
+			t_vector3	w_k;
+		};
+		t_vector3	w_ijk[3];
+	};
+	union
+	{
+		struct
+		{
+			t_vector3	c_i;
+			t_vector3	c_j;
+			t_vector3	c_k;
+		};
+		t_vector3	c_ijk[3];
 	};
 	uint8_t		set;
 	t_vector3	o;
@@ -316,12 +345,16 @@ typedef struct s_triangle
 
 typedef struct s_object
 {
+	uint8_t		flags;
 	t_vector3 	center;
-	float	 	radius;
+	t_color		color;
+	float	 	size1;
+	float	 	size2;
 	t_vector3	angle;
 	t_vector3 	c_center;
 	t_basis		basis;
 	t_triangle	axis;
+	t_triangle	box[12];
 	t_matrix4 	w_vm;
 	t_triangle	**pp_otri;
 	uint32_t	size_otri;

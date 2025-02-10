@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/08 22:25:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/10 11:39:04 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,27 +19,27 @@
 static void	ksx_draw_axis_(t_object *p_object,
 				t_camera *p_camera, t_vector4 *p_v4);
 
-void	ksx_draw_axis(t_object *p_obj, mlx_image_t *p_img, t_camera *p_cam)
+void	ksx_draw_axis(t_object *p_object, mlx_image_t *p_img, t_camera *p_cam)
 {
 	t_pixel		pixel[2];
 	t_vector4	v4[4];
 
-	ksx_draw_axis_(p_obj, p_cam, v4);
-	pixel[0].x = roundf(v4[0].x) + WIDTH / 2.f;
-	pixel[0].y = roundf(v4[0].y) + HEIGHT / 2.f;
+	ksx_draw_axis_(p_object, p_cam, v4);
+	pixel[0].x = roundf(v4[0].x) + WIDTH * .5f;
+	pixel[0].y = roundf(v4[0].y) + HEIGHT * .5f;
 	pixel[0].color.mlx_color = 0xff0000ff;
-	pixel[1].x = roundf(v4[1].x) + WIDTH / 2.f;
-	pixel[1].y = roundf(v4[1].y) + HEIGHT / 2.f;
+	pixel[1].x = roundf(v4[1].x) + WIDTH * .5f;
+	pixel[1].y = roundf(v4[1].y) + HEIGHT * .5f;
 	pixel[1].color.mlx_color = pixel[0].color.mlx_color;
 	ksx_line(p_img, pixel[0], pixel[1]);
 	pixel[0].color.mlx_color = 0xff00ff00;
-	pixel[1].x = roundf(v4[2].x) + WIDTH / 2.f;
-	pixel[1].y = roundf(v4[2].y) + HEIGHT / 2.f;
+	pixel[1].x = roundf(v4[2].x) + WIDTH * .5f;
+	pixel[1].y = roundf(v4[2].y) + HEIGHT * .5f;
 	pixel[1].color.mlx_color = pixel[0].color.mlx_color;
 	ksx_line(p_img, pixel[0], pixel[1]);
 	pixel[0].color.mlx_color = 0xffff0000;
-	pixel[1].x = roundf(v4[3].x) + WIDTH / 2.f;
-	pixel[1].y = roundf(v4[3].y) + HEIGHT / 2.f;
+	pixel[1].x = roundf(v4[3].x) + WIDTH * .5f;
+	pixel[1].y = roundf(v4[3].y) + HEIGHT * .5f;
 	pixel[1].color.mlx_color = pixel[0].color.mlx_color;
 	ksx_line(p_img, pixel[0], pixel[1]);
 	(void) p_img;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 10:32:51 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/10 13:24:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
+#include "ksx_basis.h"
 #include "ksx_vec3_math.h"
 #include "ksx_m4_math.h"
 #include "ksx_3D.h"
@@ -53,7 +54,7 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 
 	camera.center = center;
 	camera.norm = norm;
-	camera.basis = ksx_get_basis(norm, center);
+	camera.basis = ksx_get_basis(&norm, &camera.center);
 	ksx_create_vm(&camera.vm, &camera.basis);
 	camera.fov = fov;
 	camera.right = WIDTH * .5f;

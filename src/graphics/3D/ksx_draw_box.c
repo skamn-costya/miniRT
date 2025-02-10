@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_utils05.c                                      :+:      :+:    :+:   */
+/*   ksx_draw_box.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 10:43:27 by ksorokol         ###   ########.fr       */
+/*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/02/10 11:45:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
-#include "ksx_utils.h"
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+#include "ksx_vec3_math.h"
+#include "ksx_m4_math.h"
+#include "ksx_3D.h"
 
-void	ksx_tri_set_points(t_triangle *p_tri, t_vector3 *p_p1,
-		t_vector3 *p_p2, t_vector3 *p_p3)
+void	ksx_draw_box(t_object *p_object, mlx_image_t *p_img, t_camera *p_cam)
 {
-	p_tri->p1 = *p_p1;
-	p_tri->p2 = *p_p2;
-	p_tri->p3 = *p_p3;
-}
+	uint32_t	idx;
 
-void	ksx_tri_set_norms(t_triangle *p_tri, t_vector3 *p_n1,
-		t_vector3 *p_n2, t_vector3 *p_n3)
-{
-	p_tri->norm1 = *p_n1;
-	p_tri->norm2 = *p_n2;
-	p_tri->norm3 = *p_n3;
+	idx = 0;
+	while (idx < 12)
+	{
+		p_object->box[idx].color.mlx_color = BOX_COLOR;
+		ksx_draw_tri(&p_object->box[idx], p_img, p_cam);
+		idx++;
+	}
 }

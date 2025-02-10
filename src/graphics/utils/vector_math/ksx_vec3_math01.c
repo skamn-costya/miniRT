@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 15:53:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/10 09:25:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,51 +26,52 @@
 /**
  * @brief returns a vector as addition of v1 and v2
  *
- * @param v1 The first vecot
- * @param v2 The second vecot
+ * @param p_v1 pointer to the first vecot
+ * @param p_v2 pointer to the second vecot
  */
-t_vector3	ksx_vec3_add(const t_vector3 v1, const t_vector3 v2)
+t_vector3	ksx_vec3_add(const t_vector3 *p_v1, const t_vector3 *p_v2)
 {
 	t_vector3	result;
 
-	result.x = v1.x + v2.x;
-	result.y = v1.y + v2.y;
-	result.z = v1.z + v2.z;
+	result.x = p_v1->x + p_v2->x;
+	result.y = p_v1->y + p_v2->y;
+	result.z = p_v1->z + p_v2->z;
 	return (result);
 }
 
 /**
  * @brief returns a vector as subtraction of v1 and v2
  *
- * @param v1 The first vecot
- * @param v2 The second vecot
+ * @param p_v1 pointer to the first vecot
+ * @param p_v2 pointer to the second vecot
  */
-t_vector3	ksx_vec3_sub(const t_vector3 v1, const t_vector3 v2)
+t_vector3	ksx_vec3_sub(const t_vector3 *p_v1, const t_vector3 *p_v2)
 {
 	t_vector3	result;
 
-	result.x = v1.x - v2.x;
-	result.y = v1.y - v2.y;
-	result.z = v1.z - v2.z;
+	result.x = p_v1->x - p_v2->x;
+	result.y = p_v1->y - p_v2->y;
+	result.z = p_v1->z - p_v2->z;
 	return (result);
 }
 
-float	ksx_vec3_angle(const t_vector3 v1, const t_vector3 v2)
+float	ksx_vec3_angle(const t_vector3 *p_v1, const t_vector3 *p_v2)
 {
 	float	result;
 
-	result = acosf(((v1.x * v2.x) + (v1.y * v2.y) + (v1.z * v2.z))
-			/ (ksx_vec3_mag(v1) * ksx_vec3_mag(v2)));
+	result = acosf(((p_v1->x * p_v2->x) + (p_v1->y * p_v2->y)
+				+ (p_v1->z * p_v2->z))
+			/ (ksx_vec3_mag(p_v1) * ksx_vec3_mag(p_v2)));
 	return (result);
 }
 
-t_vector3	ksx_vec3_cross(const t_vector3 v1, const t_vector3 v2)
+t_vector3	ksx_vec3_cross(const t_vector3 *p_v1, const t_vector3 *p_v2)
 {
 	t_vector3	result;
 
-	result.x = v1.y * v2.z - v1.z * v2.y;
-	result.y = v1.z * v2.x - v1.x * v2.z;
-	result.z = v1.x * v2.y - v1.y * v2.x;
+	result.x = p_v1->y * p_v2->z - p_v1->z * p_v2->y;
+	result.y = p_v1->z * p_v2->x - p_v1->x * p_v2->z;
+	result.z = p_v1->x * p_v2->y - p_v1->y * p_v2->x;
 	return (result);
 }
 
@@ -79,11 +80,11 @@ t_vector3	ksx_vec3_cross(const t_vector3 v1, const t_vector3 v2)
  * 
  * @param v1 The vecot
   */
-float	ksx_vec3_mag(const t_vector3 v)
+float	ksx_vec3_mag(const t_vector3 *p_v)
 {
 	float	result;
 
-	result = sqrtf(powf(v.x, 2.f) + powf(v.y, 2.f)
-			+ powf(v.z, 2.f));
+	result = sqrtf(powf(p_v->x, 2.f) + powf(p_v->y, 2.f)
+			+ powf(p_v->z, 2.f));
 	return (result);
 }
