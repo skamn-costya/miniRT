@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 09:27:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:53:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int32_t	ksx_point_on_ray(const t_vector3 *p_p, const t_vector3 *p_v)
 // 	return (result);
 // }
 
-void	ksx_translate_tri(t_triangle *p_tri, const t_vector3 *p_v)
-{
-	p_tri->w_p1 = ksx_vec3_add(&p_tri->p1, p_v);
-	p_tri->w_p2 = ksx_vec3_add(&p_tri->p2, p_v);
-	p_tri->w_p3 = ksx_vec3_add(&p_tri->p3, p_v);
-}
+// void	ksx_translate_tri(t_triangle *p_tri, const t_vector3 *p_v)
+// {
+// 	p_tri->w_p1 = ksx_vec3_add(&p_tri->p1, p_v);
+// 	p_tri->w_p2 = ksx_vec3_add(&p_tri->p2, p_v);
+// 	p_tri->w_p3 = ksx_vec3_add(&p_tri->p3, p_v);
+// }

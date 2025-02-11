@@ -1,77 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_rotation01.c                                   :+:      :+:    :+:   */
+/*   ksx_rotation.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 01:53:49 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:43:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
 #include "ksx_m3_math.h"
-#include "ksx_rotation.h"
+#include "ksx_object.h"
 #include <math.h>
-
-void	ksx_rotation_x(t_vector3 *point, float angle)
-{
-	// t_matrix3	m3;
-	float		r;
-
-	if (angle == 0)
-		return ;
-	r = (angle * PI) / 180.f;
-	point->y = (point->y * cosf(r)) - (point->z * sinf(r));
-	point->z = (point->y * sinf(r)) + (point->z * cosf(r));
-	// ksx_m3_reset(&m3);
-	// m3.e_11 = 1;
-	// m3.e_22 = cosf(r);
-	// m3.e_23 = -sinf(r);
-	// m3.e_32 = sinf(r);
-	// m3.e_33 = cosf(r);
-	// *point = ksx_m3_vec3(&m3, point);
-}
-
-void	ksx_rotation_y(t_vector3 *point, float angle)
-{
-	// t_matrix3	m3;
-	float		r;
-
-	if (angle == 0)
-		return ;
-	r = (angle * PI) / 180.f;
-	point->x = (point->x * cosf(r)) + (point->z * sinf(r));
-	point->z = - (point->x * sinf(r)) + (point->z * cosf(r));
-	// ksx_m3_reset(&m3);
-	// m3.e_11 = cosf(r);
-	// m3.e_13 = sinf(r);
-	// m3.e_22 = 1;
-	// m3.e_13 = -sinf(r);
-	// m3.e_33 = cosf(r);
-	// *point = ksx_m3_vec3(&m3, point);
-}
-
-void	ksx_rotation_z(t_vector3 *point, float angle)
-{
-	// t_matrix3	m3;
-	float		r;
-
-	if (angle == 0)
-		return ;
-	r = (angle * PI) / 180.f;
-	point->x = (point->x * cosf(r)) - (point->y * sinf(r));
-	point->y = (point->x * sinf(r)) + (point->y * cosf(r));
-	// ksx_m3_reset(&m3);
-	// m3.e_11 = cosf(r);
-	// m3.e_12 = -sinf(r);
-	// m3.e_21 = sinf(r);
-	// m3.e_22 = cosf(r);
-	// m3.e_33 = 1;
-	// *point = ksx_m3_vec3(&m3, point);
-}
 
 void	ksx_rotation(t_vector3 *point, float angle_x,
 		float angle_y, float angle_z)
@@ -101,12 +44,46 @@ void	ksx_rotation(t_vector3 *point, float angle_x,
 	*point = ksx_m3_vec3(&m3, point);
 }
 
+void	ksx_rotation_tri(t_triangle *p_tri, float angle_x,
+	float angle_y, float angle_z)
+{
+	ksx_rotation(&p_tri->p1, angle_x, angle_y, angle_z);
+	ksx_rotation(&p_tri->p2, angle_x, angle_y, angle_z);
+	ksx_rotation(&p_tri->p3, angle_x, angle_y, angle_z);
+}
+
+void	ksx_rotation_obj(t_object *p_object, float angle_x,
+	float angle_y, float angle_z)
+{
+	uint32_t	idx;
+
+	if (angle_x == 0 && angle_y == 0 && angle_z == 0)
+		return ;
+	p_object->angle.x += angle_x;
+	p_object->angle.y += angle_y;
+	p_object->angle.z += angle_z;
+	ksx_angle_check(&p_object->angle.x);
+	ksx_angle_check(&p_object->angle.y);
+	ksx_angle_check(&p_object->angle.z);
+	idx = 0;
+	while (idx < p_object->size_otri)
+	{
+		ksx_rotation_tri(p_object->pp_otri[idx], angle_x, angle_y, angle_z);
+		idx++;
+	}
+	ksx_rotation_tri(&p_object->axis, angle_x, angle_y, angle_z);
+	idx = 0;
+	while (idx < 12)
+	{
+		ksx_rotation_tri(&p_object->box[idx], angle_x, angle_y, angle_z);
+		idx++;
+	}
+}
+
 void	ksx_angle_check(float *angle)
 {
-	if (*angle == 0 || fmodf(*angle, 360.f) < PRECISION)
+	if (*angle == 0)
 		return ;
 	if (*angle > 360.f)
 		*angle = fmodf(*angle, 360.f);
-	if (fmodf(*angle, 360.f) < PRECISION)
-		*angle = 0;
 }

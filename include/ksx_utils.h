@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 10:44:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:52:56 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ uint32_t	ksx_count_pointers(void **pointers);
 void		ksx_free_pointers(void **pointers);
 int32_t		ksx_point_on_ray(const t_vector3 *p_p, const t_vector3 *p_v);
 // t_vector3	ksx_translate_vec3(t_vector3 v1, const t_vector3 v2);
-void		ksx_translate_tri(t_triangle *p_tri, const t_vector3 *p_v);
+// void		ksx_translate_tri(t_triangle *p_tri, const t_vector3 *p_v);
 
 // ksx_utils09.c
 t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_object *p_object);

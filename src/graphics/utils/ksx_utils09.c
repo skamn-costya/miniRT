@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 14:01:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:12:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "ksx_basis.h"
 #include "ksx_vec3_math.h"
 #include "ksx_3D.h"
-#include "ksx_rotation.h"
+#include "ksx_object.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>

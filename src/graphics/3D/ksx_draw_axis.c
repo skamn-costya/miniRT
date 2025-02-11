@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 11:39:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 12:05:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,12 @@ static void	ksx_draw_axis_(t_object *p_object,
 				t_camera *p_camera, t_vector4 *p_v4)
 {
 	p_v4[0] = ksx_vec3_vec4(p_object->basis.o, 1);
+	// p_v4[1] = ksx_vec3_vec4(p_object->axis.p1, 1);
+	// p_v4[2] = ksx_vec3_vec4(p_object->axis.p2, 1);
+	// p_v4[3] = ksx_vec3_vec4(p_object->axis.p3, 1);
 	p_v4[1] = ksx_vec3_vec4(p_object->axis.w_p1, 1);
 	p_v4[2] = ksx_vec3_vec4(p_object->axis.w_p2, 1);
 	p_v4[3] = ksx_vec3_vec4(p_object->axis.w_p3, 1);
-	// p_v4[0] = ksx_m4_vec4(p_cam->vm, p_v4[0]);
-	// p_v4[1] = ksx_m4_vec4(p_cam->vm, p_v4[1]);
-	// p_v4[2] = ksx_m4_vec4(p_cam->vm, p_v4[2]);
-	// p_v4[3] = ksx_m4_vec4(p_cam->vm, p_v4[3]);
 	p_v4[0] = ksx_m4_vec4(&p_camera->pm, &p_v4[0]);
 	p_v4[1] = ksx_m4_vec4(&p_camera->pm, &p_v4[1]);
 	p_v4[2] = ksx_m4_vec4(&p_camera->pm, &p_v4[2]);

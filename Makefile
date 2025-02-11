@@ -35,9 +35,12 @@ MATRIX_MATH_FN =	ksx_m4_math01.c \
 MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 
 3D_DIR = graphics/3D/
-3D_FN = ksx_draw_axis.c \
+3D_FN = ksx_draw_obj.c \
+		ksx_draw_axis.c \
 		ksx_draw_box.c \
+		ksx_draw_tris.c \
 		ksx_draw_tri.c
+
 3D = $(addprefix $(3D_DIR), $(3D_FN))
 
 BASIS_DIR = graphics/basis/
@@ -46,11 +49,10 @@ BASIS_FN =	ksx_basis.c \
 BASIS = $(addprefix $(BASIS_DIR), $(BASIS_FN))
 
 # Rotatin pints, vectors, triangles, matrixes (view, proection)
-ROTATION_DIR = graphics/rotation/
-ROTATION_FN =	ksx_rotation01.c \
-				ksx_rotation02.c \
-				ksx_rotation03.c
-ROTATION = $(addprefix $(ROTATION_DIR), $(ROTATION_FN))
+OBJECT_DIR = graphics/object/
+OBJECT_FN =	ksx_rotation.c \
+			ksx_translate.c
+OBJECT = $(addprefix $(OBJECT_DIR), $(OBJECT_FN))
 
 # Camera object
 CAMERA_DIR = graphics/camera/
@@ -92,7 +94,7 @@ SRC = 	$(UTILS) \
 		$(MATRIX_MATH) \
 		$(3D) \
 		$(BASIS) \
-		$(ROTATION) \
+		$(OBJECT) \
 		$(CAMERA) \
 		$(SPHERE) \
 		$(CYLINDER) \
@@ -153,7 +155,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(MATRIX_MATH_DIR)
 	mkdir -p $(OBJ_DIR)$(BASIS_DIR)
 	mkdir -p $(OBJ_DIR)$(3D_DIR)
-	mkdir -p $(OBJ_DIR)$(ROTATION_DIR)
+	mkdir -p $(OBJ_DIR)$(OBJECT_DIR)
 	mkdir -p $(OBJ_DIR)$(CAMERA_DIR)
 	mkdir -p $(OBJ_DIR)$(SPHERE_DIR)
 	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)

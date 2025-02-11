@@ -6,12 +6,12 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 13:40:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 11:12:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
-#include "ksx_rotation.h"
+#include "ksx_object.h"
 #include "ksx_vec3_math.h"
 #include "ksx_m4_math.h"
 #include <math.h>

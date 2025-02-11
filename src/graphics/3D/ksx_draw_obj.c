@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_draw_box.c                                     :+:      :+:    :+:   */
+/*   ksx_draw_obj.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 11:18:32 by ksorokol         ###   ########.fr       */
+/*   Created: 2025/02/11 10:39:02 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/02/11 11:58:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
-#include "ksx_vec3_math.h"
-#include "ksx_m4_math.h"
 #include "ksx_3D.h"
 
-void	ksx_draw_box(t_object *p_object, mlx_image_t *p_img, t_camera *p_cam)
+void	ksx_draw_obj(t_object *p_object, mlx_image_t *p_img, t_camera *p_cam)
 {
-	uint32_t	idx;
-
-	idx = 0;
-	while (idx < 12)
-	{
-		p_object->box[idx].color.mlx_color = BOX_COLOR; // move to create box
-		ksx_draw_tri(&p_object->box[idx], p_img, p_cam, 1);
-		idx++;
-	}
+	ksx_draw_tris (p_object->pp_otri, &p_object->size_otri, p_img, p_cam);
+	ksx_draw_axis (p_object, p_img, p_cam);
+	ksx_draw_box (p_object, p_img, p_cam);
 }
