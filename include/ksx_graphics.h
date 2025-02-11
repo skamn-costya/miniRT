@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 13:32:01 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:26:18 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,17 +142,17 @@ typedef struct s_vector4
 		};
 		float	xyzw[4];
 	};
-	union
-	{
-		struct
-		{
-			float	start_x;
-			float	start_y;
-			float	start_z;
-			float	start_w;
-		};
-		float	start_xyzw[4];
-	};
+	// union
+	// {
+	// 	struct
+	// 	{
+	// 		float	start_x;
+	// 		float	start_y;
+	// 		float	start_z;
+	// 		float	start_w;
+	// 	};
+	// 	float	start_xyzw[4];
+	// };
 }	t_vector4;
 
 typedef struct s_basis

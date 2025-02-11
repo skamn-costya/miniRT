@@ -54,7 +54,8 @@ OBJECT_FN =	ksx_object01.c \
 			ksx_object02.c \
 			ksx_object03.c \
 			ksx_rotation.c \
-			ksx_translate.c
+			ksx_translate.c \
+			ksx_transform.c
 OBJECT = $(addprefix $(OBJECT_DIR), $(OBJECT_FN))
 
 # Camera object

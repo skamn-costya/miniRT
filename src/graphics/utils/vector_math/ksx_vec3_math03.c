@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 13:18:59 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:23:56 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ t_vector3	ksx_vec3_set(float x, float y, float z)
 	return (v);
 }
 
-t_vector4	ksx_vec3_vec4(t_vector3 v, float w)
+t_vector4	ksx_vec3_vec4(const t_vector3 *p_v, float w)
 {
 	t_vector4	v4;
 
-	v4.x = v.x;
-	v4.y = v.y;
-	v4.z = v.z;
+	v4.x = p_v->x;
+	v4.y = p_v->y;
+	v4.z = p_v->z;
 	v4.w = w;
 	return (v4);
 }

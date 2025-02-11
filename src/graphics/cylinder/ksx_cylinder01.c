@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 16:02:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:36:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 	ksx_init_cylinder_box (p_object);
 	// ksx_init_cylinder_tri(p_object);
 	ksx_init_cylinder(p_object);
+	ksx_transform_obj(p_object, &p_object->basis);
 	return (p_object);
 }
 
