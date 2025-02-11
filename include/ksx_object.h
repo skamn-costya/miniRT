@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:30:32 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 20:36:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 20:54:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		ksx_translate_obj(t_object *p_object);
 // ksx_transform.c
 void		ksx_transform(t_vector3 *p_point, t_matrix4 *p_mt,
 				t_vector3 *p_result);
-void	ksx_transform_obj(t_object *p_object, t_basis *p_basis);
+void		ksx_transform_obj(t_object *p_object, t_basis *p_basis);
 void 		ksx_get_tm(t_matrix4 *p_m4, t_basis *p_basis);
 
 #endif	// KSX_OBJECT_H

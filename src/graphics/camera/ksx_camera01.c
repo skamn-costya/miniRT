@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 11:12:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 23:30:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,43 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.center = center;
 	camera.norm = norm;
 	camera.basis = ksx_get_basis(&norm, &camera.center);
-	ksx_create_vm(&camera.vm, &camera.basis);
+	// ksx_create_vm(&camera.vm, &camera.basis);
 	camera.fov = fov;
 	camera.right = WIDTH * .5f;
 	camera.left = - camera.right;
 	camera.top = HEIGHT * .5f;
 	camera.bottom = -camera.top;
 	camera.aspect = 1.f * WIDTH / HEIGHT;
+	ksx_camera_set_vm(&camera.vm, &camera.basis);
 	// camera.vfov = 2.f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
 	return (camera);
+}
+
+void ksx_camera_set_vm(t_matrix4 *p_m4, t_basis *p_basis)
+{
+	ksx_get_tm(p_m4, p_basis);
+}
+
+void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
+{
+	uint32_t	idx;
+
+	idx = 0;
+	while (idx < p_object->size_over)
+	{
+		ksx_transform(&p_object->pp_over[idx]->p_wp, p_vm, &p_object->pp_over[idx]->p_cp);
+		idx++;
+	}
+	ksx_transform(&p_object->center, p_vm, &p_object->c_center);
+	ksx_transform(&p_object->axis.p_ver1->p_wp, p_vm, &p_object->axis.p_ver1->p_cp);
+	ksx_transform(&p_object->axis.p_ver2->p_wp, p_vm, &p_object->axis.p_ver2->p_cp);
+	ksx_transform(&p_object->axis.p_ver3->p_wp, p_vm, &p_object->axis.p_ver3->p_cp);
+	idx = 0;
+	while (idx < 8)
+	{
+		ksx_transform(&p_object->box_ver[idx].p_wp, p_vm, &p_object->box_ver[idx].p_cp);
+		idx++;
+	}	
 }
 
 // void	init_camera(t_camera *p_cam, float near, float far)
@@ -85,7 +113,7 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 // https://www.mauriciopoppe.com
 //  /notes/computer-graphics/viewing/projection-transform/
 
-void	ksx_set_camera_pm(t_camera *p_camera, float fov, float far)
+void	ksx_camera_set_pm(t_camera *p_camera, float fov, float far)
 {
 	if (fov < 1 || fov > 179)
 		return;
@@ -106,7 +134,7 @@ void	ksx_set_camera_pm(t_camera *p_camera, float fov, float far)
 			/ (p_camera->far - p_camera->near));
 }
 
-// void	ksx_set_camera_pm(t_camera *p_camera, float far)
+// void	ksx_camera_set_pm(t_camera *p_camera, float far)
 // {
 // 	ksx_m4_reset(&p_camera->pm);
 // 	p_camera->far = far;

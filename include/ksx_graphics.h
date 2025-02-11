@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 20:26:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 23:39:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,7 @@ typedef struct s_basis
 		};
 		t_vector3	c_ijk[3];
 	};
-	uint8_t		set;
+	// uint8_t		set;
 	t_vector3	o;
 }	t_basis;
 

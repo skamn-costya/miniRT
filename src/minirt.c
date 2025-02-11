@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 11:45:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 22:36:28 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char *argv[])
 		return (ft_lstclear(&p_list, &free_t_obj_descr), EXIT_FAILURE);
 	ksx_init_world(&grph, p_list);
 	ft_lstclear(&p_list, &free_t_obj_descr);
-	ksx_set_camera_pm(&grph.camera, grph.camera.fov, 500.f);
+	ksx_camera_set_pm(&grph.camera, grph.camera.fov, 500.f);
 	ksx_draw(&grph);
 	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
 	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);
@@ -131,9 +131,9 @@ void my_scrollhook(double xdelta, double ydelta, void* param)
 	p_grph = (t_graphics *) param;
 	// Simple up or down detection.
 	if (ydelta > 0)
-		ksx_set_camera_pm(&p_grph->camera, p_grph->camera.fov - 1, 500.f);
+		ksx_camera_set_pm(&p_grph->camera, p_grph->camera.fov - 1, 500.f);
 	else if (ydelta < 0)
-		ksx_set_camera_pm(&p_grph->camera, p_grph->camera.fov + 1, 500.f);
+		ksx_camera_set_pm(&p_grph->camera, p_grph->camera.fov + 1, 500.f);
 	ksx_draw (p_grph);
 	printf ("FOV = %f, near = %f\n", p_grph->camera.fov, p_grph->camera.near);
 
