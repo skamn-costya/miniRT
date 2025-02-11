@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 11:52:56 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:53:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ mlx_image_t	*ksx_create_image(mlx_t *mlx);
 t_vector3	ksx_mid_point(const t_vector3 *p_p1, const t_vector3 *p_p2);
 
 // ksx_utils05.c
-void		ksx_tri_set_points(t_triangle *p_tri, t_vector3 *p_p1,
-				t_vector3 *p_p2, t_vector3 *p_p3);
+void		ksx_tri_set_vertexes(t_triangle *p_tri, t_vertex *p_ver1,
+				t_vertex *p_ver2, t_vertex *p_ver3);
 void		ksx_tri_set_norms(t_triangle *p_tri, t_vector3 *p_n1,
 				t_vector3 *p_n2, t_vector3 *p_n3);
 
@@ -49,7 +49,8 @@ void		ksx_tri_set_norms(t_triangle *p_tri, t_vector3 *p_n1,
 
 // ksx_utils08.c
 uint32_t	ksx_count_pointers(void **pointers);
-void		ksx_free_pointers(void **pointers);
+void		ksx_free_pointers(void ***ppp_mem);
+void		ksx_null_pointers(void **pp_mem, uint32_t size);
 int32_t		ksx_point_on_ray(const t_vector3 *p_p, const t_vector3 *p_v);
 // t_vector3	ksx_translate_vec3(t_vector3 v1, const t_vector3 v2);
 // void		ksx_translate_tri(t_triangle *p_tri, const t_vector3 *p_v);
@@ -58,7 +59,7 @@ int32_t		ksx_point_on_ray(const t_vector3 *p_p, const t_vector3 *p_v);
 t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_object *p_object);
 // t_triangle	**ksx_tris2obj(t_triangle *p_tris[],
 // 				uint32_t size, t_object *p_object);
-t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm);
-t_object	*ksx_create_object(t_vector3 *p_center);
+// t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm);
+// t_object	*ksx_create_object(t_vector3 *p_center);
 
 #endif	// KSX_UTILS_H //

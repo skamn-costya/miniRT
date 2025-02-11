@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 11:43:47 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:41:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,6 @@ void	ksx_rotation(t_vector3 *point, float angle_x,
 	*point = ksx_m3_vec3(&m3, point);
 }
 
-void	ksx_rotation_tri(t_triangle *p_tri, float angle_x,
-	float angle_y, float angle_z)
-{
-	ksx_rotation(&p_tri->p1, angle_x, angle_y, angle_z);
-	ksx_rotation(&p_tri->p2, angle_x, angle_y, angle_z);
-	ksx_rotation(&p_tri->p3, angle_x, angle_y, angle_z);
-}
-
 void	ksx_rotation_obj(t_object *p_object, float angle_x,
 	float angle_y, float angle_z)
 {
@@ -59,23 +51,25 @@ void	ksx_rotation_obj(t_object *p_object, float angle_x,
 
 	if (angle_x == 0 && angle_y == 0 && angle_z == 0)
 		return ;
-	p_object->angle.x += angle_x;
-	p_object->angle.y += angle_y;
-	p_object->angle.z += angle_z;
+	// p_object->angle.x += angle_x;
+	// p_object->angle.y += angle_y;
+	// p_object->angle.z += angle_z;
 	ksx_angle_check(&p_object->angle.x);
 	ksx_angle_check(&p_object->angle.y);
 	ksx_angle_check(&p_object->angle.z);
 	idx = 0;
-	while (idx < p_object->size_otri)
+	while (idx < p_object->size_over)
 	{
-		ksx_rotation_tri(p_object->pp_otri[idx], angle_x, angle_y, angle_z);
+		ksx_rotation(&p_object->pp_over[idx]->p_p, angle_x, angle_y, angle_z);
 		idx++;
 	}
-	ksx_rotation_tri(&p_object->axis, angle_x, angle_y, angle_z);
+	ksx_rotation(&p_object->axis.p_ver1->p_p, angle_x, angle_y, angle_z);
+	ksx_rotation(&p_object->axis.p_ver2->p_p, angle_x, angle_y, angle_z);
+	ksx_rotation(&p_object->axis.p_ver3->p_p, angle_x, angle_y, angle_z);
 	idx = 0;
-	while (idx < 12)
+	while (idx < 8)
 	{
-		ksx_rotation_tri(&p_object->box[idx], angle_x, angle_y, angle_z);
+		ksx_rotation(&p_object->box_ver[idx].p_p, angle_x, angle_y, angle_z);
 		idx++;
 	}
 }

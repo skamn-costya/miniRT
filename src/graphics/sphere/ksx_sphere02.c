@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 17:11:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:52:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // Sphere: "sp", coord, d, rgb
 
 #include "ksx_graphics.h"
+#include "ksx_object.h"
 #include "ksx_utils.h"
 #include "ksx_vec3_math.h"
 #include "ksx_sphere.h"
@@ -25,53 +26,36 @@
 
 void	ksx_sphere_split(t_object *p_object)
 {
-	t_triangle	*p_tris[5];
-	uint32_t	idx[2];
-	t_vector3	v[3];
+	t_triangle	*p_tris;
+	t_vertex	**pp_ver;
+	t_triangle	**pp_tri;
+	uint32_t	idx;
 
-	p_object->last_gen++;
-	idx[0] = 0;
-	idx[1] = p_object->size_otri;
-	while (idx[0] < idx[1])
+	idx = 0;
+	pp_ver = ksx_obj_add_vers(p_object, (p_object->size_otri * 3));
+	pp_tri = ksx_obj_new_tris(p_object->size_otri * 4);
+	while (idx < p_object->size_otri)
 	{
-		p_tris[0] = p_object->pp_otri[idx[0]];
-		if (p_tris[0]->generation == p_object->last_gen - 1)
-		{
-			p_tris[1] = (t_triangle *) malloc (sizeof(t_triangle));
-			p_tris[2] = (t_triangle *) malloc (sizeof(t_triangle));
-			p_tris[3] = (t_triangle *) malloc (sizeof(t_triangle));
-			p_tris[4] = (t_triangle *) malloc (sizeof(t_triangle));
-			if (!p_tris[1] || !p_tris[2] || !p_tris[3] || !p_tris[4])
-			{
-				printf("Error: %s:%d in func: %s\n", __FILE__, __LINE__, __func__);
-				return ;
-			}
-			v[0] = ksx_mid_point(&p_tris[0]->p1, &p_tris[0]->p2);
-			v[1] = ksx_mid_point(&p_tris[0]->p2, &p_tris[0]->p3);
-			v[2] = ksx_mid_point(&p_tris[0]->p3, &p_tris[0]->p1);
-			ksx_vec3_resize(&v[0], p_object->size1);
-			ksx_vec3_resize(&v[1], p_object->size1);
-			ksx_vec3_resize(&v[2], p_object->size1);
-			ksx_tri_set_points (p_tris[1], &p_tris[0]->p1, &v[0], &v[2]);
-			ksx_tri_set_points (p_tris[2], &v[0], &p_tris[0]->p2, &v[1]);
-			ksx_tri_set_points (p_tris[3], &v[1], &p_tris[0]->p3, &v[2]);
-			ksx_tri_set_points (p_tris[4], &v[0], &v[1], &v[2]);
-			p_tris[1]->color = p_object->color;
-			p_tris[2]->color = p_object->color;
-			p_tris[3]->color = p_object->color;
-			p_tris[4]->color = p_object->color;
-			p_tris[1]->generation = p_object->last_gen;
-			p_tris[2]->generation = p_object->last_gen;
-			p_tris[3]->generation = p_object->last_gen;
-			p_tris[4]->generation = p_object->last_gen;
-			ksx_tri2obj (p_tris[1], p_object);
-			ksx_tri2obj (p_tris[2], p_object);
-			ksx_tri2obj (p_tris[3], p_object);
-			ksx_tri2obj (p_tris[4], p_object);
-			// ksx_sphere_split_(p_object, p_radius, p_tris, v);
-		}
-		idx[0]++;
+		p_tris = p_object->pp_otri[idx];
+		pp_ver[idx * 3]->p_p = ksx_mid_point(&p_tris->p_ver1->p_p, &p_tris->p_ver2->p_p);
+		pp_ver[idx * 3 + 1]->p_p = ksx_mid_point(&p_tris->p_ver2->p_p, &p_tris->p_ver3->p_p);
+		pp_ver[idx * 3 + 2]->p_p = ksx_mid_point(&p_tris->p_ver3->p_p, &p_tris->p_ver1->p_p);
+		ksx_vec3_resize(&pp_ver[idx * 3]->p_p, p_object->size1);
+		ksx_vec3_resize(&pp_ver[idx * 3 + 1]->p_p, p_object->size1);
+		ksx_vec3_resize(&pp_ver[idx * 3 + 2]->p_p, p_object->size1);
+		ksx_tri_set_vertexes (pp_tri[idx * 4], p_tris->p_ver1, pp_ver[idx * 3], pp_ver[idx * 3 + 2]);
+		ksx_tri_set_vertexes (pp_tri[idx * 4 + 1], pp_ver[idx * 3], p_tris->p_ver2, pp_ver[idx * 3 + 1]);
+		ksx_tri_set_vertexes (pp_tri[idx * 4 + 2], pp_ver[idx * 3 + 1], p_tris->p_ver3, pp_ver[idx * 3 + 2]);
+		ksx_tri_set_vertexes (pp_tri[idx * 4 + 3], pp_ver[idx * 3], pp_ver[idx * 3 + 1], pp_ver[idx * 3 + 2]);
+		pp_tri[idx * 4]->color = p_object->color;
+		pp_tri[idx * 4 + 1]->color = p_object->color;
+		pp_tri[idx * 4 + 2]->color = p_object->color;
+		pp_tri[idx * 4 + 3]->color = p_object->color;
+		idx++;
 	}
+	ksx_free_pointers((void ***) &p_object->pp_otri);
+	p_object->pp_otri = pp_tri;
+	p_object->size_otri *= 4;
 }
 
 // static void	ksx_sphere_split_(t_object *p_object, float *p_radius,

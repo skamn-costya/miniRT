@@ -50,7 +50,10 @@ BASIS = $(addprefix $(BASIS_DIR), $(BASIS_FN))
 
 # Rotatin pints, vectors, triangles, matrixes (view, proection)
 OBJECT_DIR = graphics/object/
-OBJECT_FN =	ksx_rotation.c \
+OBJECT_FN =	ksx_object01.c \
+			ksx_object02.c \
+			ksx_object03.c \
+			ksx_rotation.c \
 			ksx_translate.c
 OBJECT = $(addprefix $(OBJECT_DIR), $(OBJECT_FN))
 

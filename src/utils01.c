@@ -6,8 +6,10 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 12:38:54 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/01/28 21:40:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:44:45 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
+#include "ksx_graphics.h"
+#include <stdio.h>

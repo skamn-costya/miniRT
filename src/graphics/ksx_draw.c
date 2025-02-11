@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 11:57:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 17:37:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	ksx_draw(t_graphics *p_grph)
 		ksx_rotation_obj(p_object, p_object->angle.x, p_object->angle.y, p_object->angle.z);
 		ksx_translate_obj (p_object);
 		ksx_draw_obj(p_object, p_img, &p_grph->camera);
+		ksx_draw_axis (p_object, p_img, &p_grph->camera);
+		ksx_draw_box (p_object, p_img, &p_grph->camera);
 		idx++;
 	}
 	mlx_delete_image(p_grph->mlx, p_grph->img);

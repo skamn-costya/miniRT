@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 11:53:35 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 16:18:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,32 @@ uint32_t	ksx_count_pointers(void **pointers)
 	return (idx);
 }
 
-void	ksx_free_pointers(void **pointers)
+void	ksx_free_pointers(void ***ppp_mem)
 {
 	uint32_t	idx;
 
-	if (!pointers)
+	if (!ppp_mem || !*ppp_mem)
 		return ;
 	idx = 0;
-	while (pointers[idx])
+	while ((*ppp_mem)[idx])
 	{
-		free (pointers[idx]);
+		free ((*ppp_mem)[idx]);
 		idx++;
 	}
-	free (pointers);
+	free (*ppp_mem);
+	*ppp_mem = NULL;
+}
+
+void	ksx_null_pointers(void **pp_mem, uint32_t size)
+{
+	uint32_t	idx;
+
+	idx = 0;
+	while (idx < size)
+	{
+		pp_mem[idx] = NULL;
+		idx++;
+	}
 }
 
 // function is_point_on_ray in debug ...

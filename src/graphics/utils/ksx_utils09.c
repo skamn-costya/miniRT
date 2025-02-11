@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 11:12:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:38:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,56 +80,33 @@ t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_object *p_object)
 
 // set three point for calculate a transformation matrix
 // (1,1,1)(-1,-1,-1)(2,-3,4)
-t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm)
-{
-	t_triangle	tps;
+// t_triangle	ksx_init_tps(const t_vector3 center, const t_vector3 norm)
+// {
+// 	t_triangle	tps;
 
-	(void) norm;
-	tps.p1.x = center.x + 1;
-	tps.p1.y = center.y + 1;
-	tps.p1.z = center.z + 1;
-	tps.p2.x = center.x - 1;
-	tps.p2.y = center.y - 1;
-	tps.p2.z = center.z - 1;
-	tps.p3.x = center.x + 2;
-	tps.p3.y = center.y - 3;
-	tps.p3.z = center.z + 4;
-	tps.w_p1.x = center.x + 1;
-	tps.w_p1.y = center.y + 1;
-	tps.w_p1.z = center.z + 1;
-	tps.w_p2.x = center.x - 1;
-	tps.w_p2.y = center.y - 1;
-	tps.w_p2.z = center.z - 1;
-	tps.w_p3.x = center.x + 2;
-	tps.w_p3.y = center.y - 3;
-	tps.w_p3.z = center.z + 4;
-	return (tps);
-}
+// 	(void) norm;
+// 	tps.p1.x = center.x + 1;
+// 	tps.p1.y = center.y + 1;
+// 	tps.p1.z = center.z + 1;
+// 	tps.p2.x = center.x - 1;
+// 	tps.p2.y = center.y - 1;
+// 	tps.p2.z = center.z - 1;
+// 	tps.p3.x = center.x + 2;
+// 	tps.p3.y = center.y - 3;
+// 	tps.p3.z = center.z + 4;
+// 	tps.w_p1.x = center.x + 1;
+// 	tps.w_p1.y = center.y + 1;
+// 	tps.w_p1.z = center.z + 1;
+// 	tps.w_p2.x = center.x - 1;
+// 	tps.w_p2.y = center.y - 1;
+// 	tps.w_p2.z = center.z - 1;
+// 	tps.w_p3.x = center.x + 2;
+// 	tps.w_p3.y = center.y - 3;
+// 	tps.w_p3.z = center.z + 4;
+// 	return (tps);
+// }
 
-t_object	*ksx_create_object(t_vector3 *p_center)
-{
-	t_object	*p_object;
-	t_vector3	v;
 
-	p_object = (t_object *) malloc (sizeof(t_object));
-	if (!p_object)
-		return (printf("Error: memory allocation failed!\n"), NULL);
-	p_object->flags = 0x00000000;
-	p_object->center = *p_center;
-	p_object->angle.x = 0;
-	p_object->angle.y = 0;
-	p_object->angle.z = 0;
-	p_object->c_center = p_object->center;
-	p_object->pp_otri = NULL;
-	p_object->size_otri = 0;
-	p_object->last_gen = 0;
-	v = ksx_vec3_set(0, 0, 0);
-	p_object->basis = ksx_get_basis(&v, &p_object->center);
-	p_object->axis.p1 = ksx_vec3_set(AXIS_LEN, 0, 0);
-	p_object->axis.p2 = ksx_vec3_set(0, AXIS_LEN, 0);
-	p_object->axis.p3 = ksx_vec3_set(0, 0, AXIS_LEN);
-	return (p_object);
-}
 
 // t_triangle	*set_triangel_points(t_triangle *p_triangle,
 // t_point p1, t_point p2, t_point p3)

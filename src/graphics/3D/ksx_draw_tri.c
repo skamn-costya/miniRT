@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 10:26:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:20:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,18 @@ void	ksx_draw_tri(t_triangle *p_tri, mlx_image_t *p_img,
 	pixel[0].color.mlx_color = p_tri->color.mlx_color;
 	pixel[1].color.mlx_color = p_tri->color.mlx_color;
 	pixel[2].color.mlx_color = p_tri->color.mlx_color;
-	// vec4 = ksx_vec3_vec4(p_tri->c_p1, 1);
-	vec4 = ksx_vec3_vec4(p_tri->w_p1, 1);
+	// vec4 = ksx_vec3_vec4(p_tri->p_ver1->p_cp, 1);
+	vec4 = ksx_vec3_vec4(p_tri->p_ver1->p_wp, 1);
 	vec4 = ksx_m4_vec4(&p_cam->pm, &vec4);
 	pixel[0].x = round(vec4.x) + WIDTH * .5f;
 	pixel[0].y = round(vec4.y) + HEIGHT * .5f;
-	// vec4 = ksx_vec3_vec4(p_tri->c_p2, 1);
-	vec4 = ksx_vec3_vec4(p_tri->w_p2, 1);
+	// vec4 = ksx_vec3_vec4(p_tri->p_ver2->p_cp, 1);
+	vec4 = ksx_vec3_vec4(p_tri->p_ver2->p_wp, 1);
 	vec4 = ksx_m4_vec4(&p_cam->pm, &vec4);
 	pixel[1].x = round(vec4.x) + WIDTH * .5f;
 	pixel[1].y = round(vec4.y) + HEIGHT * .5f;
-	// vec4 = ksx_vec3_vec4(p_tri->c_p3, 1);
-	vec4 = ksx_vec3_vec4(p_tri->w_p3, 1);
+	// vec4 = ksx_vec3_vec4(p_tri->p_ver3->p_cp, 1);
+	vec4 = ksx_vec3_vec4(p_tri->p_ver3->p_wp, 1);
 	vec4 = ksx_m4_vec4(&p_cam->pm, &vec4);
 	pixel[2].x = round(vec4.x) + WIDTH * .5f;
 	pixel[2].y = round(vec4.y) + HEIGHT * .5f;

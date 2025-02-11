@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 17:49:35 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:32:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,16 +117,16 @@ typedef struct s_vector3
 		};
 		float	xyz[3];
 	};
-	union
-	{
-		struct
-		{
-			float	start_x;
-			float	start_y;
-			float	start_z;
-		};
-		float	start_xyz[3];
-	};
+	// union
+	// {
+	// 	struct
+	// 	{
+	// 		float	start_x;
+	// 		float	start_y;
+	// 		float	start_z;
+	// 	};
+	// 	float	start_xyz[3];
+	// };
 }	t_vector3;
 
 typedef struct s_vector4
@@ -297,37 +297,24 @@ typedef struct s_camera
 	};
 }	t_camera;
 
+typedef struct s_vertex
+{
+	t_vector3	p_p;
+	t_vector3	p_wp;
+	t_vector3	p_cp;
+}	t_vertex;
+
 typedef struct s_triangle
 {
 	union
 	{
 		struct
 		{
-			t_vector3	p1;
-			t_vector3	p2;
-			t_vector3	p3;
+			t_vertex	*p_ver1;
+			t_vertex	*p_ver2;
+			t_vertex	*p_ver3;
 		};
-		t_vector3	points[3];
-	};
-	union
-	{
-		struct
-		{
-			t_vector3	w_p1;
-			t_vector3	w_p2;
-			t_vector3	w_p3;
-		};
-		t_vector3	w_points[3];
-	};
-	union
-	{
-		struct
-		{
-			t_vector3	c_p1;
-			t_vector3	c_p2;
-			t_vector3	c_p3;
-		};
-		t_vector3	c_points[3];
+		t_vertex	*p_ver[3];
 	};
 	union
 	{
@@ -339,8 +326,9 @@ typedef struct s_triangle
 		};
 		t_vector3	norms[3];
 	};
+	t_vector3	norm;
 	t_color		color;
-	uint32_t	generation;
+	// uint32_t	generation;
 }	t_triangle;
 
 typedef struct s_object
@@ -353,12 +341,16 @@ typedef struct s_object
 	t_vector3	angle;
 	t_vector3 	c_center;
 	t_basis		basis;
+	t_vertex	axis_ver[3];
 	t_triangle	axis;
+	t_vertex	box_ver[8];
 	t_triangle	box[12];
-	t_matrix4 	w_vm;
+	// t_matrix4 	w_vm;
+	t_vertex	**pp_over;
+	uint32_t	size_over;
 	t_triangle	**pp_otri;
 	uint32_t	size_otri;
-	uint32_t	last_gen;
+	// uint32_t	last_gen;
 }	t_object;
 
 typedef struct s_world

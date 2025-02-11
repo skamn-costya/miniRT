@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/07 12:21:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/11 13:18:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ t_vector3	ksx_vec3_set(float x, float y, float z)
 {
 	t_vector3	v;
 
-	v.start_x = 0;
-	v.start_y = 0;
-	v.start_z = 0;
+	// v.start_x = 0;
+	// v.start_y = 0;
+	// v.start_z = 0;
 	v.x = x;
 	v.y = y;
 	v.z = z;
