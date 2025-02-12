@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 12:09:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:50:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	main(int argc, char *argv[])
 	if (!ksx_init_grph(&grph))
 		return (ft_lstclear(&p_list, &free_t_obj_descr), EXIT_FAILURE);
 	ksx_init_world(&grph, p_list);
+	grph.obj_idx = 0;
 	ft_lstclear(&p_list, &free_t_obj_descr);
 	ksx_camera_set_pm(&grph.camera, grph.camera.fov, 500.f);
 	ksx_draw(&grph);
@@ -87,7 +88,7 @@ static void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 					p_obj_descr->d, p_obj_descr->color);
 		if (p_obj_descr->id == CYLINDER)
 		{
-			f[0] = p_obj_descr->d;
+			f[p_grph->obj_idx] = p_obj_descr->d;
 			f[1] = p_obj_descr->h;
 			p_object = ksx_create_cylinder(p_obj_descr->coord,
 					p_obj_descr->norm, f, p_obj_descr->color);
@@ -107,21 +108,27 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	// If we PRESS the 'J' key, print "Hello".
 	// if (keydata.key == MLX_KEY_J && keydata.action == MLX_PRESS)
 	if (keydata.key == MLX_KEY_KP_4)
-		p_grph->world.pp_wobj[0]->angle.y = ANGLE;
+		p_grph->world.pp_wobj[p_grph->obj_idx]->angle.y = ANGLE;
 	if (keydata.key == MLX_KEY_KP_6)
-		p_grph->world.pp_wobj[0]->angle.y = -ANGLE;
+		p_grph->world.pp_wobj[p_grph->obj_idx]->angle.y = -ANGLE;
 	if (keydata.key == MLX_KEY_KP_8)
-		p_grph->world.pp_wobj[0]->angle.x = ANGLE;
+		p_grph->world.pp_wobj[p_grph->obj_idx]->angle.x = ANGLE;
 	if (keydata.key == MLX_KEY_KP_2)
-		p_grph->world.pp_wobj[0]->angle.x = -ANGLE;
+		p_grph->world.pp_wobj[p_grph->obj_idx]->angle.x = -ANGLE;
 	if (keydata.key == MLX_KEY_KP_9)
-		p_grph->world.pp_wobj[0]->angle.z = ANGLE;
+		p_grph->world.pp_wobj[p_grph->obj_idx]->angle.z = ANGLE;
 	if (keydata.key == MLX_KEY_KP_1)
-		p_grph->world.pp_wobj[0]->angle.z = -ANGLE;
+		p_grph->world.pp_wobj[p_grph->obj_idx]->angle.z = -ANGLE;
+	if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_RELEASE)
+	{
+		p_grph->obj_idx++;
+		if (p_grph->obj_idx >= p_grph->world.size_wobj)
+			p_grph->obj_idx = 0;
+	}
 	ksx_draw (p_grph);
-	p_grph->world.pp_wobj[0]->angle.x = 0;
-	p_grph->world.pp_wobj[0]->angle.y = 0;
-	p_grph->world.pp_wobj[0]->angle.z = 0;
+	p_grph->world.pp_wobj[p_grph->obj_idx]->angle.x = 0;
+	p_grph->world.pp_wobj[p_grph->obj_idx]->angle.y = 0;
+	p_grph->world.pp_wobj[p_grph->obj_idx]->angle.z = 0;
 }
 
 void my_scrollhook(double xdelta, double ydelta, void* param)

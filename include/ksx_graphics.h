@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 13:48:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:46:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,6 +366,7 @@ typedef struct s_graphics
 	mlx_image_t	*img;
 	t_world		world;
 	t_camera	camera;
+	uint32_t	obj_idx;
 }	t_graphics;
 
 mlx_t		*ksx_init(void);

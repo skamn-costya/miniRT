@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 17:41:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 19:06:29 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "ksx_m3_math.h"
 #include "ksx_object.h"
 #include <math.h>
+
+// https://www.mathworks.com/help/nav/ug/rotations-orientation-and-quaternions.html
 
 void	ksx_rotation(t_vector3 *point, float angle_x,
 		float angle_y, float angle_z)
