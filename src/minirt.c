@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 22:36:28 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:09:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void my_scrollhook(double xdelta, double ydelta, void* param)
 	else if (ydelta < 0)
 		ksx_camera_set_pm(&p_grph->camera, p_grph->camera.fov + 1, 500.f);
 	ksx_draw (p_grph);
-	printf ("FOV = %f, near = %f\n", p_grph->camera.fov, p_grph->camera.near);
+	// printf ("FOV = %f, near = %f\n", p_grph->camera.fov, p_grph->camera.near);
 
 	// Can also detect a mousewheel that goes along the X (e.g: MX Master 3)
 	if (xdelta < 0)

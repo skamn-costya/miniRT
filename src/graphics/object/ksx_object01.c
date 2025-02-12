@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 23:11:49 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 16:06:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object->pp_otri = NULL;
 	p_object->size_otri = 0;
 	// p_object->last_gen = 0;
-	v = ksx_vec3_set(0, 0, 1);
-	p_object->basis = ksx_get_basis(&v, &p_object->center);
+	v = ksx_vec3_set(0, 1, 0);
+	p_object->basis = ksx_get_basis(&v, NULL);
 	p_object->axis_ver[0].p_p = ksx_vec3_set(AXIS_LEN, 0, 0);
 	p_object->axis_ver[1].p_p = ksx_vec3_set(0, AXIS_LEN, 0);
 	p_object->axis_ver[2].p_p = ksx_vec3_set(0, 0, AXIS_LEN);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 17:49:46 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 10:29:04 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	get_coord(char **pp_str, size_t idx, t_obj_descr *p_obj_descr)
 		f = ft_atof(pp_str_[size]);
 		p_obj_descr->coord.xyz[size] = f;
 	}
+	// p_obj_descr->coord.y *= -1.f;
+	// p_obj_descr->coord.z *= -1.f;
 	return (ft_parrclear((void **)pp_str_), TRUE);
 }
 

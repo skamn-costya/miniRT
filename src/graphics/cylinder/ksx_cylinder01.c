@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 20:36:59 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 12:14:04 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 	p_object->color = color;
 	p_object->size1 = dia_ht[0] * .5f;
 	p_object->size2 = dia_ht[1] * .5f;
-	p_object->basis = ksx_get_basis(&norm, &p_object->center);
+	p_object->basis = ksx_get_basis(&norm, NULL);
 	ksx_init_cylinder_box (p_object);
 	// ksx_init_cylinder_tri(p_object);
 	ksx_init_cylinder(p_object);

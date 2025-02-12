@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 23:30:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:21:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,10 +123,10 @@ void	ksx_camera_set_pm(t_camera *p_camera, float fov, float far)
 	p_camera->far = p_camera->near + far;
 	ksx_m4_reset(&p_camera->pm);
 	p_camera->pm.e_11 = 1.f / tanf(p_camera->hfov * .5f);
+	p_camera->pm.e_22 = -1.f / tanf(p_camera->hfov * .5f);
 	// p_camera->pm.e_22 = 1.f / (p_camera->aspect * tanf(p_camera->vfov * .5f));
 	p_camera->pm.e_33 = -((p_camera->far + p_camera->near)
 			/ (p_camera->far - p_camera->near));
-	p_camera->pm.e_22 = 1.f / tanf(p_camera->hfov * .5f);
 	// p_camera->pm.e_33 = -((p_camera->far)
 	// 		/ (p_camera->far - p_camera->near));
 	p_camera->pm.e_34 = -1.f;

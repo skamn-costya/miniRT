@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 23:39:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 13:48:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@
 # define RORATE_Y 0x00001000
 # define RORATE_Z 0x00010000
 # define CHANGE_CENTER 0x00010000
-
 
 // Data type for colors, 32 bites: 8 - alfa, 8 - blue, 8 - green, 8 - red
 typedef struct s_color
@@ -334,12 +333,12 @@ typedef struct s_triangle
 typedef struct s_object
 {
 	uint8_t		flags;
-	t_vector3 	center;
+	t_vector3	center;
 	t_color		color;
-	float	 	size1;
-	float	 	size2;
+	float		size1;
+	float		size2;
 	t_vector3	angle;
-	t_vector3 	c_center;
+	t_vector3	c_center;
 	t_basis		basis;
 	t_vertex	axis_ver[3];
 	t_triangle	axis;
@@ -351,6 +350,7 @@ typedef struct s_object
 	t_triangle	**pp_otri;
 	uint32_t	size_otri;
 	// uint32_t	last_gen;
+	// void		(*f_transform)(void *, t_basis *);
 }	t_object;
 
 typedef struct s_world
