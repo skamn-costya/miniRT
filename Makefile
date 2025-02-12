@@ -25,7 +25,10 @@ UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
 VECTOR_MATH_DIR = graphics/utils/vector_math/
 VECTOR_MATH_FN =	ksx_vec3_math01.c \
 					ksx_vec3_math02.c \
-					ksx_vec3_math03.c
+					ksx_vec3_math03.c \
+					ksx_vec4_math01.c \
+					ksx_vec4_math02.c \
+					ksx_vec4_math03.c
 VECTOR_MATH = $(addprefix $(VECTOR_MATH_DIR), $(VECTOR_MATH_FN))
 
 # KSX t_vector math
@@ -52,7 +55,7 @@ OBJECT_DIR = graphics/object/
 OBJECT_FN =	ksx_object01.c \
 			ksx_object02.c \
 			ksx_object03.c \
-			ksx_rotation.c \
+			ksx_qrotation.c \
 			ksx_translate.c \
 			ksx_transform.c
 OBJECT = $(addprefix $(OBJECT_DIR), $(OBJECT_FN))
