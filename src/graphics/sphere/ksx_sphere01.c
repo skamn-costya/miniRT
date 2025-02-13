@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 21:41:35 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/13 00:05:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ t_object	*ksx_create_sphere(t_vector3 center,
 	ksx_sphere_split (p_object);	// 32
 	ksx_sphere_split (p_object);	// 128
 	ksx_sphere_split (p_object);	// 512
-	// ksx_sphere_split (p_object);	// 2048
-	// ksx_sphere_split (p_object);	// 8192
-	// ksx_sphere_split (p_object);	// 32768
-	// ksx_sphere_split (p_object);	// 131072
+	ksx_sphere_split (p_object);	// 2048
+	ksx_sphere_split (p_object);	// 8192
+	ksx_sphere_split (p_object);	// 32768
+	ksx_sphere_split (p_object);	// 131072
 	// p_object->basis.j = ksx_vec3_set(0,2.5f, 0);	// egg
-	p_object->basis.i = ksx_vec3_set(.75f, 0, 0);	// egg
-	p_object->basis.k = ksx_vec3_set(0, 0, .75f);	// egg
+	// p_object->basis.i = ksx_vec3_set(.75f, 0, 0);	// egg
+	// p_object->basis.k = ksx_vec3_set(0, 0, .75f);	// egg
 	ksx_transform_obj(p_object, &p_object->basis);
 	return (p_object);
 }

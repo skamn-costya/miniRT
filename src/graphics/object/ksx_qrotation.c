@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 22:54:47 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 23:47:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void	ksx_qrotation(t_vector3 *point, float angle, t_vector3 *p_v)
 	f[1] = sinf(f[0] * .5f);
 	v4[0] = ksx_vec4_set(f[1] * p_v->x, f[1] * p_v->y, f[1] * p_v->z, cosf(f[0] * .5f));
 	v4[1] = ksx_vec4_set(point->x, point->y, point->z, 0);
-	v4[2] = ksx_vec4_set(-f[1] * p_v->x, -f[1] * p_v->y, -f[1] * p_v->z, cosf(f[0] * .5f));
+	v4[2] = ksx_vec4_set(-v4[0].x, -v4[0].y, -v4[0].z, v4[0].w);
+	// v4[2] = ksx_vec4_set(-f[1] * p_v->x, -f[1] * p_v->y, -f[1] * p_v->z, cosf(f[0] * .5f));
 	v4[3] = ksx_quat_multi(&v4[0], &v4[1]);
 	v4[3] = ksx_quat_multi(&v4[3], &v4[2]);
 	*point = ksx_vec3_set(v4[3].x, v4[3].y, v4[3].z);

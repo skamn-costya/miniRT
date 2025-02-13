@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 22:26:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/12 23:20:30 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_vector4	ksx_vec4_cross(const t_vector4 *p_v1, const t_vector4 *p_v2)
 	result.x = p_v1->y * p_v2->z - p_v1->z * p_v2->y;
 	result.y = p_v1->z * p_v2->x - p_v1->x * p_v2->z;
 	result.z = p_v1->x * p_v2->y - p_v1->y * p_v2->x;
-	result.z = p_v1->w * p_v2->w - p_v1->w * p_v2->w;
+	result.w = p_v1->w * p_v2->w - p_v1->w * p_v2->w;
 	return (result);
 }
 

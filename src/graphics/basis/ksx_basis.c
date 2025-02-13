@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 18:59:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/13 01:03:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
 #include "ksx_vec3_math.h"
+#include "ksx_object.h"
 #include <math.h>
 
 static void	ksx_set_basis111(t_basis *p_basis);
@@ -20,26 +21,20 @@ static void	ksx_set_basis111(t_basis *p_basis);
 t_basis	ksx_get_basis_obj(const t_vector3 *p_norm)
 {
 	t_basis		basis;
-	t_vector3	tmp_v3;
+	t_vector3	r;
 
 	basis.o = ksx_vec3_set(0, 0, 0);
 	if (!p_norm->x && !p_norm->z)
 		return (ksx_set_basis111(&basis), basis);
 	basis.j = ksx_vec3_unit(p_norm);
-	// if (!p_norm->y && !p_norm->z)
-	// {
-	// 	tmp_v3 = ksx_vec3_set(0, 0, 1);
-	// 	tmp_v3 = ksx_vec3_cross(&basis.j, &tmp_v3);
-	// 	basis.k = ksx_vec3_div(tmp_v3, ksx_vec3_mag(&tmp_v3));
-	// 	basis.i = ksx_vec3_cross(&basis.j, &basis.k);
-	// }
-	// else
-	// {
-		tmp_v3 = ksx_vec3_set(1, 0, 0);
-		tmp_v3 = ksx_vec3_cross(&basis.j, &tmp_v3);
-		basis.k = ksx_vec3_div(tmp_v3, ksx_vec3_mag(&tmp_v3));
-		basis.i = ksx_vec3_cross(&basis.j, &basis.k);
-	// }	
+	r = ksx_vec3_set(0, 1, 0);
+	r = ksx_mid_point(&r, p_norm);
+	r = ksx_vec3_unit(&r);
+	basis.i = ksx_vec3_set(1, 0, 0);
+	ksx_qrotation(&basis.i, 180, &r);
+	// basis.k = ksx_vec3_cross(&basis.i, &basis.j);
+	basis.k = ksx_vec3_set(0, 0, 1);
+	ksx_qrotation(&basis.k, 180, &r);
 	return (basis);
 }
 
