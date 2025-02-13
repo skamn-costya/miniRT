@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/13 13:18:37 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:00:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,4 +75,11 @@ static void	ksx_set_basis111(t_basis *p_basis)
 	p_basis->i = ksx_vec3_set(1, 0, 0);
 	p_basis->j = ksx_vec3_set(0, 1, 0);
 	p_basis->k = ksx_vec3_set(0, 0, 1);
+}
+
+void	ksx_qrotation_basis(t_basis *p_basis, float angle, t_vector3 v)
+{
+	ksx_qrotation(&p_basis->i, angle, &v);
+	ksx_qrotation(&p_basis->j, angle, &v);
+	ksx_qrotation(&p_basis->k, angle, &v);
 }

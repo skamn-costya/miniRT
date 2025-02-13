@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 22:55:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:20:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,14 +33,18 @@ void	ksx_draw(t_graphics *p_grph)
 
 	if (!p_grph->world.pp_wobj)
 		return ;
-	
+	if (p_grph->camera.flags & CHANGE)
+	{
+		ksx_camera_set_vm(&p_grph->camera.vm, &p_grph->camera.basis);
+		p_grph->camera.flags ^= CHANGE;
+	}
+
 	p_img = ksx_create_image(p_grph->mlx);
 	pp_object = p_grph->world.pp_wobj;
 	idx = 0;
 	while (idx < p_grph->world.size_wobj)
 	{
 		p_object = pp_object[idx];
-		// ksx_rotation_obj(p_object, p_object->angle.x, p_object->angle.y, p_object->angle.z);
 		ksx_translate_obj (p_object);
 		ksx_camera_obj_vm (p_object, &p_grph->camera.vm);
 		ksx_draw_obj(p_object, p_img, &p_grph->camera);

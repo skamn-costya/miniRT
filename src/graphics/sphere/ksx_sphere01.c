@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/13 00:05:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:46:36 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@ static void			ksx_init_sphere(t_object *p_object);
 // static t_triangle	**ksx_init_sphere_tri(t_object *p_object);
 
 t_object	*ksx_create_sphere(t_vector3 center,
-			uint32_t diameter, t_color color)
+			uint32_t diameter, t_color color, uint8_t gen)
 {
 	t_object	*p_object;
+	uint8_t		idx;
 
 	p_object = ksx_create_object(&center);
 	if (!p_object)
@@ -39,16 +40,22 @@ t_object	*ksx_create_sphere(t_vector3 center,
 	p_object->color = color;
 	ksx_init_sphere_box (p_object);
 	ksx_init_sphere(p_object);
-	ksx_sphere_split (p_object);	// 32
-	ksx_sphere_split (p_object);	// 128
-	ksx_sphere_split (p_object);	// 512
-	ksx_sphere_split (p_object);	// 2048
-	ksx_sphere_split (p_object);	// 8192
-	ksx_sphere_split (p_object);	// 32768
-	ksx_sphere_split (p_object);	// 131072
+	idx = 0;
+	while (idx < gen)
+	{
+		ksx_sphere_split (p_object);
+		idx++;
+	}
+	// 	// 32
+	// ksx_sphere_split (p_object);	// 128
+	// ksx_sphere_split (p_object);	// 512
+	// ksx_sphere_split (p_object);	// 2048
+	// ksx_sphere_split (p_object);	// 8192
+	// ksx_sphere_split (p_object);	// 32768
+	// ksx_sphere_split (p_object);	// 131072
 	// p_object->basis.j = ksx_vec3_set(0,2.5f, 0);	// egg
-	// p_object->basis.i = ksx_vec3_set(.75f, 0, 0);	// egg
-	// p_object->basis.k = ksx_vec3_set(0, 0, .75f);	// egg
+	// p_object->basis.i = ksx_vec3_set(.25f, 0, 0);	// egg
+	// p_object->basis.k = ksx_vec3_set(0, 0, .05f);	// egg
 	ksx_transform_obj(p_object, &p_object->basis);
 	return (p_object);
 }

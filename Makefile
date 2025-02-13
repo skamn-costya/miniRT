@@ -107,7 +107,11 @@ SRC = 	$(UTILS) \
 		$(GRAPHICS) \
 		$(PARSER) \
 		$(MAIN) \
-		utils01.c
+		utils01.c \
+		key_kp01.c \
+		key_kp02.c \
+		key_arrows.c \
+		key_adsw.c
 SRCS =	$(addprefix $(SRC_DIR), $(SRC))
 
 # All .o files

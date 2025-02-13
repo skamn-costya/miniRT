@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 16:46:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:06:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,11 @@
 # define RORATE_Y 0x00001000
 # define RORATE_Z 0x00010000
 # define CHANGE_CENTER 0x00010000
+
+// Sphere generation
+# define SPHERE_GEN 3
+
+# define ANGLE 5
 
 // Data type for colors, 32 bites: 8 - alfa, 8 - blue, 8 - green, 8 - red
 typedef struct s_color
@@ -261,6 +266,7 @@ typedef struct s_camera
 	float		hfov;
 	float		aspect;
 	// float		vfov;
+	uint8_t		flags;
 	t_matrix4	vm;
 	t_matrix4	pm;
 	// float		focal_len;
@@ -381,7 +387,7 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world);
 void		ksx_clean_world(t_world *p_world);
 
 t_object	*ksx_create_sphere(t_vector3 center,
-				uint32_t diameter, t_color color);
+				uint32_t diameter, t_color color, uint8_t gen);
 t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 				float dia_ht[], t_color color);
 void		ksx_draw(t_graphics *p_grph);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 18:55:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/13 16:20:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.aspect = 1.f * WIDTH / HEIGHT;
 	ksx_camera_set_vm(&camera.vm, &camera.basis);
 	// camera.vfov = 2.f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
+	camera.flags = 0;
 	return (camera);
 }
 
