@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/13 16:20:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/14 12:21:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,62 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	return (camera);
 }
 
-void ksx_camera_set_vm(t_matrix4 *p_m4, t_basis *p_basis)
+void ksx_camera_set_vm(t_matrix4 *p_vm, t_basis *p_basis)
 {
-	ksx_get_tm(p_m4, p_basis);
+	ksx_translate(&p_basis->i, &p_basis->o, &p_basis->w_i);
+	ksx_translate(&p_basis->j, &p_basis->o, &p_basis->w_j);
+	ksx_translate(&p_basis->k, &p_basis->o, &p_basis->w_k);
+	// p_vm->e_11 = p_basis->i.x;
+	// p_vm->e_12 = p_basis->i.y;
+	// p_vm->e_13 = p_basis->i.z;
+	// p_vm->e_14 = -ksx_vec3_dot(p_basis->i, p_basis->o);
+	// // p_m4->e_14 = p_basis->i.x * (-p_basis->o.x) + p_basis->i.y
+	// // 	* (-p_basis->o.y) + p_basis->i.z * (-p_basis->o.z);
+	// p_vm->e_21 = p_basis->j.x;
+	// p_vm->e_22 = p_basis->j.y;
+	// p_vm->e_23 = p_basis->j.z;
+	// p_vm->e_24 = -ksx_vec3_dot(p_basis->j, p_basis->o);
+	// // p_m4->e_24 = p_basis->j.x * (-p_basis->o.x) + p_basis->j.y
+	// // 	* (-p_basis->o.y) + p_basis->j.z * (-p_basis->o.z);
+	// p_vm->e_31 = p_basis->k.x;
+	// p_vm->e_32 = p_basis->k.y;
+	// p_vm->e_33 = p_basis->k.z;
+	// p_vm->e_34 = -ksx_vec3_dot(p_basis->k, p_basis->o);
+	// // p_m4->e_34 = p_basis->k.x * (-p_basis->o.x) + p_basis->k.y
+	// // 	* (-p_basis->o.y) + p_basis->k.z * (-p_basis->o.z);
+	// p_vm->e_41 = 0;
+	// p_vm->e_42 = 0;
+	// p_vm->e_43 = 0;
+	// p_vm->e_44 = 1;
+
+	// t_vector3	w;
+	// t_vector3	u;
+	// t_vector3	v;
+
+	// w = ksx_vec3_sub(&p_basis->o, &p_basis->w_k);
+	// w = ksx_vec3_unit(&w);
+	// v = ksx_vec3_set(0, 1, 0);
+	// u = ksx_vec3_cross(&w, &v);
+	// u = ksx_vec3_unit(&u);
+	// v = ksx_vec3_cross(&w, &u);
+
+	// p_vm->e_11 = u.x;
+	// p_vm->e_12 = u.y;
+	// p_vm->e_13 = u.z;
+	// p_vm->e_14 = -ksx_vec3_dot(p_basis->o, u);
+	// p_vm->e_21 = v.x;
+	// p_vm->e_22 = v.y;
+	// p_vm->e_23 = v.z;
+	// p_vm->e_24 = -ksx_vec3_dot(p_basis->o, v);
+	// p_vm->e_31 = w.x;
+	// p_vm->e_32 = w.y;
+	// p_vm->e_33 = w.z;
+	// p_vm->e_34 = -ksx_vec3_dot(p_basis->o, w);
+	// p_vm->e_31 = 0;
+	// p_vm->e_32 = 0;
+	// p_vm->e_33 = 0;
+	// p_vm->e_34 = 1;
+	ksx_get_tm(p_vm, p_basis);
 }
 
 void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)

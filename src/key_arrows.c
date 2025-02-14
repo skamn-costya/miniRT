@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/13 18:39:49 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/14 10:59:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,27 @@ void	key_arrows(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 void	key_right(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	(void) p_keydata;
-	ksx_qrotation_basis(&p_grph->camera.basis, ANGLE, ksx_vec3_set(0, 1, 0));
+	ksx_qrotation_basis(&p_grph->camera.basis, ANGLE, p_grph->camera.basis.j);
 	p_grph->camera.flags |= CHANGE;
 }
 
 void	key_left(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	(void) p_keydata;
-	ksx_qrotation_basis(&p_grph->camera.basis, -ANGLE, ksx_vec3_set(0, 1, 0));
+	ksx_qrotation_basis(&p_grph->camera.basis, -ANGLE, p_grph->camera.basis.j);
 	p_grph->camera.flags |= CHANGE;
 }
 
 void	key_up(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	(void) p_keydata;
-	ksx_qrotation_basis(&p_grph->camera.basis, ANGLE, ksx_vec3_set(1, 0, 0));
+	ksx_qrotation_basis(&p_grph->camera.basis, ANGLE, p_grph->camera.basis.i);
 	p_grph->camera.flags |= CHANGE;
 }
 
 void	key_down(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	(void) p_keydata;
-	ksx_qrotation_basis(&p_grph->camera.basis, -ANGLE, ksx_vec3_set(1, 0, 0));
+	ksx_qrotation_basis(&p_grph->camera.basis, -ANGLE, p_grph->camera.basis.i);
 	p_grph->camera.flags |= CHANGE;
 }
