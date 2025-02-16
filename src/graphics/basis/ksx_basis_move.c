@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_utils07.c                                      :+:      :+:    :+:   */
+/*   ksx_basis_move.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 10:38:01 by ksorokol         ###   ########.fr       */
+/*   Created: 2025/02/06 12:07:41 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/02/16 13:08:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
-#include "ksx_vec3_math.h"
 #include "ksx_utils.h"
+#include "ksx_vec3_math.h"
+#include "ksx_object.h"
+#include "ksx_basis.h"
 #include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
 
-// t_vector3	ksx_point_m3(const t_vector3 point, const t_matrix3 m)
+// void	ksx_camera_move_basis(t_camera *p_camera, const t_vector3 *p_v)
 // {
-// 	t_vector3		point_;
-
-// 	point_.x = point.x * m.e_11 + point.y * m.e_12 + point.z * m.e_13;
-// 	point_.y = point.x * m.e_21 + point.y * m.e_22 + point.z * m.e_23;
-// 	point_.z = point.x * m.e_31 + point.y * m.e_32 + point.z * m.e_33;
-// 	return (point_);
-// }
-
-
-
-// t_matrix3	ksx_get_transfor_matrix(const t_vector3 v1, const t_vector3 v2)
-// {
-
+// 	p_camera->basis.o = ksx_vec3_add(&p_camera->basis.o, p_v);
+// 	p_camera->basis.w_i = ksx_vec3_add(&p_camera->basis.w_i, p_v);
+// 	p_camera->basis.w_j = ksx_vec3_add(&p_camera->basis.w_j, p_v);
+// 	p_camera->basis.w_k = ksx_vec3_add(&p_camera->basis.w_k, p_v);
 // }

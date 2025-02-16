@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:22:40 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/08 22:24:46 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/15 10:02:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	ksx_m4_reset(t_matrix4 *p_m)
 	p_m->e_44 = 0.f;
 }
 
-static void	ksx_m4_multi_(const t_matrix4 *p_m1,
+static void	ksx_m4_multi_1(const t_matrix4 *p_m1,
 			const t_matrix4 *p_m2, t_matrix4 *p_m);
 
 t_matrix4	ksx_m4_multi(const t_matrix4 *p_m1, const t_matrix4 *p_m2)
@@ -58,11 +58,11 @@ t_matrix4	ksx_m4_multi(const t_matrix4 *p_m1, const t_matrix4 *p_m2)
 		+ p_m1->e_23 * p_m2->e_33 + p_m1->e_24 * p_m2->e_43;
 	m.e_24 = p_m1->e_21 * p_m2->e_14 + p_m1->e_22 * p_m2->e_24
 		+ p_m1->e_23 * p_m2->e_34 + p_m1->e_24 * p_m2->e_44;
-	ksx_m4_multi_(p_m1, p_m2, &m);
+	ksx_m4_multi_1(p_m1, p_m2, &m);
 	return (m);
 }
 
-static void	ksx_m4_multi_(const t_matrix4 *p_m1,
+static void	ksx_m4_multi_1(const t_matrix4 *p_m1,
 					const t_matrix4 *p_m2, t_matrix4 *p_m)
 {
 	p_m->e_31 = p_m1->e_31 * p_m2->e_11 + p_m1->e_32 * p_m2->e_21

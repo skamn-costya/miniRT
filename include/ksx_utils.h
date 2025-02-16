@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 14:53:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/15 08:45:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@
 # include "ksx_graphics.h"
 
 # define AXIS_LEN 25
-
-// ksx_utils03.c
-float		ksx_determinant2(const t_matrix2 m);
-float		ksx_determinant3(const t_matrix3 m);
-float		ksx_determinant4(const t_matrix4 m);
 
 // ksx_utils04.c
 float		ksx_fraction(const t_pixel p, const t_pixel p1, const t_pixel p2);

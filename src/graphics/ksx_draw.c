@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/13 16:20:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/16 11:49:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ksx_m4_math.h"
 #include "ksx_3D.h"
 #include "ksx_object.h"
+#include "ksx_basis.h"
 #include "ksx_camera.h"
 #include <math.h>
 #include <stdio.h>
@@ -35,7 +36,7 @@ void	ksx_draw(t_graphics *p_grph)
 		return ;
 	if (p_grph->camera.flags & CHANGE)
 	{
-		ksx_camera_set_vm(&p_grph->camera.vm, &p_grph->camera.basis);
+		ksx_camera_set_vm(&p_grph->camera);
 		p_grph->camera.flags ^= CHANGE;
 	}
 

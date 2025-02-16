@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/13 16:00:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/16 10:18:29 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,30 +44,29 @@ t_basis	ksx_get_basis_obj(const t_vector3 *p_norm)
 	return (basis);
 }
 
-t_basis	ksx_get_basis_cam(const t_vector3 *p_norm, const t_vector3 *p_center)
+void	ksx_camera_set_basis(t_camera *p_camera, const t_vector3 *p_norm)
 {
-	t_basis		basis;
 	t_vector3	tmp_v3;
 
-	basis.o = *p_center;
 	if (!p_norm->x && !p_norm->y)
-		return (ksx_set_basis111(&basis), basis);
-	basis.k = ksx_vec3_unit(p_norm);
+		return (ksx_set_basis111(&p_camera->basis));
+	p_camera->basis.k = ksx_vec3_unit(p_norm);
 	if (p_norm->x > 0)
 	{
 		tmp_v3 = ksx_vec3_set(0, 1, 0);
-		tmp_v3 = ksx_vec3_cross(&tmp_v3, &basis.k);
-		basis.i = ksx_vec3_unit(&tmp_v3);
-		basis.j = ksx_vec3_cross(&basis.k, &basis.i);
+		tmp_v3 = ksx_vec3_cross(&tmp_v3, &p_camera->basis.k);
+		p_camera->basis.i = ksx_vec3_unit(&tmp_v3);
+		p_camera->basis.j = ksx_vec3_cross(&p_camera->basis.k,
+				&p_camera->basis.i);
 	}
 	else
 	{
 		tmp_v3 = ksx_vec3_set(1, 0, 0);
-		tmp_v3 = ksx_vec3_cross(&tmp_v3, &basis.k);
-		basis.j = ksx_vec3_unit(&tmp_v3);
-		basis.i = ksx_vec3_cross(&basis.k, &basis.j);
+		tmp_v3 = ksx_vec3_cross(&tmp_v3, &p_camera->basis.k);
+		p_camera->basis.j = ksx_vec3_unit(&tmp_v3);
+		p_camera->basis.i = ksx_vec3_cross(&p_camera->basis.k,
+				&p_camera->basis.j);
 	}
-	return (basis);
 }
 
 static void	ksx_set_basis111(t_basis *p_basis)

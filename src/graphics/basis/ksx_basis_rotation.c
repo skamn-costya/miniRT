@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_rotation_norm01.c                              :+:      :+:    :+:   */
+/*   ksx_basis_rotation.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 11:12:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/16 11:53:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,3 +35,6 @@ void	ksx_create_vm(t_matrix4 *p_vm, const t_basis *p_basis)
 	p_vm->e_43 = 0;
 	p_vm->e_44 = 1;
 }
+
+// ksx_camera_change_basis(&camera)
+// {}

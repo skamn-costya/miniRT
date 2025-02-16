@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/14 12:21:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/16 11:52:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 {
 	t_camera	camera;
 
-	camera.center = center;
+	camera.basis.o = center;
 	camera.norm = norm;
-	camera.basis = ksx_get_basis_cam(&norm, &camera.center);
+	ksx_camera_set_basis(&camera, &norm);
 	// ksx_create_vm(&camera.vm, &camera.basis);
 	camera.fov = fov;
 	camera.right = WIDTH * .5f;
@@ -62,17 +62,14 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.top = HEIGHT * .5f;
 	camera.bottom = -camera.top;
 	camera.aspect = 1.f * WIDTH / HEIGHT;
-	ksx_camera_set_vm(&camera.vm, &camera.basis);
+	ksx_camera_set_vm(&camera);
 	// camera.vfov = 2.f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
 	camera.flags = 0;
 	return (camera);
 }
 
-void ksx_camera_set_vm(t_matrix4 *p_vm, t_basis *p_basis)
+void ksx_camera_set_vm(t_camera *p_camera)
 {
-	ksx_translate(&p_basis->i, &p_basis->o, &p_basis->w_i);
-	ksx_translate(&p_basis->j, &p_basis->o, &p_basis->w_j);
-	ksx_translate(&p_basis->k, &p_basis->o, &p_basis->w_k);
 	// p_vm->e_11 = p_basis->i.x;
 	// p_vm->e_12 = p_basis->i.y;
 	// p_vm->e_13 = p_basis->i.z;
@@ -123,7 +120,8 @@ void ksx_camera_set_vm(t_matrix4 *p_vm, t_basis *p_basis)
 	// p_vm->e_32 = 0;
 	// p_vm->e_33 = 0;
 	// p_vm->e_34 = 1;
-	ksx_get_tm(p_vm, p_basis);
+	ksx_get_tm(&p_camera->vm, &p_camera->basis);
+	ksx_m4_invert(&p_camera->vm, &p_camera->ivm);
 }
 
 void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)

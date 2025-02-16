@@ -53,3 +53,25 @@ t_vector3	ksx_m3_vec3(const t_matrix3 *p_m, const t_vector3 *p_v)
 	v3.z = (p_m->e_31 * p_v->x) + (p_m->e_32 * p_v->y) + (p_m->e_33 * p_v->z);
 	return (v3);
 }
+
+// float	ksx_determinant2(const t_matrix2 m)
+// {
+// 	float	result;
+
+// 	result = m.e_11 * m.e_22;
+// 	result -= m.e_12 * m.e_21;
+// 	return (result);
+// }
+
+float	ksx_m3_det(const t_matrix3 *p_m)
+{
+	float	result;
+
+	 result = p_m->e_11 * p_m->e_22 * p_m->e_33;
+	result += p_m->e_12 * p_m->e_23 * p_m->e_31;
+	result += p_m->e_13 * p_m->e_21 * p_m->e_32;
+	result -= p_m->e_13 * p_m->e_22 * p_m->e_31;
+	result -= p_m->e_11 * p_m->e_23 * p_m->e_32;
+	result -= p_m->e_12 * p_m->e_21 * p_m->e_33;
+	return (result);
+}

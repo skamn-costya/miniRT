@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/13 18:42:35 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/16 13:07:41 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ksx_graphics.h"
 #include "ksx_object.h"
 #include "ksx_vec3_math.h"
+#include "ksx_m4_math.h"
 #include "ksx_utils.h"
 #include "ksx_camera.h"
 #include "keys.h"
@@ -111,14 +112,22 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		key_kp(&keydata, p_grph);
 	else if (keydata.key >= MLX_KEY_RIGHT && keydata.key <= MLX_KEY_UP)
 		key_arrows(&keydata, p_grph);
-	else if (keydata.key == MLX_KEY_A || keydata.key <= MLX_KEY_D
-				|| keydata.key == MLX_KEY_S || keydata.key <= MLX_KEY_W)
+	else if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D
+				|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_W)
 		key_adsw(&keydata, p_grph);
 	else if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_RELEASE)
 	{
 		p_grph->obj_idx++;
 		if (p_grph->obj_idx >= p_grph->world.size_wobj)
 			p_grph->obj_idx = 0;
+	}
+	else if (keydata.key == MLX_KEY_SPACE)
+	{
+		// FOR TEST ONLUY
+		t_vector3 	v3[3];
+		v3[0] = p_grph->world.pp_wobj[0]->c_center;
+		ksx_transform(&v3[0], &p_grph->camera.vm, &v3[1]);
+		ksx_transform(&v3[1], &p_grph->camera.ivm, &v3[2]);
 	}
 	ksx_draw (p_grph);
 }

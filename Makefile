@@ -12,11 +12,8 @@ PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 
 # KSX utilites
 UTILS_DIR = graphics/utils/
-UTILS_FN =	ksx_utils03.c \
-			ksx_utils04.c \
+UTILS_FN =	ksx_utils04.c \
 			ksx_utils05.c \
-			ksx_utils06.c \
-			ksx_utils07.c \
 			ksx_utils08.c \
 			ksx_utils09.c
 UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
@@ -34,6 +31,8 @@ VECTOR_MATH = $(addprefix $(VECTOR_MATH_DIR), $(VECTOR_MATH_FN))
 # KSX t_vector math
 MATRIX_MATH_DIR = graphics/utils/matrix_math/
 MATRIX_MATH_FN =	ksx_m4_math01.c \
+					ksx_m4_math02.c \
+					ksx_m4_math03.c \
 					ksx_m3_math01.c
 MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 
@@ -47,7 +46,8 @@ MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 
 BASIS_DIR = graphics/basis/
 BASIS_FN =	ksx_basis.c \
-			ksx_rotation_norm01.c
+			ksx_basis_move.c \
+			ksx_basis_rotation.c
 BASIS = $(addprefix $(BASIS_DIR), $(BASIS_FN))
 
 # Rotatin pints, vectors, triangles, matrixes (view, proection)
