@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 23:47:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/16 14:06:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ksx_qrotation(t_vector3 *point, float angle, t_vector3 *p_v)
 
 	if (!angle)
 		return ;
-	f[0] = (angle * PI) / 180.f;
+	f[0] = angle * PI180;
 	f[1] = sinf(f[0] * .5f);
 	v4[0] = ksx_vec4_set(f[1] * p_v->x, f[1] * p_v->y, f[1] * p_v->z, cosf(f[0] * .5f));
 	v4[1] = ksx_vec4_set(point->x, point->y, point->z, 0);

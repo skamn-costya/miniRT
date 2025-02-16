@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 19:06:29 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/16 14:08:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	ksx_rotation(t_vector3 *point, float angle_x,
 
 	if (angle_x == 0 && angle_y == 0 && angle_z == 0)
 		return ;
-	r[0] = (angle_x * PI) / 180.f;
-	r[1] = (angle_y * PI) / 180.f;
-	r[2] = (angle_z * PI) / 180.f;
+	r[0] = angle_x * PI180;
+	r[1] = angle_y * PI180;
+	r[2] = angle_z * PI180;
 	ksx_m3_reset(&m3);
 	m3.e_11 = cos (r[1]) * cos (r[2]);
 	m3.e_12 = -(sin (r[2]) * cos (r[1]));

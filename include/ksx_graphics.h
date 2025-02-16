@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/16 10:11:01 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/16 20:12:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@
 # define KSX_TRUE 1
 # define KSX_FALSE 0
 
-# define PI 3.14159265358979323846f
+// # define PI 3.141592653589793115997963468544185161590576171875
+// # define PI 3.14159274f
+# define PI180 0.01745329251f
+// # define PI180 0.017453292519943
+
 # define PRECISION	0.00001f
 /* Only support RGBA */
 # define BPP 4
@@ -45,7 +49,7 @@
 
 // FLAGS
 # define CHANGE 0x00000001
-# define RORATE_XYZ 0x00000010
+# define RORATE 0x00000010
 # define RORATE_X 0x00000100
 # define RORATE_Y 0x00001000
 # define RORATE_Z 0x00010000
@@ -54,7 +58,9 @@
 // Sphere generation
 # define SPHERE_GEN 3
 
-# define ANGLE 5
+# define ANGLE 5.f
+# define STEP 5.f
+# define SCALE .05f
 
 // Data type for colors, 32 bites: 8 - alfa, 8 - blue, 8 - green, 8 - red
 typedef struct s_color
@@ -260,7 +266,7 @@ typedef struct s_matrix44
 typedef struct s_camera
 {
 	// t_vector3	center;
-	t_vector3	move;
+	// t_vector3	move;
 	t_vector3	norm;
 	t_basis		basis;
 	float		fov;

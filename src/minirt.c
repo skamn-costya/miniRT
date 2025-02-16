@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/16 13:07:41 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/16 15:57:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,10 +124,13 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	else if (keydata.key == MLX_KEY_SPACE)
 	{
 		// FOR TEST ONLUY
-		t_vector3 	v3[3];
-		v3[0] = p_grph->world.pp_wobj[0]->c_center;
-		ksx_transform(&v3[0], &p_grph->camera.vm, &v3[1]);
-		ksx_transform(&v3[1], &p_grph->camera.ivm, &v3[2]);
+		double 	d;
+		float	f;
+		// d = PI / 180;
+		f = PI180;
+		d = 123;
+		d = f * d / 2;
+
 	}
 	ksx_draw (p_grph);
 }
