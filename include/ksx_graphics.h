@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/16 20:12:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/16 23:56:28 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,7 +267,7 @@ typedef struct s_camera
 {
 	// t_vector3	center;
 	// t_vector3	move;
-	t_vector3	norm;
+	// t_vector3	norm;
 	t_basis		basis;
 	float		fov;
 	float		hfov;

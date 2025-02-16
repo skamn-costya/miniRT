@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/16 10:18:29 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/17 00:10:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "ksx_vec3_math.h"
 #include "ksx_object.h"
 #include <math.h>
+#include <stdio.h>
 
 static void	ksx_set_basis111(t_basis *p_basis);
 
@@ -81,4 +82,10 @@ void	ksx_qrotation_basis(t_basis *p_basis, float angle, t_vector3 v)
 	ksx_qrotation(&p_basis->i, angle, &v);
 	ksx_qrotation(&p_basis->j, angle, &v);
 	ksx_qrotation(&p_basis->k, angle, &v);
+	p_basis->i = ksx_vec3_unit(&p_basis->i);
+	p_basis->j = ksx_vec3_unit(&p_basis->j);
+	p_basis->k = ksx_vec3_unit(&p_basis->k);
+	// printf("ksx_vec3_mag(&p_basis->i) = %f\n", ksx_vec3_mag(&p_basis->i));
+	// printf("ksx_vec3_mag(&p_basis->j) = %f\n", ksx_vec3_mag(&p_basis->j));
+	// printf("ksx_vec3_mag(&p_basis->k) = %f\n\n", ksx_vec3_mag(&p_basis->k));
 }
