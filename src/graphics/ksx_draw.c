@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/16 11:49:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/17 18:30:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ void	ksx_draw(t_graphics *p_grph)
 		ksx_translate_obj (p_object);
 		ksx_camera_obj_vm (p_object, &p_grph->camera.vm);
 		ksx_draw_obj(p_object, p_img, &p_grph->camera);
+		if (idx == 0)
+			printf("z -> %f\n",	p_object->axis.p_ver3->p_cp.z);
 		ksx_draw_axis (p_object, p_img, &p_grph->camera);
 		ksx_draw_box (p_object, p_img, &p_grph->camera);
 		idx++;

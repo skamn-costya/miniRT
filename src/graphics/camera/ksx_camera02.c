@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/16 22:53:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:07:22 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void ksx_camera_set_vm(t_camera *p_camera)
 	p_camera->vm.e_12 = p_camera->basis.i.y;
 	p_camera->vm.e_13 = p_camera->basis.i.z;
 	p_camera->vm.e_14 = -ksx_vec3_dot(p_camera->basis.i, p_camera->basis.o);
+	// p_camera->vm.e_14 = -ksx_vec3_dot(&p_camera->basis.i, &p_camera->basis.o); // Corrected
 	// v = ksx_vec3_unit(&p_camera->basis.w_j);
 	p_camera->vm.e_21 = p_camera->basis.j.x;
 	p_camera->vm.e_22 = p_camera->basis.j.y;
@@ -41,4 +42,6 @@ void ksx_camera_set_vm(t_camera *p_camera)
 	p_camera->vm.e_43 = 0;
 	p_camera->vm.e_44 = 1;
 	ksx_m4_invert(&p_camera->vm, &p_camera->ivm);
+	// ksx_m4_transpose(&p_camera->ivm, &p_camera->vm);
+	// p_camera->vm = p_camera->ivm;
 }

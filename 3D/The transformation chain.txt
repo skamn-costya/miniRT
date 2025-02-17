@@ -1,0 +1,36 @@
+The transformation chain is usually written as:
+
+clip
+=
+Projection
+×
+View
+×
+Model
+×
+vertex
+clip=Projection×View×Model×vertex
+
+Here's how each step works:
+
+Model Matrix:
+
+Input: A vertex in model (or object) space.
+Output: Transforms the vertex to world space.
+Meaning: This matrix positions, scales, and rotates the object within the world.
+View Matrix:
+
+Input: A vertex now in world space.
+Output: Transforms the vertex to camera (or view) space.
+Meaning: This matrix positions and orients the world relative to the camera (effectively placing the camera at the origin).
+Projection Matrix:
+
+Input: A vertex in camera space.
+Output: Transforms the vertex to clip space.
+Meaning: This matrix applies perspective (or orthographic) projection, preparing the vertex for the perspective divide.
+So, the world coordinates are produced as the output of the Model transformation. The chain is:
+
+Model Transformation: Model coordinates → World Coordinates
+View Transformation: World Coordinates → Camera Coordinates
+Projection Transformation: Camera Coordinates → Clip Coordinates
+If you combine them, world coordinates are implicit between the Model and View matrices.
