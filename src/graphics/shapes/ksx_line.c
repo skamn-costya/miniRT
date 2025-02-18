@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:52:47 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/09 15:17:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:16:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
 #include <math.h>
+#include <stdio.h>
 
 static void	ksx_line_(mlx_image_t *img,
 				t_pixel p1, t_pixel p2, int32_t d_xy[]);
@@ -26,7 +27,10 @@ void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2)
 	float	m;
 	int32_t	d_xy[4];
 
-	ksx_set_pixel(img, &pix1);
+	printf("Line: %lu.%lu : %lu.%lu\n", pix1.x, pix1.y, pix2.x, pix2.y);
+	// if ((pix1.x > img->width || pix1.y > img->height) || (pix2.x > img->width || pix2.y > img->height))
+	// 	return;
+	// ksx_set_pixel(img, &pix1);
 	d_xy[0] = pix2.x - pix1.x;
 	d_xy[1] = pix2.y - pix1.y;
 	d_xy[2] = 0;
@@ -47,7 +51,7 @@ void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2)
 		ksx_line_x (img, pix1, pix2, d_xy);
 	else
 		ksx_line_y (img, pix1, pix2, d_xy);
-	ksx_set_pixel(img, &pix2);
+	// ksx_set_pixel(img, &pix2);
 }
 
 static t_color	ksx_get_color(t_pixel p, t_pixel p1, t_pixel p2)

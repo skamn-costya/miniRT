@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/13 16:29:37 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/18 14:16:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ksx_draw_tris(t_triangle **pp_tri, uint32_t *p_size,
 	idx = 0;
 	while (idx < *p_size)
 	{
-		ksx_draw_tri(pp_tri[idx], p_image, p_camera, DRAW_LINE);
+		ksx_draw_tri(pp_tri[idx], p_image, p_camera);
 		idx++;
 	}
 }

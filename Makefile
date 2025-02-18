@@ -42,7 +42,8 @@ MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 		ksx_draw_box.c \
 		ksx_draw_tris.c \
 		ksx_draw_tri.c \
-		ksx_draw_get_pixel.c
+		ksx_draw_get_pixel.c \
+		ksx_draw_vertex.c
 3D = $(addprefix $(3D_DIR), $(3D_FN))
 
 BASIS_DIR = graphics/basis/
@@ -75,7 +76,8 @@ SPHERE = $(addprefix $(SPHERE_DIR), $(SPHERE_FN))
 
 # Cylinder object
 CYLINDER_DIR = graphics/cylinder/
-CYLINDER_FN = ksx_cylinder01.c
+CYLINDER_FN =	ksx_cylinder01.c \
+				ksx_cylinder02.c
 CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FN))
 
 # Draw shapes functions

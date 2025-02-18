@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 18:55:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/18 13:28:29 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 		return (printf("Error: memory allocation failed!\n"), NULL);
 	p_object->flags = 0x00000000;
 	p_object->center = *p_center;
+	p_object->edge = EDGE_SIZE;
+	p_object->size1 = 0;
+	p_object->size2 = 0;
 	p_object->angle.x = 0;
 	p_object->angle.y = 0;
 	p_object->angle.z = 0;

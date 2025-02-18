@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/18 02:06:46 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:40:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 # include "MLX42.h"
 # include <stdint.h>
 
-# define PM_DEBUG	1
-# define DRAW_LINE	0
+# define PM_DEBUG	0
+# define DRAW_LINE	1
 # define AXIS_LEN 	5
+# define FAR	 	1000
 
 // # define WIDTH 1920
 // # define HEIGHT 1044
@@ -59,8 +60,11 @@
 # define RORATE_Z 0x00010000
 # define CHANGE_CENTER 0x00010000
 
+# define EDGE_SIZE	10.f
 // Sphere generation
-# define SPHERE_GEN 3
+# define SPHERE_GEN 4
+// Cylinder step angle
+# define CYLINDER_ANGLE 45.f
 
 # define ANGLE 1.f
 # define STEP 5.f
@@ -355,6 +359,7 @@ typedef struct s_object
 	t_color		color;
 	float		size1;
 	float		size2;
+	float		edge;
 	t_vector3	angle;
 	t_vector3	c_center;
 	t_basis		basis;
