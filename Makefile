@@ -41,7 +41,8 @@ MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 		ksx_draw_axis.c \
 		ksx_draw_box.c \
 		ksx_draw_tris.c \
-		ksx_draw_tri.c
+		ksx_draw_tri.c \
+		ksx_draw_get_pixel.c
 3D = $(addprefix $(3D_DIR), $(3D_FN))
 
 BASIS_DIR = graphics/basis/

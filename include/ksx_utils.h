@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/15 08:45:37 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/18 02:06:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define KSX_UTILS_H
 
 # include "ksx_graphics.h"
-
-# define AXIS_LEN 25
 
 // ksx_utils04.c
 float		ksx_fraction(const t_pixel p, const t_pixel p1, const t_pixel p2);

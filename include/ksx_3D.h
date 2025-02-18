@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:54 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/13 16:28:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/18 01:38:05 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define KSX_3D_H
 
 # define BOX_COLOR	0x88888888
-# define DRAW_LINE	1
 
 # include "ksx_graphics.h"
 
@@ -28,4 +27,6 @@ void	ksx_draw_box(t_object *p_obj, mlx_image_t *p_image,
 			t_camera *p_camera);
 void	ksx_draw_obj(t_object *p_obj, mlx_image_t *p_image,
 			t_camera *p_camera);
+t_pixel	ksx_draw_get_pixel(t_camera *p_camera,
+			t_vector3 *p_point, uint32_t color);
 #endif	// KSX_3D_H //
