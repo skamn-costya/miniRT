@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/18 00:03:21 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/18 21:59:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,35 +112,50 @@ void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 // 	p_cam->pm.e_43 = 1;
 // }
 
-// https://www.mauriciopoppe.com
-//  /notes/computer-graphics/viewing/projection-transform/
+// https://www.mauriciopoppe.com/notes/computer-graphics/viewing/projection-transform/
+// https://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/#the-view-matrix
 
 void	ksx_camera_set_pm(t_camera *p_camera, float fov, float far)
 {
-	float	f;
-
+	(void) p_camera;
+	(void) fov;
+	(void) far;
 	if (fov < 1 || fov > 179)
 		return;
-	p_camera->fov = fov;
-	p_camera->hfov = fov * PI180;
-	p_camera->near = (float) 100.0f;
-	p_camera->far = far;
-	f = 1.f / tanf(p_camera->hfov * .5f);
 	ksx_m4_reset(&p_camera->pm);
-	p_camera->pm.e_11 = f;
-	p_camera->pm.e_22 = f;
-	// p_camera->pm.e_22 = 1.f / (p_camera->aspect * tanf(p_camera->vfov * .5f));
-	// p_camera->pm.e_33 = -((p_camera->far + p_camera->near)
-	// 		/ (p_camera->far - p_camera->near));
-	p_camera->pm.e_33 = -((p_camera->far)
-			/ (p_camera->far - p_camera->near));
-	p_camera->pm.e_34 = 1.f;
-	p_camera->pm.e_43 = (1.f / (p_camera->far - p_camera->near));
-	// p_camera->pm.e_43 = -((2.f * p_camera->far * p_camera->near)
-	// 		/ (p_camera->far - p_camera->near));
-	// p_camera->pm.e_43 = ((2.f * p_camera->far * p_camera->near)
-	// 		/ (p_camera->far - p_camera->near));
+	p_camera->pm.e_11 = 1;
+	p_camera->pm.e_22 = 1;
+	p_camera->pm.e_33 = 1;
+	p_camera->pm.e_44 = 1;
 }
+
+
+// void	ksx_camera_set_pm(t_camera *p_camera, float fov, float far)
+// {
+// 	float	f;
+
+// 	if (fov < 1 || fov > 179)
+// 		return;
+// 	p_camera->fov = fov;
+// 	p_camera->hfov = fov * PI180;
+// 	p_camera->near = (float) 100.0f;
+// 	p_camera->far = far;
+// 	f = 1.f / tanf(p_camera->hfov * .5f);
+// 	ksx_m4_reset(&p_camera->pm);
+// 	p_camera->pm.e_11 = f;
+// 	p_camera->pm.e_22 = f;
+// 	// p_camera->pm.e_22 = 1.f / (p_camera->aspect * tanf(p_camera->vfov * .5f));
+// 	// p_camera->pm.e_33 = -((p_camera->far + p_camera->near)
+// 	// 		/ (p_camera->far - p_camera->near));
+// 	p_camera->pm.e_33 = -((p_camera->far)
+// 			/ (p_camera->far - p_camera->near));
+// 	p_camera->pm.e_34 = 1.f;
+// 	p_camera->pm.e_43 = (1.f / (p_camera->far - p_camera->near));
+// 	// p_camera->pm.e_43 = -((2.f * p_camera->far * p_camera->near)
+// 	// 		/ (p_camera->far - p_camera->near));
+// 	// p_camera->pm.e_43 = ((2.f * p_camera->far * p_camera->near)
+// 	// 		/ (p_camera->far - p_camera->near));
+// }
 
 // void ksx_camera_set_pm(t_camera *p_camera, float fov, float far)
 // {

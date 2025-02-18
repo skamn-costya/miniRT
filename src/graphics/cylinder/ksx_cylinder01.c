@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/18 18:28:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/18 22:18:51 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
 	uint32_t	idx[2];
 	float		step;
 	t_vertex	**pp_vertex;
-	t_vector3	v3;
+	// t_vector3	v3;
 
 	step = p_object->size2 * 2.f / roundf((p_object->size2 * 2.f) / p_object->edge);
-	v3 = ksx_vec3_set(0, 1, 0);
+	// v3 = ksx_vec3_set(0, 1, 0);
 	idx[0] = 1;
 	while (idx[0] < (p_object->size2 * 2.f / step) + 1)
 	{
@@ -114,13 +114,13 @@ static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
 		{
 			pp_vertex[idx[1]]->p_p = ksx_vec3_set(p_object->pp_over[idx[1] + 2]->p_p.x,
 				p_object->size2 - (step * idx[0] + 1), p_object->pp_over[idx[1] + 2]->p_p.z);
-			if (idx[0] % 2)
-				ksx_qrotation(&pp_vertex[idx[1]]->p_p, CYLINDER_ANGLE * .5f, &v3);
+			// if (idx[0] % 2)
+			// 	ksx_qrotation(&pp_vertex[idx[1]]->p_p, CYLINDER_ANGLE * .5f, &v3);
 			idx[1]++;
 		}
 		idx[0]++;
 	}
-	ksx_init_cylinder_tri(p_object, size, (p_object->size2 * 2.f / step));
+	ksx_init_cylinder_tri(p_object, size, (p_object->size2 * 2.f / step) + 1);
 }
 
 static void	ksx_init_cylinder_2(t_object *p_object, uint32_t size)

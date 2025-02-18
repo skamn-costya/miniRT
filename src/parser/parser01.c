@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/03 23:42:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/18 23:36:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ static t_list	*create_line_list(int fd)
 	while (p_str[0])
 	{
 		p_str[1] = ft_strtrim(p_str[0], TRIM_SYMBOLS);
+		free (p_str[0]);
+		p_str[0] = p_str[1];
+		p_str[1] = ft_strreplace(p_str[0], TRIM_SYMBOLS, ' ');
 		free (p_str[0]);
 		p_str[0] = comma_trim(p_str[1]);
 		free (p_str[1]);
