@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 13:01:41 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 17:08:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 #include "ksx_m3_math.h"
 #include "ksx_m4_math.h"
 #include "ksx_object.h"
+#include "ksx_basis.h"
 #include <math.h>
+#include <stdio.h>
 
 void	ksx_transform(t_vector3 *p_point, t_matrix4 *p_tm,
 		t_vector3 *p_result)
@@ -30,16 +32,56 @@ void	ksx_transform(t_vector3 *p_point, t_matrix4 *p_tm,
 	p_result->z = v4.z;
 }
 
-void	ksx_transform_obj(t_object *p_object, t_basis *p_basis)
+void	ksx_transform_obj(t_object *p_object)
 {
 	t_matrix4	tm;
 	uint32_t	idx;
+	t_vector3	v;
+	t_basis		basis;
 
-	ksx_get_tm (&tm, p_basis);
+	printf("basis->i.x = %f\n", p_object->basis.i.x);
+	printf("basis->i.y = %f\n", p_object->basis.i.y);
+	printf("basis->i.z = %f\n", p_object->basis.i.z);
+	printf("basis->j.x = %f\n", p_object->basis.j.x);
+	printf("basis->j.y = %f\n", p_object->basis.j.y);
+	printf("basis->j.z = %f\n", p_object->basis.j.z);
+	printf("basis->k.x = %f\n", p_object->basis.k.x);
+	printf("basis->k.y = %f\n", p_object->basis.k.y);
+	printf("basis->k.z = %f\n", p_object->basis.k.z);
+	printf("mag(basis->i) = %f\n", ksx_vec3_mag(&p_object->basis.i));
+	printf("mag(basis->j) = %f\n", ksx_vec3_mag(&p_object->basis.j));
+	printf("mag(basis->k) = %f\n", ksx_vec3_mag(&p_object->basis.k));
+	printf("angle(basis->i, basis->j) = %f\n", ksx_vec3_angle(&p_object->basis.i, &p_object->basis.j) / PI180);
+	printf("angle(basis->j, basis->k) = %f\n", ksx_vec3_angle(&p_object->basis.j, &p_object->basis.k) / PI180);
+	printf("angle(basis->k, basis->i) = %f\n\n", ksx_vec3_angle(&p_object->basis.k, &p_object->basis.i) / PI180);
+	ksx_obj_copy_vrts (p_object->pp_vrtx_origin, p_object->pp_vrtx, p_object->size_vrtx);
+	v = ksx_vec3_set(0, 0, 0);
+	ksx_basis_set_norm(&basis, &v);
+	ksx_vec3_resize(&basis.i, ksx_vec3_mag(&p_object->basis.i));
+	ksx_vec3_resize(&basis.j, ksx_vec3_mag(&p_object->basis.j));
+	ksx_vec3_resize(&basis.k, ksx_vec3_mag(&p_object->basis.k));
+	ksx_get_tm (&tm, &basis);
 	idx = 0;
-	while (idx < p_object->size_over)
+	while (idx < p_object->size_vrtx)
 	{
-		ksx_transform(&p_object->pp_over[idx]->p_p, &tm, &p_object->pp_over[idx]->p_p);
+		ksx_transform(&p_object->pp_vrtx[idx]->p_p, &tm, &p_object->pp_vrtx[idx]->p_p);
+		idx++;
+	}
+	idx = 0;
+	while (idx < 8)
+	{
+		ksx_transform(&p_object->box_ver[idx].p_p, &tm, &p_object->box_ver[idx].p_p);
+		idx++;
+	}
+	basis = p_object->basis;
+	ksx_vec3_resize(&basis.i, 1.f);
+	ksx_vec3_resize(&basis.j, 1.f);
+	ksx_vec3_resize(&basis.k, 1.f);
+	ksx_get_tm (&tm, &basis);
+	idx = 0;
+	while (idx < p_object->size_vrtx)
+	{
+		ksx_transform(&p_object->pp_vrtx[idx]->p_p, &tm, &p_object->pp_vrtx[idx]->p_p);
 		idx++;
 	}
 	idx = 0;

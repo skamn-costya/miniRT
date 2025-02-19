@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 11:47:05 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:43:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	ksx_qrotation_obj(t_object *p_object, float angle, t_vector3 v)
 	if (!angle)
 		return ;
 	idx = 0;
-	while (idx < p_object->size_over)
+	while (idx < p_object->size_vrtx)
 	{
-		ksx_qrotation(&p_object->pp_over[idx]->p_p, angle, &v);
+		ksx_qrotation(&p_object->pp_vrtx[idx]->p_p, angle, &v);
 		idx++;
 	}
 	// ksx_qrotation(&p_object->axis.p_ver1->p_p, angle, &v);

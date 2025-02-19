@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 16:21:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:43:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ t_vertex	**ksx_obj_add_vers(t_object *p_object, uint32_t size)
 	uint32_t	idx;
 
 	pp_ver = (t_vertex **) malloc (sizeof(t_vertex *)
-			* (p_object->size_over + size + 1));
+			* (p_object->size_vrtx + size + 1));
 	if (!pp_ver)
 		return ((void) printf ("Error: memory allocation failed!\n"), NULL);
-	ksx_null_pointers((void **) pp_ver, p_object->size_over + size + 1);
+	ksx_null_pointers((void **) pp_ver, p_object->size_vrtx + size + 1);
 	idx = 0;
-	while (idx < p_object->size_over)
+	while (idx < p_object->size_vrtx)
 	{
-		pp_ver[idx] = p_object->pp_over[idx];
+		pp_ver[idx] = p_object->pp_vrtx[idx];
 		idx++;
 	}
-	p_object->size_over += size;
-	while (idx < p_object->size_over)
+	p_object->size_vrtx += size;
+	while (idx < p_object->size_vrtx)
 	{
 		pp_ver[idx] = (t_vertex *) malloc (sizeof(t_vertex));
 		if (!pp_ver[idx])
@@ -45,6 +45,6 @@ t_vertex	**ksx_obj_add_vers(t_object *p_object, uint32_t size)
 				(void) printf ("Error: memory allocation failed!\n"), NULL);
 		idx++;
 	}
-	free(p_object->pp_over);
-	return (p_object->pp_over = pp_ver, &pp_ver[p_object->size_over - size]);
+	free(p_object->pp_vrtx);
+	return (p_object->pp_vrtx = pp_ver, &pp_ver[p_object->size_vrtx - size]);
 }

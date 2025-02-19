@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/06 16:27:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:58:10 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	ksx_clean_world(t_world *p_world)
 	{
 		p_object = p_world->pp_wobj[idx[0]];
 		idx[1] = 0;
-		while (idx[1] < p_object->size_otri)
-			free(p_object->pp_otri[idx[1]++]);
-		free(p_object->pp_otri);
+		while (idx[1] < p_object->size_tri)
+			free(p_object->pp_tri[idx[1]++]);
+		free(p_object->pp_tri);
 		free(p_object);
 		idx[0]++;
 	}

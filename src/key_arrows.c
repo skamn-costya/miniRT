@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/14 10:59:31 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:53:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,40 +17,48 @@
 
 void	key_arrows(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	if (p_keydata->key == MLX_KEY_RIGHT)
+	if (p_keydata->key == MLX_KEY_RIGHT && (p_keydata->action == MLX_PRESS || p_keydata->action == MLX_REPEAT))
 		key_right(p_keydata, p_grph);
-	else if (p_keydata->key == MLX_KEY_LEFT)
+	else if (p_keydata->key == MLX_KEY_LEFT && (p_keydata->action == MLX_PRESS || p_keydata->action == MLX_REPEAT))
 		key_left(p_keydata, p_grph);
-	else if (p_keydata->key == MLX_KEY_UP)
+	else if (p_keydata->key == MLX_KEY_UP && (p_keydata->action == MLX_PRESS || p_keydata->action == MLX_REPEAT))
 		key_up(p_keydata, p_grph);
-	else if (p_keydata->key == MLX_KEY_DOWN)
+	else if (p_keydata->key == MLX_KEY_DOWN && (p_keydata->action == MLX_PRESS || p_keydata->action == MLX_REPEAT))
 		key_down(p_keydata, p_grph);
 }
 
 void	key_right(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	(void) p_keydata;
-	ksx_qrotation_basis(&p_grph->camera.basis, ANGLE, p_grph->camera.basis.j);
-	p_grph->camera.flags |= CHANGE;
+	if (p_keydata->modifier != MLX_SHIFT)
+	{
+		ksx_qrotation_basis(&p_grph->camera.basis, ANGLE, p_grph->camera.basis.j);
+		p_grph->camera.flags |= CHANGE & RORATE & RORATE_Y;
+	}
 }
 
 void	key_left(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	(void) p_keydata;
-	ksx_qrotation_basis(&p_grph->camera.basis, -ANGLE, p_grph->camera.basis.j);
-	p_grph->camera.flags |= CHANGE;
+	if (p_keydata->modifier != MLX_SHIFT)
+	{
+		ksx_qrotation_basis(&p_grph->camera.basis, -ANGLE, p_grph->camera.basis.j);
+		p_grph->camera.flags |= CHANGE & RORATE & RORATE_Y;
+	}
 }
 
 void	key_up(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	(void) p_keydata;
-	ksx_qrotation_basis(&p_grph->camera.basis, ANGLE, p_grph->camera.basis.i);
-	p_grph->camera.flags |= CHANGE;
+	if (p_keydata->modifier != MLX_SHIFT)
+	{
+		ksx_qrotation_basis(&p_grph->camera.basis, ANGLE, p_grph->camera.basis.i);
+		p_grph->camera.flags |= CHANGE & RORATE & RORATE_X;
+	}
 }
 
 void	key_down(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	(void) p_keydata;
-	ksx_qrotation_basis(&p_grph->camera.basis, -ANGLE, p_grph->camera.basis.i);
-	p_grph->camera.flags |= CHANGE;
+	if (p_keydata->modifier != MLX_SHIFT)
+	{
+		ksx_qrotation_basis(&p_grph->camera.basis, -ANGLE, p_grph->camera.basis.i);
+		p_grph->camera.flags |= CHANGE & RORATE & RORATE_X;
+	}
 }

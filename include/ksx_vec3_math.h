@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:53:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 12:07:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:57:40 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,6 @@ t_vector4	ksx_vec3_vec4(const t_vector3 *p_v, float w);
 
 // ksx_vec3_math04.c
 t_vector3	ksx_vec3_sadd(const t_vector3 *p_v, const float scalar);
+t_vector3	ksx_vec3_ssub(const t_vector3 *p_v, const float scalar);
 
 #endif	// KSX_VEC3_MATH_H

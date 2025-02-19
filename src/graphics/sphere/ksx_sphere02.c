@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 17:52:32 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 14:58:10 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void	ksx_sphere_split(t_object *p_object)
 	uint32_t	idx;
 
 	idx = 0;
-	pp_ver = ksx_obj_add_vers(p_object, (p_object->size_otri * 3));
-	pp_tri = ksx_obj_new_tris(p_object->size_otri * 4);
-	while (idx < p_object->size_otri)
+	pp_ver = ksx_obj_add_vers(p_object, (p_object->size_tri * 3));
+	pp_tri = ksx_obj_new_tris(p_object->size_tri * 4);
+	while (idx < p_object->size_tri)
 	{
-		p_tris = p_object->pp_otri[idx];
+		p_tris = p_object->pp_tri[idx];
 		pp_ver[idx * 3]->p_p = ksx_mid_point(&p_tris->p_ver1->p_p, &p_tris->p_ver2->p_p);
 		pp_ver[idx * 3 + 1]->p_p = ksx_mid_point(&p_tris->p_ver2->p_p, &p_tris->p_ver3->p_p);
 		pp_ver[idx * 3 + 2]->p_p = ksx_mid_point(&p_tris->p_ver3->p_p, &p_tris->p_ver1->p_p);
@@ -53,9 +53,9 @@ void	ksx_sphere_split(t_object *p_object)
 		pp_tri[idx * 4 + 3]->color = p_object->color;
 		idx++;
 	}
-	ksx_free_pointers((void ***) &p_object->pp_otri);
-	p_object->pp_otri = pp_tri;
-	p_object->size_otri *= 4;
+	ksx_free_pointers((void ***) &p_object->pp_tri);
+	p_object->pp_tri = pp_tri;
+	p_object->size_tri *= 4;
 }
 
 // static void	ksx_sphere_split_(t_object *p_object, float *p_radius,

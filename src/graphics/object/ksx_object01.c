@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 13:18:32 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 16:43:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,51 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object->edge = EDGE_SIZE;
 	p_object->size1 = 0;
 	p_object->size2 = 0;
-	v = ksx_vec3_set(0, 1, 0);
+	v = ksx_vec3_set(0, 0, 0);
 	ksx_basis_set_norm(&p_object->basis, &v);
 	p_object->basis.w_o = *p_center;
 	p_object->basis.w_i = ksx_vec3_add(&p_object->basis.i, &p_object->basis.w_o);
 	p_object->basis.w_j = ksx_vec3_add(&p_object->basis.j, &p_object->basis.w_o);
 	p_object->basis.w_k = ksx_vec3_add(&p_object->basis.k, &p_object->basis.w_o);
-	p_object->pp_over = NULL;
-	p_object->size_over = 0;
-	p_object->pp_otri = NULL;
-	p_object->size_otri = 0;
+	p_object->pp_vrtx = NULL;
+	p_object->size_vrtx = 0;
+	p_object->pp_tri = NULL;
+	p_object->size_tri = 0;
 	return (p_object);
+}
+
+t_vertex	**ksx_obj_vrts_dup2origin(t_object *p_object)
+{
+	uint32_t	idx;
+
+	p_object->pp_vrtx_origin = (t_vertex **) malloc(sizeof(t_vertex *) * (p_object->size_vrtx + 1));
+	if (!p_object->pp_vrtx_origin)
+		return (NULL);
+	idx = 0;
+	ksx_null_pointers((void **) p_object->pp_vrtx_origin, p_object->size_vrtx + 1);
+	while (idx < p_object->size_vrtx)
+	{
+		p_object->pp_vrtx_origin[idx] = (t_vertex *) malloc(sizeof(t_vertex));
+		if (!p_object->pp_vrtx_origin[idx])
+			return (ksx_free_pointers((void ***) &p_object->pp_vrtx_origin),
+				(void) printf ("Error: memory allocation failed!\n"), NULL);
+		idx++;
+	}
+	ksx_obj_copy_vrts(p_object->pp_vrtx, p_object->pp_vrtx_origin, p_object->size_vrtx);
+	return (p_object->pp_vrtx_origin);
+}
+
+void	ksx_obj_copy_vrts(t_vertex **pp_vrt1, t_vertex **pp_vrt2, uint32_t size)
+{
+	uint32_t idx;
+
+	idx = 0;
+	while (idx < size)
+	{
+		pp_vrt2[idx]->p_p.x = pp_vrt1[idx]->p_p.x;
+		pp_vrt2[idx]->p_p.y = pp_vrt1[idx]->p_p.y;
+		pp_vrt2[idx]->p_p.z = pp_vrt1[idx]->p_p.z;
+		idx++;
+	}
+	
 }

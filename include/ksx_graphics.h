@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 12:01:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 18:03:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define PM_DEBUG	1
 # define DRAW_LINE	1
-# define AXIS_LEN 	5
+# define AXIS_LEN 	50
 # define FAR	 	1000
 
 // # define WIDTH 1920
@@ -70,6 +70,8 @@
 # define ANGLE 2.5f
 # define STEP 5.f
 # define SCALE .05f
+# define MIN_AXIS .051f
+# define MAX_AXIS 5.f
 
 // Data type for colors, 32 bites: 8 - alfa, 8 - blue, 8 - green, 8 - red
 typedef struct s_color
@@ -365,10 +367,11 @@ typedef struct s_object
 	t_basis		basis;
 	t_vertex	box_ver[8];
 	t_triangle	box[12];
-	t_vertex	**pp_over;
-	uint32_t	size_over;
-	t_triangle	**pp_otri;
-	uint32_t	size_otri;
+	t_vertex	**pp_vrtx_origin;
+	t_vertex	**pp_vrtx;
+	uint32_t	size_vrtx;
+	t_triangle	**pp_tri;
+	uint32_t	size_tri;
 	// void		(*f_transform)(void *, t_basis *);
 }	t_object;
 
