@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 17:50:21 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 11:48:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ void	ksx_translate_obj(t_object *p_object)
 	idx = 0;
 	while (idx < p_object->size_over)
 	{
-		ksx_translate(&p_object->pp_over[idx]->p_p, &p_object->center, &p_object->pp_over[idx]->p_wp);
+		ksx_translate(&p_object->pp_over[idx]->p_p, &p_object->basis.w_o, &p_object->pp_over[idx]->p_wp);
 		idx++;
 	}
-	ksx_translate(&p_object->axis.p_ver1->p_p, &p_object->center, &p_object->axis.p_ver1->p_wp);
-	ksx_translate(&p_object->axis.p_ver2->p_p, &p_object->center, &p_object->axis.p_ver2->p_wp);
-	ksx_translate(&p_object->axis.p_ver3->p_p, &p_object->center, &p_object->axis.p_ver3->p_wp);
+	// ksx_translate(&p_object->axis.p_ver1->p_p, &p_object->basis.w_o, &p_object->axis.p_ver1->p_wp);
+	// ksx_translate(&p_object->axis.p_ver2->p_p, &p_object->basis.w_o, &p_object->axis.p_ver2->p_wp);
+	// ksx_translate(&p_object->axis.p_ver3->p_p, &p_object->basis.w_o, &p_object->axis.p_ver3->p_wp);
 	idx = 0;
 	while (idx < 8)
 	{
-		ksx_translate(&p_object->box_ver[idx].p_p, &p_object->center, &p_object->box_ver[idx].p_wp);
+		ksx_translate(&p_object->box_ver[idx].p_p, &p_object->basis.w_o, &p_object->box_ver[idx].p_wp);
 		idx++;
 	}
 }

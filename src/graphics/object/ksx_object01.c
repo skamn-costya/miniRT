@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/18 13:28:29 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:18:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,18 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	if (!p_object)
 		return (printf("Error: memory allocation failed!\n"), NULL);
 	p_object->flags = 0x00000000;
-	p_object->center = *p_center;
 	p_object->edge = EDGE_SIZE;
 	p_object->size1 = 0;
 	p_object->size2 = 0;
-	p_object->angle.x = 0;
-	p_object->angle.y = 0;
-	p_object->angle.z = 0;
-	p_object->c_center = p_object->center;
+	v = ksx_vec3_set(0, 1, 0);
+	ksx_basis_set_norm(&p_object->basis, &v);
+	p_object->basis.w_o = *p_center;
+	p_object->basis.w_i = ksx_vec3_add(&p_object->basis.i, &p_object->basis.w_o);
+	p_object->basis.w_j = ksx_vec3_add(&p_object->basis.j, &p_object->basis.w_o);
+	p_object->basis.w_k = ksx_vec3_add(&p_object->basis.k, &p_object->basis.w_o);
 	p_object->pp_over = NULL;
 	p_object->size_over = 0;
 	p_object->pp_otri = NULL;
 	p_object->size_otri = 0;
-	// p_object->last_gen = 0;
-	v = ksx_vec3_set(0, 1, 0);
-	p_object->basis = ksx_get_basis_obj(&v);
-	p_object->axis_ver[0].p_p = ksx_vec3_set(AXIS_LEN, 0, 0);
-	p_object->axis_ver[1].p_p = ksx_vec3_set(0, AXIS_LEN, 0);
-	p_object->axis_ver[2].p_p = ksx_vec3_set(0, 0, AXIS_LEN);
-	p_object->axis.p_ver1 = &p_object->axis_ver[0];
-	p_object->axis.p_ver2 = &p_object->axis_ver[1];
-	p_object->axis.p_ver3 = &p_object->axis_ver[2];
 	return (p_object);
 }

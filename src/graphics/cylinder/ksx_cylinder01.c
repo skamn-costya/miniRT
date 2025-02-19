@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/18 22:18:51 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 13:23:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 	p_object->color = color;
 	p_object->size1 = dia_ht[0] * .5f;
 	p_object->size2 = dia_ht[1] * .5f;
-	p_object->basis = ksx_get_basis_obj(&norm);
+	// p_object->basis = ksx_get_basis_obj(&norm);
+	ksx_basis_set_norm(&p_object->basis, &norm);
 	ksx_init_cylinder_box (p_object);
-	// ksx_init_cylinder_tri(p_object);
 	ksx_init_cylinder(p_object);
 	ksx_transform_obj(p_object, &p_object->basis);
 	return (p_object);
@@ -89,7 +89,6 @@ static void	ksx_init_cylinder(t_object *p_object)
 		xz[1] = p_object->size1 * sinf(CYLINDER_ANGLE * idx * PI180);
 		idx++;
 		p_object->pp_over[idx]->p_p = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
-		// p_object->pp_over[idx + size]->p_p = ksx_vec3_set(xz[0], -p_object->size2, xz[1]);
 	}
 	p_object->edge = ksx_vec3_dist(p_object->pp_over[2]->p_p, p_object->pp_over[3]->p_p);
 	ksx_init_cylinder_1(p_object, size);
@@ -101,10 +100,8 @@ static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
 	uint32_t	idx[2];
 	float		step;
 	t_vertex	**pp_vertex;
-	// t_vector3	v3;
 
 	step = p_object->size2 * 2.f / roundf((p_object->size2 * 2.f) / p_object->edge);
-	// v3 = ksx_vec3_set(0, 1, 0);
 	idx[0] = 1;
 	while (idx[0] < (p_object->size2 * 2.f / step) + 1)
 	{
@@ -133,7 +130,6 @@ static void	ksx_init_cylinder_2(t_object *p_object, uint32_t size)
 	return;
 	step = p_object->size1 / roundf(p_object->size1 / p_object->edge);
 	idx[0] = 1;
-	// while (idx[0] < p_object->size1 / step)
 	while (idx[0] < 2)
 	{
 		pp_vertex = ksx_obj_add_vers(p_object, size * 2);
@@ -149,24 +145,3 @@ static void	ksx_init_cylinder_2(t_object *p_object, uint32_t size)
 		idx[0]++;
 	}
 }
-
-// static t_triangle	**ksx_init_cylinder_tri(t_object *p_object)
-// {
-// 	uint32_t	idx;
-// 	t_triangle	*p_tri;
-// 	t_triangle	**pp_tri;
-
-// 	return (NULL);
-// 	idx = 0;
-// 	while (idx < 12)
-// 	{
-// 		p_tri = (t_triangle *) malloc (sizeof(t_triangle));
-// 		if (!p_tri)
-// 			return (printf("Error: memory allocation failed!\n"), NULL);
-// 		p_tri->generation = 1;
-// 		pp_tri = ksx_tri2obj(p_tri, p_object);
-// 		idx++;
-// 	}
-// 	p_object->last_gen = 1;
-// 	return (pp_tri);
-// }

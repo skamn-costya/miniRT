@@ -23,6 +23,7 @@ VECTOR_MATH_DIR = graphics/utils/vector_math/
 VECTOR_MATH_FN =	ksx_vec3_math01.c \
 					ksx_vec3_math02.c \
 					ksx_vec3_math03.c \
+					ksx_vec3_math04.c \
 					ksx_vec4_math01.c \
 					ksx_vec4_math02.c \
 					ksx_vec4_math03.c

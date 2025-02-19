@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/18 22:20:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:01:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@
 // # define CYLINDER_ANGLE 12.f
 # define CYLINDER_ANGLE 18.f
 
-# define ANGLE 1.f
+# define ANGLE 2.5f
 # define STEP 5.f
 # define SCALE .05f
 
@@ -208,6 +208,8 @@ typedef struct s_basis
 	};
 	// uint8_t		set;
 	t_vector3	o;
+	t_vector3	w_o;
+	t_vector3	c_o;
 }	t_basis;
 
 typedef struct s_matrix22
@@ -356,24 +358,17 @@ typedef struct s_triangle
 typedef struct s_object
 {
 	uint8_t		flags;
-	t_vector3	center;
 	t_color		color;
 	float		size1;
 	float		size2;
 	float		edge;
-	t_vector3	angle;
-	t_vector3	c_center;
 	t_basis		basis;
-	t_vertex	axis_ver[3];
-	t_triangle	axis;
 	t_vertex	box_ver[8];
 	t_triangle	box[12];
-	// t_matrix4 	w_vm;
 	t_vertex	**pp_over;
 	uint32_t	size_over;
 	t_triangle	**pp_otri;
 	uint32_t	size_otri;
-	// uint32_t	last_gen;
 	// void		(*f_transform)(void *, t_basis *);
 }	t_object;
 

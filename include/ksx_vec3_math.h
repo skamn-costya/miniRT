@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 10:53:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 20:23:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 12:07:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ void		ksx_vec3_resize(t_vector3 *p_v, const float size);
 t_matrix3	ksx_vec3_tensor(const t_vector3 v1, const t_vector3 v2);
 
 // ksx_vec3_math03.c
-float		ksx_vec3_dot(const t_vector3 v1, const t_vector3 v2);
-t_vector3	ksx_vec3_multi(const t_vector3 v, const float scalar);
-t_vector3	ksx_vec3_div(const t_vector3 v, const float scalar);
+float		ksx_vec3_dot(const t_vector3 *p_v1, const t_vector3 *p_v2);
+t_vector3	ksx_vec3_smulti(const t_vector3 *p_v, const float scalar);
+t_vector3	ksx_vec3_sdiv(const t_vector3 *p_v, const float scalar);
 t_vector3	ksx_vec3_set(float x, float y, float z);
 t_vector4	ksx_vec3_vec4(const t_vector3 *p_v, float w);
+
+// ksx_vec3_math04.c
+t_vector3	ksx_vec3_sadd(const t_vector3 *p_v, const float scalar);
 
 #endif	// KSX_VEC3_MATH_H
