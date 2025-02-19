@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 15:18:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 19:13:56 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static void	ksx_init_sphere_box(t_object *p_object)
 	ksx_tri_set_vertexes(&p_object->box[9], &p_object->box_ver[1], &p_object->box_ver[2], &p_object->box_ver[6]);
 	ksx_tri_set_vertexes(&p_object->box[10], &p_object->box_ver[4], &p_object->box_ver[5], &p_object->box_ver[6]);
 	ksx_tri_set_vertexes(&p_object->box[11], &p_object->box_ver[4], &p_object->box_ver[6], &p_object->box_ver[7]);
+	ksx_obj_copy_boxvrts (p_object->box_ver, p_object->box_ver_origin, 8);
 }
 
 static void	ksx_init_sphere(t_object *p_object)

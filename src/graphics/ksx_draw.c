@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 16:38:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:04:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@
 #include "ksx_camera.h"
 #include <math.h>
 #include <stdio.h>
-
-// void	ksx_draw(t_vars *vars);
-// static void	ksx_draw_zord(t_vars *vars);
-// static void	fdf_lines(t_vars *vars, int idx_xy[]);
 
 void	ksx_draw(t_graphics *p_grph)
 {
@@ -39,7 +35,6 @@ void	ksx_draw(t_graphics *p_grph)
 		ksx_camera_set_vm(&p_grph->camera);
 		p_grph->camera.flags ^= CHANGE;
 	}
-
 	p_img = ksx_create_image(p_grph->mlx);
 	pp_object = p_grph->world.pp_wobj;
 	idx = 0;
@@ -52,71 +47,10 @@ void	ksx_draw(t_graphics *p_grph)
 		// if (idx == 0)
 		// 	printf("z -> %f\n",	p_object->basis.c_k.z);
 		ksx_draw_axis (p_object, p_img, &p_grph->camera);
-		// ksx_draw_box (p_object, p_img, &p_grph->camera);
+		ksx_draw_box (p_object, p_img, &p_grph->camera);
 		idx++;
 	}
 	mlx_delete_image(p_grph->mlx, p_grph->img);
 	p_grph->img = p_img;
 	mlx_image_to_window(p_grph->mlx, p_grph->img, 0, 0);
 }
-
-	// point[0] = ksx_point_m4(point[0], p_grph->camera.pm);
-	// point[1] = ksx_point_m4(point[1], p_grph->camera.pm);
-	// point[2] = ksx_point_m4(point[2], p_grph->camera.pm);
-
-// void	ksx_draw(t_vars *vars)
-// {
-// 	int	idx_xy[2];
-
-// 	idx_xy[1] = 0;
-// 	while (idx_xy[1] < vars->xy[1])
-// 	{
-// 		idx_xy[0] = 0;
-// 		while (idx_xy[0] < vars->xy[0])
-// 		{
-// 			// fdf_lines (vars, idx_xy);
-// 			idx_xy[0]++;
-// 		}
-// 		idx_xy[1]++;
-// 	}
-// }
-
-// static void	ksx_draw_zord(t_vars *vars)
-// {
-// 	int	idx_xy[2];
-// 	int	mm[6];
-
-// 	fdf_min_nax (vars->fdf, vars->xy, mm);
-// 	while (mm[4] <= mm[5])
-// 	{
-// 		idx_xy[1] = 0;
-// 		while (idx_xy[1] < vars->xy[1])
-// 		{
-// 			idx_xy[0] = 0;
-// 			while (idx_xy[0] < vars->xy[0])
-// 			{
-// 				if (round (vars->fdf[idx_xy[0]][idx_xy[1]]->xyz_p[2]) == mm[4])
-// 					fdf_lines (vars, idx_xy);
-// 				idx_xy[0]++;
-// 			}
-// 			idx_xy[1]++;
-// 		}
-// 		mm[4]++;
-// 	}
-// }
-
-// static void	ksx_lines(t_vars *vars, int idx_xy[])
-// {
-// 	t_fdf	*fdf;
-
-// 	fdf = vars->fdf[idx_xy[0]][idx_xy[1]];
-// 	fdf_point (vars->img, get_point (fdf, vars->as_xyz, vars->flags));
-// 	if (idx_xy[0] < vars->xy[0] - 1)
-// 		fdf_line (vars->img, get_point (fdf, vars->as_xyz, vars->flags),
-// 			get_point (vars->fdf[idx_xy[0] + 1][idx_xy[1]],
-// 				vars->as_xyz, vars->flags));
-// 	if (idx_xy[1] < vars->xy[1] - 1)
-// 		fdf_line (vars->img, get_point (fdf, vars->as_xyz, vars->flags),
-// 			get_point (vars->fdf[idx_xy[0]][idx_xy[1] + 1],
-// 				vars->as_xyz, vars->flags));
-// }

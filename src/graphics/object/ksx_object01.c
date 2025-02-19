@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 16:43:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:15:22 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,27 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object->basis.w_i = ksx_vec3_add(&p_object->basis.i, &p_object->basis.w_o);
 	p_object->basis.w_j = ksx_vec3_add(&p_object->basis.j, &p_object->basis.w_o);
 	p_object->basis.w_k = ksx_vec3_add(&p_object->basis.k, &p_object->basis.w_o);
+	ksx_obj_set_axis(p_object->w_axis);
 	p_object->pp_vrtx = NULL;
 	p_object->size_vrtx = 0;
 	p_object->pp_tri = NULL;
 	p_object->size_tri = 0;
 	return (p_object);
+}
+
+void	ksx_obj_set_axis(t_vertex *p_ver)
+{
+	t_basis		basis;
+	t_vector3	v;
+
+	v = ksx_vec3_set(0, 0, 0);
+	ksx_basis_set_norm(&basis, &v);
+	p_ver[X].p_p = basis.i;
+	p_ver[Y].p_p = basis.j;
+	p_ver[Z].p_p = basis.k;
+	ksx_vec3_resize(&p_ver[X].p_p, AXIS_LEN);
+	ksx_vec3_resize(&p_ver[Y].p_p, AXIS_LEN);
+	ksx_vec3_resize(&p_ver[Z].p_p, AXIS_LEN);
 }
 
 t_vertex	**ksx_obj_vrts_dup2origin(t_object *p_object)
@@ -78,5 +94,18 @@ void	ksx_obj_copy_vrts(t_vertex **pp_vrt1, t_vertex **pp_vrt2, uint32_t size)
 		pp_vrt2[idx]->p_p.z = pp_vrt1[idx]->p_p.z;
 		idx++;
 	}
-	
+}
+
+void	ksx_obj_copy_boxvrts(t_vertex *p_vrt1, t_vertex *p_vrt2, uint32_t size)
+{
+	uint32_t idx;
+
+	idx = 0;
+	while (idx < size)
+	{
+		p_vrt2[idx].p_p.x = p_vrt1[idx].p_p.x;
+		p_vrt2[idx].p_p.y = p_vrt1[idx].p_p.y;
+		p_vrt2[idx].p_p.z = p_vrt1[idx].p_p.z;
+		idx++;
+	}
 }
