@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 23:11:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:20:40 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "ksx_m4_math.h"
 #include "ksx_vec3_math.h"
 
-void ksx_camera_set_vm(t_camera *p_camera)
+void	ksx_camera_set_vm(t_camera *p_camera)
 {
 	p_camera->vm.e_11 = p_camera->basis.i.x;
 	p_camera->vm.e_12 = p_camera->basis.i.y;

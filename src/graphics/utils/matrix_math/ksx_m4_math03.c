@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:22:40 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/15 12:24:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:53:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 static float	ksx_m4_invert_1(const t_matrix4 *p_m, uint32_t i, uint32_t j);
 
-void 	ksx_m4_invert(const t_matrix4 *p_m1, t_matrix4 *p_m2)
+void	ksx_m4_invert(const t_matrix4 *p_m1, t_matrix4 *p_m2)
 {
 	uint32_t	idx;
 	float		det;
@@ -30,7 +30,7 @@ void 	ksx_m4_invert(const t_matrix4 *p_m1, t_matrix4 *p_m2)
 	while (idx < 16)
 	{
 		m4.elems[idx] = ksx_m4_invert_1(p_m1, idx / 4, idx % 4);
-		m4.elems[idx] *= 1/det;
+		m4.elems[idx] *= 1 / det;
 		idx++;
 	}
 	ksx_m4_transpose(&m4, p_m2);
@@ -57,7 +57,7 @@ static float	ksx_m4_invert_1(const t_matrix4 *p_m, uint32_t i, uint32_t j)
 	return (result);
 }
 
-void 	ksx_m4_transpose(const t_matrix4 *p_m1, t_matrix4 *p_m2)
+void	ksx_m4_transpose(const t_matrix4 *p_m1, t_matrix4 *p_m2)
 {
 	p_m2->e_11 = p_m1->e_11;
 	p_m2->e_12 = p_m1->e_21;

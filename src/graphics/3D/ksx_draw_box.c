@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/18 14:17:28 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:34:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	ksx_draw_box(t_object *p_object,
 	idx = 0;
 	while (idx < 12)
 	{
-		p_object->box[idx].color.mlx_color = BOX_COLOR; // move to create box
 		ksx_draw_tri(&p_object->box[idx], p_image, p_camera);
 		idx++;
 	}

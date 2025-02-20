@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:24:31 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/15 12:02:21 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 19:03:22 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ float		ksx_m4_det(const t_matrix4 *p_m);
  * @param[in] p_m1 a pointer to the matrix for invertible matrix.
  * @param[in] p_m2 a pointer to the matrix result matrix.
  */
-void 	ksx_m4_invert(const t_matrix4 *p_m1, t_matrix4 *p_m2);
+void		ksx_m4_invert(const t_matrix4 *p_m1, t_matrix4 *p_m2);
 
-void 	ksx_m4_transpose(const t_matrix4 *p_m1, t_matrix4 *p_m2);
+void		ksx_m4_transpose(const t_matrix4 *p_m1, t_matrix4 *p_m2);
 
 #endif	// KSX_M4_MATH_H

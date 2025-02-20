@@ -32,15 +32,24 @@ t_matrix3	ksx_m3_multi(const t_matrix3 *p_m1, const t_matrix3 *p_m2)
 {
 	t_matrix3	m3;
 
-	m3.e_11 = p_m1->e_11 * p_m2->e_11 + p_m1->e_12 * p_m2->e_21 + p_m1->e_13 * p_m2->e_31;
-	m3.e_12 = p_m1->e_11 * p_m2->e_12 + p_m1->e_12 * p_m2->e_22 + p_m1->e_13 * p_m2->e_32;
-	m3.e_13 = p_m1->e_11 * p_m2->e_13 + p_m1->e_12 * p_m2->e_23 + p_m1->e_13 * p_m2->e_33;
-	m3.e_21 = p_m1->e_21 * p_m2->e_11 + p_m1->e_22 * p_m2->e_21 + p_m1->e_23 * p_m2->e_31;
-	m3.e_22 = p_m1->e_21 * p_m2->e_12 + p_m1->e_22 * p_m2->e_22 + p_m1->e_23 * p_m2->e_32;
-	m3.e_23 = p_m1->e_21 * p_m2->e_13 + p_m1->e_22 * p_m2->e_23 + p_m1->e_23 * p_m2->e_33;
-	m3.e_31 = p_m1->e_31 * p_m2->e_11 + p_m1->e_32 * p_m2->e_21 + p_m1->e_33 * p_m2->e_31;
-	m3.e_32 = p_m1->e_31 * p_m2->e_12 + p_m1->e_32 * p_m2->e_22 + p_m1->e_33 * p_m2->e_32;
-	m3.e_33 = p_m1->e_31 * p_m2->e_13 + p_m1->e_32 * p_m2->e_23 + p_m1->e_33 * p_m2->e_33;
+	m3.e_11 = p_m1->e_11 * p_m2->e_11 + p_m1->e_12 * p_m2->e_21
+		+ p_m1->e_13 * p_m2->e_31;
+	m3.e_12 = p_m1->e_11 * p_m2->e_12 + p_m1->e_12 * p_m2->e_22
+		+ p_m1->e_13 * p_m2->e_32;
+	m3.e_13 = p_m1->e_11 * p_m2->e_13 + p_m1->e_12 * p_m2->e_23
+		+ p_m1->e_13 * p_m2->e_33;
+	m3.e_21 = p_m1->e_21 * p_m2->e_11 + p_m1->e_22 * p_m2->e_21
+		+ p_m1->e_23 * p_m2->e_31;
+	m3.e_22 = p_m1->e_21 * p_m2->e_12 + p_m1->e_22 * p_m2->e_22
+		+ p_m1->e_23 * p_m2->e_32;
+	m3.e_23 = p_m1->e_21 * p_m2->e_13 + p_m1->e_22 * p_m2->e_23
+		+ p_m1->e_23 * p_m2->e_33;
+	m3.e_31 = p_m1->e_31 * p_m2->e_11 + p_m1->e_32 * p_m2->e_21
+		+ p_m1->e_33 * p_m2->e_31;
+	m3.e_32 = p_m1->e_31 * p_m2->e_12 + p_m1->e_32 * p_m2->e_22
+		+ p_m1->e_33 * p_m2->e_32;
+	m3.e_33 = p_m1->e_31 * p_m2->e_13 + p_m1->e_32 * p_m2->e_23
+		+ p_m1->e_33 * p_m2->e_33;
 	return (m3);
 }
 
@@ -67,7 +76,7 @@ float	ksx_m3_det(const t_matrix3 *p_m)
 {
 	float	result;
 
-	 result = p_m->e_11 * p_m->e_22 * p_m->e_33;
+	result = p_m->e_11 * p_m->e_22 * p_m->e_33;
 	result += p_m->e_12 * p_m->e_23 * p_m->e_31;
 	result += p_m->e_13 * p_m->e_21 * p_m->e_32;
 	result -= p_m->e_13 * p_m->e_22 * p_m->e_31;

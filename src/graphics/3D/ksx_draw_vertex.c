@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 14:43:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:34:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ksx_draw_vertexes(t_object *p_object, mlx_image_t *p_image,
 	idx = 0;
 	while (idx < p_object->size_vrtx)
 	{
-		ksx_draw_vertex(p_object->pp_vrtx[idx], p_image, p_camera, p_object->color.mlx_color);
+		ksx_draw_vertex(p_object->pp_vrtx[idx], p_image,
+			p_camera, p_object->color.mlx_color);
 		idx++;
 	}
-	
 }

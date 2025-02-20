@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:08:16 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:01:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:19:04 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ksx_garbage_collector(t_graphics *p_grph)
 		return ;
 	}
 	mlx_delete_image(p_g->mlx, p_g->img);
-	// mlx_close_window(p_g->mlx);
+	mlx_close_window(p_g->mlx);
 	mlx_terminate(p_g->mlx);
 	ksx_clean_world(&p_g->world);
 	p_g->f_gc(NULL);
@@ -34,6 +34,7 @@ void	ksx_garbage_collector(t_graphics *p_grph)
 
 void	ksx_error(char *error, char *file_name, int str_num)
 {
-	printf("%sERROR:%s %s.\nFile: %s\nString: %d\n\n", RED, RESET, error, file_name, str_num);
+	printf("%sERROR:%s %s.\nFile: %s\nString: %d\n\n",
+		RED, RESET, error, file_name, str_num);
 	ksx_garbage_collector(NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 16:44:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:38:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,45 +46,40 @@
 
 void	ksx_basis_set_norm(t_basis *p_basis, t_vector3 *p_norm)
 {
-	t_vector3 tmp_v3;
+	t_vector3	tmp_v3;
 
 	if (!p_norm->x && !p_norm->y && !p_norm->z)
 		p_norm->z = 1.f;
-    p_basis->k = ksx_vec3_unit(p_norm);
-    // Choose a reference vector that is not nearly parallel to k.
-    if (fabsf(p_basis->k.x) < fabsf(p_basis->k.y) && fabsf(p_basis->k.x) < fabsf(p_basis->k.z))
-        tmp_v3 = ksx_vec3_set(1, 0, 0);
-    else if (fabsf(p_basis->k.y) < fabsf(p_basis->k.z))
-        tmp_v3 = ksx_vec3_set(0, 1, 0);
-    else
-        {tmp_v3 = ksx_vec3_set(0, 0, 1);}
-    // Compute the right vector.
+	p_basis->k = ksx_vec3_unit(p_norm);
+	if (fabsf(p_basis->k.x) < fabsf(p_basis->k.y)
+		&& fabsf(p_basis->k.x) < fabsf(p_basis->k.z))
+		tmp_v3 = ksx_vec3_set(1, 0, 0);
+	else if (fabsf(p_basis->k.y) < fabsf(p_basis->k.z))
+		tmp_v3 = ksx_vec3_set(0, 1, 0);
+	else
+		tmp_v3 = ksx_vec3_set(0, 0, 1);
 	tmp_v3 = ksx_vec3_cross(&tmp_v3, &p_basis->k);
-    p_basis->i = ksx_vec3_unit(&tmp_v3);
-    // Compute the up vector.
-    p_basis->j = ksx_vec3_cross(&p_basis->k, &p_basis->i);
+	p_basis->i = ksx_vec3_unit(&tmp_v3);
+	p_basis->j = ksx_vec3_cross(&p_basis->k, &p_basis->i);
 }
 
-void ksx_basis_camera(t_camera *p_camera, t_vector3 *p_norm)
+void	ksx_basis_camera(t_camera *p_camera, t_vector3 *p_norm)
 {
-    t_vector3 tmp_v3;
+	t_vector3	tmp_v3;
 
 	if (!p_norm->x && !p_norm->y && !p_norm->z)
 		p_norm->z = 1;
-    p_camera->basis.k = ksx_vec3_unit(p_norm);
-	
-    // Choose a reference vector that is not nearly parallel to k.
-    if (fabsf(p_camera->basis.k.x) < fabsf(p_camera->basis.k.y) && fabsf(p_camera->basis.k.x) < fabsf(p_camera->basis.k.z))
-        tmp_v3 = ksx_vec3_set(1, 0, 0);
-    else if (fabsf(p_camera->basis.k.y) < fabsf(p_camera->basis.k.z))
-        tmp_v3 = ksx_vec3_set(0, 1, 0);
-    else
-        {tmp_v3 = ksx_vec3_set(0, 0, 1);}
-    // Compute the right vector.
+	p_camera->basis.k = ksx_vec3_unit(p_norm);
+	if (fabsf(p_camera->basis.k.x) < fabsf(p_camera->basis.k.y)
+		&& fabsf(p_camera->basis.k.x) < fabsf(p_camera->basis.k.z))
+		tmp_v3 = ksx_vec3_set(1, 0, 0);
+	else if (fabsf(p_camera->basis.k.y) < fabsf(p_camera->basis.k.z))
+		tmp_v3 = ksx_vec3_set(0, 1, 0);
+	else
+		tmp_v3 = ksx_vec3_set(0, 0, 1);
 	tmp_v3 = ksx_vec3_cross(&tmp_v3, &p_camera->basis.k);
-    p_camera->basis.i = ksx_vec3_unit(&tmp_v3);
-    // Compute the up vector.
-    p_camera->basis.j = ksx_vec3_cross(&p_camera->basis.k, &p_camera->basis.i);
+	p_camera->basis.i = ksx_vec3_unit(&tmp_v3);
+	p_camera->basis.j = ksx_vec3_cross(&p_camera->basis.k, &p_camera->basis.i);
 }
 
 // static void	ksx_basis111(t_basis *p_basis)

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 01:39:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:19:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,6 @@ void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 	while (++idx < p_object->size_vrtx)
 		ksx_transform(&p_object->pp_vrtx[idx]->p_wp, p_vm, &p_object->pp_vrtx[idx]->p_cp);
 	ksx_transform(&p_object->basis.w_o, p_vm, &p_object->basis.c_o);
-	// ksx_transform(&p_object->basis.w_i, p_vm, &p_object->basis.c_i);
-	// ksx_transform(&p_object->basis.w_j, p_vm, &p_object->basis.c_j);
-	// ksx_transform(&p_object->basis.w_k, p_vm, &p_object->basis.c_k);
 	idx = -1;
 	while (++idx < 8)
 		ksx_transform(&p_object->box_ver[idx].p_wp, p_vm, &p_object->box_ver[idx].p_cp);

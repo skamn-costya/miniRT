@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 17:50:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:17:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,8 @@
 
 static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *));
 static void	ksx_init_world(t_graphics *p_grph, t_list *p_list);
-void my_scrollhook(double xdelta, double ydelta, void* param);
-
-void my_keyhook(mlx_key_data_t keydata, void* param);
+void		my_scrollhook(double xdelta, double ydelta, void *param);
+void		my_keyhook(mlx_key_data_t keydata, void *param);
 
 int	main(int argc, char *argv[])
 {
@@ -50,10 +49,6 @@ int	main(int argc, char *argv[])
 	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);
 	mlx_loop(grph.mlx);
 	ksx_garbage_collector(NULL);
-	// ksx_clean_world(&grph.world);
-	// mlx_delete_image(grph.mlx, grph.img);
-	// mlx_close_window(grph.mlx);
-	// mlx_terminate(grph.mlx);
 	return (EXIT_SUCCESS);
 }
 
@@ -90,10 +85,10 @@ static void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 		if (p_obj_descr->id == CAMERA)
 			p_grph->camera = ksx_create_camera (p_obj_descr->coord,
 					p_obj_descr->norm, p_obj_descr->fov);
-		if (p_obj_descr->id == SPHERE)
+		else if (p_obj_descr->id == SPHERE)
 			p_object = ksx_create_sphere (p_obj_descr->coord,
 					p_obj_descr->d, p_obj_descr->color, SPHERE_GEN);
-		if (p_obj_descr->id == CYLINDER)
+		else if (p_obj_descr->id == CYLINDER)
 		{
 			f[0] = p_obj_descr->d;
 			f[1] = p_obj_descr->h;
@@ -106,7 +101,7 @@ static void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 	}
 }
 
-void my_keyhook(mlx_key_data_t keydata, void* param)
+void	my_keyhook(mlx_key_data_t keydata, void *param)
 {
 	t_graphics	*p_grph;
 
@@ -116,8 +111,8 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	else if (keydata.key >= MLX_KEY_RIGHT && keydata.key <= MLX_KEY_UP)
 		key_arrows(&keydata, p_grph);
 	else if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D
-				|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_W
-				|| keydata.key == MLX_KEY_E || keydata.key == MLX_KEY_Z)
+		|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_W
+		|| keydata.key == MLX_KEY_E || keydata.key == MLX_KEY_Z)
 		key_adswze(&keydata, p_grph);
 	else if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_RELEASE)
 	{
@@ -125,34 +120,19 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 		if (p_grph->obj_idx >= p_grph->world.size_wobj)
 			p_grph->obj_idx = 0;
 	}
-	// else if (keydata.key == MLX_KEY_SPACE)
-	// {
-	// 	// FOR TEST ONLUY
-	// 	double 	d;
-	// 	float	f;
-	// 	// d = PI / 180;
-	// 	f = PI180;
-	// 	d = 123;
-	// 	d = f * d / 2;
-
-	// }
 	ksx_draw (p_grph);
 }
 
-void my_scrollhook(double xdelta, double ydelta, void* param)
+void	my_scrollhook(double xdelta, double ydelta, void *param)
 {
 	t_graphics	*p_grph;
 
 	p_grph = (t_graphics *) param;
-	// Simple up or down detection.
 	if (ydelta > 0)
 		scroll_zoom_in(p_grph);
 	else if (ydelta < 0)
 		scroll_zoom_out(p_grph);
 	ksx_draw (p_grph);
-	// printf ("FOV = %f, near = %f\n", p_grph->camera.fov, p_grph->camera.near);
-
-	// Can also detect a mousewheel that goes along the X (e.g: MX Master 3)
 	if (xdelta < 0)
 		puts("Sliiiide to the left!");
 	else if (xdelta > 0)

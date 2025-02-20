@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 16:07:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:46:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,26 +62,30 @@ t_vertex	**ksx_obj_vrts_dup2origin(t_object *p_object)
 {
 	uint32_t	idx;
 
-	p_object->pp_vrtx_origin = (t_vertex **) malloc(sizeof(t_vertex *) * (p_object->size_vrtx + 1));
+	p_object->pp_vrtx_origin = (t_vertex **) malloc(sizeof(t_vertex *)
+			* (p_object->size_vrtx + 1));
 	if (!p_object->pp_vrtx_origin)
 		ksx_error("memory allocation failure", __FILE__, __LINE__);
 	idx = 0;
-	ksx_null_pointers((void **) p_object->pp_vrtx_origin, p_object->size_vrtx + 1);
+	ksx_null_pointers((void **) p_object->pp_vrtx_origin,
+		p_object->size_vrtx + 1);
 	while (idx < p_object->size_vrtx)
 	{
 		p_object->pp_vrtx_origin[idx] = (t_vertex *) malloc(sizeof(t_vertex));
 		if (!p_object->pp_vrtx_origin[idx])
 			return (ksx_free_pointers((void ***) &p_object->pp_vrtx_origin),
-				ksx_error("memory allocation failure", __FILE__, __LINE__), NULL);
+				ksx_error("memory allocation failure", __FILE__, __LINE__),
+				NULL);
 		idx++;
 	}
-	ksx_obj_copy_vrts(p_object->pp_vrtx, p_object->pp_vrtx_origin, p_object->size_vrtx);
+	ksx_obj_copy_vrts(p_object->pp_vrtx, p_object->pp_vrtx_origin,
+		p_object->size_vrtx);
 	return (p_object->pp_vrtx_origin);
 }
 
 void	ksx_obj_copy_vrts(t_vertex **pp_vrt1, t_vertex **pp_vrt2, uint32_t size)
 {
-	uint32_t idx;
+	uint32_t	idx;
 
 	idx = 0;
 	while (idx < size)
@@ -95,7 +99,7 @@ void	ksx_obj_copy_vrts(t_vertex **pp_vrt1, t_vertex **pp_vrt2, uint32_t size)
 
 void	ksx_obj_copy_boxvrts(t_vertex *p_vrt1, t_vertex *p_vrt2, uint32_t size)
 {
-	uint32_t idx;
+	uint32_t	idx;
 
 	idx = 0;
 	while (idx < size)

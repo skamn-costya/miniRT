@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 19:14:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:32:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@
 static void	ksx_init_cylinder_box(t_object *p_object);
 // static t_triangle	**ksx_init_cylinder_tri(t_object *p_object);
 static void	ksx_init_cylinder(t_object *p_object);
-static void ksx_init_cylinder_1(t_object *p_object, uint32_t size);
-static void ksx_init_cylinder_2(t_object *p_object, uint32_t size);
+static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size);
 
 t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 			float dia_ht[], t_color color)
@@ -40,7 +39,6 @@ t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 	p_object->color = color;
 	p_object->size1 = dia_ht[0] * .5f;
 	p_object->size2 = dia_ht[1] * .5f;
-	// p_object->basis = ksx_get_basis_obj(&norm);
 	ksx_basis_set_norm(&p_object->basis, &norm);
 	ksx_init_cylinder_box (p_object);
 	ksx_init_cylinder(p_object);
@@ -71,6 +69,18 @@ static void	ksx_init_cylinder_box(t_object *p_object)
 	ksx_tri_set_vertexes(&p_object->box[9], &p_object->box_ver[1], &p_object->box_ver[2], &p_object->box_ver[6]);
 	ksx_tri_set_vertexes(&p_object->box[10], &p_object->box_ver[4], &p_object->box_ver[5], &p_object->box_ver[6]);
 	ksx_tri_set_vertexes(&p_object->box[11], &p_object->box_ver[4], &p_object->box_ver[6], &p_object->box_ver[7]);
+	p_object->box[0].color.mlx_color = BOX_COLOR;
+	p_object->box[1].color.mlx_color = BOX_COLOR;
+	p_object->box[2].color.mlx_color = BOX_COLOR;
+	p_object->box[3].color.mlx_color = BOX_COLOR;
+	p_object->box[4].color.mlx_color = BOX_COLOR;
+	p_object->box[5].color.mlx_color = BOX_COLOR;
+	p_object->box[6].color.mlx_color = BOX_COLOR;
+	p_object->box[7].color.mlx_color = BOX_COLOR;
+	p_object->box[8].color.mlx_color = BOX_COLOR;
+	p_object->box[9].color.mlx_color = BOX_COLOR;
+	p_object->box[10].color.mlx_color = BOX_COLOR;
+	p_object->box[11].color.mlx_color = BOX_COLOR;
 	ksx_obj_copy_boxvrts (p_object->box_ver, p_object->box_ver_origin, 8);
 }
 
@@ -79,7 +89,7 @@ static void	ksx_init_cylinder(t_object *p_object)
 	uint32_t	size;
 	uint32_t	idx;
 	float		xz[2];
-	
+
 	size = 360 / CYLINDER_ANGLE;
 	ksx_obj_add_vers(p_object, size + 2);
 	idx = 0;
@@ -94,7 +104,6 @@ static void	ksx_init_cylinder(t_object *p_object)
 	}
 	p_object->edge = ksx_vec3_dist(p_object->pp_vrtx[2]->p_p, p_object->pp_vrtx[3]->p_p);
 	ksx_init_cylinder_1(p_object, size);
-	ksx_init_cylinder_2(p_object, size);
 }
 
 static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
@@ -112,7 +121,7 @@ static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
 		while (idx[1] < size)
 		{
 			pp_vertex[idx[1]]->p_p = ksx_vec3_set(p_object->pp_vrtx[idx[1] + 2]->p_p.x,
-				p_object->size2 - (step * idx[0] + 1), p_object->pp_vrtx[idx[1] + 2]->p_p.z);
+					p_object->size2 - (step * idx[0] + 1), p_object->pp_vrtx[idx[1] + 2]->p_p.z);
 			// if (idx[0] % 2)
 			// 	ksx_qrotation(&pp_vertex[idx[1]]->p_p, CYLINDER_ANGLE * .5f, &v3);
 			idx[1]++;
@@ -120,30 +129,4 @@ static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
 		idx[0]++;
 	}
 	ksx_init_cylinder_tri(p_object, size, (p_object->size2 * 2.f / step) + 1);
-}
-
-static void	ksx_init_cylinder_2(t_object *p_object, uint32_t size)
-{
-	uint32_t	idx[2];
-	float		step;
-	float		xz[2];
-	t_vertex	**pp_vertex;
-
-	return;
-	step = p_object->size1 / roundf(p_object->size1 / p_object->edge);
-	idx[0] = 1;
-	while (idx[0] < 2)
-	{
-		pp_vertex = ksx_obj_add_vers(p_object, size * 2);
-		idx[1] = 0;
-		while (idx[1] < size)
-		{
-			xz[0] = (p_object->size1 - (step * idx[0])) * cosf(CYLINDER_ANGLE * idx[1] * PI180);
-			xz[1] = (p_object->size1 - (step * idx[0])) * sinf(CYLINDER_ANGLE * idx[1] * PI180);
-			pp_vertex[idx[1]]->p_p = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
-			pp_vertex[idx[1] + size]->p_p = ksx_vec3_set(xz[0], -p_object->size2, xz[1]);
-			idx[1]++;
-		}
-		idx[0]++;
-	}
 }

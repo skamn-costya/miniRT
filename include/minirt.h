@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 16:18:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 19:02:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,3 @@ void	error(char *error, char *file_name, int str_num);
 
 // sudo apt updatesudo apt update
 // sudo apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
-

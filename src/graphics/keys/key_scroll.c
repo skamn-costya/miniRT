@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 15:02:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 19:01:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@
 
 // ksx_camera_set_pm(&p_grph->camera, p_grph->camera.fov + 1, FAR);
 void	scroll_zoom_in(t_graphics *p_grph)
-{	
+{
 	ksx_vec3_resize(&p_grph->camera.basis.i,
-	ksx_vec3_mag(&p_grph->camera.basis.i) + SCALE);
+		ksx_vec3_mag(&p_grph->camera.basis.i) + SCALE);
 	ksx_vec3_resize(&p_grph->camera.basis.j,
-	ksx_vec3_mag(&p_grph->camera.basis.j) + SCALE);
+		ksx_vec3_mag(&p_grph->camera.basis.j) + SCALE);
 	ksx_vec3_resize(&p_grph->camera.basis.k,
-	ksx_vec3_mag(&p_grph->camera.basis.k) + SCALE);
+		ksx_vec3_mag(&p_grph->camera.basis.k) + SCALE);
 	if (ksx_vec3_mag(&p_grph->camera.basis.i) > MAX_AXIS)
 		ksx_vec3_resize(&p_grph->camera.basis.i, MAX_AXIS);
 	if (ksx_vec3_mag(&p_grph->camera.basis.j) > MAX_AXIS)
@@ -39,11 +39,11 @@ void	scroll_zoom_in(t_graphics *p_grph)
 void	scroll_zoom_out(t_graphics *p_grph)
 {
 	ksx_vec3_resize(&p_grph->camera.basis.i,
-	ksx_vec3_mag(&p_grph->camera.basis.i) - SCALE);
+		ksx_vec3_mag(&p_grph->camera.basis.i) - SCALE);
 	ksx_vec3_resize(&p_grph->camera.basis.j,
-	ksx_vec3_mag(&p_grph->camera.basis.j) - SCALE);
+		ksx_vec3_mag(&p_grph->camera.basis.j) - SCALE);
 	ksx_vec3_resize(&p_grph->camera.basis.k,
-	ksx_vec3_mag(&p_grph->camera.basis.k) - SCALE);
+		ksx_vec3_mag(&p_grph->camera.basis.k) - SCALE);
 	if (ksx_vec3_mag(&p_grph->camera.basis.i) < MIN_AXIS)
 		ksx_vec3_resize(&p_grph->camera.basis.i, MIN_AXIS);
 	if (ksx_vec3_mag(&p_grph->camera.basis.j) < MIN_AXIS)

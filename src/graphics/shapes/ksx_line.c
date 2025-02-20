@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:52:47 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 16:26:00 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 18:48:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2)
 	float	m;
 	int32_t	d_xy[4];
 
-	// printf("Line: %lu.%lu : %lu.%lu\n", pix1.x, pix1.y, pix2.x, pix2.y);
-	// if ((pix1.x > img->width || pix1.y > img->height) || (pix2.x > img->width || pix2.y > img->height))
-	// 	return;
-	// ksx_set_pixel(img, &pix1);
 	d_xy[0] = pix2.x - pix1.x;
 	d_xy[1] = pix2.y - pix1.y;
 	d_xy[2] = 0;
@@ -51,7 +47,6 @@ void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2)
 		ksx_line_x (img, pix1, pix2, d_xy);
 	else
 		ksx_line_y (img, pix1, pix2, d_xy);
-	// ksx_set_pixel(img, &pix2);
 }
 
 static t_color	ksx_get_color(t_pixel p, t_pixel p1, t_pixel p2)
