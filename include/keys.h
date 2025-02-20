@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:03:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 14:39:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:02:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,9 @@ void	key_w(mlx_key_data_t *p_keydata, t_graphics *p_grph);
 // key_ze.c
 void	key_z(mlx_key_data_t *p_keydata, t_graphics *p_grph);
 void	key_e(mlx_key_data_t *p_keydata, t_graphics *p_grph);
+
+// key_scroll.c
+void	scroll_zoom_in(t_graphics *p_grph);
+void	scroll_zoom_out(t_graphics *p_grph);
 
 #endif	// KEYS_H

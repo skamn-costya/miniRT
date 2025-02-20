@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 14:38:21 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 15:02:52 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,9 +143,9 @@ void my_scrollhook(double xdelta, double ydelta, void* param)
 	p_grph = (t_graphics *) param;
 	// Simple up or down detection.
 	if (ydelta > 0)
-		ksx_camera_set_pm(&p_grph->camera, p_grph->camera.fov - 1, FAR);
+		scroll_zoom_in(p_grph);
 	else if (ydelta < 0)
-		ksx_camera_set_pm(&p_grph->camera, p_grph->camera.fov + 1, FAR);
+		scroll_zoom_out(p_grph);
 	ksx_draw (p_grph);
 	// printf ("FOV = %f, near = %f\n", p_grph->camera.fov, p_grph->camera.near);
 
