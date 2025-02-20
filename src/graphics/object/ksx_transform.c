@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 20:16:33 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 01:53:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ksx_transform_obj(t_object *p_object)
 
 	ksx_obj_copy_vrts (p_object->pp_vrtx_origin, p_object->pp_vrtx, p_object->size_vrtx);
 	ksx_obj_copy_boxvrts (p_object->box_ver_origin, p_object->box_ver, 8);
-	ksx_obj_set_axis(p_object->w_axis);
+	// ksx_obj_set_axis(p_object->w_axis);
 	v = ksx_vec3_set(0, 0, 0);
 	ksx_basis_set_norm(&basis, &v);
 	ksx_vec3_resize(&basis.i, ksx_vec3_mag(&p_object->basis.i));
@@ -72,6 +72,7 @@ void	ksx_transform_obj(t_object *p_object)
 	ksx_vec3_resize(&basis.k, 1.f);
 	ksx_get_tm (&tm, &basis);
 	ksx_transform_obj_t(p_object, &tm);
+	ksx_translate_obj (p_object);
 }
 
 static void	ksx_transform_obj_t(t_object *p_object, t_matrix4 *p_tm)
@@ -85,7 +86,7 @@ static void	ksx_transform_obj_t(t_object *p_object, t_matrix4 *p_tm)
 	while (++idx < 8)
 		ksx_transform(&p_object->box_ver[idx].p_p, p_tm, &p_object->box_ver[idx].p_p);
 	idx = -1;
-	while (++idx < 3)
+	while (++idx < 4)
 		ksx_transform(&p_object->w_axis[idx].p_p, p_tm, &p_object->w_axis[idx].p_p);
 }
 

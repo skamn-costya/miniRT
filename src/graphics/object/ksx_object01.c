@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 20:15:22 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 01:47:38 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,12 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object->size1 = 0;
 	p_object->size2 = 0;
 	v = ksx_vec3_set(0, 0, 0);
+	p_object->basis.o = v;
 	ksx_basis_set_norm(&p_object->basis, &v);
 	p_object->basis.w_o = *p_center;
-	p_object->basis.w_i = ksx_vec3_add(&p_object->basis.i, &p_object->basis.w_o);
-	p_object->basis.w_j = ksx_vec3_add(&p_object->basis.j, &p_object->basis.w_o);
-	p_object->basis.w_k = ksx_vec3_add(&p_object->basis.k, &p_object->basis.w_o);
+	p_object->basis.w_i = p_object->basis.i;
+	p_object->basis.w_j = p_object->basis.j;
+	p_object->basis.w_k = p_object->basis.k;
 	ksx_obj_set_axis(p_object->w_axis);
 	p_object->pp_vrtx = NULL;
 	p_object->size_vrtx = 0;
@@ -56,6 +57,7 @@ void	ksx_obj_set_axis(t_vertex *p_ver)
 	p_ver[X].p_p = basis.i;
 	p_ver[Y].p_p = basis.j;
 	p_ver[Z].p_p = basis.k;
+	p_ver[3].p_p = basis.o;
 	ksx_vec3_resize(&p_ver[X].p_p, AXIS_LEN);
 	ksx_vec3_resize(&p_ver[Y].p_p, AXIS_LEN);
 	ksx_vec3_resize(&p_ver[Z].p_p, AXIS_LEN);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:30:32 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 20:15:22 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 00:08:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_triangle	**ksx_obj_add_tris(t_object *p_object, uint32_t size);
 
 // ksx_qrotation.c
 void		ksx_qrotation(t_vector3 *point, float angle, t_vector3 *p_v);
-void		ksx_qrotation_obj(t_object *p_object, float angle, t_vector3 v);
+// void		ksx_qrotation_obj(t_object *p_object, float angle, t_vector3 v);
 
 // ksx_translate.c
 void		ksx_translate(t_vector3 *p_point, t_vector3 *p_center,

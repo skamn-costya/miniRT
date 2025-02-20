@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/16 13:48:24 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 01:26:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,44 +31,32 @@ void	key_adsw(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 
 void	key_a(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	t_vector4	v4;
-
 	(void) p_keydata;
-	v4 = ksx_vec4_set(-STEP, 0, 0, 1);
-	v4 = ksx_m4_vec4(&p_grph->camera.ivm, &v4);
-	p_grph->camera.basis.o = ksx_vec4_vec3(&v4);
-	p_grph->camera.flags |= CHANGE;
+	ksx_qrotation_wbasis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, ANGLE, ksx_vec3_set(0, 0, 1));
+	ksx_translate_obj(p_grph->world.pp_wobj[p_grph->obj_idx]);
+	p_grph->world.pp_wobj[p_grph->obj_idx]->flags |= CHANGE;
 }
 
 void	key_d(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	t_vector4	v4;
-
 	(void) p_keydata;
-	v4 = ksx_vec4_set(STEP, 0, 0, 1);
-	v4 = ksx_m4_vec4(&p_grph->camera.ivm, &v4);
-	p_grph->camera.basis.o = ksx_vec4_vec3(&v4);
-	p_grph->camera.flags |= CHANGE;
+	ksx_qrotation_wbasis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, -ANGLE, ksx_vec3_set(0, 0, 1));
+	ksx_translate_obj(p_grph->world.pp_wobj[p_grph->obj_idx]);
+	p_grph->world.pp_wobj[p_grph->obj_idx]->flags |= CHANGE;
 }
 
 void	key_s(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	t_vector4	v4;
-
 	(void) p_keydata;
-	v4 = ksx_vec4_set(0, -STEP, 0, 1);
-	v4 = ksx_m4_vec4(&p_grph->camera.ivm, &v4);
-	p_grph->camera.basis.o = ksx_vec4_vec3(&v4);
-	p_grph->camera.flags |= CHANGE;
+	ksx_qrotation_wbasis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, ANGLE, ksx_vec3_set(0, 1, 0));
+	ksx_translate_obj(p_grph->world.pp_wobj[p_grph->obj_idx]);
+	p_grph->world.pp_wobj[p_grph->obj_idx]->flags |= CHANGE;
 }
 
 void	key_w(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	t_vector4	v4;
-
 	(void) p_keydata;
-	v4 = ksx_vec4_set(0, STEP, 0, 1);
-	v4 = ksx_m4_vec4(&p_grph->camera.ivm, &v4);
-	p_grph->camera.basis.o = ksx_vec4_vec3(&v4);
-	p_grph->camera.flags |= CHANGE;
+	ksx_qrotation_wbasis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, -ANGLE, ksx_vec3_set(0, 1, 0));
+	ksx_translate_obj(p_grph->world.pp_wobj[p_grph->obj_idx]);
+	p_grph->world.pp_wobj[p_grph->obj_idx]->flags |= CHANGE;
 }

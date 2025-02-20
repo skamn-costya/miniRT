@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:21:05 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 14:21:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 01:23:52 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ void		ksx_basis_camera(t_camera *p_camera, const t_vector3 *p_norm);
 
 // ksx_basis_rotation.c
 void		ksx_qrotation_basis(t_basis *p_basis, float angle, t_vector3 v);
+void		ksx_qrotation_wbasis(t_basis *p_basis, float angle, t_vector3 v);
 
 #endif	// KSX_BASIS_H

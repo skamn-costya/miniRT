@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 14:43:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 00:08:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,19 @@ static t_vector4	ksx_quat_multi(t_vector4 *p_q1, t_vector4 *p_q2)
 	return (v4);
 }
 
-void	ksx_qrotation_obj(t_object *p_object, float angle, t_vector3 v)
-{
-	uint32_t	idx;
+// void	ksx_qrotation_obj(t_object *p_object, float angle, t_vector3 v)
+// {
+// 	uint32_t	idx;
 
-	if (!angle)
-		return ;
-	idx = 0;
-	while (idx < p_object->size_vrtx)
-	{
-		ksx_qrotation(&p_object->pp_vrtx[idx]->p_p, angle, &v);
-		idx++;
-	}
-	// ksx_qrotation(&p_object->axis.p_ver1->p_p, angle, &v);
-	// ksx_qrotation(&p_object->axis.p_ver2->p_p, angle, &v);
-	// ksx_qrotation(&p_object->axis.p_ver3->p_p, angle, &v);
-	idx = 0;
-	while (idx < 8)
-	{
-		ksx_qrotation(&p_object->box_ver[idx].p_p, angle, &v);
-		idx++;
-	}
-}
+// 	if (!angle)
+// 		return ;
+// 	idx = -1;
+// 	while (++idx < p_object->size_vrtx)
+// 		ksx_qrotation(&p_object->pp_vrtx[idx]->p_p, angle, &v);
+// 	idx = -1;
+// 	while (++idx < 8)
+// 		ksx_qrotation(&p_object->box_ver[idx].p_p, angle, &v);
+// 	idx = -1;
+// 	while (++idx < 3)
+// 		ksx_qrotation(&p_object->w_axis[idx].p_p, angle, &v);
+// }
