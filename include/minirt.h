@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 14:13:31 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:18:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,10 @@ typedef struct s_obj_descr
 	char		*texture;
 }	t_obj_descr;
 
-// utils01.c
-void	clear_exit(char *str, uint8_t fd);
+// gc.c
+// void	clear_exit(char *str, uint8_t fd);
+void	garbage_collector(void *p_grph);
+void	error(char *error, char *file_name, int str_num);
 
 #endif	// MINIRT_H
 

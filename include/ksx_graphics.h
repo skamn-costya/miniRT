@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 12:57:32 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:03:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -392,6 +392,7 @@ typedef struct s_graphics
 	t_world		world;
 	t_camera	camera;
 	uint32_t	obj_idx;
+	void		(*f_gc)(void *);
 }	t_graphics;
 
 mlx_t		*ksx_init(void);
@@ -410,5 +411,9 @@ t_object	*ksx_create_sphere(t_vector3 center,
 t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 				float dia_ht[], t_color color);
 void		ksx_draw(t_graphics *p_grph);
+
+// garbage_collector
+void		ksx_garbage_collector(t_graphics *p_grph);
+void		ksx_error(char *error, char *file_name, int str_num);
 
 #endif	// KSX_GRAPHICS_H //

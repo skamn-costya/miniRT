@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 14:58:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:53:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 	pp_object = (t_object **) malloc
 		(sizeof(t_object *) * (p_world->size_wobj + 1));
 	if (!pp_object)
-		return (printf("Error: memory allocation failed!\n"), NULL);
+		ksx_error("memory allocation failure", __FILE__, __LINE__);
 	idx = 0;
 	while (idx < p_world->size_wobj)
 	{
@@ -43,16 +43,18 @@ void	ksx_clean_world(t_world *p_world)
 	t_object	*p_object;
 
 	free(p_world->p_tris);
+	p_world->p_tris = NULL;
 	idx[0] = 0;
 	while (idx[0] < p_world->size_wobj)
 	{
 		p_object = p_world->pp_wobj[idx[0]];
-		idx[1] = 0;
-		while (idx[1] < p_object->size_tri)
-			free(p_object->pp_tri[idx[1]++]);
-		free(p_object->pp_tri);
+		ksx_free_pointers((void ***) &p_object->pp_tri);
+		ksx_free_pointers((void ***) &p_object->pp_vrtx);
+		ksx_free_pointers((void ***) &p_object->pp_vrtx_origin);
 		free(p_object);
+		p_world->pp_wobj[idx[0]] = NULL;
 		idx[0]++;
 	}
 	free(p_world->pp_wobj);
+	p_world->pp_wobj = NULL;
 }

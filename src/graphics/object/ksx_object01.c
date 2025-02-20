@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 13:10:52 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:07:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 
 	p_object = (t_object *) malloc (sizeof(t_object));
 	if (!p_object)
-		return (printf("Error: memory allocation failed!\n"), NULL);
+		ksx_error("memory allocation failure", __FILE__, __LINE__);
 	p_object->flags = 0x00000000;
 	p_object->edge = EDGE_SIZE;
 	p_object->size1 = 0;
@@ -64,7 +64,7 @@ t_vertex	**ksx_obj_vrts_dup2origin(t_object *p_object)
 
 	p_object->pp_vrtx_origin = (t_vertex **) malloc(sizeof(t_vertex *) * (p_object->size_vrtx + 1));
 	if (!p_object->pp_vrtx_origin)
-		return (NULL);
+		ksx_error("memory allocation failure", __FILE__, __LINE__);
 	idx = 0;
 	ksx_null_pointers((void **) p_object->pp_vrtx_origin, p_object->size_vrtx + 1);
 	while (idx < p_object->size_vrtx)
@@ -72,7 +72,7 @@ t_vertex	**ksx_obj_vrts_dup2origin(t_object *p_object)
 		p_object->pp_vrtx_origin[idx] = (t_vertex *) malloc(sizeof(t_vertex));
 		if (!p_object->pp_vrtx_origin[idx])
 			return (ksx_free_pointers((void ***) &p_object->pp_vrtx_origin),
-				(void) printf ("Error: memory allocation failed!\n"), NULL);
+				ksx_error("memory allocation failure", __FILE__, __LINE__), NULL);
 		idx++;
 	}
 	ksx_obj_copy_vrts(p_object->pp_vrtx, p_object->pp_vrtx_origin, p_object->size_vrtx);

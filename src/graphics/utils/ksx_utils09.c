@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 14:58:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:17:33 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,27 +38,27 @@
 // 	return (p_obj->p = p_triangle, p_obj->size = size, p_obj);
 // }
 
-t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_object *p_object)
-{
-	t_triangle	**pp_tri;
-	uint32_t	idx;
+// t_triangle	**ksx_tri2obj(t_triangle *p_tri, t_object *p_object)
+// {
+// 	t_triangle	**pp_tri;
+// 	uint32_t	idx;
 
-	pp_tri = (t_triangle **) malloc (sizeof(t_triangle *)
-			* (p_object->size_tri + 1));
-	if (!pp_tri)
-		return (printf("Error: memory allocation failed!\n"), NULL);
-	idx = 0;
-	while (idx < p_object->size_tri)
-	{
-		pp_tri[idx] = p_object->pp_tri[idx];
-		idx++;
-	}
-	pp_tri[idx] = p_tri;
-	free(p_object->pp_tri);
-	p_object->pp_tri = pp_tri;
-	p_object->size_tri++;
-	return (pp_tri);
-}
+// 	pp_tri = (t_triangle **) malloc (sizeof(t_triangle *)
+// 			* (p_object->size_tri + 1));
+// 	if (!pp_tri)
+// 		ksx_error("memory allocation failure", __FILE__, __LINE__);
+// 	idx = 0;
+// 	while (idx < p_object->size_tri)
+// 	{
+// 		pp_tri[idx] = p_object->pp_tri[idx];
+// 		idx++;
+// 	}
+// 	pp_tri[idx] = p_tri;
+// 	free(p_object->pp_tri);
+// 	p_object->pp_tri = pp_tri;
+// 	p_object->size_tri++;
+// 	return (pp_tri);
+// }
 
 // t_triangle	**ksx_tris2obj(t_triangle *p_tris[],
 // 			uint32_t size, t_object *p_object)

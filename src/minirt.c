@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 15:02:52 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:50:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-static int	ksx_init_grph(t_graphics *p_grph);
+static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *));
 static void	ksx_init_world(t_graphics *p_grph, t_list *p_list);
 void my_scrollhook(double xdelta, double ydelta, void* param);
 
@@ -39,8 +39,8 @@ int	main(int argc, char *argv[])
 	p_list = check_file(argv[1]);
 	if (!p_list)
 		return (printf("Incorrect the scene file.\n"), EXIT_SUCCESS);
-	if (!ksx_init_grph(&grph))
-		return (ft_lstclear(&p_list, &free_t_obj_descr), EXIT_FAILURE);
+	garbage_collector((void **) &p_list);
+	ksx_init_grph(&grph, &garbage_collector);
 	ksx_init_world(&grph, p_list);
 	grph.obj_idx = 0;
 	ft_lstclear(&p_list, &free_t_obj_descr);
@@ -49,15 +49,18 @@ int	main(int argc, char *argv[])
 	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
 	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);
 	mlx_loop(grph.mlx);
-	ksx_clean_world(&grph.world);
-	mlx_delete_image(grph.mlx, grph.img);
-	mlx_close_window(grph.mlx);
-	mlx_terminate(grph.mlx);
+	ksx_garbage_collector(NULL);
+	// ksx_clean_world(&grph.world);
+	// mlx_delete_image(grph.mlx, grph.img);
+	// mlx_close_window(grph.mlx);
+	// mlx_terminate(grph.mlx);
 	return (EXIT_SUCCESS);
 }
 
-static int	ksx_init_grph(t_graphics *p_grph)
+static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *))
 {
+	ksx_garbage_collector(p_grph);
+	p_grph->f_gc = f;
 	p_grph->world.p_tris = NULL;
 	p_grph->world.pp_wobj = NULL;
 	p_grph->world.size_wobj = 0;

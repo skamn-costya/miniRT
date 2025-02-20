@@ -93,11 +93,12 @@ GRAPHICS_DIR = graphics/
 GRAPHICS_FN =	ksx_draw.c \
 				ksx_init.c \
 				ksx_prep.c \
-				ksx_world.c
+				ksx_world.c \
+				ksx_gc.c
 GRAPHICS =	$(addprefix $(GRAPHICS_DIR), $(GRAPHICS_FN))
 
 # Keys
-KYES_DIR = keys/
+KYES_DIR = graphics/keys/
 KYES_FN =	key_kp01.c \
 			key_kp02.c \
 			key_arrows.c \
@@ -122,7 +123,7 @@ SRC = 	$(UTILS) \
 		$(KYES) \
 		$(PARSER) \
 		$(MAIN) \
-		utils01.c
+		gc.c
 SRCS =	$(addprefix $(SRC_DIR), $(SRC))
 
 # All .o files

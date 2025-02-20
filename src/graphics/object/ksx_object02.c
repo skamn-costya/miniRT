@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 14:43:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:07:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_vertex	**ksx_obj_add_vers(t_object *p_object, uint32_t size)
 	pp_ver = (t_vertex **) malloc (sizeof(t_vertex *)
 			* (p_object->size_vrtx + size + 1));
 	if (!pp_ver)
-		return ((void) printf ("Error: memory allocation failed!\n"), NULL);
+		ksx_error("memory allocation failure", __FILE__, __LINE__);
 	ksx_null_pointers((void **) pp_ver, p_object->size_vrtx + size + 1);
 	idx = 0;
 	while (idx < p_object->size_vrtx)
@@ -42,7 +42,7 @@ t_vertex	**ksx_obj_add_vers(t_object *p_object, uint32_t size)
 		pp_ver[idx] = (t_vertex *) malloc (sizeof(t_vertex));
 		if (!pp_ver[idx])
 			return (ksx_free_pointers((void ***) &pp_ver),
-				(void) printf ("Error: memory allocation failed!\n"), NULL);
+				ksx_error("memory allocation failure", __FILE__, __LINE__), NULL);
 		idx++;
 	}
 	free(p_object->pp_vrtx);

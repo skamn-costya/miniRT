@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 14:58:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 16:08:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_triangle	**ksx_obj_new_tris(uint32_t size)
 
 	pp_tri = (t_triangle **) malloc (sizeof(t_triangle *) * (size + 1));
 	if (!pp_tri)
-		return ((void) printf ("Error: memory allocation failed!\n"), NULL);
+		ksx_error("memory allocation failure", __FILE__, __LINE__);
 	ksx_null_pointers((void **) pp_tri, size + 1);
 	idx = 0;
 	while (idx < size)
@@ -35,7 +35,7 @@ t_triangle	**ksx_obj_new_tris(uint32_t size)
 		pp_tri[idx] = (t_triangle *) malloc (sizeof(t_triangle));
 		if (!pp_tri[idx])
 			return (ksx_free_pointers((void ***) &pp_tri),
-				(void) printf ("Error: memory allocation failed!\n"), NULL);
+				ksx_error("memory allocation failure", __FILE__, __LINE__), NULL);
 		idx++;
 	}
 	return (pp_tri);
@@ -48,7 +48,7 @@ t_triangle	**ksx_obj_add_tris(t_object *p_object, uint32_t size)
 
 	pp_tri = (t_triangle **) malloc (sizeof(t_triangle *) * (p_object->size_tri + size + 1));
 	if (!pp_tri)
-		return ((void) printf ("Error: memory allocation failed!\n"), NULL);
+		ksx_error("memory allocation failure", __FILE__, __LINE__);
 	ksx_null_pointers((void **) pp_tri, p_object->size_tri + size + 1);
 	idx[0] = 0;
 	while (idx[0] < p_object->size_tri)
@@ -62,7 +62,7 @@ t_triangle	**ksx_obj_add_tris(t_object *p_object, uint32_t size)
 		pp_tri[idx[0]] = (t_triangle *) malloc (sizeof(t_triangle));
 		if (!pp_tri[idx[0]])
 			return (ksx_free_pointers((void ***) &pp_tri),
-				(void) printf ("Error: memory allocation failed!\n"), NULL);
+				ksx_error("memory allocation failure", __FILE__, __LINE__), NULL);
 		idx[0]++;
 	}
 	free (p_object->pp_tri);
