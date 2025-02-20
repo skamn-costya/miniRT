@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 23:22:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:50:49 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	key_kp(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 		key_kp_plus(p_keydata, p_grph);
 	else if (p_keydata->key == MLX_KEY_KP_SUBTRACT)
 		key_kp_minus(p_keydata, p_grph);
+	p_grph->world.pp_wobj[p_grph->obj_idx]->flags |= CHANGE;
+	ksx_transform_obj(p_grph->world.pp_wobj[p_grph->obj_idx]);
 }
 
 void	key_kp_4(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	if (p_keydata->modifier != MLX_SHIFT)
-		ksx_qrotation_basis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, -ANGLE, ksx_vec3_set(0, 1, 0));
-	else
+	if (p_keydata->modifier == MLX_SHIFT)
 	{
 		if (ksx_vec3_mag(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.i) < MAX_AXIS)
 			ksx_vec3_resize(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.i,
@@ -47,15 +47,13 @@ void	key_kp_4(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 		if (ksx_vec3_mag(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.i) < MIN_AXIS)
 			ksx_vec3_resize(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.i, MIN_AXIS);
 	}
-	ksx_transform_obj(p_grph->world.pp_wobj[p_grph->obj_idx]);
-	p_grph->world.pp_wobj[p_grph->obj_idx]->flags |= CHANGE;
+	else
+		ksx_qrotation_basis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, -ANGLE, ksx_vec3_set(0, 1, 0));
 }
 
 void	key_kp_6(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	if (p_keydata->modifier != MLX_SHIFT)
-		ksx_qrotation_basis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, ANGLE, ksx_vec3_set(0, 1, 0));
-	else
+	if (p_keydata->modifier == MLX_SHIFT)
 	{
 		if (ksx_vec3_mag(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.i) > MIN_AXIS)
 			ksx_vec3_resize(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.i,
@@ -63,15 +61,13 @@ void	key_kp_6(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 		if(ksx_vec3_mag(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.i) > MAX_AXIS)
 			ksx_vec3_resize(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.i, MAX_AXIS);
 	}
-	ksx_transform_obj(p_grph->world.pp_wobj[p_grph->obj_idx]);
-	p_grph->world.pp_wobj[p_grph->obj_idx]->flags |= CHANGE;
+	else
+		ksx_qrotation_basis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, ANGLE, ksx_vec3_set(0, 1, 0));
 }
 
 void	key_kp_2(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	if (p_keydata->modifier != MLX_SHIFT)
-		ksx_qrotation_basis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, -ANGLE, ksx_vec3_set(1, 0, 0));
-	else
+	if (p_keydata->modifier == MLX_SHIFT)
 	{
 		if (ksx_vec3_mag(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.j) < MAX_AXIS)
 			ksx_vec3_resize(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.j,
@@ -79,15 +75,13 @@ void	key_kp_2(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 		if (ksx_vec3_mag(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.j) < MIN_AXIS)
 			ksx_vec3_resize(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.j, MIN_AXIS);
 	}
-	ksx_transform_obj(p_grph->world.pp_wobj[p_grph->obj_idx]);
-	p_grph->world.pp_wobj[p_grph->obj_idx]->flags |= CHANGE;
+	else
+		ksx_qrotation_basis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, -ANGLE, ksx_vec3_set(1, 0, 0));
 }
 
 void	key_kp_8(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	if (p_keydata->modifier != MLX_SHIFT)
-		ksx_qrotation_basis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, ANGLE, ksx_vec3_set(1, 0, 0));
-	else
+	if (p_keydata->modifier == MLX_SHIFT)
 	{
 		if (ksx_vec3_mag(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.j) > MIN_AXIS)
 			ksx_vec3_resize(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.j,
@@ -95,6 +89,6 @@ void	key_kp_8(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 		if(ksx_vec3_mag(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.j) > MAX_AXIS)
 			ksx_vec3_resize(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis.j, MAX_AXIS);
 	}
-	ksx_transform_obj(p_grph->world.pp_wobj[p_grph->obj_idx]);
-	p_grph->world.pp_wobj[p_grph->obj_idx]->flags |= CHANGE;
+	else
+		ksx_qrotation_basis(&p_grph->world.pp_wobj[p_grph->obj_idx]->basis, ANGLE, ksx_vec3_set(1, 0, 0));
 }

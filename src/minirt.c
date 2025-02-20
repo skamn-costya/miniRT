@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/18 12:07:32 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:38:21 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,25 +113,26 @@ void my_keyhook(mlx_key_data_t keydata, void* param)
 	else if (keydata.key >= MLX_KEY_RIGHT && keydata.key <= MLX_KEY_UP)
 		key_arrows(&keydata, p_grph);
 	else if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_D
-				|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_W)
-		key_adsw(&keydata, p_grph);
+				|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_W
+				|| keydata.key == MLX_KEY_E || keydata.key == MLX_KEY_Z)
+		key_adswze(&keydata, p_grph);
 	else if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_RELEASE)
 	{
 		p_grph->obj_idx++;
 		if (p_grph->obj_idx >= p_grph->world.size_wobj)
 			p_grph->obj_idx = 0;
 	}
-	else if (keydata.key == MLX_KEY_SPACE)
-	{
-		// FOR TEST ONLUY
-		double 	d;
-		float	f;
-		// d = PI / 180;
-		f = PI180;
-		d = 123;
-		d = f * d / 2;
+	// else if (keydata.key == MLX_KEY_SPACE)
+	// {
+	// 	// FOR TEST ONLUY
+	// 	double 	d;
+	// 	float	f;
+	// 	// d = PI / 180;
+	// 	f = PI180;
+	// 	d = 123;
+	// 	d = f * d / 2;
 
-	}
+	// }
 	ksx_draw (p_grph);
 }
 

@@ -96,6 +96,15 @@ GRAPHICS_FN =	ksx_draw.c \
 				ksx_world.c
 GRAPHICS =	$(addprefix $(GRAPHICS_DIR), $(GRAPHICS_FN))
 
+# Keys
+KYES_DIR = keys/
+KYES_FN =	key_kp01.c \
+			key_kp02.c \
+			key_arrows.c \
+			key_adsw.c \
+			key_ze.c
+KYES =	$(addprefix $(KYES_DIR), $(KYES_FN))
+
 # All sources
 SRC_DIR = ./src/
 SRC = 	$(UTILS) \
@@ -109,13 +118,10 @@ SRC = 	$(UTILS) \
 		$(CYLINDER) \
 		$(SHAPES) \
 		$(GRAPHICS) \
+		$(KYES) \
 		$(PARSER) \
 		$(MAIN) \
-		utils01.c \
-		key_kp01.c \
-		key_kp02.c \
-		key_arrows.c \
-		key_adsw.c
+		utils01.c
 SRCS =	$(addprefix $(SRC_DIR), $(SRC))
 
 # All .o files
@@ -173,6 +179,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(SPHERE_DIR)
 	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)
 	mkdir -p $(OBJ_DIR)$(SHAPES_DIR)
+	mkdir -p $(OBJ_DIR)$(KYES_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -c $< -o $@
