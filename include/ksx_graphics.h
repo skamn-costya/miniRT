@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 01:38:28 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:57:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@
 # define X 0
 # define Y 1
 # define Z 2
+# define O 3
 
 // FLAGS
 # define CHANGE 0x00000001

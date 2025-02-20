@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 14:30:32 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 00:08:47 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:10:50 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void		ksx_obj_copy_vrts(t_vertex **pp_vrt1,
 				t_vertex **pp_vrt2, uint32_t size);
 void		ksx_obj_copy_boxvrts(t_vertex *p_vrt1,
 				t_vertex *p_vrt2, uint32_t size);
-void		ksx_obj_set_axis(t_vertex *p_ver);
+void		ksx_obj_set_axis(t_vertex *p_ver, t_basis *p_basis);
 
 t_vertex	**ksx_obj_add_vers(t_object *p_object, uint32_t size);
 t_triangle	**ksx_obj_new_tris(uint32_t size);

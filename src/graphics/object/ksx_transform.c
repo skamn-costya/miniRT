@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 01:53:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:25:28 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,10 @@ void	ksx_transform_obj(t_object *p_object)
 
 	ksx_obj_copy_vrts (p_object->pp_vrtx_origin, p_object->pp_vrtx, p_object->size_vrtx);
 	ksx_obj_copy_boxvrts (p_object->box_ver_origin, p_object->box_ver, 8);
-	// ksx_obj_set_axis(p_object->w_axis);
 	v = ksx_vec3_set(0, 0, 0);
+	basis.o = v;
 	ksx_basis_set_norm(&basis, &v);
+	ksx_obj_set_axis(p_object->w_axis, &basis);
 	ksx_vec3_resize(&basis.i, ksx_vec3_mag(&p_object->basis.i));
 	ksx_vec3_resize(&basis.j, ksx_vec3_mag(&p_object->basis.j));
 	ksx_vec3_resize(&basis.k, ksx_vec3_mag(&p_object->basis.k));
