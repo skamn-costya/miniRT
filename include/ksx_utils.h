@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 17:17:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:48:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@ mlx_image_t	*ksx_create_image(mlx_t *mlx);
 t_vector3	ksx_mid_point(const t_vector3 *p_p1, const t_vector3 *p_p2);
 
 // ksx_utils05.c
-void		ksx_tri_set_vertexes(t_triangle *p_tri, t_vertex *p_ver1,
-				t_vertex *p_ver2, t_vertex *p_ver3);
-void		ksx_tri_set_norms(t_triangle *p_tri, t_vector3 *p_n1,
-				t_vector3 *p_n2, t_vector3 *p_n3);
 
 // ksx_utils06.c
 // void		ksx_triangle_rotation_w(t_triangle *p_triangle, const float angle_x,

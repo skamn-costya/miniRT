@@ -1,20 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_utils05.c                                      :+:      :+:    :+:   */
+/*   ksx_triangle.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/11 13:10:32 by ksorokol         ###   ########.fr       */
+/*   Created: 2025/02/21 12:41:55 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/02/21 12:46:29 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ksx_graphics.h"
-#include "ksx_utils.h"
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
+# include "ksx_graphics.h"
 
 void	ksx_tri_set_vertexes(t_triangle *p_tri, t_vertex *p_ver1,
 		t_vertex *p_ver2, t_vertex *p_ver3)

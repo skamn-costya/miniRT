@@ -1,16 +1,37 @@
 {
-    ignore_libnvidia_leaks
-    Memcheck:Leak
+	dlopen
+	Memcheck:Leak
 	match-leak-kinds:all
 	...
-    obj:*/libnvidia-glcore.so.*
+	fun:dlopen@@GLIBC_2.34
 }
 {
-	ignore_libGLX_nvidia_leaks
-    Memcheck:Leak
-	match-leak-kinds:all
+	_dl_open
+	Memcheck:Leak
+	match-leak-kinds:reachable
 	...
-	obj:*/libGLX_nvidia.so.*
+	fun:_dl_open
+}
+{
+	_dl_catch_exception
+	Memcheck:Leak
+	match-leak-kinds:reachable
+	...
+	fun:_dl_catch_exception
+}
+{
+	_dl_catch_exception
+	Memcheck:Leak
+	match-leak-kinds:reachable
+	...
+	fun:_dl_catch_exception
+}
+{
+	_dl_init
+	Memcheck:Leak
+	match-leak-kinds:reachable
+	...
+	fun:_dl_init
 }
 {
 	ignore_libglfw_leaks

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/19 14:58:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:52:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include "ksx_utils.h"
 #include "ksx_vec3_math.h"
 #include "ksx_sphere.h"
+#include "ksx_triangle.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>

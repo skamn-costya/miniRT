@@ -13,9 +13,7 @@ PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 # KSX utilites
 UTILS_DIR = graphics/utils/
 UTILS_FN =	ksx_utils04.c \
-			ksx_utils05.c \
-			ksx_utils08.c \
-			ksx_utils09.c
+			ksx_utils08.c
 UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
 
 # KSX t_vector math
@@ -108,6 +106,11 @@ KYES_FN =	key_kp01.c \
 			key_1234.c
 KYES =	$(addprefix $(KYES_DIR), $(KYES_FN))
 
+# Keys
+TRIANGLE_DIR = graphics/triangle/
+TRIANGLE_FN =	ksx_triangle.c
+TRIANGLE =	$(addprefix $(TRIANGLE_DIR), $(TRIANGLE_FN))
+
 # All sources
 SRC_DIR = ./src/
 SRC = 	$(UTILS) \
@@ -122,6 +125,7 @@ SRC = 	$(UTILS) \
 		$(SHAPES) \
 		$(GRAPHICS) \
 		$(KYES) \
+		$(TRIANGLE) \
 		$(PARSER) \
 		$(MAIN) \
 		gc.c
@@ -183,6 +187,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)
 	mkdir -p $(OBJ_DIR)$(SHAPES_DIR)
 	mkdir -p $(OBJ_DIR)$(KYES_DIR)
+	mkdir -p $(OBJ_DIR)$(TRIANGLE_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -c $< -o $@
@@ -204,6 +209,10 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
+
+go:
+#	valgrind --leak-check=full --suppressions=mlx.supp ./minirt ./files.rt/example.rt
+	valgrind --leak-check=full --show-leak-kinds=all --suppressions=mlx.supp ./minirt ./files.rt/example.rt
 
 # test:
 # 	@echo Automatic Variables
