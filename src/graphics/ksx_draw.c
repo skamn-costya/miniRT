@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:18:21 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:11:51 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,12 @@ void	ksx_draw(t_graphics *p_grph)
 			ksx_camera_obj_vm (p_object, &p_grph->camera.vm);
 			p_object->flags ^= CHANGE;
 		}
-		ksx_draw_obj(p_object, p_img, &p_grph->camera);
-		ksx_draw_axis (p_object, p_img, &p_grph->camera);
-		ksx_draw_box (p_object, p_img, &p_grph->camera);
+		if (p_grph->camera.flags & DRAW_OBJ && p_object->flags & DRAW_OBJ)
+			ksx_draw_obj(p_object, p_img, &p_grph->camera);
+		if (p_grph->camera.flags & DRAW_AXIS && p_object->flags & DRAW_AXIS)
+			ksx_draw_axis (p_object, p_img, &p_grph->camera);
+		if (p_grph->camera.flags & DRAW_BOX && p_object->flags & DRAW_BOX)
+			ksx_draw_box (p_object, p_img, &p_grph->camera);
 		idx++;
 	}
 	p_grph->camera.flags ^= CHANGE;

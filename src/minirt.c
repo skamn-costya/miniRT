@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:17:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:30:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,10 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_W
 		|| keydata.key == MLX_KEY_E || keydata.key == MLX_KEY_Z)
 		key_adswze(&keydata, p_grph);
+	else if ((keydata.key == MLX_KEY_1 || keydata.key == MLX_KEY_2
+		|| keydata.key == MLX_KEY_3 || keydata.key == MLX_KEY_4)
+		&& keydata.action == MLX_RELEASE)
+		key_1234(&keydata, p_grph);
 	else if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_RELEASE)
 	{
 		p_grph->obj_idx++;

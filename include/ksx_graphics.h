@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 16:03:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:38:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdint.h>
 
 # define PM_DEBUG	1
-# define DRAW_LINE	1
 # define AXIS_LEN 	100
 # define FAR	 	1000
 
@@ -30,7 +29,8 @@
 # define KSX_FALSE 0
 
 // # define PI 3.141592653589793115997963468544185161590576171875
-// # define PI 3.14159274f
+
+// PI / 180.f
 # define PI180 0.01745329251f
 // # define PI180 0.017453292519943
 
@@ -54,18 +54,21 @@
 # define O 3
 
 // FLAGS
-# define CHANGE 0x00000001
-# define RORATE 0x00000010
-# define RORATE_X 0x00000100
-# define RORATE_Y 0x00001000
-# define RORATE_Z 0x00010000
-# define CHANGE_CENTER 0x00010000
+# define CHANGE		0b00000001
+# define DRAW_BOX	0b00000100
+# define DRAW_AXIS	0b00001000
+# define DRAW_LINE	0b00010000
+# define DRAW_OBJ	0b00100000
+
+// # define RORATE_X 0b00000100
+// # define RORATE_Y 0b00001000
+// # define RORATE_Z 0b00010000
+// # define CHANGE_CENTER 0x00010000
 
 # define EDGE_SIZE	10.f
 // Sphere generation
 # define SPHERE_GEN 3
 // Cylinder step angle
-// # define CYLINDER_ANGLE 12.f
 # define CYLINDER_ANGLE 18.f
 
 # define ANGLE 2.5f

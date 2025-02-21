@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:46:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:32:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object = (t_object *) malloc (sizeof(t_object));
 	if (!p_object)
 		ksx_error("memory allocation failure", __FILE__, __LINE__);
-	p_object->flags = 0x00000000;
+	p_object->flags = DRAW_OBJ | DRAW_BOX | DRAW_AXIS | DRAW_LINE;
 	p_object->edge = EDGE_SIZE;
 	p_object->size1 = 0;
 	p_object->size2 = 0;

@@ -104,7 +104,8 @@ KYES_FN =	key_kp01.c \
 			key_arrows.c \
 			key_adsw.c \
 			key_ze.c \
-			key_scroll.c
+			key_scroll.c \
+			key_1234.c
 KYES =	$(addprefix $(KYES_DIR), $(KYES_FN))
 
 # All sources
