@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 17:53:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/23 18:50:05 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 	t_object	**pp_object;
 	uint32_t	idx;
 
+	if (!p_object || !p_world)
+		return (NULL);
 	pp_object = (t_object **) malloc
 		(sizeof(t_object *) * (p_world->size_wobj + 1));
 	if (!pp_object)

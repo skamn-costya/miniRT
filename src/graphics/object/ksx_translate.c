@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:44:37 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:28:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,16 +43,16 @@ static void	ksx_transform_obj_wr(t_object *p_object)
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
-		p_object->pp_vrtx[idx]->p_wp = ksx_vec3_add
-			(&p_object->pp_vrtx[idx]->p_p, &p_object->basis.w_o);
+		p_object->pp_vrtx[idx]->wp = ksx_vec3_add
+			(&p_object->pp_vrtx[idx]->p, &p_object->basis.w_o);
 	idx = -1;
 	while (++idx < 8)
-		p_object->box_ver[idx].p_wp = ksx_vec3_add
-			(&p_object->box_ver[idx].p_p, &p_object->basis.w_o);
+		p_object->box_ver[idx].wp = ksx_vec3_add
+			(&p_object->box_ver[idx].p, &p_object->basis.w_o);
 	idx = -1;
 	while (++idx < 4)
-		p_object->w_axis[idx].p_wp = ksx_vec3_add
-			(&p_object->w_axis[idx].p_p, &p_object->basis.w_o);
+		p_object->w_axis[idx].wp = ksx_vec3_add
+			(&p_object->w_axis[idx].p, &p_object->basis.w_o);
 }
 
 static void	ksx_transform_obj_wt(t_object *p_object, t_matrix4 *p_wtm)
@@ -61,16 +61,16 @@ static void	ksx_transform_obj_wt(t_object *p_object, t_matrix4 *p_wtm)
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
-		ksx_transform(&p_object->pp_vrtx[idx]->p_wp,
-			p_wtm, &p_object->pp_vrtx[idx]->p_wp);
+		ksx_transform(&p_object->pp_vrtx[idx]->wp,
+			p_wtm, &p_object->pp_vrtx[idx]->wp);
 	idx = -1;
 	while (++idx < 8)
-		ksx_transform(&p_object->box_ver[idx].p_wp,
-			p_wtm, &p_object->box_ver[idx].p_wp);
+		ksx_transform(&p_object->box_ver[idx].wp,
+			p_wtm, &p_object->box_ver[idx].wp);
 	idx = -1;
 	while (++idx < 4)
-		ksx_transform(&p_object->w_axis[idx].p_wp,
-			p_wtm, &p_object->w_axis[idx].p_wp);
+		ksx_transform(&p_object->w_axis[idx].wp,
+			p_wtm, &p_object->w_axis[idx].wp);
 }
 
 static void	ksx_get_wtm(t_matrix4 *p_m4, t_basis *p_basis)

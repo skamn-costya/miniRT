@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/18 23:36:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/23 10:39:28 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <fcntl.h>
 #include <stdio.h>
 
-static t_list	*create_line_list(int fd);
 static t_fline	*create_fline(t_list **pp_list, char *str);
 static int		is_obj(char *id);
 
@@ -47,7 +46,7 @@ t_list	*check_file(char *f_name)
 	return (result);
 }
 
-static t_list	*create_line_list(int fd)
+t_list	*create_line_list(int fd)
 {
 	char	*p_str[2];
 	t_list	*p_line_list;
@@ -57,22 +56,20 @@ static t_list	*create_line_list(int fd)
 	while (p_str[0])
 	{
 		p_str[1] = ft_strtrim(p_str[0], TRIM_SYMBOLS);
-		free (p_str[0]);
-		p_str[0] = p_str[1];
-		p_str[1] = ft_strreplace(p_str[0], TRIM_SYMBOLS, ' ');
-		free (p_str[0]);
-		p_str[0] = comma_trim(p_str[1]);
+		p_str[0] = ft_strreplace(p_str[1], TRIM_SYMBOLS, ' ');
 		free (p_str[1]);
-		if (ft_strlen(p_str[0]) > 0 && p_str[0][0] != '#')
+		p_str[1] = comma_trim(p_str[0]);
+		free (p_str[0]);
+		if (ft_strlen(p_str[1]) > 0 && p_str[1][0] != '#')
 		{
-			if (!create_fline(&p_line_list, p_str[0]))
+			if (!create_fline(&p_line_list, p_str[1]))
 			{
 				printf("Memory allocation failed\n");
 				printf("Some object may be lost ...\n");
 			}
 		}
 		else
-			free (p_str[0]);
+			free (p_str[1]);
 		p_str[0] = get_next_line(fd);
 	}
 	return (p_line_list);
@@ -128,7 +125,8 @@ static int	is_obj(char *id)
 		return (l++, TRUE);
 	if (!ft_strcmp(id, SPHERE_ID)
 		|| !ft_strcmp(id, PLANE_ID)
-		|| !ft_strcmp(id, CYLINDER_ID))
+		|| !ft_strcmp(id, CYLINDER_ID)
+		|| !ft_strcmp(id, OBJ_ID))
 		return (TRUE);
 	else
 		return (FALSE);

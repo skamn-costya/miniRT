@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/21 12:52:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:31:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ void	ksx_sphere_split(t_object *p_object)
 	while (idx < p_object->size_tri)
 	{
 		p_tris = p_object->pp_tri[idx];
-		pp_ver[idx * 3]->p_p = ksx_mid_point(&p_tris->p_ver1->p_p, &p_tris->p_ver2->p_p);
-		pp_ver[idx * 3 + 1]->p_p = ksx_mid_point(&p_tris->p_ver2->p_p, &p_tris->p_ver3->p_p);
-		pp_ver[idx * 3 + 2]->p_p = ksx_mid_point(&p_tris->p_ver3->p_p, &p_tris->p_ver1->p_p);
-		ksx_vec3_resize(&pp_ver[idx * 3]->p_p, p_object->size1);
-		ksx_vec3_resize(&pp_ver[idx * 3 + 1]->p_p, p_object->size1);
-		ksx_vec3_resize(&pp_ver[idx * 3 + 2]->p_p, p_object->size1);
+		pp_ver[idx * 3]->p = ksx_mid_point(&p_tris->p_ver1->p, &p_tris->p_ver2->p);
+		pp_ver[idx * 3 + 1]->p = ksx_mid_point(&p_tris->p_ver2->p, &p_tris->p_ver3->p);
+		pp_ver[idx * 3 + 2]->p = ksx_mid_point(&p_tris->p_ver3->p, &p_tris->p_ver1->p);
+		pp_ver[idx * 3]->norm = ksx_vec3_unit(&pp_ver[idx * 3]->p);	// ???
+		pp_ver[idx * 3 + 1]->norm = ksx_vec3_unit(&pp_ver[idx * 3 + 1]->p);	// ???
+		pp_ver[idx * 3 + 2]->norm = ksx_vec3_unit(&pp_ver[idx * 3 + 2]->p);	// ???
+		ksx_vec3_resize(&pp_ver[idx * 3]->p, p_object->size1);
+		ksx_vec3_resize(&pp_ver[idx * 3 + 1]->p, p_object->size1);
+		ksx_vec3_resize(&pp_ver[idx * 3 + 2]->p, p_object->size1);
 		ksx_tri_set_vertexes (pp_tri[idx * 4], p_tris->p_ver1, pp_ver[idx * 3], pp_ver[idx * 3 + 2]);
 		ksx_tri_set_vertexes (pp_tri[idx * 4 + 1], pp_ver[idx * 3], p_tris->p_ver2, pp_ver[idx * 3 + 1]);
 		ksx_tri_set_vertexes (pp_tri[idx * 4 + 2], pp_ver[idx * 3 + 1], p_tris->p_ver3, pp_ver[idx * 3 + 2]);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/21 11:38:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:36:38 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -329,9 +329,10 @@ typedef struct s_camera
 
 typedef struct s_vertex
 {
-	t_vector3	p_p;
-	t_vector3	p_wp;
-	t_vector3	p_cp;
+	t_vector3	p;
+	t_vector3	wp;
+	t_vector3	cp;
+	t_vector3	norm;
 }	t_vertex;
 
 typedef struct s_triangle

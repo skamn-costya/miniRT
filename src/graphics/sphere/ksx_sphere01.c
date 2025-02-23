@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/21 12:52:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/23 09:33:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ t_object	*ksx_create_sphere(t_vector3 center,
 	uint8_t		idx;
 
 	p_object = ksx_create_object(&center);
-	if (!p_object)
-		return (NULL);
 	p_object->size1 = diameter * .5f;
 	p_object->color = color;
 	ksx_init_sphere_box (p_object);
@@ -53,14 +51,14 @@ t_object	*ksx_create_sphere(t_vector3 center,
 
 static void	ksx_init_sphere_box(t_object *p_object)
 {
-	p_object->box_ver[0].p_p = ksx_vec3_set(p_object->size1, p_object->size1, p_object->size1);
-	p_object->box_ver[1].p_p = ksx_vec3_set(-p_object->size1, p_object->size1, p_object->size1);
-	p_object->box_ver[2].p_p = ksx_vec3_set(-p_object->size1, p_object->size1, -p_object->size1);
-	p_object->box_ver[3].p_p = ksx_vec3_set(p_object->size1, p_object->size1, -p_object->size1);
-	p_object->box_ver[4].p_p = ksx_vec3_set(p_object->size1, -p_object->size1, p_object->size1);
-	p_object->box_ver[5].p_p = ksx_vec3_set(-p_object->size1, -p_object->size1, p_object->size1);
-	p_object->box_ver[6].p_p = ksx_vec3_set(-p_object->size1, -p_object->size1, -p_object->size1);
-	p_object->box_ver[7].p_p = ksx_vec3_set(p_object->size1, -p_object->size1, -p_object->size1);
+	p_object->box_ver[0].p = ksx_vec3_set(p_object->size1, p_object->size1, p_object->size1);
+	p_object->box_ver[1].p = ksx_vec3_set(-p_object->size1, p_object->size1, p_object->size1);
+	p_object->box_ver[2].p = ksx_vec3_set(-p_object->size1, p_object->size1, -p_object->size1);
+	p_object->box_ver[3].p = ksx_vec3_set(p_object->size1, p_object->size1, -p_object->size1);
+	p_object->box_ver[4].p = ksx_vec3_set(p_object->size1, -p_object->size1, p_object->size1);
+	p_object->box_ver[5].p = ksx_vec3_set(-p_object->size1, -p_object->size1, p_object->size1);
+	p_object->box_ver[6].p = ksx_vec3_set(-p_object->size1, -p_object->size1, -p_object->size1);
+	p_object->box_ver[7].p = ksx_vec3_set(p_object->size1, -p_object->size1, -p_object->size1);
 	ksx_tri_set_vertexes(&p_object->box[0], &p_object->box_ver[0], &p_object->box_ver[1], &p_object->box_ver[3]);
 	ksx_tri_set_vertexes(&p_object->box[1], &p_object->box_ver[1], &p_object->box_ver[2], &p_object->box_ver[3]);
 	ksx_tri_set_vertexes(&p_object->box[2], &p_object->box_ver[2], &p_object->box_ver[3], &p_object->box_ver[6]);
@@ -91,12 +89,18 @@ static void	ksx_init_sphere_box(t_object *p_object)
 static void	ksx_init_sphere(t_object *p_object)
 {
 	ksx_obj_add_vers(p_object, 6);
-	p_object->pp_vrtx[0]->p_p = ksx_vec3_set(0, p_object->size1, 0);
-	p_object->pp_vrtx[1]->p_p = ksx_vec3_set(p_object->size1, 0, 0);
-	p_object->pp_vrtx[2]->p_p = ksx_vec3_set(0, 0, p_object->size1);
-	p_object->pp_vrtx[3]->p_p = ksx_vec3_set(0, -p_object->size1, 0);
-	p_object->pp_vrtx[4]->p_p = ksx_vec3_set(-p_object->size1, 0, 0);
-	p_object->pp_vrtx[5]->p_p = ksx_vec3_set(0, 0, -p_object->size1);
+	p_object->pp_vrtx[0]->p = ksx_vec3_set(0, p_object->size1, 0);
+	p_object->pp_vrtx[1]->p = ksx_vec3_set(p_object->size1, 0, 0);
+	p_object->pp_vrtx[2]->p = ksx_vec3_set(0, 0, p_object->size1);
+	p_object->pp_vrtx[3]->p = ksx_vec3_set(0, -p_object->size1, 0);
+	p_object->pp_vrtx[4]->p = ksx_vec3_set(-p_object->size1, 0, 0);
+	p_object->pp_vrtx[5]->p = ksx_vec3_set(0, 0, -p_object->size1);
+	p_object->pp_vrtx[0]->norm = ksx_vec3_unit(&p_object->pp_vrtx[0]->p);	// ???
+	p_object->pp_vrtx[1]->norm = ksx_vec3_unit(&p_object->pp_vrtx[1]->p);	// ???
+	p_object->pp_vrtx[2]->norm = ksx_vec3_unit(&p_object->pp_vrtx[2]->p);	// ???
+	p_object->pp_vrtx[3]->norm = ksx_vec3_unit(&p_object->pp_vrtx[3]->p);	// ???
+	p_object->pp_vrtx[4]->norm = ksx_vec3_unit(&p_object->pp_vrtx[4]->p);	// ???
+	p_object->pp_vrtx[5]->norm = ksx_vec3_unit(&p_object->pp_vrtx[5]->p);	// ???
 	p_object->pp_tri = ksx_obj_new_tris(8);
 	p_object->size_tri = 8;
 	ksx_tri_set_vertexes(p_object->pp_tri[0], p_object->pp_vrtx[0], p_object->pp_vrtx[1], p_object->pp_vrtx[2]);

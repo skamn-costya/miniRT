@@ -42,7 +42,8 @@ MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 		ksx_draw_tris.c \
 		ksx_draw_tri.c \
 		ksx_draw_get_pixel.c \
-		ksx_draw_vertex.c
+		ksx_draw_vertex.c \
+		ksx_draw_norm.c
 3D = $(addprefix $(3D_DIR), $(3D_FN))
 
 BASIS_DIR = graphics/basis/
@@ -60,6 +61,10 @@ OBJECT_FN =	ksx_object01.c \
 			ksx_translate.c \
 			ksx_transform.c
 OBJECT = $(addprefix $(OBJECT_DIR), $(OBJECT_FN))
+
+OBJ_FILE_DIR = graphics/obj_file/
+OBJ_FILE_FN = ksx_obj_file.c
+OBJ_FILE = $(addprefix $(OBJ_FILE_DIR), $(OBJ_FILE_FN))
 
 # Camera object
 CAMERA_DIR = graphics/camera/
@@ -119,6 +124,7 @@ SRC = 	$(UTILS) \
 		$(3D) \
 		$(BASIS) \
 		$(OBJECT) \
+		$(OBJ_FILE) \
 		$(CAMERA) \
 		$(SPHERE) \
 		$(CYLINDER) \
@@ -182,6 +188,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(BASIS_DIR)
 	mkdir -p $(OBJ_DIR)$(3D_DIR)
 	mkdir -p $(OBJ_DIR)$(OBJECT_DIR)
+	mkdir -p $(OBJ_DIR)$(OBJ_FILE_DIR)
 	mkdir -p $(OBJ_DIR)$(CAMERA_DIR)
 	mkdir -p $(OBJ_DIR)$(SPHERE_DIR)
 	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)

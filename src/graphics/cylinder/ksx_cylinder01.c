@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/21 12:53:11 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:41:28 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 
 static void	ksx_init_cylinder_box(t_object *p_object)
 {
-	p_object->box_ver[0].p_p = ksx_vec3_set(p_object->size1, p_object->size2, p_object->size1);
-	p_object->box_ver[1].p_p = ksx_vec3_set(-p_object->size1, p_object->size2, p_object->size1);
-	p_object->box_ver[2].p_p = ksx_vec3_set(-p_object->size1, p_object->size2, -p_object->size1);
-	p_object->box_ver[3].p_p = ksx_vec3_set(p_object->size1, p_object->size2, -p_object->size1);
-	p_object->box_ver[4].p_p = ksx_vec3_set(p_object->size1, -p_object->size2, p_object->size1);
-	p_object->box_ver[5].p_p = ksx_vec3_set(-p_object->size1, -p_object->size2, p_object->size1);
-	p_object->box_ver[6].p_p = ksx_vec3_set(-p_object->size1, -p_object->size2, -p_object->size1);
-	p_object->box_ver[7].p_p = ksx_vec3_set(p_object->size1, -p_object->size2, -p_object->size1);
+	p_object->box_ver[0].p = ksx_vec3_set(p_object->size1, p_object->size2, p_object->size1);
+	p_object->box_ver[1].p = ksx_vec3_set(-p_object->size1, p_object->size2, p_object->size1);
+	p_object->box_ver[2].p = ksx_vec3_set(-p_object->size1, p_object->size2, -p_object->size1);
+	p_object->box_ver[3].p = ksx_vec3_set(p_object->size1, p_object->size2, -p_object->size1);
+	p_object->box_ver[4].p = ksx_vec3_set(p_object->size1, -p_object->size2, p_object->size1);
+	p_object->box_ver[5].p = ksx_vec3_set(-p_object->size1, -p_object->size2, p_object->size1);
+	p_object->box_ver[6].p = ksx_vec3_set(-p_object->size1, -p_object->size2, -p_object->size1);
+	p_object->box_ver[7].p = ksx_vec3_set(p_object->size1, -p_object->size2, -p_object->size1);
 	ksx_tri_set_vertexes(&p_object->box[0], &p_object->box_ver[0], &p_object->box_ver[1], &p_object->box_ver[3]);
 	ksx_tri_set_vertexes(&p_object->box[1], &p_object->box_ver[1], &p_object->box_ver[2], &p_object->box_ver[3]);
 	ksx_tri_set_vertexes(&p_object->box[2], &p_object->box_ver[2], &p_object->box_ver[3], &p_object->box_ver[6]);
@@ -94,16 +94,16 @@ static void	ksx_init_cylinder(t_object *p_object)
 	size = 360 / CYLINDER_ANGLE;
 	ksx_obj_add_vers(p_object, size + 2);
 	idx = 0;
-	p_object->pp_vrtx[idx]->p_p = ksx_vec3_set(0, p_object->size2, 0);
-	p_object->pp_vrtx[++idx]->p_p = ksx_vec3_set(0, -p_object->size2, 0);
+	p_object->pp_vrtx[idx]->p = ksx_vec3_set(0, p_object->size2, 0);
+	p_object->pp_vrtx[++idx]->p = ksx_vec3_set(0, -p_object->size2, 0);
 	while (idx < size + 1)
 	{
 		xz[0] = p_object->size1 * cosf(CYLINDER_ANGLE * idx * PI180);
 		xz[1] = p_object->size1 * sinf(CYLINDER_ANGLE * idx * PI180);
 		idx++;
-		p_object->pp_vrtx[idx]->p_p = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
+		p_object->pp_vrtx[idx]->p = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
 	}
-	p_object->edge = ksx_vec3_dist(p_object->pp_vrtx[2]->p_p, p_object->pp_vrtx[3]->p_p);
+	p_object->edge = ksx_vec3_dist(p_object->pp_vrtx[2]->p, p_object->pp_vrtx[3]->p);
 	ksx_init_cylinder_1(p_object, size);
 }
 
@@ -121,8 +121,8 @@ static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
 		idx[1] = 0;
 		while (idx[1] < size)
 		{
-			pp_vertex[idx[1]]->p_p = ksx_vec3_set(p_object->pp_vrtx[idx[1] + 2]->p_p.x,
-					p_object->size2 - (step * idx[0] + 1), p_object->pp_vrtx[idx[1] + 2]->p_p.z);
+			pp_vertex[idx[1]]->p = ksx_vec3_set(p_object->pp_vrtx[idx[1] + 2]->p.x,
+					p_object->size2 - (step * idx[0] + 1), p_object->pp_vrtx[idx[1] + 2]->p.z);
 			// if (idx[0] % 2)
 			// 	ksx_qrotation(&pp_vertex[idx[1]]->p_p, CYLINDER_ANGLE * .5f, &v3);
 			idx[1]++;

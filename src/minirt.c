@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/21 11:30:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/23 01:50:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "parser.h"
 #include "ksx_graphics.h"
 #include "ksx_object.h"
+#include "ksx_obj_file.h"
 #include "ksx_vec3_math.h"
 #include "ksx_m4_math.h"
 #include "ksx_utils.h"
@@ -95,6 +96,8 @@ static void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 			p_object = ksx_create_cylinder(p_obj_descr->coord,
 					p_obj_descr->norm, f, p_obj_descr->color);
 		}
+		else if (p_obj_descr->id == OBJ)
+			read_of(&p_grph->world, p_obj_descr->obj_file);
 		if (p_object)
 			ksx_obj2world(p_object, &p_grph->world);
 		p_list_ = p_list_->next;

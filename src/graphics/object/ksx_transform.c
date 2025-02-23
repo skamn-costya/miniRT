@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:42:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:39:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,16 +86,16 @@ static void	ksx_transform_obj_t(t_object *p_object, t_matrix4 *p_tm)
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
-		ksx_transform(&p_object->pp_vrtx[idx]->p_p,
-			p_tm, &p_object->pp_vrtx[idx]->p_p);
+		ksx_transform(&p_object->pp_vrtx[idx]->p,
+			p_tm, &p_object->pp_vrtx[idx]->p);
 	idx = -1;
 	while (++idx < 8)
-		ksx_transform(&p_object->box_ver[idx].p_p,
-			p_tm, &p_object->box_ver[idx].p_p);
+		ksx_transform(&p_object->box_ver[idx].p,
+			p_tm, &p_object->box_ver[idx].p);
 	idx = -1;
 	while (++idx < 4)
-		ksx_transform(&p_object->w_axis[idx].p_p,
-			p_tm, &p_object->w_axis[idx].p_p);
+		ksx_transform(&p_object->w_axis[idx].p,
+			p_tm, &p_object->w_axis[idx].p);
 }
 
 // p_m4->e_14 = -ksx_vec3_dot(&p_basis->i, &p_basis->o);

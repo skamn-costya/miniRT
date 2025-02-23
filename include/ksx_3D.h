@@ -6,14 +6,16 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:54 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/18 14:17:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:13:36 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KSX_3D_H
 # define KSX_3D_H
 
-# define BOX_COLOR	0x88888888
+# define BOX_COLOR		0x88888888
+# define PIXEL_RED		0xFF0000FF
+# define PIXEL_BLACK	0xFF000000
 
 # include "ksx_graphics.h"
 
@@ -33,4 +35,6 @@ void	ksx_draw_vertex(t_vertex *p_vertex, mlx_image_t *p_image,
 			t_camera *p_camera, uint32_t mlx_color);
 void	ksx_draw_vertexes(t_object *p_object, mlx_image_t *p_image,
 			t_camera *p_camera);
+void	ksx_draw_norms(t_object *p_object,
+			mlx_image_t *p_image, t_camera *p_camera);
 #endif	// KSX_3D_H //
