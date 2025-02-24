@@ -112,6 +112,11 @@ KYES_FN =	key_kp01.c \
 KYES =	$(addprefix $(KYES_DIR), $(KYES_FN))
 
 # Keys
+BOXES_DIR = graphics/boxes/
+BOXES_FN =	ksx_boxes.c
+BOXES =	$(addprefix $(BOXES_DIR), $(BOXES_FN))
+
+# Keys
 TRIANGLE_DIR = graphics/triangle/
 TRIANGLE_FN =	ksx_triangle.c
 TRIANGLE =	$(addprefix $(TRIANGLE_DIR), $(TRIANGLE_FN))
@@ -123,6 +128,7 @@ SRC = 	$(UTILS) \
 		$(MATRIX_MATH) \
 		$(3D) \
 		$(BASIS) \
+		$(BOXES) \
 		$(OBJECT) \
 		$(OBJ_FILE) \
 		$(CAMERA) \
@@ -195,6 +201,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(SHAPES_DIR)
 	mkdir -p $(OBJ_DIR)$(KYES_DIR)
 	mkdir -p $(OBJ_DIR)$(TRIANGLE_DIR)
+	mkdir -p $(OBJ_DIR)$(BOXES_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -c $< -o $@

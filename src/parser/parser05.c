@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/05 21:11:29 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:35:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ char	*comma_trim(char *str)
 	if (!str)
 		return (NULL);
 	p_str = ft_split(str, ',');
-	size = ft_parrsize((void **) p_str);
+	size = ft_pparrsize((void **) p_str);
 	if (size < 2)
-		return (ft_parrclear((void **) p_str), ft_strdup(str));
+		return (ft_pparrclear((void **) p_str), ft_strdup(str));
 	idx = 0;
 	str_ = ft_strtrim(p_str[idx], TRIM_SYMBOLS);
 	while (++idx < size)
@@ -34,7 +34,7 @@ char	*comma_trim(char *str)
 		str_ = ft_new_strcmp(str_, ",", 1);
 		str_ = ft_new_strcmp(str_, ft_strtrim(p_str[idx], TRIM_SYMBOLS), 3);
 	}
-	return (ft_parrclear((void **) p_str), str_);
+	return (ft_pparrclear((void **) p_str), str_);
 }
 
 void	free_t_obj_descr(void *p_obj_descr)

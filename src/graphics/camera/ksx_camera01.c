@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/22 11:39:37 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:48:10 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,21 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 {
 	uint32_t	idx;
+	t_box		**pp_box;
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
 		ksx_transform(&p_object->pp_vrtx[idx]->wp, p_vm, &p_object->pp_vrtx[idx]->cp);
 	ksx_transform(&p_object->basis.w_o, p_vm, &p_object->basis.c_o);
-	idx = -1;
-	while (++idx < 8)
-		ksx_transform(&p_object->box_ver[idx].wp, p_vm, &p_object->box_ver[idx].cp);
+	pp_box = p_object->pp_box;
+	while (pp_box && *pp_box)
+	{
+		idx = -1;
+		while (++idx < 8)
+			ksx_transform(&(*pp_box)->ver[idx].wp,
+				p_vm, &(*pp_box)->ver[idx].cp);
+		pp_box++;
+	}
 	idx = -1;
 	while (++idx < 4)
 		ksx_transform(&p_object->w_axis[idx].wp, p_vm, &p_object->w_axis[idx].cp);

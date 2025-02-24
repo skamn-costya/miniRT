@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/22 12:28:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:48:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,21 @@ void	ksx_translate_obj(t_object *p_object)
 static void	ksx_transform_obj_wr(t_object *p_object)
 {
 	uint32_t	idx;
+	t_box		**pp_box;
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
 		p_object->pp_vrtx[idx]->wp = ksx_vec3_add
 			(&p_object->pp_vrtx[idx]->p, &p_object->basis.w_o);
-	idx = -1;
-	while (++idx < 8)
-		p_object->box_ver[idx].wp = ksx_vec3_add
-			(&p_object->box_ver[idx].p, &p_object->basis.w_o);
+	pp_box = p_object->pp_box;
+	while (pp_box && *pp_box)
+	{
+		idx = -1;
+		while (++idx < 8)
+			(*pp_box)->ver[idx].wp = ksx_vec3_add
+				(&(*pp_box)->ver[idx].p, &p_object->basis.w_o);
+		pp_box++;
+	}
 	idx = -1;
 	while (++idx < 4)
 		p_object->w_axis[idx].wp = ksx_vec3_add
@@ -58,15 +64,21 @@ static void	ksx_transform_obj_wr(t_object *p_object)
 static void	ksx_transform_obj_wt(t_object *p_object, t_matrix4 *p_wtm)
 {
 	uint32_t	idx;
+	t_box		**pp_box;
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
 		ksx_transform(&p_object->pp_vrtx[idx]->wp,
 			p_wtm, &p_object->pp_vrtx[idx]->wp);
-	idx = -1;
-	while (++idx < 8)
-		ksx_transform(&p_object->box_ver[idx].wp,
-			p_wtm, &p_object->box_ver[idx].wp);
+	pp_box = p_object->pp_box;
+	while (pp_box && *pp_box)
+	{
+		idx = -1;
+		while (++idx < 8)
+			ksx_transform(&(*pp_box)->ver[idx].wp,
+			p_wtm, &(*pp_box)->ver[idx].wp);
+		pp_box++;
+	}
 	idx = -1;
 	while (++idx < 4)
 		ksx_transform(&p_object->w_axis[idx].wp,

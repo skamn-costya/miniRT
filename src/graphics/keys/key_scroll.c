@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 19:01:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:57:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ void	scroll_zoom_in(t_graphics *p_grph)
 		ksx_vec3_mag(&p_grph->camera.basis.j) + SCALE);
 	ksx_vec3_resize(&p_grph->camera.basis.k,
 		ksx_vec3_mag(&p_grph->camera.basis.k) + SCALE);
-	if (ksx_vec3_mag(&p_grph->camera.basis.i) > MAX_AXIS)
-		ksx_vec3_resize(&p_grph->camera.basis.i, MAX_AXIS);
-	if (ksx_vec3_mag(&p_grph->camera.basis.j) > MAX_AXIS)
-		ksx_vec3_resize(&p_grph->camera.basis.j, MAX_AXIS);
-	if (ksx_vec3_mag(&p_grph->camera.basis.k) > MAX_AXIS)
-		ksx_vec3_resize(&p_grph->camera.basis.k, MAX_AXIS);
+	// if (ksx_vec3_mag(&p_grph->camera.basis.i) > MAX_AXIS)
+	// 	ksx_vec3_resize(&p_grph->camera.basis.i, MAX_AXIS);
+	// if (ksx_vec3_mag(&p_grph->camera.basis.j) > MAX_AXIS)
+	// 	ksx_vec3_resize(&p_grph->camera.basis.j, MAX_AXIS);
+	// if (ksx_vec3_mag(&p_grph->camera.basis.k) > MAX_AXIS)
+	// 	ksx_vec3_resize(&p_grph->camera.basis.k, MAX_AXIS);
 	p_grph->camera.flags |= CHANGE;
 }
 

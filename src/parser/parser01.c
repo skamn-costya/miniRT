@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/23 10:39:28 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:35:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	free_t_fline(void *p_fline)
 		return ;
 	p_fline_ = (t_fline *) p_fline;
 	if (p_fline_->words)
-		ft_parrclear((void **) p_fline_->words);
+		ft_pparrclear((void **) p_fline_->words);
 	free (p_fline_->str);
 	free(p_fline);
 }

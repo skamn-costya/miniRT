@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/23 09:53:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:33:18 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object->basis.w_j = p_object->basis.j;
 	p_object->basis.w_k = p_object->basis.k;
 	ksx_obj_set_axis(p_object->w_axis, &p_object->basis);
+	p_object->pp_box = NULL;
 	p_object->pp_vrtx = NULL;
 	p_object->size_vrtx = 0;
 	p_object->pp_tri = NULL;

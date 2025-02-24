@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:26:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/23 21:21:21 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:35:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ void	read_of(t_world *p_world, char *file_name)
 
 t_vertex	*get_v_of(t_fline *p_fline, t_object *p_object, int *p_idx)
 {
-	if ((p_fline->words[1] && !is_f_number(p_fline->words[1]))
-		|| (p_fline->words[2] && !is_f_number(p_fline->words[2]))
-		|| (p_fline->words[3] && !is_f_number(p_fline->words[3])))
-		return (NULL);
+	// if ((p_fline->words[1] && !is_f_number(p_fline->words[1]))
+	// 	|| (p_fline->words[2] && !is_f_number(p_fline->words[2]))
+	// 	|| (p_fline->words[3] && !is_f_number(p_fline->words[3])))
+	// 	return (printf("Wrong float number.\n"), NULL);
 	ksx_obj_add_vers(p_object, 1);
 	p_object->pp_vrtx[*p_idx]->p.x = ft_atof(p_fline->words[1]);
 	p_object->pp_vrtx[*p_idx]->p.y = ft_atof(p_fline->words[2]);
@@ -108,9 +108,9 @@ static int	get_f_split(char *p_str)
 		return (-1);
 	pp_str = ft_split(p_str, '/');
 	if (!is_i_number(pp_str[0]))
-		return (ft_parrclear((void **)pp_str), -1);
+		return (ft_pparrclear((void **)pp_str), -1);
 	i = ft_atoi(pp_str[0]);
-	return (ft_parrclear((void **)pp_str), i);
+	return (ft_pparrclear((void **)pp_str), i);
 }
 
 t_vertex	*get_vn_of(t_fline *p_fline, t_object *p_object, int *p_idx)
