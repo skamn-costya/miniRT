@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/21 11:31:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:28:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	key_1234(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 void	key_1(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	if (p_keydata->modifier == MLX_SHIFT)
-		p_grph->world.pp_wobj[p_grph->obj_idx]->flags ^= DRAW_BOX;
+		p_grph->world.pp_obj[p_grph->obj_idx]->flags ^= DRAW_BOX;
 	else
 	{
 		p_grph->camera.flags ^= DRAW_BOX;
@@ -43,7 +43,7 @@ void	key_1(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 void	key_2(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	if (p_keydata->modifier == MLX_SHIFT)
-		p_grph->world.pp_wobj[p_grph->obj_idx]->flags ^= DRAW_AXIS;
+		p_grph->world.pp_obj[p_grph->obj_idx]->flags ^= DRAW_AXIS;
 	else
 	{
 		p_grph->camera.flags ^= DRAW_AXIS;
@@ -54,7 +54,7 @@ void	key_2(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 void	key_3(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	if (p_keydata->modifier == MLX_SHIFT)
-		p_grph->world.pp_wobj[p_grph->obj_idx]->flags ^= DRAW_LINE;
+		p_grph->world.pp_obj[p_grph->obj_idx]->flags ^= DRAW_LINE;
 	else
 	{
 		p_grph->camera.flags ^= DRAW_LINE;
@@ -65,7 +65,7 @@ void	key_3(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 void	key_4(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	if (p_keydata->modifier == MLX_SHIFT)
-		p_grph->world.pp_wobj[p_grph->obj_idx]->flags ^= DRAW_OBJ;
+		p_grph->world.pp_obj[p_grph->obj_idx]->flags ^= DRAW_OBJ;
 	else
 	{
 		p_grph->camera.flags ^= DRAW_OBJ;

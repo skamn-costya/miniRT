@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/23 20:03:29 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:28:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	ksx_draw(t_graphics *p_grph)
 	t_object	*p_object;
 	uint32_t	idx;
 
-	if (!p_grph->world.pp_wobj)
+	if (!p_grph->world.pp_obj)
 		return ;
 	if (p_grph->camera.flags & CHANGE)
 		ksx_camera_set_vm(&p_grph->camera);
 	p_img = ksx_create_image(p_grph->mlx);
-	pp_object = p_grph->world.pp_wobj;
+	pp_object = p_grph->world.pp_obj;
 	idx = 0;
-	while (idx < p_grph->world.size_wobj)
+	while (idx < p_grph->world.size_obj)
 	{
 		p_object = pp_object[idx];
 		if (p_grph->camera.flags & CHANGE || p_object->flags & CHANGE)
