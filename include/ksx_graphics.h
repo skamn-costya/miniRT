@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 14:45:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:10:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -367,7 +367,7 @@ typedef struct s_box
 	t_vertex	ver_origin[8];
 	t_vertex	ver[8];
 	t_triangle	tris[12];
-	t_triangle	*p_tris;
+	t_triangle	**pp_tris;
 	void		*p_object;
 }	t_box;
 
@@ -394,8 +394,8 @@ typedef struct s_object
 
 typedef struct s_world
 {
-	t_triangle	*p_tris;
-	t_triangle	*p_boxes;
+	// t_triangle	*p_tris;
+	t_box		**pp_boxes;
 	t_object	**pp_wobj;
 	uint32_t	size_wobj;
 }	t_world;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:47:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:08:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,9 @@ t_triangle	**ksx_obj_add_tris(t_object *p_object, uint32_t size)
 	free (p_object->pp_tri);
 	p_object->pp_tri = pp_tri;
 	return (p_object->size_tri += size, &p_object->pp_tri[idx[1]]);
+}
+
+void	ksx_obj_tris2box(t_object *p_object)
+{
+	p_object->pp_box[0]->pp_tris = p_object->pp_tri;
 }

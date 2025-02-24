@@ -6,11 +6,12 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/23 18:50:05 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:10:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
+#include "ksx_boxes.h"
 #include "ksx_utils.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -33,6 +34,7 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 		idx++;
 	}
 	pp_object[idx] = p_object;
+	ksx_box_add (&p_world->pp_boxes, p_object->pp_box[0]);
 	free (p_world->pp_wobj);
 	p_world->pp_wobj = pp_object;
 	p_world->size_wobj++;
@@ -44,8 +46,8 @@ void	ksx_clean_world(t_world *p_world)
 	uint32_t	idx[3];
 	t_object	*p_object;
 
-	free(p_world->p_tris);
-	p_world->p_tris = NULL;
+	// free(p_world->p_tris);
+	// p_world->p_tris = NULL;
 	idx[0] = 0;
 	while (idx[0] < p_world->size_wobj)
 	{

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/23 01:50:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:07:38 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *))
 {
 	ksx_garbage_collector(p_grph);
 	p_grph->f_gc = f;
-	p_grph->world.p_tris = NULL;
+	// p_grph->world.p_tris = NULL;
+	p_grph->world.pp_boxes = NULL;
 	p_grph->world.pp_wobj = NULL;
 	p_grph->world.size_wobj = 0;
 	p_grph->mlx = ksx_init();

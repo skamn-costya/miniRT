@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 15:45:54 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:01:50 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ t_object	*ksx_create_sphere(t_vector3 center,
 	}
 	ksx_obj_vrts_dup2origin(p_object);
 	ksx_transform_obj(p_object);
+	ksx_obj_tris2box(p_object);
 	return (p_object);
 }
 
 static void	ksx_init_sphere_box(t_object *p_object)
 {
-	ksx_box_add(&p_object->pp_box);
+	ksx_box_add_new(&p_object->pp_box);
 	p_object->pp_box[0]->ver[0].p = ksx_vec3_set(p_object->size1, p_object->size1, p_object->size1);
 	p_object->pp_box[0]->ver[1].p = ksx_vec3_set(-p_object->size1, p_object->size1, p_object->size1);
 	p_object->pp_box[0]->ver[2].p = ksx_vec3_set(-p_object->size1, p_object->size1, -p_object->size1);
