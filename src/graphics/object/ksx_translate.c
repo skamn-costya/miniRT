@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 15:48:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:12:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,12 @@ static void	ksx_transform_obj_wr(t_object *p_object)
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
+	{
 		p_object->pp_vrtx[idx]->wp = ksx_vec3_add
 			(&p_object->pp_vrtx[idx]->p, &p_object->basis.w_o);
+		p_object->pp_vrtx[idx]->wnorm = ksx_vec3_add
+			(&p_object->pp_vrtx[idx]->norm, &p_object->basis.w_o);
+	}
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
@@ -68,8 +72,12 @@ static void	ksx_transform_obj_wt(t_object *p_object, t_matrix4 *p_wtm)
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
+	{
 		ksx_transform(&p_object->pp_vrtx[idx]->wp,
 			p_wtm, &p_object->pp_vrtx[idx]->wp);
+		ksx_transform(&p_object->pp_vrtx[idx]->norm,	// ??? may be need normalisation
+			p_wtm, &p_object->pp_vrtx[idx]->wnorm);
+	}
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{

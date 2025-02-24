@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 16:30:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:18:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@
 # define DRAW_AXIS	0b00001000
 # define DRAW_LINE	0b00010000
 # define DRAW_OBJ	0b00100000
+# define DRAW_NORM	0b01000000
 
 // # define RORATE_X 0b00000100
 // # define RORATE_Y 0b00001000
@@ -333,6 +334,8 @@ typedef struct s_vertex
 	t_vector3	wp;
 	t_vector3	cp;
 	t_vector3	norm;
+	t_vector3	wnorm;
+	t_vector3	cnorm;
 }	t_vertex;
 
 typedef struct s_triangle
@@ -381,9 +384,6 @@ typedef struct s_object
 	t_basis		basis;
 	t_vertex	w_axis[4];
 	t_box		**pp_box;
-	// t_vertex	box_ver_origin[8];
-	// t_vertex	box_ver[8];
-	// t_triangle	box[12];
 	t_vertex	**pp_vrtx_origin;
 	t_vertex	**pp_vrtx;
 	uint32_t	size_vrtx;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:18:43 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 16:16:11 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:56:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	ksx_box_create(t_box *p_box, uint32_t mlx_color)
 		p_box->tris[idx].color.mlx_color = mlx_color;
 }
 
-
-// t_triangle	**ksx_obj_add_tris(t_object *p_object, uint32_t size)
 t_box	*ksx_box_add_new(t_box ***ppp_box)
 {
 	t_box	**pp_box;

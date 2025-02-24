@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 16:31:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:43:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 		idx++;
 	}
 	pp_object[idx] = p_object;
-	ksx_box_add (&p_world->pp_box, p_object->pp_box[0]);
+	if (p_object->pp_box && p_object->pp_box[0])
+		ksx_box_add (&p_world->pp_box, p_object->pp_box[0]);
 	p_world->size_box++;
 	free (p_world->pp_obj);
 	p_world->pp_obj = pp_object;

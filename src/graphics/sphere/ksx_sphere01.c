@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 16:01:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:54:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_object	*ksx_create_sphere(t_vector3 center,
 		ksx_sphere_split (p_object);
 		idx++;
 	}
+	ksx_sphere_norns(p_object);
 	ksx_obj_vrts_dup2origin(p_object);
 	ksx_transform_obj(p_object);
 	ksx_obj_tris2box(p_object);
@@ -75,12 +76,6 @@ static void	ksx_init_sphere(t_object *p_object)
 	p_object->pp_vrtx[3]->p = ksx_vec3_set(0, -p_object->size1, 0);
 	p_object->pp_vrtx[4]->p = ksx_vec3_set(-p_object->size1, 0, 0);
 	p_object->pp_vrtx[5]->p = ksx_vec3_set(0, 0, -p_object->size1);
-	p_object->pp_vrtx[0]->norm = ksx_vec3_unit(&p_object->pp_vrtx[0]->p);	// ???
-	p_object->pp_vrtx[1]->norm = ksx_vec3_unit(&p_object->pp_vrtx[1]->p);	// ???
-	p_object->pp_vrtx[2]->norm = ksx_vec3_unit(&p_object->pp_vrtx[2]->p);	// ???
-	p_object->pp_vrtx[3]->norm = ksx_vec3_unit(&p_object->pp_vrtx[3]->p);	// ???
-	p_object->pp_vrtx[4]->norm = ksx_vec3_unit(&p_object->pp_vrtx[4]->p);	// ???
-	p_object->pp_vrtx[5]->norm = ksx_vec3_unit(&p_object->pp_vrtx[5]->p);	// ???
 	p_object->pp_tri = ksx_obj_new_tris(8);
 	p_object->size_tri = 8;
 	ksx_tri_set_vertexes(p_object->pp_tri[0], p_object->pp_vrtx[0], p_object->pp_vrtx[1], p_object->pp_vrtx[2]);

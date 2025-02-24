@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 15:33:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:23:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object = (t_object *) malloc (sizeof(t_object));
 	if (!p_object)
 		ksx_error("memory allocation failure", __FILE__, __LINE__);
-	p_object->flags = DRAW_OBJ | DRAW_BOX | DRAW_AXIS | DRAW_LINE;
+	p_object->flags = DRAW_OBJ | DRAW_BOX | DRAW_AXIS | DRAW_LINE | DRAW_NORM;
 	p_object->edge = EDGE_SIZE;
 	p_object->size1 = 0;
 	p_object->size2 = 0;
@@ -96,6 +96,9 @@ void	ksx_obj_copy_vrts(t_vertex **pp_vrt1, t_vertex **pp_vrt2, uint32_t size)
 		pp_vrt2[idx]->p.x = pp_vrt1[idx]->p.x;
 		pp_vrt2[idx]->p.y = pp_vrt1[idx]->p.y;
 		pp_vrt2[idx]->p.z = pp_vrt1[idx]->p.z;
+		pp_vrt2[idx]->norm.x = pp_vrt1[idx]->norm.x;
+		pp_vrt2[idx]->norm.y = pp_vrt1[idx]->norm.y;
+		pp_vrt2[idx]->norm.z = pp_vrt1[idx]->norm.z;
 		idx++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 15:48:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:05:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,12 @@ static void	ksx_transform_obj_t(t_object *p_object, t_matrix4 *p_tm)
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
+	{
 		ksx_transform(&p_object->pp_vrtx[idx]->p,
 			p_tm, &p_object->pp_vrtx[idx]->p);
+		ksx_transform(&p_object->pp_vrtx[idx]->norm,
+			p_tm, &p_object->pp_vrtx[idx]->norm);
+	}
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
