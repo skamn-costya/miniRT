@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 14:52:24 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 18:44:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,19 @@ static void	ksx_init_cylinder(t_object *p_object)
 	float		xz[2];
 
 	size = 360 / CYLINDER_ANGLE;
-	ksx_obj_add_vers(p_object, size + 2);
+	ksx_obj_add_vers(p_object, (size + 1) * 2);
 	idx = 0;
 	p_object->pp_vrtx[idx]->p = ksx_vec3_set(0, p_object->size2, 0);
+	p_object->pp_vrtx[idx]->norm = ksx_vec3_set(0, 1.f , 0);
 	p_object->pp_vrtx[++idx]->p = ksx_vec3_set(0, -p_object->size2, 0);
-	while (idx < size + 1)
+	p_object->pp_vrtx[idx]->norm = ksx_vec3_set(0, -1.f , 0);
+	while (idx < size + 2)
 	{
 		xz[0] = p_object->size1 * cosf(CYLINDER_ANGLE * idx * PI180);
 		xz[1] = p_object->size1 * sinf(CYLINDER_ANGLE * idx * PI180);
 		idx++;
 		p_object->pp_vrtx[idx]->p = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
+		p_object->pp_vrtx[idx + size]->p = ksx_vec3_set(xz[0], -p_object->size2, xz[1]);
 	}
 	p_object->edge = ksx_vec3_dist(p_object->pp_vrtx[2]->p, p_object->pp_vrtx[3]->p);
 	ksx_init_cylinder_1(p_object, size);
@@ -94,7 +97,7 @@ static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
 	t_vertex	**pp_vertex;
 
 	step = p_object->size2 * 2.f / roundf((p_object->size2 * 2.f) / p_object->edge);
-	idx[0] = 1;
+	idx[0] = 0;
 	while (idx[0] < (p_object->size2 * 2.f / step) + 1)
 	{
 		pp_vertex = ksx_obj_add_vers(p_object, size);

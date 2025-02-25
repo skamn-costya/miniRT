@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 21:12:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 16:30:45 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static void	ksx_transform_obj_wr(t_object *p_object);
 static void	ksx_transform_obj_wt(t_object *p_object, t_matrix4 *p_wtm);
 static void	ksx_get_wtm(t_matrix4 *p_m4, t_basis *p_basis);
 
-void	ksx_translate(t_vector3 *p_point, t_vector3 *p_center,
-		t_vector3 *p_result)
-{
-	*p_result = ksx_vec3_add (p_point, p_center);
-}
+// void	ksx_translate(t_vector3 *p_point, t_vector3 *p_center,
+// 		t_vector3 *p_result)
+// {
+// 	*p_result = ksx_vec3_add (p_point, p_center);
+// }
 
 void	ksx_translate_obj(t_object *p_object)
 {
