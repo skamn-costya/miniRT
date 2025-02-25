@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/21 12:53:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 19:50:56 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ksx_init_cylinder_tri(t_object *p_object,
 	idx[0] = 0;
 	while (idx[0] < count - 1)
 	{
-		pp_ver = &p_object->pp_vrtx[2 + idx[0] * size];
+		pp_ver = &p_object->pp_vrtx[2 + size * 2 + idx[0] * size];
 		pp_tri = ksx_obj_add_tris(p_object, size * 2);
 		idx[1] = 0;
 		while (idx[1] < size)
@@ -65,6 +65,7 @@ static void	ksx_init_cylinder_tri_cup(t_object *p_object,
 
 	pp_tri = ksx_obj_add_tris(p_object, size * 2);
 	pp_ver_a = &p_object->pp_vrtx[2];
+	pp_ver_b = &p_object->pp_vrtx[2 + size];
 	idx[0] = 0;
 	while (idx[0] < size)
 	{
@@ -72,6 +73,7 @@ static void	ksx_init_cylinder_tri_cup(t_object *p_object,
 		if (idx[1] == size)
 			idx[1] = 0;
 		ksx_tri_set_vertexes(pp_tri[idx[0]], pp_ver_a[idx[0]], pp_ver_a[idx[1]], p_object->pp_vrtx[0]);
+		// ksx_tri_set_vertexes(pp_tri[idx[0] + size], pp_ver_a[idx[0]], pp_ver_a[idx[1]], p_object->pp_vrtx[0]);
 		ksx_tri_set_vertexes(pp_tri[idx[0] + size], pp_ver_b[idx[0]], pp_ver_b[idx[1]], p_object->pp_vrtx[1]);
 		pp_tri[idx[0]]->color = p_object->color;
 		pp_tri[idx[0] + size]->color = p_object->color;
