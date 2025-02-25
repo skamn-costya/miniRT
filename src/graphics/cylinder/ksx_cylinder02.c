@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 19:50:56 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 22:16:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+static void	ksx_init_cylinder_tri_(t_object *p_object,
+				uint32_t size, t_vertex **pp_ver_b);
 static void	ksx_init_cylinder_tri_cup(t_object *p_object,
 				uint32_t size, t_vertex **pp_ver_b);
 
@@ -34,8 +36,8 @@ void	ksx_init_cylinder_tri(t_object *p_object,
 	t_vertex	**pp_ver;
 	t_triangle	**pp_tri;
 
-	idx[0] = 0;
-	while (idx[0] < count - 1)
+	idx[0] = 2;
+	while (idx[0] < count)
 	{
 		pp_ver = &p_object->pp_vrtx[2 + size * 2 + idx[0] * size];
 		pp_tri = ksx_obj_add_tris(p_object, size * 2);
@@ -53,19 +55,49 @@ void	ksx_init_cylinder_tri(t_object *p_object,
 		}
 		idx[0]++;
 	}
+	ksx_init_cylinder_tri_(p_object, size, &p_object->pp_vrtx[2 + size * 2 + idx[0] * size]);
 	ksx_init_cylinder_tri_cup(p_object, size, &p_object->pp_vrtx[2 + idx[0] * size]);
 }
 
-static void	ksx_init_cylinder_tri_cup(t_object *p_object,
-		uint32_t size, t_vertex **pp_ver_b)
+static void	ksx_init_cylinder_tri_(t_object *p_object,
+	uint32_t size, t_vertex **pp_ver_)
+{
+	uint32_t	idx[2];
+	t_vertex	**pp_ver[4];
+	t_triangle	**pp_tri;
+
+	pp_ver[0] = &p_object->pp_vrtx[2 + size * 2];
+	pp_ver[3] = &p_object->pp_vrtx[2 + size * 3];
+	pp_ver[1] = &p_object->pp_vrtx[2 + size * 4];
+	pp_ver[2] = pp_ver_;
+	pp_tri = ksx_obj_add_tris(p_object, size * 4);
+	idx[0] = 0;
+	while (idx[0] < size)
+	{
+		idx[1] = idx[0] + 1;
+		if (idx[1] == size)
+			idx[1] = 0;
+		ksx_tri_set_vertexes(pp_tri[idx[1]], pp_ver[0][idx[0]], pp_ver[0][idx[1]], pp_ver[1][idx[0]]);
+		ksx_tri_set_vertexes(pp_tri[idx[1] + size], pp_ver[1][idx[0]], pp_ver[1][idx[1]], pp_ver[0][idx[1]]);
+		ksx_tri_set_vertexes(pp_tri[idx[1] + size * 2], pp_ver[2][idx[0]], pp_ver[2][idx[1]], pp_ver[3][idx[0]]);
+		ksx_tri_set_vertexes(pp_tri[idx[1] + size * 3], pp_ver[3][idx[0]], pp_ver[3][idx[1]], pp_ver[2][idx[1]]);
+		pp_tri[idx[1]]->color = p_object->color;
+		pp_tri[idx[1] + size]->color = p_object->color;
+		pp_tri[idx[1] + size * 2]->color = p_object->color;
+		pp_tri[idx[1] + size * 3]->color = p_object->color;
+		idx[0]++;
+	}
+}
+
+static void	ksx_init_cylinder_tri_cup(t_object *p_object, uint32_t size, t_vertex **pp_ver_b)
 {
 	uint32_t	idx[2];
 	t_vertex	**pp_ver_a;
 	t_triangle	**pp_tri;
 
 	pp_tri = ksx_obj_add_tris(p_object, size * 2);
-	pp_ver_a = &p_object->pp_vrtx[2];
-	pp_ver_b = &p_object->pp_vrtx[2 + size];
+	pp_ver_a = &p_object->pp_vrtx[2 + size * 2];
+	pp_ver_b = &p_object->pp_vrtx[2 + size * 3];
 	idx[0] = 0;
 	while (idx[0] < size)
 	{
@@ -79,5 +111,4 @@ static void	ksx_init_cylinder_tri_cup(t_object *p_object,
 		pp_tri[idx[0] + size]->color = p_object->color;
 		idx[0]++;
 	}
-	idx[0]++;
 }
