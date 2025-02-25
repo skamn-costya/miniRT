@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 21:05:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:46:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,19 @@ void	ksx_transform(t_vector3 *p_point, t_matrix4 *p_tm,
 void	ksx_transform_obj(t_object *p_object)
 {
 	t_matrix4	tm;
-	t_vector3	v;
 	t_basis		basis;
 	t_box		**pp_box;
 
-	ksx_obj_copy_vrts (p_object->pp_vrtx_origin,
+	ksx_obj_copy_vrts(p_object->pp_vrtx_origin,
 		p_object->pp_vrtx, p_object->size_vrtx);
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
-		ksx_obj_copy_boxvrts ((*pp_box)->ver_origin, (*pp_box)->ver, 8);
+		ksx_obj_copy_boxvrts((*pp_box)->ver_origin, (*pp_box)->ver, 8);
 		pp_box++;
 	}
-	v = ksx_vec3_set(0, 0, 0);
-	basis.o = v;
-	ksx_basis_set_norm(&basis, &v);
+	basis.o = ksx_vec3_set(0, 0, 0);
+	ksx_basis_set_norm(&basis, &basis.o);
 	ksx_obj_set_axis(p_object->w_axis, &basis);
 	ksx_vec3_resize(&basis.i, ksx_vec3_mag(&p_object->basis.i));
 	ksx_vec3_resize(&basis.j, ksx_vec3_mag(&p_object->basis.j));

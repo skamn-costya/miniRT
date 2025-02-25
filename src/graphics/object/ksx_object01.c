@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 20:23:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:45:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 t_object	*ksx_create_object(t_vector3 *p_center)
 {
 	t_object	*p_object;
-	t_vector3	v;
 
 	p_object = (t_object *) malloc (sizeof(t_object));
 	if (!p_object)
@@ -32,10 +31,9 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object->edge = EDGE_SIZE;
 	p_object->size1 = 0;
 	p_object->size2 = 0;
-	v = ksx_vec3_set(0, 0, 0);
-	p_object->basis.o = v;
-	ksx_basis_set_norm(&p_object->basis, &v);
-	p_object->basis.w_o = v;
+	p_object->basis.o = ksx_vec3_set(0, 0, 0);
+	ksx_basis_set_norm(&p_object->basis, &p_object->basis.o);
+	p_object->basis.w_o = p_object->basis.o;
 	if (p_center)
 		p_object->basis.w_o = *p_center;
 	p_object->basis.w_i = p_object->basis.i;

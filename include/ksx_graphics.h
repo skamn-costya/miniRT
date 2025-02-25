@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 01:46:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:47:54 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,8 @@
 # include "MLX42.h"
 # include <stdint.h>
 
-# define PM_DEBUG	1
 # define AXIS_LEN 	100
-# define FAR	 	1000
+# define FAR	 	500
 
 // # define WIDTH 1920
 // # define HEIGHT 1044

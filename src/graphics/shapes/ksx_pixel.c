@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:44:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 17:50:35 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 10:17:38 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	ksx_set_pixel(mlx_image_t *p_img, t_pixel *p_pix)
 {
 	uint8_t		*p_pixel;
 
-	if (p_pix->x >= p_img->width || p_pix->y >= p_img->height)
+	if (p_pix->x >= p_img->width || p_pix->y >= p_img->height
+		|| p_pix->x < 0 || p_pix->y < 0)
 		return ;
 	p_pixel = &p_img->pixels[(p_img->width * p_pix->y + p_pix->x) * BPP];
 	p_pixel[0] = p_pix->color.rgba[0];

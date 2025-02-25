@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 01:15:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 14:49:04 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,14 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 {
 	t_camera	camera;
 
-	camera.basis.o = center;
+	camera.basis.o = ksx_vec3_set(0, 0, 0);
+	camera.basis.w_o = center;
 	// camera.norm = norm;
-	ksx_basis_camera(&camera, &norm);
+	ksx_basis_set_norm(&camera.basis, &norm);
+	camera.basis.w_i = ksx_vec3_add(&camera.basis.i, &camera.basis.w_o);
+	camera.basis.w_j = ksx_vec3_add(&camera.basis.j, &camera.basis.w_o);
+	camera.basis.w_k = ksx_vec3_add(&camera.basis.k, &camera.basis.w_o);
+	// ksx_basis_camera(&camera, &norm);
 	// ksx_create_vm(&camera.vm, &camera.basis);
 	camera.fov = fov;
 	camera.right = WIDTH * .5f;
@@ -81,19 +86,18 @@ void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
+	{
 		ksx_transform(&p_object->pp_vrtx[idx]->wp, p_vm, &p_object->pp_vrtx[idx]->cp);
+		ksx_transform(&p_object->pp_vrtx[idx]->wnorm, p_vm, &p_object->pp_vrtx[idx]->cnorm);
+	}
 	ksx_transform(&p_object->basis.w_o, p_vm, &p_object->basis.c_o);
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
 		idx = -1;
 		while (++idx < 8)
-		{
 			ksx_transform(&(*pp_box)->ver[idx].wp,
 				p_vm, &(*pp_box)->ver[idx].cp);
-			ksx_transform(&(*pp_box)->ver[idx].wnorm,
-				p_vm, &(*pp_box)->ver[idx].cnorm);
-		}
 		pp_box++;
 	}
 	idx = -1;
@@ -143,7 +147,7 @@ void	ksx_camera_set_pm(t_camera *p_camera, float fov, float far)
 // 		return;
 // 	p_camera->fov = fov;
 // 	p_camera->hfov = fov * PI180;
-// 	p_camera->near = (float) 100.0f;
+// 	p_camera->near = (float) 1.f;
 // 	p_camera->far = far;
 // 	f = 1.f / tanf(p_camera->hfov * .5f);
 // 	ksx_m4_reset(&p_camera->pm);
