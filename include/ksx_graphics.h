@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 20:18:32 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 01:46:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,10 @@ typedef struct s_pixel
 	{
 		struct
 		{
-			uint64_t	x;
-			uint64_t	y;
+			int64_t	x;
+			int64_t	y;
 		};
-		uint64_t	xy[2];
+		int64_t	xy[2];
 	};
 	t_color	color;
 }	t_pixel;

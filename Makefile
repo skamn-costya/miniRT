@@ -108,7 +108,8 @@ KYES_FN =	key_kp01.c \
 			key_adsw.c \
 			key_ze.c \
 			key_scroll.c \
-			key_1234.c
+			key_1234.c \
+			key_5678.c
 KYES =	$(addprefix $(KYES_DIR), $(KYES_FN))
 
 # Keys

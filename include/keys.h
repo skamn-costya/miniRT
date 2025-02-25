@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:03:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/21 11:17:31 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/25 00:33:33 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,12 @@ void	key_1(mlx_key_data_t *p_keydata, t_graphics *p_grph);
 void	key_2(mlx_key_data_t *p_keydata, t_graphics *p_grph);
 void	key_3(mlx_key_data_t *p_keydata, t_graphics *p_grph);
 void	key_4(mlx_key_data_t *p_keydata, t_graphics *p_grph);
+
+// key_5678.c
+void	key_5678(mlx_key_data_t *p_keydata, t_graphics *p_grph);
+void	key_5(mlx_key_data_t *p_keydata, t_graphics *p_grph);
+void	key_6(mlx_key_data_t *p_keydata, t_graphics *p_grph);
+void	key_7(mlx_key_data_t *p_keydata, t_graphics *p_grph);
+void	key_8(mlx_key_data_t *p_keydata, t_graphics *p_grph);
 
 #endif	// KEYS_H
