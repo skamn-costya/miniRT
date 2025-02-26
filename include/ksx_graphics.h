@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 19:55:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:47:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,20 @@
 # define O 3
 
 // FLAGS
+// 1
 # define CHANGE		0b00000001
-# define DRAW_BOX	0b00000100
-# define DRAW_AXIS	0b00001000
-# define DRAW_LINE	0b00010000
-# define DRAW_OBJ	0b00100000
-# define DRAW_NORM	0b01000000
+// 2
+# define DRAW_BOX	0b00000010
+// 4
+# define DRAW_AXIS	0b00000100
+// 8
+# define DRAW_LINE	0b00001000
+// 16
+# define DRAW_OBJ	0b00010000
+// 32
+# define DRAW_NORM	0b00100000
+// 64
+# define CAM_PM		0b01000000
 
 // # define RORATE_X 0b00000100
 // # define RORATE_Y 0b00001000

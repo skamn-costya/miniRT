@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 00:32:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:38:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	main(int argc, char *argv[])
 	ksx_init_world(&grph, p_list);
 	grph.obj_idx = 0;
 	ft_lstclear(&p_list, &free_t_obj_descr);
-	ksx_camera_set_pm(&grph.camera, grph.camera.fov, FAR);
+	ksx_camera_set_pm2(&grph.camera, grph.camera.fov, FAR);
 	ksx_draw(&grph);
 	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
 	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);
@@ -127,6 +127,10 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		|| keydata.key == MLX_KEY_7 || keydata.key == MLX_KEY_8)
 		&& keydata.action == MLX_RELEASE)
 		key_5678(&keydata, p_grph);
+	else if ((keydata.key == MLX_KEY_9 || keydata.key == MLX_KEY_0
+		|| keydata.key == MLX_KEY_MINUS || keydata.key == MLX_KEY_EQUAL)
+		&& keydata.action == MLX_RELEASE)
+		key_90__(&keydata, p_grph);
 	else if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_RELEASE)
 	{
 		p_grph->obj_idx++;

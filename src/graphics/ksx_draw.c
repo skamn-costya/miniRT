@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 20:16:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:44:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void	ksx_draw(t_graphics *p_grph)
 	if (!p_grph->world.pp_obj)
 		return ;
 	if (p_grph->camera.flags & CHANGE)
+	{
 		ksx_camera_set_vm(&p_grph->camera);
+		ksx_camera_refresh_pm(&p_grph->camera, p_grph->camera.fov, p_grph->camera.far);
+	}
 	p_img = ksx_create_image(p_grph->mlx);
 	pp_object = p_grph->world.pp_obj;
 	idx = 0;
@@ -41,7 +44,7 @@ void	ksx_draw(t_graphics *p_grph)
 		if (p_grph->camera.flags & CHANGE || p_object->flags & CHANGE)
 		{
 			ksx_camera_obj_vm (p_object, &p_grph->camera.vm);
-			p_object->flags ^= CHANGE;
+			p_object->flags &= ~CHANGE;
 		}
 		if (p_grph->camera.flags & DRAW_OBJ && p_object->flags & DRAW_OBJ)
 			ksx_draw_obj(p_object, p_img, &p_grph->camera);
@@ -53,7 +56,7 @@ void	ksx_draw(t_graphics *p_grph)
 			ksx_draw_norms(p_object, p_img, &p_grph->camera);
 		idx++;
 	}
-	p_grph->camera.flags ^= CHANGE;
+	p_grph->camera.flags &= ~CHANGE;
 	mlx_delete_image(p_grph->mlx, p_grph->img);
 	p_grph->img = p_img;
 	mlx_image_to_window(p_grph->mlx, p_grph->img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 22:42:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:57:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.aspect = 1.f * WIDTH / HEIGHT;
 	ksx_camera_set_vm(&camera);
 	// camera.vfov = 2.f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
-	camera.flags = DRAW_OBJ | CHANGE;
+	camera.flags = DRAW_OBJ | CHANGE | CAM_PM;
 	return (camera);
 }
 
@@ -126,22 +126,22 @@ void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 // https://www.mauriciopoppe.com/notes/computer-graphics/viewing/projection-transform/
 // https://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/#the-view-matrix
 
-// void	ksx_camera_set_pm(t_camera *p_camera, float fov, float far)
-// {
-// 	(void) p_camera;
-// 	(void) fov;
-// 	(void) far;
-// 	if (fov < 1 || fov > 179)
-// 		return;
-// 	ksx_m4_reset(&p_camera->pm);
-// 	p_camera->pm.e_11 = 1;
-// 	p_camera->pm.e_22 = 1;
-// 	p_camera->pm.e_33 = 1;
-// 	p_camera->pm.e_44 = 1;
-// }
+void	ksx_camera_set_pm1(t_camera *p_camera, float fov, float far)
+{
+	(void) p_camera;
+	(void) fov;
+	(void) far;
+	if (fov < 1 || fov > 179)
+		return;
+	ksx_m4_reset(&p_camera->pm);
+	p_camera->pm.e_11 = 1;
+	p_camera->pm.e_22 = 1;
+	p_camera->pm.e_33 = 1;
+	p_camera->pm.e_44 = 1;
+}
 
 
-void	ksx_camera_set_pm(t_camera *p_camera, float fov, float far)
+void	ksx_camera_set_pm2(t_camera *p_camera, float fov, float far)
 {
 	float	f;
 

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 14:46:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:15:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ksx_transform(t_vector3 *p_point, t_matrix4 *p_tm,
 {
 	t_vector4	v4;
 
-	v4 = ksx_vec3_vec4(p_point, 0);
+	v4 = ksx_vec3_vec4(p_point, 1);
 	v4 = ksx_m4_vec4(p_tm, &v4);
 	p_result->x = v4.x;
 	p_result->y = v4.y;

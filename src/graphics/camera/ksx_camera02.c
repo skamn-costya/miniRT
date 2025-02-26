@@ -6,11 +6,12 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 13:19:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:53:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
+#include "ksx_camera.h"
 #include "ksx_m4_math.h"
 #include "ksx_vec3_math.h"
 
@@ -34,3 +35,12 @@ void	ksx_camera_set_vm(t_camera *p_camera)
 	p_camera->vm.e_44 = 1;
 	ksx_m4_invert(&p_camera->vm, &p_camera->ivm);
 }
+
+void	ksx_camera_refresh_pm(t_camera *p_camera, float fov, float far)
+{
+	if (p_camera->flags & CAM_PM)
+		ksx_camera_set_pm2(p_camera, fov, far);
+	else
+		ksx_camera_set_pm1(p_camera, fov, far);
+}
+
