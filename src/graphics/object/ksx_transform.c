@@ -6,11 +6,12 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/26 13:15:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:25:11 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
+#include "ksx_object.h"
 #include "ksx_utils.h"
 #include "ksx_vec3_math.h"
 #include "ksx_m3_math.h"
@@ -59,26 +60,21 @@ void	ksx_transform_obj(t_object *p_object)
 	t_basis		basis;
 	t_box		**pp_box;
 
-	ksx_obj_copy_vrts(p_object->pp_vrtx_origin,
-		p_object->pp_vrtx, p_object->size_vrtx);
+	ksx_obj_copy_vrts(p_object->pp_vrtx, ORIP, LOCP, p_object->size_vrtx);
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
-		ksx_obj_copy_boxvrts((*pp_box)->ver_origin, (*pp_box)->ver, 8);
+		ksx_obj_copy_boxvrts((*pp_box)->ver, ORIP, LOCP, 8);
 		pp_box++;
 	}
-	basis.o = ksx_vec3_set(0, 0, 0);
+	basis.o = ksx_vec3_set(0.f, 0.f, 0.f);
 	ksx_basis_set_norm(&basis, &basis.o);
 	ksx_obj_set_axis(p_object->w_axis, &basis);
-	ksx_vec3_resize(&basis.i, ksx_vec3_mag(&p_object->basis.i));
-	ksx_vec3_resize(&basis.j, ksx_vec3_mag(&p_object->basis.j));
-	ksx_vec3_resize(&basis.k, ksx_vec3_mag(&p_object->basis.k));
+	ksx_basis_copy_len(&p_object->basis, &basis);
 	ksx_get_tm (&tm, &basis);
 	ksx_transform_obj_t(p_object, &tm);
 	basis = p_object->basis;
-	ksx_vec3_resize(&basis.i, 1.f);
-	ksx_vec3_resize(&basis.j, 1.f);
-	ksx_vec3_resize(&basis.k, 1.f);
+	ksx_basis_unit(&basis);
 	ksx_get_tm (&tm, &basis);
 	ksx_transform_obj_t(p_object, &tm);
 	ksx_translate_obj (p_object);
@@ -92,24 +88,24 @@ static void	ksx_transform_obj_t(t_object *p_object, t_matrix4 *p_tm)
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
 	{
-		ksx_transform(&p_object->pp_vrtx[idx]->p,
-			p_tm, &p_object->pp_vrtx[idx]->p);
-		ksx_transform(&p_object->pp_vrtx[idx]->norm,
-			p_tm, &p_object->pp_vrtx[idx]->norm);
+		ksx_transform(&p_object->pp_vrtx[idx]->lp,
+			p_tm, &p_object->pp_vrtx[idx]->lp);
+		ksx_transform(&p_object->pp_vrtx[idx]->lnorm,
+			p_tm, &p_object->pp_vrtx[idx]->lnorm);
 	}
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
 		idx = -1;
 		while (++idx < 8)
-			ksx_transform(&(*pp_box)->ver[idx].p,
-				p_tm, &(*pp_box)->ver[idx].p);
+			ksx_transform(&(*pp_box)->ver[idx].lp,
+				p_tm, &(*pp_box)->ver[idx].lp);
 		pp_box++;
 	}
 	idx = -1;
 	while (++idx < 4)
-		ksx_transform(&p_object->w_axis[idx].p,
-			p_tm, &p_object->w_axis[idx].p);
+		ksx_transform(&p_object->w_axis[idx].lp,
+			p_tm, &p_object->w_axis[idx].lp);
 }
 
 // p_m4->e_14 = -ksx_vec3_dot(&p_basis->i, &p_basis->o);

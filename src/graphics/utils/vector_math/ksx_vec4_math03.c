@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:53:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:48:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,37 +15,38 @@
 #include "ksx_vec4_math.h"
 #include <math.h>
 
-float	ksx_vec4_dot(const t_vector4 v1, const t_vector4 v2)
+float	ksx_vec4_dot(const t_vector4 *p_v1, const t_vector4 *p_v2)
 {
 	float	result;
 
-	result = v1.x * v2.x + v1.y * v2.y + v1.z * v2.z + v1.w * v2.w;
+	result = p_v1->x * p_v2->x + p_v1->y * p_v2->y
+		+ p_v1->z * p_v2->z + p_v1->w * p_v2->w;
 	return (result);
 }
 
-t_vector4	ksx_vec4_multi(const t_vector4 v, const float scalar)
+t_vector4	ksx_vec4_multi(const t_vector4 *p_v, const float scalar)
 {
 	t_vector4	result;
 
-	result.x = v.x * scalar;
-	result.y = v.y * scalar;
-	result.z = v.z * scalar;
-	result.w = v.w * scalar;
+	result.x = p_v->x * scalar;
+	result.y = p_v->y * scalar;
+	result.z = p_v->z * scalar;
+	result.w = p_v->w * scalar;
 	return (result);
 }
 
-t_vector4	ksx_vec4_div(const t_vector4 v, const float scalar)
+t_vector4	ksx_vec4_div(const t_vector4 *p_v, const float scalar)
 {
 	t_vector4	result;
 
 	if (scalar == 0)
 	{
-		return (v);
+		return (ksx_vec4_set(0.f, 0.f, 0.f, 0.f));
 	}
-	result.x = v.x / scalar;
-	result.y = v.y / scalar;
-	result.z = v.z / scalar;
-	result.w = v.w / scalar;
+	result.x = p_v->x / scalar;
+	result.y = p_v->y / scalar;
+	result.z = p_v->z / scalar;
+	result.w = p_v->w / scalar;
 	return (result);
 }
 

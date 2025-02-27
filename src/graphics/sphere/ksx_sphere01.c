@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 14:50:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:24:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void			ksx_init_sphere_box(t_object *p_object);
-static void			ksx_init_sphere(t_object *p_object);
-// static t_triangle	**ksx_init_sphere_tri(t_object *p_object);
+static void		ksx_init_sphere_box(t_object *p_object);
+static void		ksx_init_sphere(t_object *p_object);
 
 t_object	*ksx_create_sphere(t_vector3 center,
 			uint32_t diameter, t_color color, uint8_t gen)
@@ -46,7 +45,6 @@ t_object	*ksx_create_sphere(t_vector3 center,
 		idx++;
 	}
 	ksx_sphere_norns(p_object);
-	ksx_obj_vrts_dup2origin(p_object);
 	ksx_transform_obj(p_object);
 	ksx_obj_tris2box(p_object);
 	return (p_object);
@@ -55,27 +53,27 @@ t_object	*ksx_create_sphere(t_vector3 center,
 static void	ksx_init_sphere_box(t_object *p_object)
 {
 	ksx_box_add_new(&p_object->pp_box);
-	p_object->pp_box[0]->ver[0].p = ksx_vec3_set(p_object->size1, p_object->size1, p_object->size1);
-	p_object->pp_box[0]->ver[1].p = ksx_vec3_set(-p_object->size1, p_object->size1, p_object->size1);
-	p_object->pp_box[0]->ver[2].p = ksx_vec3_set(-p_object->size1, p_object->size1, -p_object->size1);
-	p_object->pp_box[0]->ver[3].p = ksx_vec3_set(p_object->size1, p_object->size1, -p_object->size1);
-	p_object->pp_box[0]->ver[4].p = ksx_vec3_set(p_object->size1, -p_object->size1, p_object->size1);
-	p_object->pp_box[0]->ver[5].p = ksx_vec3_set(-p_object->size1, -p_object->size1, p_object->size1);
-	p_object->pp_box[0]->ver[6].p = ksx_vec3_set(-p_object->size1, -p_object->size1, -p_object->size1);
-	p_object->pp_box[0]->ver[7].p = ksx_vec3_set(p_object->size1, -p_object->size1, -p_object->size1);
+	p_object->pp_box[0]->ver[0].op = ksx_vec3_set(p_object->size1, p_object->size1, p_object->size1);
+	p_object->pp_box[0]->ver[1].op = ksx_vec3_set(-p_object->size1, p_object->size1, p_object->size1);
+	p_object->pp_box[0]->ver[2].op = ksx_vec3_set(-p_object->size1, p_object->size1, -p_object->size1);
+	p_object->pp_box[0]->ver[3].op = ksx_vec3_set(p_object->size1, p_object->size1, -p_object->size1);
+	p_object->pp_box[0]->ver[4].op = ksx_vec3_set(p_object->size1, -p_object->size1, p_object->size1);
+	p_object->pp_box[0]->ver[5].op = ksx_vec3_set(-p_object->size1, -p_object->size1, p_object->size1);
+	p_object->pp_box[0]->ver[6].op = ksx_vec3_set(-p_object->size1, -p_object->size1, -p_object->size1);
+	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1, -p_object->size1, -p_object->size1);
 	ksx_box_create(p_object->pp_box[0], BOX_COLOR);
-	ksx_obj_copy_boxvrts(p_object->pp_box[0]->ver, p_object->pp_box[0]->ver_origin, 8);
+	// ksx_obj_copy_boxvrts(p_object->pp_box[0]->ver, p_object->pp_box[0]->ver_origin, 8);
 }
 
 static void	ksx_init_sphere(t_object *p_object)
 {
 	ksx_obj_add_vers(p_object, 6);
-	p_object->pp_vrtx[0]->p = ksx_vec3_set(0, p_object->size1, 0);
-	p_object->pp_vrtx[1]->p = ksx_vec3_set(p_object->size1, 0, 0);
-	p_object->pp_vrtx[2]->p = ksx_vec3_set(0, 0, p_object->size1);
-	p_object->pp_vrtx[3]->p = ksx_vec3_set(0, -p_object->size1, 0);
-	p_object->pp_vrtx[4]->p = ksx_vec3_set(-p_object->size1, 0, 0);
-	p_object->pp_vrtx[5]->p = ksx_vec3_set(0, 0, -p_object->size1);
+	p_object->pp_vrtx[0]->op = ksx_vec3_set(0, p_object->size1, 0);
+	p_object->pp_vrtx[1]->op = ksx_vec3_set(p_object->size1, 0, 0);
+	p_object->pp_vrtx[2]->op = ksx_vec3_set(0, 0, p_object->size1);
+	p_object->pp_vrtx[3]->op = ksx_vec3_set(0, -p_object->size1, 0);
+	p_object->pp_vrtx[4]->op = ksx_vec3_set(-p_object->size1, 0, 0);
+	p_object->pp_vrtx[5]->op = ksx_vec3_set(0, 0, -p_object->size1);
 	p_object->pp_tri = ksx_obj_new_tris(8);
 	p_object->size_tri = 8;
 	ksx_tri_set_vertexes(p_object->pp_tri[0], p_object->pp_vrtx[0], p_object->pp_vrtx[1], p_object->pp_vrtx[2]);
@@ -95,23 +93,3 @@ static void	ksx_init_sphere(t_object *p_object)
 	p_object->pp_tri[6]->color = p_object->color;
 	p_object->pp_tri[7]->color = p_object->color;
 }
-
-// static t_triangle	**ksx_init_sphere_tri(t_object *p_object)
-// {
-// 	uint32_t	idx;
-// 	t_triangle	*p_tri;
-// 	t_triangle	**pp_tri;
-
-// 	idx = 0;
-// 	while (idx < 8)
-// 	{
-// 		p_tri = (t_triangle *) malloc (sizeof(t_triangle));
-// 		if (!p_tri)
-// 			return (printf("Error: memory allocation failed!\n"), NULL);
-// 		// p_tri->generation = 1;
-// 		pp_tri = ksx_tri2obj(p_tri, p_object);
-// 		idx++;
-// 	}
-// 	// p_object->last_gen = 1;
-// 	return (pp_tri);
-// }

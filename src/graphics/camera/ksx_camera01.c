@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/26 13:57:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:32:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,20 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.basis.w_o = center;
 	// camera.norm = norm;
 	ksx_basis_set_norm(&camera.basis, &norm);
-	camera.basis.w_i = ksx_vec3_add(&camera.basis.i, &camera.basis.w_o);
-	camera.basis.w_j = ksx_vec3_add(&camera.basis.j, &camera.basis.w_o);
-	camera.basis.w_k = ksx_vec3_add(&camera.basis.k, &camera.basis.w_o);
+	// camera.basis.w_i = ksx_vec3_add(&camera.basis.i, &camera.basis.w_o);
+	// camera.basis.w_j = ksx_vec3_add(&camera.basis.j, &camera.basis.w_o);
+	// camera.basis.w_k = ksx_vec3_add(&camera.basis.k, &camera.basis.w_o);
 	// ksx_basis_camera(&camera, &norm);
 	// ksx_create_vm(&camera.vm, &camera.basis);
 	camera.fov = fov;
 	camera.hfov = fov * PI180;
 	camera.near = (WIDTH * .5f) / tanf(camera.hfov * .5f);
+	camera.far = 1200.f;
 	camera.right = WIDTH * .5f;
 	camera.left = - camera.right;
 	camera.top = HEIGHT * .5f;
 	camera.bottom = -camera.top;
-	camera.aspect = 1.f * WIDTH / HEIGHT;
+	camera.aspect = WIDTH / HEIGHT;
 	ksx_camera_set_vm(&camera);
 	// camera.vfov = 2.f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
 	camera.flags = DRAW_OBJ | CHANGE | CAM_PM;
@@ -92,7 +93,7 @@ void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 		ksx_transform(&p_object->pp_vrtx[idx]->wp, p_vm, &p_object->pp_vrtx[idx]->cp);
 		ksx_transform(&p_object->pp_vrtx[idx]->wnorm, p_vm, &p_object->pp_vrtx[idx]->cnorm);
 	}
-	ksx_transform(&p_object->basis.w_o, p_vm, &p_object->basis.c_o);
+	// ksx_transform(&p_object->basis.w_o, p_vm, &p_object->basis.c_o);
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
@@ -126,13 +127,8 @@ void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 // https://www.mauriciopoppe.com/notes/computer-graphics/viewing/projection-transform/
 // https://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/#the-view-matrix
 
-void	ksx_camera_set_pm1(t_camera *p_camera, float fov, float far)
+void	ksx_camera_set_pm1(t_camera *p_camera)
 {
-	(void) p_camera;
-	(void) fov;
-	(void) far;
-	if (fov < 1 || fov > 179)
-		return;
 	ksx_m4_reset(&p_camera->pm);
 	p_camera->pm.e_11 = 1;
 	p_camera->pm.e_22 = 1;
@@ -141,7 +137,7 @@ void	ksx_camera_set_pm1(t_camera *p_camera, float fov, float far)
 }
 
 
-void	ksx_camera_set_pm2(t_camera *p_camera, float fov, float far)
+void	ksx_camera_set_pm2(t_camera *p_camera, float fov)
 {
 	float	f;
 
@@ -149,8 +145,7 @@ void	ksx_camera_set_pm2(t_camera *p_camera, float fov, float far)
 		return;
 	p_camera->fov = fov;
 	// p_camera->hfov = fov * PI180;
-	p_camera->near = (float) 1.f;
-	p_camera->far = far;
+	// p_camera->near = (float) 1.f;
 	f = 1.f / tanf(p_camera->hfov * .5f);
 	ksx_m4_reset(&p_camera->pm);
 	p_camera->pm.e_11 = f;
@@ -162,7 +157,7 @@ void	ksx_camera_set_pm2(t_camera *p_camera, float fov, float far)
 			/ (p_camera->far - p_camera->near));
 	p_camera->pm.e_34 = 1.f;
 	p_camera->pm.e_43 = (1.f / (p_camera->far - p_camera->near));
-	// p_camera->pm.e_43 = -((2.f * p_camera->far * p_camera->near)
+	// p_camera->pm.e_43 = -((p_camera->far * p_camera->near)
 	// 		/ (p_camera->far - p_camera->near));
 	// p_camera->pm.e_43 = ((2.f * p_camera->far * p_camera->near)
 	// 		/ (p_camera->far - p_camera->near));

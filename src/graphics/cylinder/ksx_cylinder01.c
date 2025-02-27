@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 21:38:41 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:27:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 	ksx_basis_set_norm(&p_object->basis, &norm);
 	ksx_init_cylinder_box (p_object);
 	ksx_init_cylinder(p_object);
-	ksx_obj_vrts_dup2origin(p_object);
+	// ksx_obj_vrts_dup2origin(p_object);
+	// ksx_obj_copy_vrts(p_object->pp_vrtx, ORIP, LOCP);
 	ksx_transform_obj(p_object);
 	ksx_obj_tris2box(p_object);
 	return (p_object);
@@ -53,16 +54,16 @@ t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 static void	ksx_init_cylinder_box(t_object *p_object)
 {
 	ksx_box_add_new(&p_object->pp_box);
-	p_object->pp_box[0]->ver[0].p = ksx_vec3_set(p_object->size1, p_object->size2, p_object->size1);
-	p_object->pp_box[0]->ver[1].p = ksx_vec3_set(-p_object->size1, p_object->size2, p_object->size1);
-	p_object->pp_box[0]->ver[2].p = ksx_vec3_set(-p_object->size1, p_object->size2, -p_object->size1);
-	p_object->pp_box[0]->ver[3].p = ksx_vec3_set(p_object->size1, p_object->size2, -p_object->size1);
-	p_object->pp_box[0]->ver[4].p = ksx_vec3_set(p_object->size1, -p_object->size2, p_object->size1);
-	p_object->pp_box[0]->ver[5].p = ksx_vec3_set(-p_object->size1, -p_object->size2, p_object->size1);
-	p_object->pp_box[0]->ver[6].p = ksx_vec3_set(-p_object->size1, -p_object->size2, -p_object->size1);
-	p_object->pp_box[0]->ver[7].p = ksx_vec3_set(p_object->size1, -p_object->size2, -p_object->size1);
+	p_object->pp_box[0]->ver[0].op = ksx_vec3_set(p_object->size1, p_object->size2, p_object->size1);
+	p_object->pp_box[0]->ver[1].op = ksx_vec3_set(-p_object->size1, p_object->size2, p_object->size1);
+	p_object->pp_box[0]->ver[2].op = ksx_vec3_set(-p_object->size1, p_object->size2, -p_object->size1);
+	p_object->pp_box[0]->ver[3].op = ksx_vec3_set(p_object->size1, p_object->size2, -p_object->size1);
+	p_object->pp_box[0]->ver[4].op = ksx_vec3_set(p_object->size1, -p_object->size2, p_object->size1);
+	p_object->pp_box[0]->ver[5].op = ksx_vec3_set(-p_object->size1, -p_object->size2, p_object->size1);
+	p_object->pp_box[0]->ver[6].op = ksx_vec3_set(-p_object->size1, -p_object->size2, -p_object->size1);
+	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1, -p_object->size2, -p_object->size1);
 	ksx_box_create(p_object->pp_box[0], BOX_COLOR);
-	ksx_obj_copy_boxvrts(p_object->pp_box[0]->ver, p_object->pp_box[0]->ver_origin, 8);
+	// ksx_obj_copy_boxvrts(p_object->pp_box[0]->ver, p_object->pp_box[0]->ver_origin, 8);
 }
 
 static void	ksx_init_cylinder(t_object *p_object)
@@ -74,29 +75,29 @@ static void	ksx_init_cylinder(t_object *p_object)
 	size = 360 / CYLINDER_ANGLE;
 	ksx_obj_add_vers(p_object, (size * 4) +2 );
 	idx = 0;
-	p_object->pp_vrtx[idx]->p = ksx_vec3_set(0, p_object->size2, 0);
-	p_object->pp_vrtx[idx]->norm = ksx_vec3_set(0, 1.f , 0);
+	p_object->pp_vrtx[idx]->op = ksx_vec3_set(0, p_object->size2, 0);
+	p_object->pp_vrtx[idx]->onorm = ksx_vec3_set(0, 1.f , 0);
 	idx++;
-	p_object->pp_vrtx[idx]->p = ksx_vec3_set(0, -p_object->size2, 0);
-	p_object->pp_vrtx[idx]->norm = ksx_vec3_set(0, -1.f , 0);
+	p_object->pp_vrtx[idx]->op = ksx_vec3_set(0, -p_object->size2, 0);
+	p_object->pp_vrtx[idx]->onorm = ksx_vec3_set(0, -1.f , 0);
 	idx++;
 	while (idx < size + 2)
 	{
 		xz[0] = p_object->size1 * cosf(CYLINDER_ANGLE * idx * PI180);
 		xz[1] = p_object->size1 * sinf(CYLINDER_ANGLE * idx * PI180);
-		p_object->pp_vrtx[idx]->p = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
-		p_object->pp_vrtx[idx]->norm = ksx_vec3_set(0, 1.f , 0);
-		p_object->pp_vrtx[idx + size]->p = ksx_vec3_set(xz[0], -p_object->size2, xz[1]);
-		p_object->pp_vrtx[idx + size]->norm = ksx_vec3_set(0, -1.f , 0);
-		p_object->pp_vrtx[idx + size * 2]->p = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
-		p_object->pp_vrtx[idx + size * 2]->norm = ksx_vec3_set(xz[0], 0, xz[1]);
-		ksx_vec3_unit(&p_object->pp_vrtx[idx + size * 2]->norm);
-		p_object->pp_vrtx[idx + size * 3]->p = ksx_vec3_set(xz[0], -p_object->size2, xz[1]);
-		p_object->pp_vrtx[idx + size * 3]->norm = ksx_vec3_set(xz[0], 0, xz[1]);
-		ksx_vec3_unit(&p_object->pp_vrtx[idx + size * 3]->norm);
+		p_object->pp_vrtx[idx]->op = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
+		p_object->pp_vrtx[idx]->onorm = ksx_vec3_set(0, 1.f , 0);
+		p_object->pp_vrtx[idx + size]->op = ksx_vec3_set(xz[0], -p_object->size2, xz[1]);
+		p_object->pp_vrtx[idx + size]->onorm = ksx_vec3_set(0, -1.f , 0);
+		p_object->pp_vrtx[idx + size * 2]->op = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
+		p_object->pp_vrtx[idx + size * 2]->onorm = ksx_vec3_set(xz[0], 0, xz[1]);
+		ksx_vec3_unit(&p_object->pp_vrtx[idx + size * 2]->onorm);
+		p_object->pp_vrtx[idx + size * 3]->op = ksx_vec3_set(xz[0], -p_object->size2, xz[1]);
+		p_object->pp_vrtx[idx + size * 3]->onorm = ksx_vec3_set(xz[0], 0, xz[1]);
+		ksx_vec3_unit(&p_object->pp_vrtx[idx + size * 3]->onorm);
 		idx++;
 	}
-	p_object->edge = ksx_vec3_dist(p_object->pp_vrtx[2]->p, p_object->pp_vrtx[3]->p);
+	p_object->edge = ksx_vec3_dist(&p_object->pp_vrtx[2]->op, &p_object->pp_vrtx[3]->op);
 	ksx_init_cylinder_1(p_object, size);
 }
 
@@ -116,11 +117,11 @@ static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
 		idx[1] = 0;
 		while (idx[1] < size)
 		{
-			pp_vertex[idx[1]]->p = ksx_vec3_set(p_object->pp_vrtx[idx[1] + 2]->p.x,
-					p_object->size2 - (step[1] * idx[0] + 1), p_object->pp_vrtx[idx[1] + 2]->p.z);
-			pp_vertex[idx[1]]->norm = ksx_vec3_set(pp_vertex[idx[1]]->p.x,
-					0, pp_vertex[idx[1]]->p.z);
-			ksx_vec3_unit(&pp_vertex[idx[1]]->norm);
+			pp_vertex[idx[1]]->op = ksx_vec3_set(p_object->pp_vrtx[idx[1] + 2]->op.x,
+					p_object->size2 - (step[1] * idx[0] + 1), p_object->pp_vrtx[idx[1] + 2]->op.z);
+			pp_vertex[idx[1]]->onorm = ksx_vec3_set(pp_vertex[idx[1]]->op.x,
+					0, pp_vertex[idx[1]]->op.z);
+			ksx_vec3_unit(&pp_vertex[idx[1]]->onorm);
 			// if (idx[0] % 2)
 			// 	ksx_qrotation(&pp_vertex[idx[1]]->p_p, CYLINDER_ANGLE * .5f, &v3);
 			idx[1]++;

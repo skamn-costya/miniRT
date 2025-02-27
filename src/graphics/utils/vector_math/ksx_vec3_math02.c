@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/10 09:29:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:39:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ t_vector3	ksx_vec3_norm(const t_vector3 *p_v, const t_vector3 *p_norm)
 /**
  * @brief returns the distance between v1 and v2.
  * 
- * @param v1 The first vecot
- * @param v2 The second vecot
+ * @param p_v1 The pointer to first vecot
+ * @param p_v2 The pointer to second vecot
  */
-float	ksx_vec3_dist(const t_vector3 v1, const t_vector3 v2)
+float	ksx_vec3_dist(const t_vector3 *p_v1, const t_vector3 *p_v2)
 {
 	float	result;
 
-	result = sqrtf(powf(v1.x - v2.x, 2.f) + powf(v1.y - v2.y, 2.f)
-			+ powf(v1.z - v2.z, 2.f));
+	result = sqrtf(powf(p_v1->x - p_v2->x, 2.f) + powf(p_v1->y - p_v2->y, 2.f)
+			+ powf(p_v1->z - p_v2->z, 2.f));
 	return (result);
 }
 
@@ -67,18 +67,18 @@ void	ksx_vec3_resize(t_vector3 *p_v, const float size)
 	p_v->z = p_v->z * f;
 }
 
-t_matrix3	ksx_vec3_tensor(const t_vector3 v1, const t_vector3 v2)
+t_matrix3	ksx_vec3_tensor(const t_vector3 *p_v1, const t_vector3 *p_v2)
 {
 	t_matrix3	result;
 
-	result.e_11 = v1.x * v2.x;
-	result.e_12 = v1.x * v2.y;
-	result.e_13 = v1.x * v2.z;
-	result.e_21 = v1.y * v2.x;
-	result.e_22 = v1.y * v2.y;
-	result.e_23 = v1.y * v2.z;
-	result.e_31 = v1.z * v2.x;
-	result.e_32 = v1.z * v2.y;
-	result.e_33 = v1.z * v2.z;
+	result.e_11 = p_v1->x * p_v2->x;
+	result.e_12 = p_v1->x * p_v2->y;
+	result.e_13 = p_v1->x * p_v2->z;
+	result.e_21 = p_v1->y * p_v2->x;
+	result.e_22 = p_v1->y * p_v2->y;
+	result.e_23 = p_v1->y * p_v2->z;
+	result.e_31 = p_v1->z * p_v2->x;
+	result.e_32 = p_v1->z * p_v2->y;
+	result.e_33 = p_v1->z * p_v2->z;
 	return (result);
 }

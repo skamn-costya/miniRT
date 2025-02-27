@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/12 22:50:59 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:47:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ t_vector4	ksx_vec4_unit(const t_vector4 *p_v)
 /**
  * @brief returns the distance between v1 and v2.
  * 
- * @param v1 The first vecot
- * @param v2 The second vecot
+ * @param p_v1 The pointer to the first vecot
+ * @param p_v2 The pointer to the second vecot
  */
-float	ksx_vec4_dist(const t_vector4 v1, const t_vector4 v2)
+float	ksx_vec4_dist(const t_vector4 *p_v1, const t_vector4 *p_v2)
 {
 	float	result;
 
-	result = sqrtf(powf(v1.x - v2.x, 2.f) + powf(v1.y - v2.y, 2.f)
-			+ powf(v1.z - v2.z, 2.f) + powf(v1.w - v2.w, 2.f));
+	result = sqrtf(powf(p_v1->x - p_v2->x, 2.f) + powf(p_v1->y - p_v2->y, 2.f)
+			+ powf(p_v1->z - p_v2->z, 2.f) + powf(p_v1->w - p_v2->w, 2.f));
 	return (result);
 }
 

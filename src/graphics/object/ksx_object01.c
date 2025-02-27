@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 14:45:37 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/27 18:07:52 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object->basis.w_o = p_object->basis.o;
 	if (p_center)
 		p_object->basis.w_o = *p_center;
-	p_object->basis.w_i = p_object->basis.i;
-	p_object->basis.w_j = p_object->basis.j;
-	p_object->basis.w_k = p_object->basis.k;
+	// p_object->basis.w_i = p_object->basis.i;
+	// p_object->basis.w_j = p_object->basis.j;
+	// p_object->basis.w_k = p_object->basis.k;
 	ksx_obj_set_axis(p_object->w_axis, &p_object->basis);
 	p_object->pp_box = NULL;
 	p_object->pp_vrtx = NULL;
@@ -50,67 +50,34 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 
 void	ksx_obj_set_axis(t_vertex *p_ver, t_basis *p_basis)
 {
-	p_ver[X].p = p_basis->i;
-	p_ver[Y].p = p_basis->j;
-	p_ver[Z].p = p_basis->k;
-	p_ver[O].p = p_basis->o;
-	ksx_vec3_resize(&p_ver[X].p, AXIS_LEN);
-	ksx_vec3_resize(&p_ver[Y].p, AXIS_LEN);
-	ksx_vec3_resize(&p_ver[Z].p, AXIS_LEN);
+	p_ver[X].op = p_basis->i;
+	p_ver[Y].op = p_basis->j;
+	p_ver[Z].op = p_basis->k;
+	p_ver[O].op = p_basis->o;
+	ksx_vec3_resize(&p_ver[X].op, AXIS_LEN);
+	ksx_vec3_resize(&p_ver[Y].op, AXIS_LEN);
+	ksx_vec3_resize(&p_ver[Z].op, AXIS_LEN);
 }
-
-t_vertex	**ksx_obj_vrts_dup2origin(t_object *p_object)
-{
-	uint32_t	idx;
-
-	p_object->pp_vrtx_origin = (t_vertex **) malloc(sizeof(t_vertex *)
-			* (p_object->size_vrtx + 1));
-	if (!p_object->pp_vrtx_origin)
-		ksx_error("memory allocation failure", __FILE__, __LINE__);
-	idx = 0;
-	ksx_null_pointers((void **) p_object->pp_vrtx_origin,
-		p_object->size_vrtx + 1);
-	while (idx < p_object->size_vrtx)
-	{
-		p_object->pp_vrtx_origin[idx] = (t_vertex *) malloc(sizeof(t_vertex));
-		if (!p_object->pp_vrtx_origin[idx])
-			return (ksx_free_pointers((void ***) &p_object->pp_vrtx_origin),
-				ksx_error("memory allocation failure", __FILE__, __LINE__),
-				NULL);
-		idx++;
-	}
-	ksx_obj_copy_vrts(p_object->pp_vrtx, p_object->pp_vrtx_origin,
-		p_object->size_vrtx);
-	return (p_object->pp_vrtx_origin);
-}
-
-void	ksx_obj_copy_vrts(t_vertex **pp_vrt1, t_vertex **pp_vrt2, uint32_t size)
+void	ksx_obj_copy_vrts(t_vertex **pp_vrt, uint32_t idx_src,
+			uint32_t idx_des, uint32_t size)
 {
 	uint32_t	idx;
 
 	idx = 0;
 	while (idx < size)
 	{
-		pp_vrt2[idx]->p.x = pp_vrt1[idx]->p.x;
-		pp_vrt2[idx]->p.y = pp_vrt1[idx]->p.y;
-		pp_vrt2[idx]->p.z = pp_vrt1[idx]->p.z;
-		pp_vrt2[idx]->norm.x = pp_vrt1[idx]->norm.x;
-		pp_vrt2[idx]->norm.y = pp_vrt1[idx]->norm.y;
-		pp_vrt2[idx]->norm.z = pp_vrt1[idx]->norm.z;
+		pp_vrt[idx]->ppppnnnn[idx_des] = pp_vrt[idx]->ppppnnnn[idx_src];
+		pp_vrt[idx]->ppppnnnn[idx_des + ORIN] = pp_vrt[idx]->ppppnnnn[idx_src + ORIN];
 		idx++;
 	}
 }
 
-void	ksx_obj_copy_boxvrts(t_vertex *p_vrt1, t_vertex *p_vrt2, uint32_t size)
+void	ksx_obj_copy_boxvrts(t_vertex *p_vrt, uint32_t idx1,
+	uint32_t idx2, uint32_t size)
 {
 	uint32_t	idx;
 
-	idx = 0;
-	while (idx < size)
-	{
-		p_vrt2[idx].p.x = p_vrt1[idx].p.x;
-		p_vrt2[idx].p.y = p_vrt1[idx].p.y;
-		p_vrt2[idx].p.z = p_vrt1[idx].p.z;
-		idx++;
-	}
+	idx = -1;
+	while (++idx < size)
+		p_vrt[idx].ppppnnnn[idx2] = p_vrt[idx].ppppnnnn[idx1];
 }

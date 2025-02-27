@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/26 11:47:24 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/27 20:17:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 # include <stdint.h>
 
 # define AXIS_LEN 	100
-# define FAR	 	500
+# define UNIT	 	1.f
+// # define FAR	 	750
 
 // # define WIDTH 1920
 // # define HEIGHT 1044
@@ -51,6 +52,17 @@
 # define Y 1
 # define Z 2
 # define O 3
+
+// Indexes of point in t_vertex
+# define ORIP	0
+# define LOCP	1
+# define WORP	2
+# define CAMP	3
+// Indexes of point in t_vertex
+# define ORIN	4
+# define LOCN	5
+# define WORN	6
+# define CAMN	7
 
 // FLAGS
 // 1
@@ -198,32 +210,22 @@ typedef struct s_basis
 			t_vector3	j;
 			t_vector3	k;
 		};
-		t_vector3	ijk[3];
+		t_vector3	ijko[3];
 	};
-	union
-	{
-		struct
-		{
-			t_vector3	w_i;
-			t_vector3	w_j;
-			t_vector3	w_k;
-		};
-		t_vector3	w_ijk[3];
-	};
-	union
-	{
-		struct
-		{
-			t_vector3	c_i;
-			t_vector3	c_j;
-			t_vector3	c_k;
-		};
-		t_vector3	c_ijk[3];
-	};
-	// uint8_t		set;
+	// union
+	// {
+	// 	struct
+	// 	{
+	// 		// t_vector3	w_i;
+	// 		t_vector3	w_j;
+	// 		t_vector3	w_k;
+	// 		t_vector3	w_o;
+	// 	};
+	// 	t_vector3	w_ijko[4];
+	// };
 	t_vector3	o;
 	t_vector3	w_o;
-	t_vector3	c_o;
+	// t_vector3	c_o;
 }	t_basis;
 
 typedef struct s_matrix22
@@ -337,12 +339,21 @@ typedef struct s_camera
 
 typedef struct s_vertex
 {
-	t_vector3	p;
-	t_vector3	wp;
-	t_vector3	cp;
-	t_vector3	norm;
-	t_vector3	wnorm;
-	t_vector3	cnorm;
+	union
+	{
+		struct
+		{
+			t_vector3	op;
+			t_vector3	lp;
+			t_vector3	wp;
+			t_vector3	cp;
+			t_vector3	onorm;
+			t_vector3	lnorm;
+			t_vector3	wnorm;
+			t_vector3	cnorm;
+		};
+		t_vector3	ppppnnnn[8];
+	};
 }	t_vertex;
 
 typedef struct s_triangle
@@ -391,7 +402,7 @@ typedef struct s_object
 	t_basis		basis;
 	t_vertex	w_axis[4];
 	t_box		**pp_box;
-	t_vertex	**pp_vrtx_origin;
+	// t_vertex	**pp_vrtx_origin;
 	t_vertex	**pp_vrtx;
 	uint32_t	size_vrtx;
 	t_triangle	**pp_tri;
