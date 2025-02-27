@@ -87,6 +87,7 @@ CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FN))
 # Draw shapes functions
 SHAPES_DIR = graphics/shapes/
 SHAPES_FN = ksx_pixel.c \
+			liang_barsky.c \
 			ksx_line.c \
 			ksx_circle.c
 SHAPES = $(addprefix $(SHAPES_DIR), $(SHAPES_FN))
