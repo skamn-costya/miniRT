@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/26 14:46:49 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:56:36 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	ksx_draw_vertex(t_vertex *p_vertex, mlx_image_t *p_image,
 	t_pixel		pixel;
 
 	pixel = ksx_draw_get_pixel(p_camera, &p_vertex->cp, mlx_color);
+	if (pixel.w <= 0 || pixel.z <= 0 || pixel.x < 0 || pixel.y < 0
+			|| pixel.x >= p_image->width || pixel.y >= p_image->height)
+		return ((void) printf ("NO vertex\n"));
 	ksx_set_pixel(p_image, &pixel);
 }
 

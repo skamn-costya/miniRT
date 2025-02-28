@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:52:47 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/27 23:41:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/28 12:56:40 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,17 @@ static void	ksx_line_y(mlx_image_t *img,
 				t_pixel p1, t_pixel p2, int32_t d_xy[]);
 static void	ksx_line_x(mlx_image_t *img,
 				t_pixel p1, t_pixel p2, int32_t d_xy[]);
-uint32_t	liang_barsky(t_pixel *p_pix1, t_pixel *p_pix2,
-				t_pixel *p_pix1n, t_pixel *p_pix2n);
 
 void	ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2)
 {
 	float	m;
 	int32_t	d_xy[4];
 
-	if (!liang_barsky(&pix1, &pix2, &pix1, &pix2))
-		return ;
+	if (pix1.w <= 0 || pix2.w <= 0 || pix1.z <= 0 || pix2.z <= 0
+			|| pix1.x < 0 || pix2.x < 0 || pix1.y < 0 || pix2.y < 0
+			|| pix1.x >= img->width || pix1.y >= img->height
+			|| pix2.x >= img->width || pix2.y >= img->height)
+		return ((void) printf ("NO line\n"));
 	d_xy[0] = pix2.x - pix1.x;
 	d_xy[1] = pix2.y - pix1.y;
 	d_xy[2] = 0;
