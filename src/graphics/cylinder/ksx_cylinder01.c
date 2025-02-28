@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/27 20:27:08 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:51:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,10 +91,10 @@ static void	ksx_init_cylinder(t_object *p_object)
 		p_object->pp_vrtx[idx + size]->onorm = ksx_vec3_set(0, -1.f , 0);
 		p_object->pp_vrtx[idx + size * 2]->op = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
 		p_object->pp_vrtx[idx + size * 2]->onorm = ksx_vec3_set(xz[0], 0, xz[1]);
-		ksx_vec3_unit(&p_object->pp_vrtx[idx + size * 2]->onorm);
+		p_object->pp_vrtx[idx + size * 2]->onorm = ksx_vec3_unit(&p_object->pp_vrtx[idx + size * 2]->onorm);
 		p_object->pp_vrtx[idx + size * 3]->op = ksx_vec3_set(xz[0], -p_object->size2, xz[1]);
 		p_object->pp_vrtx[idx + size * 3]->onorm = ksx_vec3_set(xz[0], 0, xz[1]);
-		ksx_vec3_unit(&p_object->pp_vrtx[idx + size * 3]->onorm);
+		p_object->pp_vrtx[idx + size * 3]->onorm = ksx_vec3_unit(&p_object->pp_vrtx[idx + size * 3]->onorm);
 		idx++;
 	}
 	p_object->edge = ksx_vec3_dist(&p_object->pp_vrtx[2]->op, &p_object->pp_vrtx[3]->op);
@@ -121,7 +121,7 @@ static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
 					p_object->size2 - (step[1] * idx[0] + 1), p_object->pp_vrtx[idx[1] + 2]->op.z);
 			pp_vertex[idx[1]]->onorm = ksx_vec3_set(pp_vertex[idx[1]]->op.x,
 					0, pp_vertex[idx[1]]->op.z);
-			ksx_vec3_unit(&pp_vertex[idx[1]]->onorm);
+			pp_vertex[idx[1]]->onorm = ksx_vec3_unit(&pp_vertex[idx[1]]->onorm);
 			// if (idx[0] % 2)
 			// 	ksx_qrotation(&pp_vertex[idx[1]]->p_p, CYLINDER_ANGLE * .5f, &v3);
 			idx[1]++;
