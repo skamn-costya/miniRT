@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 14:52:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 23:09:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ksx_draw_norms(t_object *p_object,
 	while (idx < p_object->size_vrtx)
 	{
 		pixel[0] = ksx_draw_get_pixel(p_camera, &p_object->pp_vrtx[idx]->cp, PIXEL_RED);
-		v3[0] = p_object->pp_vrtx[idx]->cnorm;
+		v3[0] = p_object->pp_vrtx[idx]->lnorm;
 		ksx_vec3_resize(&v3[0], 15.f);
 		v3[1] = ksx_vec3_add(&p_object->pp_vrtx[idx]->cp, &v3[0]);
 		// ksx_transform(&v3[1], &p_camera->vm, &v3[0]);

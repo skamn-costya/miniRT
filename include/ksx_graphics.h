@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 17:33:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 22:38:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "MLX42.h"
 # include <stdint.h>
 
-# define AXIS_LEN 	100
+# define AXIS_LEN 	25
 # define UNIT	 	1.f
 // # define FAR	 	750
 

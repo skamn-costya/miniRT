@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 21:34:41 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 22:09:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@
 #include "ksx_m4_math.h"
 #include "ksx_basis.h"
 
-void	scroll_zoom_out(t_graphics *p_grph)
+void	scroll_zoom_in(t_graphics *p_grph)
 {
 	p_grph->camera.flags |= CHANGE;
 	if (p_grph->camera.flags & CAM_PM)
-		return (ksx_camera_set_pm2(&p_grph->camera, p_grph->camera.fov + 1));
+		return (ksx_camera_set_pm2(&p_grph->camera, p_grph->camera.fov - 1));
 	ksx_vec3_resize(&p_grph->camera.basis.i,
 		ksx_vec3_mag(&p_grph->camera.basis.i) + SCALE);
 	ksx_vec3_resize(&p_grph->camera.basis.j,
@@ -31,11 +31,11 @@ void	scroll_zoom_out(t_graphics *p_grph)
 		ksx_vec3_mag(&p_grph->camera.basis.k) + SCALE);
 }
 
-void	scroll_zoom_in(t_graphics *p_grph)
+void	scroll_zoom_out(t_graphics *p_grph)
 {
 	p_grph->camera.flags |= CHANGE;
 	if (p_grph->camera.flags & CAM_PM)
-		return (ksx_camera_set_pm2(&p_grph->camera, p_grph->camera.fov - 1));
+		return (ksx_camera_set_pm2(&p_grph->camera, p_grph->camera.fov + 1));
 	ksx_vec3_resize(&p_grph->camera.basis.i,
 		ksx_vec3_mag(&p_grph->camera.basis.i) - SCALE);
 	ksx_vec3_resize(&p_grph->camera.basis.j,

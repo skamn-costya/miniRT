@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/02 11:17:00 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 22:36:28 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 
 void	ksx_obj_set_axis(t_vertex *p_ver, t_basis *p_basis)
 {
-	p_ver[X].op = p_basis->i;
-	p_ver[Y].op = p_basis->j;
-	p_ver[Z].op = p_basis->k;
-	p_ver[O].op = p_basis->o;
-	ksx_vec3_resize(&p_ver[X].op, AXIS_LEN);
-	ksx_vec3_resize(&p_ver[Y].op, AXIS_LEN);
-	ksx_vec3_resize(&p_ver[Z].op, AXIS_LEN);
+	p_ver[X].lp = p_basis->i;
+	p_ver[Y].lp = p_basis->j;
+	p_ver[Z].lp = p_basis->k;
+	p_ver[O].lp = p_basis->o;
+	ksx_vec3_resize(&p_ver[X].lp, AXIS_LEN);
+	ksx_vec3_resize(&p_ver[Y].lp, AXIS_LEN);
+	ksx_vec3_resize(&p_ver[Z].lp, AXIS_LEN);
 }
 void	ksx_obj_copy_vrts(t_vertex **pp_vrt, uint32_t idx_src,
 			uint32_t idx_des, uint32_t size)
