@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/28 12:56:36 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/04 00:52:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,14 @@ void	ksx_draw_vertex(t_vertex *p_vertex, mlx_image_t *p_image,
 }
 
 void	ksx_draw_vertexes(t_object *p_object, mlx_image_t *p_image,
-		t_camera *p_camera)
+		t_graphics *p_grph)
 {
 	uint32_t	idx;
+	uint32_t 	mlx_color;
 
+	mlx_color = 0xffffffff;
+	if (p_object == p_grph->world.pp_obj[p_grph->obj_idx])
+		mlx_color = 0xffff0000;
 	idx = 0;
 	while (idx < p_object->size_vrtx)
 	{
@@ -43,7 +47,7 @@ void	ksx_draw_vertexes(t_object *p_object, mlx_image_t *p_image,
 		// 		p_object->pp_vrtx[idx]->cp.y,
 		// 		p_object->pp_vrtx[idx]->cp.z);
 		ksx_draw_vertex(p_object->pp_vrtx[idx], p_image,
-			p_camera, p_object->color.mlx_color);
+			&p_grph->camera, mlx_color);
 		idx++;
 	}
 }

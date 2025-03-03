@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 15:48:30 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/04 00:49:56 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	ksx_draw_box(t_object *p_object,
 		idx = 0;
 		while (idx < 12)
 		{
-			ksx_draw_tri(&(*pp_box)->tris[idx], p_image, p_camera);
+			(void) p_image;
+			(void) p_camera;
+			// ksx_draw_tri(&(*pp_box)->tris[idx], p_image, p_camera);
 			idx++;
 		}
 		pp_box++;
