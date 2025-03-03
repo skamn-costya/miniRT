@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:26:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/27 16:59:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:22:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	read_of(t_world *p_world, char *file_name)
 			get_f_of(p_fline, p_object, &i[1]);
 		p_list[1] = p_list[1]->next;
 	}
-	// ksx_obj_vrts_dup2origin(p_object);
-	// ksx_obj_copy_vrts(p_object->pp_vrtx, ORIP, LOCP);
 	ksx_transform_obj(p_object);
 	ksx_obj2world(p_object, p_world);
 }

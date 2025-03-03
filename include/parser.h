@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/23 01:00:45 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:03:28 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define PLANE_ID		"pl"
 # define CYLINDER_ID	"cy"
 
+# define OCTAHEDRON_ID	"oc"
 # define CONE_ID		"co"
 # define HYPERBOLOID_ID	"hy"
 # define PARABOLOID_ID	"pa"
@@ -37,6 +38,7 @@ typedef enum e_obj
 	SPHERE,
 	PLANE,
 	CYLINDER,
+	OCTAHEDRON,
 	CONE,
 	HYPERBOLOID,
 	PARABOLOID,
@@ -92,6 +94,8 @@ t_obj_descr	*create_obj(t_list **pp_line_list, t_list **pp_obj_list);
 
 // parser03.c
 t_obj_descr	*par_create_sphere(t_list **pp_line_list,
+				t_list **pp_obj_list, t_fline *p_fline);
+t_obj_descr	*par_create_octahedron(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);
 t_obj_descr	*par_create_plane(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);

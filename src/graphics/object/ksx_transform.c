@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/27 17:25:11 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:17:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ksx_transform_obj(t_object *p_object)
 	}
 	basis.o = ksx_vec3_set(0.f, 0.f, 0.f);
 	ksx_basis_set_norm(&basis, &basis.o);
-	ksx_obj_set_axis(p_object->w_axis, &basis);
+	ksx_obj_set_axis(p_object->axis, &basis);
 	ksx_basis_copy_len(&p_object->basis, &basis);
 	ksx_get_tm (&tm, &basis);
 	ksx_transform_obj_t(p_object, &tm);
@@ -104,8 +104,8 @@ static void	ksx_transform_obj_t(t_object *p_object, t_matrix4 *p_tm)
 	}
 	idx = -1;
 	while (++idx < 4)
-		ksx_transform(&p_object->w_axis[idx].lp,
-			p_tm, &p_object->w_axis[idx].lp);
+		ksx_transform(&p_object->axis[idx].lp,
+			p_tm, &p_object->axis[idx].lp);
 }
 
 // p_m4->e_14 = -ksx_vec3_dot(&p_basis->i, &p_basis->o);

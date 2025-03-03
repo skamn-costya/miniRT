@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/27 17:11:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:30:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 // static void	ksx_sphere_split_(t_object *p_object, float *p_radius,
 // 				t_triangle **p_tris, t_vector3 *p_v);
+static void	ksx_sphere_split_1(t_triangle *p_tris, t_triangle **pp_tri,
+				uint32_t idx, t_vertex **pp_ver);
 
 void	ksx_sphere_split(t_object *p_object)
 {
@@ -38,16 +40,10 @@ void	ksx_sphere_split(t_object *p_object)
 	while (idx < p_object->size_tri)
 	{
 		p_tris = p_object->pp_tri[idx];
-		pp_ver[idx * 3]->op = ksx_mid_point(&p_tris->p_ver1->op, &p_tris->p_ver2->op);
-		pp_ver[idx * 3 + 1]->op = ksx_mid_point(&p_tris->p_ver2->op, &p_tris->p_ver3->op);
-		pp_ver[idx * 3 + 2]->op = ksx_mid_point(&p_tris->p_ver3->op, &p_tris->p_ver1->op);
+		ksx_sphere_split_1(p_tris, pp_tri, idx, pp_ver);
 		ksx_vec3_resize(&pp_ver[idx * 3]->op, p_object->size1);
 		ksx_vec3_resize(&pp_ver[idx * 3 + 1]->op, p_object->size1);
 		ksx_vec3_resize(&pp_ver[idx * 3 + 2]->op, p_object->size1);
-		ksx_tri_set_vertexes (pp_tri[idx * 4], p_tris->p_ver1, pp_ver[idx * 3], pp_ver[idx * 3 + 2]);
-		ksx_tri_set_vertexes (pp_tri[idx * 4 + 1], pp_ver[idx * 3], p_tris->p_ver2, pp_ver[idx * 3 + 1]);
-		ksx_tri_set_vertexes (pp_tri[idx * 4 + 2], pp_ver[idx * 3 + 1], p_tris->p_ver3, pp_ver[idx * 3 + 2]);
-		ksx_tri_set_vertexes (pp_tri[idx * 4 + 3], pp_ver[idx * 3], pp_ver[idx * 3 + 1], pp_ver[idx * 3 + 2]);
 		pp_tri[idx * 4]->color = p_object->color;
 		pp_tri[idx * 4 + 1]->color = p_object->color;
 		pp_tri[idx * 4 + 2]->color = p_object->color;
@@ -57,6 +53,25 @@ void	ksx_sphere_split(t_object *p_object)
 	ksx_free_pointers((void ***) &p_object->pp_tri);
 	p_object->pp_tri = pp_tri;
 	p_object->size_tri *= 4;
+}
+
+static void	ksx_sphere_split_1(t_triangle *p_tris, t_triangle **pp_tri,
+		uint32_t idx, t_vertex **pp_ver)
+{
+	pp_ver[idx * 3]->op = ksx_mid_point(&p_tris->p_ver1->op,
+			&p_tris->p_ver2->op);
+	pp_ver[idx * 3 + 1]->op = ksx_mid_point(&p_tris->p_ver2->op,
+			&p_tris->p_ver3->op);
+	pp_ver[idx * 3 + 2]->op = ksx_mid_point(&p_tris->p_ver3->op,
+			&p_tris->p_ver1->op);
+	ksx_tri_set_vertexes (pp_tri[idx * 4], p_tris->p_ver1,
+		pp_ver[idx * 3], pp_ver[idx * 3 + 2]);
+	ksx_tri_set_vertexes (pp_tri[idx * 4 + 1], pp_ver[idx * 3],
+		p_tris->p_ver2, pp_ver[idx * 3 + 1]);
+	ksx_tri_set_vertexes (pp_tri[idx * 4 + 2], pp_ver[idx * 3 + 1],
+		p_tris->p_ver3, pp_ver[idx * 3 + 2]);
+	ksx_tri_set_vertexes (pp_tri[idx * 4 + 3], pp_ver[idx * 3],
+		pp_ver[idx * 3 + 1], pp_ver[idx * 3 + 2]);
 }
 
 void	ksx_sphere_norns(t_object *p_object)

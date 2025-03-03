@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 14:55:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:52:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ksx_draw_norms(t_object *p_object,
 		// printf("%d len 3D: %f\n", idx, ksx_vec3_dist(p_object->pp_vrtx[idx]->cp, v3[0]));
 		// printf("%d line: [%lu, %lu] - [%lu, %lu]\n", idx, pixel[0].x, pixel[0].y, pixel[1].x, pixel[1].y);
 		// printf("%d len 2D: %f\n", idx, 	sqrtf(powf(pixel[0].x - pixel[1].x, 2.f) + powf(pixel[0].y - pixel[1].y, 2.f)));
-		ksx_line(p_image, pixel[0], pixel[1]);
+		ksx_line(p_image, &pixel[0], &pixel[1]);
 		idx++;
 	}
 }

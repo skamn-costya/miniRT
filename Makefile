@@ -87,7 +87,8 @@ CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FN))
 # Draw shapes functions
 SHAPES_DIR = graphics/shapes/
 SHAPES_FN = ksx_pixel.c \
-			ksx_line.c \
+			ksx_line01.c \
+			ksx_line02.c \
 			ksx_circle.c
 SHAPES = $(addprefix $(SHAPES_DIR), $(SHAPES_FN))
 
@@ -113,15 +114,20 @@ KYES_FN =	key_kp01.c \
 			key_90-=.c
 KYES =	$(addprefix $(KYES_DIR), $(KYES_FN))
 
-# Keys
+# Boxes
 BOXES_DIR = graphics/boxes/
 BOXES_FN =	ksx_boxes.c
 BOXES =	$(addprefix $(BOXES_DIR), $(BOXES_FN))
 
-# Keys
+# Triangle
 TRIANGLE_DIR = graphics/triangle/
 TRIANGLE_FN =	ksx_triangle.c
 TRIANGLE =	$(addprefix $(TRIANGLE_DIR), $(TRIANGLE_FN))
+
+# World
+WORLD_DIR = graphics/world/
+WORLD_FN =	ksx_world.c
+WORLD =	$(addprefix $(WORLD_DIR), $(WORLD_FN))
 
 # All sources
 SRC_DIR = ./src/
@@ -140,6 +146,7 @@ SRC = 	$(UTILS) \
 		$(GRAPHICS) \
 		$(KYES) \
 		$(TRIANGLE) \
+		$(WORLD) \
 		$(PARSER) \
 		$(MAIN) \
 		gc.c
@@ -204,6 +211,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(KYES_DIR)
 	mkdir -p $(OBJ_DIR)$(TRIANGLE_DIR)
 	mkdir -p $(OBJ_DIR)$(BOXES_DIR)
+	mkdir -p $(OBJ_DIR)$(WORLD_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -c $< -o $@
@@ -229,6 +237,9 @@ re: fclean all
 go:
 #	valgrind --leak-check=full --suppressions=mlx.supp ./minirt ./files.rt/example.rt
 	valgrind --leak-check=full --show-leak-kinds=all --suppressions=mlx.supp ./minirt ./files.rt/example.rt
+
+run:
+	./minirt ./files.rt/example.rt
 
 # test:
 # 	@echo Automatic Variables

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/28 12:24:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:52:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ksx_draw_tri(t_triangle *p_tri, mlx_image_t *p_image,
 	// ksx_set_pixel(p_image, &pixel[0]);
 	// ksx_set_pixel(p_image, &pixel[1]);
 	// ksx_set_pixel(p_image, &pixel[2]);
-	ksx_line(p_image, pixel[0], pixel[1]);
-	ksx_line(p_image, pixel[1], pixel[2]);
-	ksx_line(p_image, pixel[2], pixel[0]);
+	ksx_line(p_image, &pixel[0], &pixel[1]);
+	ksx_line(p_image, &pixel[1], &pixel[2]);
+	ksx_line(p_image, &pixel[2], &pixel[0]);
 }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/15 08:45:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:49:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-float	ksx_fraction(const t_pixel p, const t_pixel p1, const t_pixel p2)
+float	ksx_fraction(const t_pixel *p_p, const t_pixel *p_p1,
+	const t_pixel *p_p2)
 {
 	int		dx;
 	int		dy;
 	float	result;
 
-	dx = (p2.x - p1.x);
-	dy = (p2.y - p1.y);
+	dx = (p_p2->x - p_p1->x);
+	dy = (p_p2->y - p_p1->y);
 	if (ksx_abs(dx) > ksx_abs(dy))
 	{
-		if (p1.x != p2.x)
-			result = (float)(p.x - p1.x) / dx;
+		if (p_p1->x != p_p2->x)
+			result = (float)(p_p->x - p_p1->x) / dx;
 		else
 			result = 0;
 	}
 	else
 	{
-		if (p1.y != p2.y)
-			result = (float)(p.y - p1.y) / dy;
+		if (p_p1->y != p_p2->y)
+			result = (float)(p_p->y - p_p1->y) / dy;
 		else
 			result = 0;
 	}

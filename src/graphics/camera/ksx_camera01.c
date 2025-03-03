@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/28 00:25:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:33:52 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,18 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 
 	camera.basis.o = ksx_vec3_set(0, 0, 0);
 	camera.basis.w_o = center;
-	// camera.norm = norm;
 	ksx_basis_set_norm(&camera.basis, &norm);
-	// camera.basis.w_i = ksx_vec3_add(&camera.basis.i, &camera.basis.w_o);
-	// camera.basis.w_j = ksx_vec3_add(&camera.basis.j, &camera.basis.w_o);
-	// camera.basis.w_k = ksx_vec3_add(&camera.basis.k, &camera.basis.w_o);
-	// ksx_basis_camera(&camera, &norm);
-	// ksx_create_vm(&camera.vm, &camera.basis);
 	camera.fov = fov;
 	camera.hfov = fov * PI180;
 	camera.near = (WIDTH * .5f) / tanf(camera.hfov * .5f);
 	camera.near = 250.f;
 	camera.far = 750.f;
 	camera.right = WIDTH * .5f;
-	camera.left = - camera.right;
+	camera.left = -camera.right;
 	camera.top = HEIGHT * .5f;
 	camera.bottom = -camera.top;
 	camera.aspect = WIDTH / HEIGHT;
 	ksx_camera_set_vm(&camera);
-	// camera.vfov = 2.f * atanf(tanf(camera.hfov * 0.5f) / camera.aspect);
 	camera.flags = DRAW_OBJ | CHANGE | CAM_PM;
 	return (camera);
 }
@@ -83,7 +76,7 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 // 	ksx_m4_invert(&p_camera->vm, &p_camera->ivm);
 // }
 
-void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
+void	ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 {
 	uint32_t	idx;
 	t_box		**pp_box;
@@ -91,10 +84,11 @@ void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
 	{
-		ksx_transform(&p_object->pp_vrtx[idx]->wp, p_vm, &p_object->pp_vrtx[idx]->cp);
-		ksx_transform(&p_object->pp_vrtx[idx]->wnorm, p_vm, &p_object->pp_vrtx[idx]->cnorm);
+		ksx_transform(&p_object->pp_vrtx[idx]->wp, p_vm,
+			&p_object->pp_vrtx[idx]->cp);
+		ksx_transform(&p_object->pp_vrtx[idx]->wnorm, p_vm,
+			&p_object->pp_vrtx[idx]->cnorm);
 	}
-	// ksx_transform(&p_object->basis.w_o, p_vm, &p_object->basis.c_o);
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
@@ -106,7 +100,7 @@ void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 	}
 	idx = -1;
 	while (++idx < 4)
-		ksx_transform(&p_object->w_axis[idx].wp, p_vm, &p_object->w_axis[idx].cp);
+		ksx_transform(&p_object->axis[idx].wp, p_vm, &p_object->axis[idx].cp);
 }
 
 // void	init_camera(t_camera *p_cam, float near, float far)
@@ -125,8 +119,10 @@ void ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 // 	p_cam->pm.e_43 = 1;
 // }
 
-// https://www.mauriciopoppe.com/notes/computer-graphics/viewing/projection-transform/
-// https://www.opengl-tutorial.org/beginners-tutorials/tutorial-3-matrices/#the-view-matrix
+// https://www.mauriciopoppe.com
+// /notes/computer-graphics/viewing/projection-transform/
+// https://www.opengl-tutorial.org
+// /beginners-tutorials/tutorial-3-matrices/#the-view-matrix
 
 void	ksx_camera_set_pm1(t_camera *p_camera)
 {
@@ -137,13 +133,12 @@ void	ksx_camera_set_pm1(t_camera *p_camera)
 	p_camera->pm.e_44 = 1;
 }
 
-
 void	ksx_camera_set_pm2(t_camera *p_camera, float fov)
 {
 	float	f;
 
 	if (fov < 1 || fov > 179)
-		return;
+		return ;
 	ksx_m4_reset(&p_camera->pm);
 	p_camera->fov = fov;
 	p_camera->hfov = fov * PI180;
@@ -173,10 +168,10 @@ void	ksx_camera_set_pm2(t_camera *p_camera, float fov)
 
 //     ksx_m4_reset(&p_camera->pm);
 
-//     p_camera->pm.e_11 = f;// / p_camera->aspect; // Correct aspect ratio scaling
+//     p_camera->pm.e_11 = f;// / p_camera->aspect;
 //     p_camera->pm.e_22 = -f;
 //     p_camera->pm.e_34 = (far + p_camera->near) / (p_camera->near - far);
-//     p_camera->pm.e_43 = (2.f * far * p_camera->near) / (p_camera->near - far);
+// p_camera->pm.e_43 = (2.f * far * p_camera->near) / (p_camera->near - far);
 // 	p_camera->pm.e_43 = 5.f/far;
 //     // p_camera->pm.e_44 = 0.0f; // Ensure correct homogeneous divide
 // }

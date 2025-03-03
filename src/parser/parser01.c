@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 15:35:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:07:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ static int	is_obj(char *id)
 	if (!ft_strcmp(id, LIGHT_ID))
 		return (l++, TRUE);
 	if (!ft_strcmp(id, SPHERE_ID)
+		|| !ft_strcmp(id, OCTAHEDRON_ID)
 		|| !ft_strcmp(id, PLANE_ID)
 		|| !ft_strcmp(id, CYLINDER_ID)
 		|| !ft_strcmp(id, OBJ_ID))

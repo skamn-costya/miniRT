@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/23 00:37:41 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 13:05:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_list	*create_obj_list(t_list **pp_line_list)
 			par_create_light(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], SPHERE_ID))
 			par_create_sphere(pp_line_list, &p_obj_list, p_fline);
+		else if (!ft_strcmp(p_fline->words[0], OCTAHEDRON_ID))
+			par_create_octahedron(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], PLANE_ID))
 			par_create_plane(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], CYLINDER_ID))

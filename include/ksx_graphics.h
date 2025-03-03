@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/28 09:41:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:51:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -402,9 +402,8 @@ typedef struct s_object
 	float		size2;
 	float		edge;
 	t_basis		basis;
-	t_vertex	w_axis[4];
+	t_vertex	axis[4];
 	t_box		**pp_box;
-	// t_vertex	**pp_vrtx_origin;
 	t_vertex	**pp_vrtx;
 	uint32_t	size_vrtx;
 	t_triangle	**pp_tri;
@@ -415,6 +414,9 @@ typedef struct s_object
 typedef struct s_world
 {
 	// t_triangle	*p_tris;
+	uint8_t		flags;
+	t_basis		basis;
+	t_vertex	exyz[6];
 	t_box		**pp_box;
 	uint32_t	size_box;
 	t_object	**pp_obj;
@@ -436,7 +438,8 @@ int			ksx_prep(void *p_vars);
 t_pixel		ksx_get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y);
 void		ksx_set_pixel(mlx_image_t *p_img, t_pixel *p_pix);
 
-void		ksx_line(mlx_image_t *img, t_pixel pix1, t_pixel pix2);
+t_color		ksx_get_color(t_pixel *p_p, t_pixel *p_p1, t_pixel *p_p2);
+void		ksx_line(mlx_image_t *p_img, t_pixel *p_pix1, t_pixel *p_pix2);
 void		ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);
 
 t_object	**ksx_obj2world(t_object *p_object, t_world *p_world);

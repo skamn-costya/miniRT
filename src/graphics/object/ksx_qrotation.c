@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 15:04:02 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:40:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/02 11:17:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ static t_vector4	ksx_quat_multi(t_vector4 *p_q1, t_vector4 *p_q2)
 // 		ksx_qrotation(&p_object->box_ver[idx].p_p, angle, &v);
 // 	idx = -1;
 // 	while (++idx < 3)
-// 		ksx_qrotation(&p_object->w_axis[idx].p_p, angle, &v);
+// 		ksx_qrotation(&p_object->axis[idx].p_p, angle, &v);
 // }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:26:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/23 19:29:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:05:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define KSX_OBJ_FILE_H
 
 # include "ksx_graphics.h"
-#include "ksx_object.h"
-#include "parser.h"
+# include "ksx_object.h"
+# include "parser.h"
 
 # define OBJ_G	"g"
 # define OBJ_V	"v"

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/27 20:21:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 14:31:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,3 @@ void	ksx_camera_refresh_pm(t_camera *p_camera, float fov)
 	else
 		ksx_camera_set_pm1(p_camera);
 }
-
