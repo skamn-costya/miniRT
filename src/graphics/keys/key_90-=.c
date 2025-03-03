@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/27 20:21:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 21:25:05 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,38 @@ void	key_0(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 
 void	key_minus(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	(void) p_keydata;
-	(void) p_grph;
+	float	scale;
+
+	scale = SCALE;
+	if (p_keydata->modifier == MLX_SHIFT)
+		scale *= 100;
+	ksx_vec3_resize(&p_grph->world.basis.i,
+		ksx_vec3_mag(&p_grph->world.basis.i) - scale);
+	ksx_vec3_resize(&p_grph->world.basis.j,
+		ksx_vec3_mag(&p_grph->world.basis.j) - scale);
+	ksx_vec3_resize(&p_grph->world.basis.k,
+		ksx_vec3_mag(&p_grph->world.basis.k) - scale);
+	if (!ksx_basis_check(&p_grph->world.basis, X))
+		ksx_vec3_resize(&p_grph->world.basis.i, MIN_AXIS);
+	if (!ksx_basis_check(&p_grph->world.basis, Y))
+		ksx_vec3_resize(&p_grph->world.basis.j, MIN_AXIS);
+	if (!ksx_basis_check(&p_grph->world.basis, Z))
+		ksx_vec3_resize(&p_grph->world.basis.k, MIN_AXIS);
+	p_grph->world.flags |= CHANGE;
 }
 
 void	key_equal(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	(void) p_keydata;
-	(void) p_grph;
+	float	scale;
+
+	scale = SCALE;
+	if (p_keydata->modifier == MLX_SHIFT)
+		scale *= 100;
+	ksx_vec3_resize(&p_grph->world.basis.i,
+		ksx_vec3_mag(&p_grph->world.basis.i) + scale);
+	ksx_vec3_resize(&p_grph->world.basis.j,
+		ksx_vec3_mag(&p_grph->world.basis.j) + scale);
+	ksx_vec3_resize(&p_grph->world.basis.k,
+		ksx_vec3_mag(&p_grph->world.basis.k) + scale);
+	p_grph->world.flags |= CHANGE;
 }

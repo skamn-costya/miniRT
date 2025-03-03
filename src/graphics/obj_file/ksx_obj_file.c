@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:26:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 14:22:01 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:41:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	read_of(t_world *p_world, char *file_name)
 			get_f_of(p_fline, p_object, &i[1]);
 		p_list[1] = p_list[1]->next;
 	}
-	ksx_transform_obj(p_object);
+	ksx_obj_transform(p_object);
 	ksx_obj2world(p_object, p_world);
 }
 

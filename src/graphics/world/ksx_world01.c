@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_world.c                                        :+:      :+:    :+:   */
+/*   ksx_world01.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 14:22:21 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:59:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 #include "ksx_camera.h"
 #include "ksx_object.h"
 #include "ksx_obj_file.h"
+#include "ksx_vec3_math.h"
+#include "ksx_basis.h"
 #include "parser.h"
 #include "libft.h"
 
+static void	ksx_set_world_defaults(t_world *p_world);
 static void	ksx_init_world_1(t_graphics *p_grph,
 				t_object **pp_object, t_obj_descr *p_obj_descr);
 static void	ksx_init_world_2(t_object **pp_object, t_obj_descr *p_obj_descr);
@@ -28,6 +31,7 @@ void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 	t_obj_descr	*p_obj_descr;
 	t_object	*p_object;
 
+	ksx_set_world_defaults(&p_grph->world);
 	p_list_ = p_list;
 	while (p_list_)
 	{
@@ -39,9 +43,29 @@ void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 		else if (p_obj_descr->id == CYLINDER)
 			ksx_init_world_2(&p_object, p_obj_descr);
 		if (p_object)
+		{
+			ksx_world_obj_tm(&p_grph->world, p_object);
 			ksx_obj2world(p_object, &p_grph->world);
+		}
 		p_list_ = p_list_->next;
 	}
+}
+
+static void	ksx_set_world_defaults(t_world *p_world)
+{
+	p_world->flags = 0b00000000;
+	p_world->basis.o = ksx_vec3_set(0, 0, 0);
+	ksx_basis_set_norm(&p_world->basis, &p_world->basis.o);
+	p_world->exyz[0] = 0.f;
+	p_world->exyz[1] = 0.f;
+	p_world->exyz[2] = 0.f;
+	p_world->exyz[3] = 0.f;
+	p_world->exyz[4] = 0.f;
+	p_world->exyz[5] = 0.f;
+	p_world->pp_box = NULL;
+	p_world->size_box = 0;
+	p_world->pp_obj = NULL;
+	p_world->size_obj = 0;
 }
 
 static void	ksx_init_world_1(t_graphics *p_grph,

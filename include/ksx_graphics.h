@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 14:51:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 17:33:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -416,7 +416,8 @@ typedef struct s_world
 	// t_triangle	*p_tris;
 	uint8_t		flags;
 	t_basis		basis;
-	t_vertex	exyz[6];
+	float		exyz[6];
+	t_matrix4	tm;
 	t_box		**pp_box;
 	uint32_t	size_box;
 	t_object	**pp_obj;
@@ -450,6 +451,11 @@ t_object	*ksx_create_sphere(t_vector3 center,
 t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 				float dia_ht[], t_color color);
 void		ksx_draw(t_graphics *p_grph);
+
+void		ksx_change(t_graphics *p_grph);
+void		ksx_change_obj(t_object *p_object, t_graphics *p_grph);
+void		ksx_change_world(t_graphics *p_grph);
+void		ksx_change_camera(t_graphics *p_grph);
 
 // garbage_collector
 void		ksx_garbage_collector(t_graphics *p_grph);

@@ -58,7 +58,6 @@ OBJECT_FN =	ksx_object01.c \
 			ksx_object02.c \
 			ksx_object03.c \
 			ksx_qrotation.c \
-			ksx_translate.c \
 			ksx_transform.c
 OBJECT = $(addprefix $(OBJECT_DIR), $(OBJECT_FN))
 
@@ -94,7 +93,8 @@ SHAPES = $(addprefix $(SHAPES_DIR), $(SHAPES_FN))
 
 # Graphics utilites
 GRAPHICS_DIR = graphics/
-GRAPHICS_FN =	ksx_draw.c \
+GRAPHICS_FN =	ksx_change.c \
+				ksx_draw.c \
 				ksx_init.c \
 				ksx_prep.c \
 				ksx_world.c \
@@ -126,7 +126,8 @@ TRIANGLE =	$(addprefix $(TRIANGLE_DIR), $(TRIANGLE_FN))
 
 # World
 WORLD_DIR = graphics/world/
-WORLD_FN =	ksx_world.c
+WORLD_FN =	ksx_world01.c \
+			ksx_world02.c
 WORLD =	$(addprefix $(WORLD_DIR), $(WORLD_FN))
 
 # All sources

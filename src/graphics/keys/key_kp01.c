@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 13:10:33 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:41:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	key_kp(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 	else if (p_keydata->key == MLX_KEY_KP_SUBTRACT)
 		key_kp_minus(p_keydata, p_grph);
 	p_grph->world.pp_obj[p_grph->obj_idx]->flags |= CHANGE;
-	ksx_transform_obj(p_grph->world.pp_obj[p_grph->obj_idx]);
+	ksx_obj_transform(p_grph->world.pp_obj[p_grph->obj_idx]);
 }
 
 void	key_kp_4(mlx_key_data_t *p_keydata, t_graphics *p_grph)

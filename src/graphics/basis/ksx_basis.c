@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/27 17:15:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/03 21:35:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ void	ksx_basis_copy_len(t_basis *p_basis_src, t_basis *p_basis_des)
 // 	p_basis_des->j = p_basis_src->j;
 // 	p_basis_des->k = p_basis_src->k;
 // }
+
+uint32_t	ksx_basis_check(t_basis *p_basis, uint32_t axis)
+{
+	if (p_basis->ijko[axis].x < 0 || p_basis->ijko[axis].y < 0
+		|| p_basis->ijko[axis].z < 0)
+		return (0);
+	return (1);
+}
 
 void	ksx_basis_unit(t_basis *p_basis)
 {
