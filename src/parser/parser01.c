@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 13:07:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:25:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ t_list	*create_line_list(int fd)
 	while (p_str[0])
 	{
 		p_str[1] = ft_strtrim(p_str[0], TRIM_SYMBOLS);
+		free (p_str[0]);
 		p_str[0] = ft_strreplace(p_str[1], TRIM_SYMBOLS, ' ');
 		free (p_str[1]);
 		p_str[1] = comma_trim(p_str[0]);
@@ -63,10 +64,8 @@ t_list	*create_line_list(int fd)
 		if (ft_strlen(p_str[1]) > 0 && p_str[1][0] != '#')
 		{
 			if (!create_fline(&p_line_list, p_str[1]))
-			{
-				printf("Memory allocation failed\n");
-				printf("Some object may be lost ...\n");
-			}
+				printf("Memory allocation failed\n%s",
+					"Some object may be lost ...\n");
 		}
 		else
 			free (p_str[1]);
