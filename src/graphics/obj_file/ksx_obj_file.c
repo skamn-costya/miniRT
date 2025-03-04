@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:26:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/04 16:26:05 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:34:41 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ t_vertex	*get_v_of(t_fline *p_fline, t_object *p_object, int *p_idx)
 	// 	|| (p_fline->words[2] && !is_f_number(p_fline->words[2]))
 	// 	|| (p_fline->words[3] && !is_f_number(p_fline->words[3])))
 	// 	return (printf("Wrong float number.\n"), NULL);
+	if (!p_fline->words[1] || !p_fline->words[2] || !p_fline->words[3])
+		return (printf("Wrong float number.\n"), NULL);
 	ksx_obj_add_vers(p_object, 1);
 	p_object->pp_vrtx[*p_idx]->op.x = ft_atof(p_fline->words[1]);
 	p_object->pp_vrtx[*p_idx]->op.y = ft_atof(p_fline->words[2]);
