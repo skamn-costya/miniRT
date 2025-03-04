@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 13:05:00 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:58:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_obj_descr	*create_obj(t_list **pp_line_list, t_list **pp_obj_list)
 		parser_crash_exit(pp_line_list, pp_obj_list);
 	}
 	p_obj->texture = NULL;
+	p_obj->obj_file = NULL;
 	if (!*pp_obj_list)
 		*pp_obj_list = p_list;
 	else

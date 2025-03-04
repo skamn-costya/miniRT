@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 15:17:11 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:00:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,11 @@ int	main(int argc, char *argv[])
 	garbage_collector((void **) &p_list);
 	ksx_init_grph(&grph, &garbage_collector);
 	ksx_init_world(&grph, p_list);
+	if (grph.world.size_obj < 1)
+	{
+		printf("There isn't any object.\n");
+		ksx_garbage_collector(NULL);
+	}	
 	grph.obj_idx = 0;
 	ft_lstclear(&p_list, &free_t_obj_descr);
 	ksx_camera_set_pm2(&grph.camera, grph.camera.fov);

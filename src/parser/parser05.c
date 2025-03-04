@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 15:35:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:58:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	free_t_obj_descr(void *p_obj_descr)
 		return ;
 	p_obj_descr_ = (t_obj_descr *) p_obj_descr;
 	free (p_obj_descr_->texture);
+	free (p_obj_descr_->obj_file);
 	free (p_obj_descr);
 }
 

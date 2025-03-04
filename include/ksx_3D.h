@@ -6,16 +6,18 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:54 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/04 00:48:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/04 16:14:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef KSX_3D_H
 # define KSX_3D_H
 
-# define BOX_COLOR		0x88888888
+# define BOX_COLOR		0x80888888
 # define PIXEL_RED		0xFF0000FF
 # define PIXEL_BLACK	0xFF000000
+# define OBJ_COLOR		0xA0E5E5E5
+# define SEL_OBJ_COLOR	0xA05E5EFF
 
 # include "ksx_graphics.h"
 
