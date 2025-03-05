@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/05 12:55:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/05 23:30:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_boxes.h"
 #include "ksx_utils.h"
+#include "libft.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -60,6 +61,7 @@ void	ksx_world_clean(t_world *p_world)
 		idx[0]++;
 	}
 	ksx_free_pointers((void ***) &p_world->pp_lgt);
+	ksx_free_pointers((void ***) &p_world->pp_pln);
 	free(p_world->pp_box);
 	free(p_world->pp_obj);
 	p_world->pp_obj = NULL;

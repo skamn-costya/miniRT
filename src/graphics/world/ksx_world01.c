@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/05 13:13:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 00:23:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_world.h"
 #include "ksx_light.h"
+#include "ksx_plane.h"
 #include "ksx_camera.h"
 #include "ksx_object.h"
 #include "ksx_obj_file.h"
@@ -44,7 +45,8 @@ void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 			ksx_init_world_1(p_grph, &p_object, p_obj_descr);
 		else if (p_obj_descr->id == CYLINDER)
 			ksx_init_world_2(&p_object, p_obj_descr);
-		else if (p_obj_descr->id == AMBIENT || p_obj_descr->id == LIGHT)
+		else if (p_obj_descr->id == AMBIENT || p_obj_descr->id == LIGHT
+			|| p_obj_descr->id == PLANE)
 			ksx_init_world_3(p_grph, p_obj_descr);
 		if (p_object)
 		{
@@ -72,6 +74,8 @@ static void	ksx_set_world_defaults(t_world *p_world)
 	p_world->size_obj = 0;
 	p_world->pp_lgt = NULL;
 	p_world->size_lgt = 0;
+	p_world->pp_pln = NULL;
+	p_world->size_pln = 0;
 }
 
 static void	ksx_init_world_1(t_graphics *p_grph,
@@ -106,6 +110,7 @@ static void	ksx_init_world_2(t_object **pp_object, t_obj_descr *p_obj_descr)
 static void	ksx_init_world_3(t_graphics *p_grph, t_obj_descr *p_obj_descr)
 {
 	t_light	*p_light;
+	t_plane	*p_plane;
 
 	if (p_obj_descr->id == AMBIENT)
 	{
@@ -117,5 +122,11 @@ static void	ksx_init_world_3(t_graphics *p_grph, t_obj_descr *p_obj_descr)
 		p_light = ksx_create_light(p_obj_descr->coord, p_obj_descr->ratio,
 			p_obj_descr->color);
 		ksx_lgt2world(p_light, &p_grph->world);
+	}
+	if (p_obj_descr->id == PLANE)
+	{
+		p_plane = ksx_create_plane(p_obj_descr->coord, p_obj_descr->norm,
+			p_obj_descr->color);
+		ksx_pln2world(p_plane, &p_grph->world);
 	}
 }

@@ -135,6 +135,11 @@ LIGHT_DIR = graphics/light/
 LIGHT_FN =	ksx_light.c
 LIGHT =	$(addprefix $(LIGHT_DIR), $(LIGHT_FN))
 
+# Plane
+PLANE_DIR = graphics/plane/
+PLANE_FN =	ksx_plane.c
+PLANE =	$(addprefix $(PLANE_DIR), $(PLANE_FN))
+
 # All sources
 SRC_DIR = ./src/
 SRC = 	$(UTILS) \
@@ -153,6 +158,7 @@ SRC = 	$(UTILS) \
 		$(KYES) \
 		$(TRIANGLE) \
 		$(LIGHT) \
+		$(PLANE) \
 		$(WORLD) \
 		$(PARSER) \
 		$(MAIN) \
@@ -219,6 +225,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(TRIANGLE_DIR)
 	mkdir -p $(OBJ_DIR)$(BOXES_DIR)
 	mkdir -p $(OBJ_DIR)$(LIGHT_DIR)
+	mkdir -p $(OBJ_DIR)$(PLANE_DIR)
 	mkdir -p $(OBJ_DIR)$(WORLD_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
