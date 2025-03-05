@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_world.c                                        :+:      :+:    :+:   */
+/*   ksx_world03.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/04 13:34:36 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:55:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 	return (pp_object);
 }
 
-void	ksx_clean_world(t_world *p_world)
+void	ksx_world_clean(t_world *p_world)
 {
 	uint32_t	idx[3];
 	t_object	*p_object;
@@ -59,6 +59,7 @@ void	ksx_clean_world(t_world *p_world)
 		p_world->pp_obj[idx[0]] = NULL;
 		idx[0]++;
 	}
+	ksx_free_pointers((void ***) &p_world->pp_lgt);
 	free(p_world->pp_box);
 	free(p_world->pp_obj);
 	p_world->pp_obj = NULL;

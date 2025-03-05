@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:18:43 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 14:21:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:46:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,21 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static void	ksx_box_create_1(t_box *p_box);
-static void	ksx_box_create_2(t_box *p_box);
+static void	ksx_create_box_1(t_box *p_box);
+static void	ksx_create_box_2(t_box *p_box);
 
-void	ksx_box_create(t_box *p_box, uint32_t mlx_color)
+void	ksx_create_box(t_box *p_box, uint32_t mlx_color)
 {
 	uint32_t	idx;
 
-	ksx_box_create_1(p_box);
-	ksx_box_create_2(p_box);
+	ksx_create_box_1(p_box);
+	ksx_create_box_2(p_box);
 	idx = -1;
 	while (++idx < 12)
 		p_box->tris[idx].color.mlx_color = mlx_color;
 }
 
-static void	ksx_box_create_1(t_box *p_box)
+static void	ksx_create_box_1(t_box *p_box)
 {
 	ksx_tri_set_vertexes(&p_box->tris[0], &p_box->ver[0],
 		&p_box->ver[1], &p_box->ver[3]);
@@ -48,7 +48,7 @@ static void	ksx_box_create_1(t_box *p_box)
 		&p_box->ver[4], &p_box->ver[7]);
 }
 
-static void	ksx_box_create_2(t_box *p_box)
+static void	ksx_create_box_2(t_box *p_box)
 {
 	ksx_tri_set_vertexes(&p_box->tris[6], &p_box->ver[0],
 		&p_box->ver[1], &p_box->ver[4]);

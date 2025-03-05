@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 22:38:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:03:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -394,6 +394,13 @@ typedef struct s_box
 	void		*p_object;
 }	t_box;
 
+typedef struct s_light
+{
+	t_vector3	center;
+	t_color		color;
+	float		bright;
+}	t_light;
+
 typedef struct s_object
 {
 	uint8_t		flags;
@@ -401,6 +408,7 @@ typedef struct s_object
 	float		size1;
 	float		size2;
 	float		edge;
+	float		exyz[6];
 	t_basis		basis;
 	t_vertex	axis[4];
 	t_box		**pp_box;
@@ -422,6 +430,9 @@ typedef struct s_world
 	uint32_t	size_box;
 	t_object	**pp_obj;
 	uint32_t	size_obj;
+	t_light		**pp_lgt;
+	uint32_t	size_lgt;
+	t_light		ambient;
 }	t_world;
 
 typedef struct s_graphics
@@ -444,7 +455,7 @@ void		ksx_line(mlx_image_t *p_img, t_pixel *p_pix1, t_pixel *p_pix2);
 void		ksx_circle(mlx_image_t *img, t_pixel center, uint32_t radius);
 
 t_object	**ksx_obj2world(t_object *p_object, t_world *p_world);
-void		ksx_clean_world(t_world *p_world);
+void		ksx_world_clean(t_world *p_world);
 
 t_object	*ksx_create_sphere(t_vector3 center,
 				uint32_t diameter, t_color color, uint8_t gen);

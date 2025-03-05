@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 16:41:24 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:46:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	ksx_init_sphere_box(t_object *p_object)
 	p_object->pp_box[0]->ver[5].op = ksx_vec3_set(-p_object->size1, -p_object->size1, p_object->size1);
 	p_object->pp_box[0]->ver[6].op = ksx_vec3_set(-p_object->size1, -p_object->size1, -p_object->size1);
 	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1, -p_object->size1, -p_object->size1);
-	ksx_box_create(p_object->pp_box[0], BOX_COLOR);
+	ksx_create_box(p_object->pp_box[0], BOX_COLOR);
 	// ksx_obj_copy_boxvrts(p_object->pp_box[0]->ver, p_object->pp_box[0]->ver_origin, 8);
 }
 

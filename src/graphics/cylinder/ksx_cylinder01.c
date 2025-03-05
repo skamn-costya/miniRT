@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 16:41:24 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/05 12:46:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 	ksx_basis_set_norm(&p_object->basis, &norm);
 	ksx_init_cylinder_box (p_object);
 	ksx_init_cylinder(p_object);
-	// ksx_obj_vrts_dup2origin(p_object);
 	// ksx_obj_copy_vrts(p_object->pp_vrtx, ORIP, LOCP);
 	ksx_obj_transform(p_object);
 	ksx_obj_tris2box(p_object);
@@ -62,7 +61,7 @@ static void	ksx_init_cylinder_box(t_object *p_object)
 	p_object->pp_box[0]->ver[5].op = ksx_vec3_set(-p_object->size1, -p_object->size2, p_object->size1);
 	p_object->pp_box[0]->ver[6].op = ksx_vec3_set(-p_object->size1, -p_object->size2, -p_object->size1);
 	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1, -p_object->size2, -p_object->size1);
-	ksx_box_create(p_object->pp_box[0], BOX_COLOR);
+	ksx_create_box(p_object->pp_box[0], BOX_COLOR);
 	// ksx_obj_copy_boxvrts(p_object->pp_box[0]->ver, p_object->pp_box[0]->ver_origin, 8);
 }
 

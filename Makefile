@@ -97,7 +97,6 @@ GRAPHICS_FN =	ksx_change.c \
 				ksx_draw.c \
 				ksx_init.c \
 				ksx_prep.c \
-				ksx_world.c \
 				ksx_gc.c
 GRAPHICS =	$(addprefix $(GRAPHICS_DIR), $(GRAPHICS_FN))
 
@@ -127,8 +126,14 @@ TRIANGLE =	$(addprefix $(TRIANGLE_DIR), $(TRIANGLE_FN))
 # World
 WORLD_DIR = graphics/world/
 WORLD_FN =	ksx_world01.c \
-			ksx_world02.c
+			ksx_world02.c \
+			ksx_world03.c
 WORLD =	$(addprefix $(WORLD_DIR), $(WORLD_FN))
+
+# Light
+LIGHT_DIR = graphics/light/
+LIGHT_FN =	ksx_light.c
+LIGHT =	$(addprefix $(LIGHT_DIR), $(LIGHT_FN))
 
 # All sources
 SRC_DIR = ./src/
@@ -147,6 +152,7 @@ SRC = 	$(UTILS) \
 		$(GRAPHICS) \
 		$(KYES) \
 		$(TRIANGLE) \
+		$(LIGHT) \
 		$(WORLD) \
 		$(PARSER) \
 		$(MAIN) \
@@ -212,6 +218,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(KYES_DIR)
 	mkdir -p $(OBJ_DIR)$(TRIANGLE_DIR)
 	mkdir -p $(OBJ_DIR)$(BOXES_DIR)
+	mkdir -p $(OBJ_DIR)$(LIGHT_DIR)
 	mkdir -p $(OBJ_DIR)$(WORLD_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c

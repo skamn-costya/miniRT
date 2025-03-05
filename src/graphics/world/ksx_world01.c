@@ -6,12 +6,13 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 15:59:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:13:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_world.h"
+#include "ksx_light.h"
 #include "ksx_camera.h"
 #include "ksx_object.h"
 #include "ksx_obj_file.h"
@@ -24,6 +25,7 @@ static void	ksx_set_world_defaults(t_world *p_world);
 static void	ksx_init_world_1(t_graphics *p_grph,
 				t_object **pp_object, t_obj_descr *p_obj_descr);
 static void	ksx_init_world_2(t_object **pp_object, t_obj_descr *p_obj_descr);
+static void	ksx_init_world_3(t_graphics *p_grph, t_obj_descr *p_obj_descr);
 
 void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 {
@@ -42,6 +44,8 @@ void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 			ksx_init_world_1(p_grph, &p_object, p_obj_descr);
 		else if (p_obj_descr->id == CYLINDER)
 			ksx_init_world_2(&p_object, p_obj_descr);
+		else if (p_obj_descr->id == AMBIENT || p_obj_descr->id == LIGHT)
+			ksx_init_world_3(p_grph, p_obj_descr);
 		if (p_object)
 		{
 			ksx_world_obj_tm(&p_grph->world, p_object);
@@ -66,6 +70,8 @@ static void	ksx_set_world_defaults(t_world *p_world)
 	p_world->size_box = 0;
 	p_world->pp_obj = NULL;
 	p_world->size_obj = 0;
+	p_world->pp_lgt = NULL;
+	p_world->size_lgt = 0;
 }
 
 static void	ksx_init_world_1(t_graphics *p_grph,
@@ -94,5 +100,22 @@ static void	ksx_init_world_2(t_object **pp_object, t_obj_descr *p_obj_descr)
 		f[1] = p_obj_descr->h;
 		*pp_object = ksx_create_cylinder(p_obj_descr->coord,
 				p_obj_descr->norm, f, p_obj_descr->color);
+	}
+}
+
+static void	ksx_init_world_3(t_graphics *p_grph, t_obj_descr *p_obj_descr)
+{
+	t_light	*p_light;
+
+	if (p_obj_descr->id == AMBIENT)
+	{
+		p_grph->world.ambient.bright = p_obj_descr->ratio;
+		p_grph->world.ambient.color = p_obj_descr->color;
+	}
+	if (p_obj_descr->id == LIGHT)
+	{
+		p_light = ksx_create_light(p_obj_descr->coord, p_obj_descr->ratio,
+			p_obj_descr->color);
+		ksx_lgt2world(p_light, &p_grph->world);
 	}
 }
