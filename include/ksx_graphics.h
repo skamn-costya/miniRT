@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/05 23:28:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 00:54:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -397,7 +397,7 @@ typedef struct s_box
 typedef struct s_plane
 {
 	t_vector3	point;
-	t_basis		basis;
+	t_vector3	norm;
 	t_color		color;
 }	t_plane;
 
