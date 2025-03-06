@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:26:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/04 16:34:41 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 14:04:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	read_of(t_world *p_world, char *file_name)
 			get_v_of(p_fline, p_object, &i[0]);
 		if (!ft_strcmp(p_fline->words[0], OBJ_F))
 			get_f_of(p_fline, p_object, &i[1]);
+		if (!ft_strcmp(p_fline->words[0], OBJ_VN))
+			get_vn_of(p_fline, p_object, &i[1]);
 		p_list[1] = p_list[1]->next;
 	}
 	ft_lstclear(&p_list[0], &free_t_fline);
@@ -87,15 +89,15 @@ t_triangle	*get_f_of(t_fline *p_fline, t_object *p_object, int *p_idx)
 	p_object->pp_tri[*p_idx]->p_ver2 = p_object->pp_vrtx[i[1] - 1];
 	p_object->pp_tri[*p_idx]->p_ver3 = p_object->pp_vrtx[i[2] - 1];
 	p_object->pp_tri[*p_idx]->color.mlx_color = 0xffffffff;
-	if ((p_fline->words[4] && !is_i_number(p_fline->words[4])))
-	{
-		(*p_idx)++;
-		ksx_obj_add_tris(p_object, 1);
-		p_object->pp_tri[*p_idx]->p_ver1 = p_object->pp_vrtx[ft_atoi(p_fline->words[1]) - 1];
-		p_object->pp_tri[*p_idx]->p_ver2 = p_object->pp_vrtx[ft_atoi(p_fline->words[3]) - 1];
-		p_object->pp_tri[*p_idx]->p_ver3 = p_object->pp_vrtx[ft_atoi(p_fline->words[4]) - 1];
-		p_object->pp_tri[*p_idx]->color.mlx_color = 0xffffffff;
-	}
+	// if ((p_fline->words[4] && !is_i_number(p_fline->words[4])))
+	// {
+	// 	(*p_idx)++;
+	// 	ksx_obj_add_tris(p_object, 1);
+	// 	p_object->pp_tri[*p_idx]->p_ver1 = p_object->pp_vrtx[ft_atoi(p_fline->words[1]) - 1];
+	// 	p_object->pp_tri[*p_idx]->p_ver2 = p_object->pp_vrtx[ft_atoi(p_fline->words[3]) - 1];
+	// 	p_object->pp_tri[*p_idx]->p_ver3 = p_object->pp_vrtx[ft_atoi(p_fline->words[4]) - 1];
+	// 	p_object->pp_tri[*p_idx]->color.mlx_color = 0xffffffff;
+	// }
 	(*p_idx)++;
 	p_object->size_tri = *p_idx;
 	return (p_object->pp_tri[*p_idx - 1]);

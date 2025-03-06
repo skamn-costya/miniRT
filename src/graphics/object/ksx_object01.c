@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 22:36:28 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:57:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,12 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object->basis.w_o = p_object->basis.o;
 	if (p_center)
 		p_object->basis.w_o = *p_center;
-	// p_object->basis.w_i = p_object->basis.i;
-	// p_object->basis.w_j = p_object->basis.j;
-	// p_object->basis.w_k = p_object->basis.k;
 	ksx_obj_set_axis(p_object->axis, &p_object->basis);
 	p_object->pp_box = NULL;
 	p_object->pp_vrtx = NULL;
 	p_object->size_vrtx = 0;
+	p_object->pp_vnrm = NULL;
+	p_object->size_vnrm = 0;
 	p_object->pp_tri = NULL;
 	p_object->size_tri = 0;
 	return (p_object);
@@ -58,18 +57,20 @@ void	ksx_obj_set_axis(t_vertex *p_ver, t_basis *p_basis)
 	ksx_vec3_resize(&p_ver[Y].lp, AXIS_LEN);
 	ksx_vec3_resize(&p_ver[Z].lp, AXIS_LEN);
 }
-void	ksx_obj_copy_vrts(t_vertex **pp_vrt, uint32_t idx_src,
-			uint32_t idx_des, uint32_t size)
+
+void	ksx_obj_copy_vrts(t_object *p_object, uint32_t idx_src,
+			uint32_t idx_des)
 {
 	uint32_t	idx;
 
-	idx = 0;
-	while (idx < size)
-	{
-		pp_vrt[idx]->ppppnnnn[idx_des] = pp_vrt[idx]->ppppnnnn[idx_src];
-		pp_vrt[idx]->ppppnnnn[idx_des + ORIN] = pp_vrt[idx]->ppppnnnn[idx_src + ORIN];
-		idx++;
-	}
+	idx = -1;
+	while (++idx < p_object->size_vrtx)
+		p_object->pp_vrtx[idx]->olwc[idx_des]
+			= p_object->pp_vrtx[idx]->olwc[idx_src];
+	idx = -1;
+	while (++idx < p_object->size_vnrm)
+		p_object->pp_vnrm[idx]->olwc[idx_des]
+			= p_object->pp_vnrm[idx]->olwc[idx_src];
 }
 
 void	ksx_obj_copy_boxvrts(t_vertex *p_vrt, uint32_t idx1,
@@ -79,5 +80,5 @@ void	ksx_obj_copy_boxvrts(t_vertex *p_vrt, uint32_t idx1,
 
 	idx = -1;
 	while (++idx < size)
-		p_vrt[idx].ppppnnnn[idx2] = p_vrt[idx].ppppnnnn[idx1];
+		p_vrt[idx].olwc[idx2] = p_vrt[idx].olwc[idx1];
 }

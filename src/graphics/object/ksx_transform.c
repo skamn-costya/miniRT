@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 17:05:47 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:35:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	ksx_obj_transform(t_object *p_object)
 	t_basis		basis;
 	t_box		**pp_box;
 
-	ksx_obj_copy_vrts(p_object->pp_vrtx, ORIP, LOCP, p_object->size_vrtx);
+	ksx_obj_copy_vrts(p_object, ORIP, LOCP);
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
@@ -86,12 +86,12 @@ static void	ksx_obj_transform_(t_object *p_object, t_matrix4 *p_tm)
 
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
-	{
 		ksx_transform(&p_object->pp_vrtx[idx]->lp,
 			p_tm, &p_object->pp_vrtx[idx]->lp);
-		ksx_transform(&p_object->pp_vrtx[idx]->lnorm,
-			p_tm, &p_object->pp_vrtx[idx]->lnorm);
-	}
+	idx = -1;
+	while (++idx < p_object->size_vnrm)
+		ksx_transform(&p_object->pp_vnrm[idx]->lp,
+			p_tm, &p_object->pp_vnrm[idx]->lp);
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{

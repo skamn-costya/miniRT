@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 14:30:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:19:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,16 +76,26 @@ static void	ksx_sphere_split_1(t_triangle *p_tris, t_triangle **pp_tri,
 
 void	ksx_sphere_norns(t_object *p_object)
 {
-	uint32_t	idx;
-	t_vertex	*p_vrtx;
+	uint32_t	idx[2];
 
-	idx = 0;
-	while (idx < p_object->size_vrtx)
+	ksx_obj_add_vnrm(p_object, p_object->size_vrtx);
+	idx[0] = 0;
+	while (idx[0] < p_object->size_vrtx)
 	{
-		p_vrtx = p_object->pp_vrtx[idx];
-		p_vrtx->onorm = p_vrtx->op;
-		ksx_vec3_resize(&p_vrtx->onorm, UNIT);
-		idx++;
+		*p_object->pp_vnrm[idx[0]] = *p_object->pp_vrtx[idx[0]];
+		ksx_vec3_resize(&p_object->pp_vnrm[idx[0]]->op, UNIT);
+		idx[1] = 0;
+		while (idx[1] < p_object->size_tri)
+		{
+			if(p_object->pp_tri[idx[1]]->p_ver1 == p_object->pp_vrtx[idx[0]])
+				p_object->pp_tri[idx[1]]->p_norm1 = p_object->pp_vnrm[idx[0]];
+			else if(p_object->pp_tri[idx[1]]->p_ver2 == p_object->pp_vrtx[idx[0]])
+				p_object->pp_tri[idx[1]]->p_norm2 = p_object->pp_vnrm[idx[0]];
+			else if(p_object->pp_tri[idx[1]]->p_ver3 == p_object->pp_vrtx[idx[0]])
+				p_object->pp_tri[idx[1]]->p_norm3 = p_object->pp_vnrm[idx[0]];
+			idx[1]++;
+		}
+		idx[0]++;
 	}
 }
 

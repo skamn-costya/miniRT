@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:48:00 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:18:04 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,31 @@ t_vertex	**ksx_obj_add_vers(t_object *p_object, uint32_t size)
 	}
 	free(p_object->pp_vrtx);
 	return (p_object->pp_vrtx = pp_ver, &pp_ver[p_object->size_vrtx - size]);
+}
+
+t_vertex	**ksx_obj_add_vnrm(t_object *p_object, uint32_t size)
+{
+	t_vertex	**pp_vnrm;
+	uint32_t	idx;
+
+	pp_vnrm = (t_vertex **) malloc (sizeof(t_vertex *)
+			* (p_object->size_vnrm + size + 1));
+	if (!pp_vnrm)
+		ksx_error("memory allocation failure", __FILE__, __LINE__);
+	ksx_null_pointers((void **) pp_vnrm, p_object->size_vnrm + size + 1);
+	idx = -1;
+	while (++idx < p_object->size_vnrm)
+		pp_vnrm[idx] = p_object->pp_vnrm[idx];
+	p_object->size_vnrm += size;
+	while (idx < p_object->size_vnrm)
+	{
+		pp_vnrm[idx] = (t_vertex *) malloc (sizeof(t_vertex));
+		if (!pp_vnrm[idx])
+			return (ksx_free_pointers((void ***) &pp_vnrm),
+				ksx_error("memory allocation failure", __FILE__, __LINE__),
+				NULL);
+		idx++;
+	}
+	free(p_object->pp_vnrm);
+	return (p_object->pp_vnrm = pp_vnrm, &pp_vnrm[p_object->size_vnrm - size]);
 }

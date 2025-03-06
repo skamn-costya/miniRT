@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 22:16:31 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 18:23:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ static void	ksx_init_cylinder_tri_cup(t_object *p_object, uint32_t size, t_verte
 	t_triangle	**pp_tri;
 
 	pp_tri = ksx_obj_add_tris(p_object, size * 2);
-	pp_ver_a = &p_object->pp_vrtx[2 + size * 2];
-	pp_ver_b = &p_object->pp_vrtx[2 + size * 3];
+	pp_ver_a = &p_object->pp_vrtx[2];
+	pp_ver_b = &p_object->pp_vrtx[2 + size];
 	idx[0] = 0;
 	while (idx[0] < size)
 	{

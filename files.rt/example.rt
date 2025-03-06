@@ -37,7 +37,7 @@ pl 0,0,0 0,1.0,0 255,0,225
 
 sp 50,150,50 50 255,255,255
 oc -100,-10,10 50 255,255,255
-cy 250,0,500 0.75,0.,1 80 280 42,42,213
+cy 250,0,500 0.75,0.,1 80 100 42,42,213
 
 # cy 150,0,0 0,0.0,0 50 280 128,0,255
 # cy -150,0,0 0,0,1 50 280 128,0,255
@@ -59,7 +59,8 @@ cy 250,0,500 0.75,0.,1 80 280 42,42,213
 # obj ./3D/drink_can.obj
 # obj ./3D/armadillo.obj
 # obj ./3D/bunny.obj
-obj ./3D/teapot.obj
+# obj ./3D/teapot.obj
+# obj ./3D/objs/tyra.obj
 # obj ./3D/teapot_.obj
 # obj ./3D/minicooper.obj
 # obj ./3D/humanoid_quad.obj

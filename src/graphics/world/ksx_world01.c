@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 12:20:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:25:38 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,12 +63,6 @@ static void	ksx_set_world_defaults(t_world *p_world)
 	p_world->basis.o = ksx_vec3_set(0.f, 0.f, 0.f);
 	ksx_basis_set_norm(&p_world->basis, &p_world->basis.o);
 	p_world->far = ksx_vec3_set(0.f, 0.f, 0.f);;
-	// p_world->exyz[0] = 0.f;
-	// p_world->exyz[1] = 0.f;
-	// p_world->exyz[2] = 0.f;
-	// p_world->exyz[3] = 0.f;
-	// p_world->exyz[4] = 0.f;
-	// p_world->exyz[5] = 0.f;
 	p_world->pp_box = NULL;
 	p_world->size_box = 0;
 	p_world->pp_obj = NULL;

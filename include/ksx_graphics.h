@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 12:14:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:26:51 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 # include "MLX42.h"
 # include <stdint.h>
 
-# define AXIS_LEN 	25
+# define AXIS_LEN 	25.f
+# define NORM_LEN 	15.f
 # define UNIT	 	1.f
 // # define FAR	 	750
 
@@ -349,12 +350,8 @@ typedef struct s_vertex
 			t_vector3	lp;
 			t_vector3	wp;
 			t_vector3	cp;
-			t_vector3	onorm;
-			t_vector3	lnorm;
-			t_vector3	wnorm;
-			t_vector3	cnorm;
 		};
-		t_vector3	ppppnnnn[8];
+		t_vector3	olwc[4];
 	};
 }	t_vertex;
 
@@ -374,13 +371,13 @@ typedef struct s_triangle
 	{
 		struct
 		{
-			t_vector3	norm1;
-			t_vector3	norm2;
-			t_vector3	norm3;
+			t_vertex	*p_norm1;
+			t_vertex	*p_norm2;
+			t_vertex	*p_norm3;
 		};
-		t_vector3	norms[3];
+		t_vector3	*p_norms[3];
 	};
-	t_vector3	norm;
+	// t_vector3	norm;
 	t_color		color;
 	// uint32_t	generation;
 }	t_triangle;
@@ -420,6 +417,8 @@ typedef struct s_object
 	t_box		**pp_box;
 	t_vertex	**pp_vrtx;
 	uint32_t	size_vrtx;
+	t_vertex	**pp_vnrm;
+	uint32_t	size_vnrm;
 	t_triangle	**pp_tri;
 	uint32_t	size_tri;
 	// void		(*f_transform)(void *, t_basis *);

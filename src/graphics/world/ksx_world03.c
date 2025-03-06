@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/05 23:30:47 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 15:25:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ksx_world_clean(t_world *p_world)
 		p_object = p_world->pp_obj[idx[0]];
 		ksx_free_pointers((void ***) &p_object->pp_tri);
 		ksx_free_pointers((void ***) &p_object->pp_vrtx);
+		ksx_free_pointers((void ***) &p_object->pp_vnrm);
 		ksx_free_pointers((void ***) &p_object->pp_box);
 		free(p_object);
 		p_world->pp_obj[idx[0]] = NULL;
