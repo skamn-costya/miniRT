@@ -6,14 +6,16 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 14:31:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:58:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_camera.h"
+#include "ksx_object.h"
 #include "ksx_m4_math.h"
 #include "ksx_vec3_math.h"
+#include "stdio.h"
 
 void	ksx_camera_set_vm(t_camera *p_camera)
 {
@@ -36,10 +38,21 @@ void	ksx_camera_set_vm(t_camera *p_camera)
 	ksx_m4_invert(&p_camera->vm, &p_camera->ivm);
 }
 
-void	ksx_camera_refresh_pm(t_camera *p_camera, float fov)
+void	ksx_camera_refresh_pm(t_graphics *p_grph, float fov)
 {
-	if (p_camera->flags & CAM_PM)
-		ksx_camera_set_pm2(p_camera, fov);
+	t_vector3	vec3;
+
+	if (p_grph->camera.flags & CAM_PM)
+	{
+		if (p_grph->camera.far == 0.f)
+		{
+			ksx_transform(&p_grph->world.far, &p_grph->camera.vm, &vec3);
+			p_grph->camera.far = p_grph->camera.near + vec3.z + .1f;
+			printf("near = %f; far = %f\n", p_grph->camera.near, p_grph->camera.far);
+			// p_grph->camera.far = 750.f;
+		}
+		ksx_camera_set_pm2(&p_grph->camera, fov);
+	}
 	else
-		ksx_camera_set_pm1(p_camera);
+		ksx_camera_set_pm1(&p_grph->camera);
 }

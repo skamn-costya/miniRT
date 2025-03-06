@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 00:54:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:14:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -415,7 +415,6 @@ typedef struct s_object
 	float		size1;
 	float		size2;
 	float		edge;
-	float		exyz[6];
 	t_basis		basis;
 	t_vertex	axis[4];
 	t_box		**pp_box;
@@ -431,7 +430,7 @@ typedef struct s_world
 	// t_triangle	*p_tris;
 	uint8_t		flags;
 	t_basis		basis;
-	float		exyz[6];
+	t_vector3	far;
 	t_matrix4	tm;
 	t_box		**pp_box;
 	uint32_t	size_box;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 16:30:36 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:49:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@
 #include "ksx_basis.h"
 #include "parser.h"
 #include "libft.h"
+#include <math.h>
+
+static void	ksx_world_obj_tm_1(t_world *p_world,
+				t_object *p_object, uint32_t idx);
 
 void	ksx_world_obj_tm(t_world *p_world, t_object *p_object)
 {
@@ -28,25 +32,46 @@ void	ksx_world_obj_tm(t_world *p_world, t_object *p_object)
 	ksx_world_set_tm(p_world, &p_object->basis.w_o);
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
-	{
-		ksx_transform(&p_object->pp_vrtx[idx]->lp,
-			&p_world->tm, &p_object->pp_vrtx[idx]->wp);
-		ksx_transform(&p_object->pp_vrtx[idx]->lnorm,
-			&p_world->tm, &p_object->pp_vrtx[idx]->wnorm);
-	}
+		ksx_world_obj_tm_1(p_world, p_object, idx);
+	// {
+	// 	ksx_transform(&p_object->pp_vrtx[idx]->lp,
+	// 		&p_world->tm, &p_object->pp_vrtx[idx]->wp);
+	// 	ksx_transform(&p_object->pp_vrtx[idx]->lnorm,
+	// 		&p_world->tm, &p_object->pp_vrtx[idx]->wnorm);
+	// }
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
 		idx = -1;
 		while (++idx < 8)
 			ksx_transform(&(*pp_box)->ver[idx].lp,
-			&p_world->tm, &(*pp_box)->ver[idx].wp);
+				&p_world->tm, &(*pp_box)->ver[idx].wp);
 		pp_box++;
 	}
 	idx = -1;
 	while (++idx < 4)
 		ksx_transform(&p_object->axis[idx].lp,
 			&p_world->tm, &p_object->axis[idx].wp);
+}
+
+static void	ksx_world_obj_tm_1(t_world *p_world,
+	t_object *p_object, uint32_t idx)
+{
+	float	f;
+
+	ksx_transform(&p_object->pp_vrtx[idx]->lp,
+		&p_world->tm, &p_object->pp_vrtx[idx]->wp);
+	ksx_transform(&p_object->pp_vrtx[idx]->lnorm,
+		&p_world->tm, &p_object->pp_vrtx[idx]->wnorm);
+	f = fabs(p_object->pp_vrtx[idx]->wp.x);
+	if (f > p_world->far.z)
+		p_world->far.z = f;
+	f = fabs(p_object->pp_vrtx[idx]->wp.y);
+	if (f > p_world->far.z)
+		p_world->far.z = f;
+	f = fabs(p_object->pp_vrtx[idx]->wp.z);
+	if (f > p_world->far.z)
+		p_world->far.z = f;
 }
 
 void	ksx_world_set_tm(t_world *p_world, t_vector3 *p_o)

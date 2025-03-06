@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/04 16:00:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:59:14 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	main(int argc, char *argv[])
 	}	
 	grph.obj_idx = 0;
 	ft_lstclear(&p_list, &free_t_obj_descr);
-	ksx_camera_set_pm2(&grph.camera, grph.camera.fov);
+	// ksx_camera_set_pm2(&grph.camera, grph.camera.fov);
 	ksx_draw(&grph);
 	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
 	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);

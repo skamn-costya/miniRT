@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 14:54:53 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/27 20:21:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:18:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void		ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm);
 // ksx_camera02.c
 void		ksx_camera_set_vm(t_camera *p_camera);
 // void		ksx_camera_get_tm(t_camera *p_camera);
-void		ksx_camera_refresh_pm(t_camera *p_camera, float fov);
+void		ksx_camera_refresh_pm(t_graphics *p_grph, float fov);
 
 #endif	// KSX_CAMERA_H

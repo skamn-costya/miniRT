@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 17:34:32 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:20:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	ksx_change_camera(t_graphics *p_grph)
 	uint32_t	idx;
 
 	ksx_camera_set_vm(&p_grph->camera);
-	ksx_camera_refresh_pm(&p_grph->camera, p_grph->camera.fov);
+	ksx_camera_refresh_pm(p_grph, p_grph->camera.fov);
 	if (!p_grph->world.pp_obj)
 		return ;
 	pp_object = p_grph->world.pp_obj;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 21:25:05 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/06 12:19:45 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	key_0(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	(void) p_keydata;
 	p_grph->camera.flags ^= CAM_PM;
-	ksx_camera_refresh_pm(&p_grph->camera, p_grph->camera.fov);
+	ksx_camera_refresh_pm(p_grph, p_grph->camera.fov);
 	p_grph->camera.flags |= CHANGE;
 }
 
