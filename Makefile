@@ -140,6 +140,13 @@ PLANE_DIR = graphics/plane/
 PLANE_FN =	ksx_plane.c
 PLANE =	$(addprefix $(PLANE_DIR), $(PLANE_FN))
 
+RAY_DIR = ray/
+RAY_FN =	ray_intersect.c \
+			ray_boxes.c \
+			ray_init.c \
+			ray_cast.c
+RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
+
 # All sources
 SRC_DIR = ./src/
 SRC = 	$(UTILS) \
@@ -160,6 +167,7 @@ SRC = 	$(UTILS) \
 		$(LIGHT) \
 		$(PLANE) \
 		$(WORLD) \
+		$(RAY) \
 		$(PARSER) \
 		$(MAIN) \
 		gc.c
@@ -227,6 +235,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(LIGHT_DIR)
 	mkdir -p $(OBJ_DIR)$(PLANE_DIR)
 	mkdir -p $(OBJ_DIR)$(WORLD_DIR)
+	mkdir -p $(OBJ_DIR)$(RAY_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -c $< -o $@

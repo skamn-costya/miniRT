@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 12:59:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/07 18:58:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@
 #include "ksx_utils.h"
 #include "ksx_camera.h"
 #include "keys.h"
+#include "ray.h"
 #include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 
 static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *));
 void		my_scrollhook(double xdelta, double ydelta, void *param);
@@ -50,7 +52,27 @@ int	main(int argc, char *argv[])
 	grph.obj_idx = 0;
 	ft_lstclear(&p_list, &free_t_obj_descr);
 	// ksx_camera_set_pm2(&grph.camera, grph.camera.fov);
+	// ray_cast(&grph);
+	
+	time_t timer;
+    char buffer[26];
+    struct tm* tm_info;
+
+    timer = time(NULL);
+    tm_info = localtime(&timer);
+
+    strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
+    puts(buffer);
+
 	ksx_draw(&grph);
+	ray_cast_boxes(&grph);
+
+	timer = time(NULL);
+    tm_info = localtime(&timer);
+
+    strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
+    puts(buffer);
+
 	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
 	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);
 	mlx_loop(grph.mlx);

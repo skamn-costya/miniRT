@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 15:36:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/07 19:00:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.bottom = -camera.top;
 	camera.aspect = WIDTH / HEIGHT;
 	ksx_camera_set_vm(&camera);
-	camera.flags = DRAW_OBJ | CHANGE | CAM_PM;
+	camera.flags = DRAW_OBJ | CHANGE | DRAW_LINE | DRAW_NORM; // | CAM_PM;
 	return (camera);
 }
 
@@ -128,7 +128,7 @@ void	ksx_camera_set_pm1(t_camera *p_camera)
 {
 	ksx_m4_reset(&p_camera->pm);
 	p_camera->pm.e_11 = 1;
-	p_camera->pm.e_22 = -1;
+	p_camera->pm.e_22 = 1;
 	p_camera->pm.e_33 = 1;
 	p_camera->pm.e_44 = 1;
 }
