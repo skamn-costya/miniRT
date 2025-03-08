@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 17:26:51 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:27:38 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,6 +301,7 @@ typedef struct s_camera
 	t_basis		basis;
 	float		fov;
 	float		hfov;
+	float		tng;
 	float		aspect;
 	// float		vfov;
 	uint8_t		flags;
@@ -456,6 +457,7 @@ mlx_t		*ksx_init(void);
 int			ksx_prep(void *p_vars);
 t_pixel		ksx_get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y);
 void		ksx_set_pixel(mlx_image_t *p_img, t_pixel *p_pix);
+void	 	applyDepthAttenuation(t_color *p_color, float depth, float k);
 
 t_color		ksx_get_color(t_pixel *p_p, t_pixel *p_p1, t_pixel *p_p2);
 void		ksx_line(mlx_image_t *p_img, t_pixel *p_pix1, t_pixel *p_pix2);

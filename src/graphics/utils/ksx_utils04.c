@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 14:49:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/08 17:08:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,10 @@ mlx_image_t	*ksx_create_image(mlx_t *mlx)
 	idx = 0;
 	while (idx < size)
 	{
-		p_img->pixels[idx] = 0;
-		p_img->pixels[idx + 1] = 0;
-		p_img->pixels[idx + 2] = 0;
-		p_img->pixels[idx + 3] = 255;
+		p_img->pixels[idx] = 0x0;
+		p_img->pixels[idx + 1] = 0x0;
+		p_img->pixels[idx + 2] = 0x0;
+		p_img->pixels[idx + 3] = 0x80;
 		idx += 4;
 	}
 	return (p_img);

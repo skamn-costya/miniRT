@@ -6,12 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 10:44:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/25 10:17:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:50:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "MLX42.h"
+#include <math.h>
+
 
 t_pixel	ksx_get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y)
 {
@@ -52,3 +54,23 @@ void	ksx_set_pixel(mlx_image_t *p_img, t_pixel *p_pix)
 	// *(p_pixel++) = (uint8_t)(pix.color.mlx_color >> 16);
 	// *(p_pixel++) = (uint8_t)(pix.color.mlx_color >> 8);
 	// *(p_pixel++) = (uint8_t)(pix.color.mlx_color & 0xFF);
+
+	void applyDepthAttenuation(t_color *p_color, float depth, float k)
+	{
+		// Извлекаем компоненты ARGB
+		uint8_t b = (p_color->mlx_color >> 24) & 0xFF;
+		uint8_t g = (p_color->mlx_color >> 16) & 0xFF;
+		uint8_t r = (p_color->mlx_color >> 8)  & 0xFF;
+		uint8_t a = (p_color->mlx_color)       & 0xFF;
+	
+		// Вычисляем коэффициент яркости
+		float attenuation = expf(-k * depth); // Экспоненциальное затухание
+	
+		// Применяем затемнение (умножаем на attenuation)
+		r = (uint8_t)(r * attenuation);
+		g = (uint8_t)(g * attenuation);
+		b = (uint8_t)(b * attenuation);
+	
+		// Собираем пиксель обратно в ARGB
+		p_color->mlx_color = (b << 24) | (g << 16) | (r << 8) | a;
+	}

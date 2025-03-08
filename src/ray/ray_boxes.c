@@ -6,12 +6,13 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/07 19:21:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:28:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ray.h"
+#include "ksx_object.h"
 #include "ksx_utils.h"
 #include "ksx_3D.h"
 #include "ksx_vec3_math.h"
@@ -22,74 +23,103 @@ void	ray_cast_boxes(t_graphics *p_grph)
 {
 	uint32_t	xy[2];
 	t_ray		ray;
-	// mlx_image_t *p_img = ksx_create_image(p_grph->mlx);
+	mlx_image_t *p_img = ksx_create_image(p_grph->mlx);
+	float		mm[2];
 
 	ray.origin = p_grph->camera.basis.o;
+	// xy[0] = HEIGHT * WIDTH;
+	mm[0] = 999999999.f;
+	mm[1] = -999999999.f;
+	xy[0] = p_grph->img->width * p_grph->img->height;
 	xy[1] = 0;
-	while (xy[1] < HEIGHT)
+	while (xy[1] < xy[0])
 	{
-		xy[0] = 0;
-		while (xy[0] < WIDTH)
 		{
-			ray.direction = ksx_vec3_set((float)xy[0] + p_grph->camera.left, (float)xy[1] + p_grph->camera.bottom, p_grph->camera.near);
-			ray.direction = ksx_vec3_unit(&ray.direction);
-			// printf("RAY DIR: [%f, %f, %f]\n", ray.direction.x, ray.direction.y, ray.direction.z);
-			ray.length = 1e30f;
-			ray.pixel.color.mlx_color = 0x00000000;
-			ray.pixel.x = xy[0];
-			ray.pixel.y = xy[1];
-			ray.pixel.y = 1;
-			ray.pixel.w = 1;
-			ray_check_boxes(&ray, p_grph->world.pp_box, &p_grph->camera);
-			if (ray.pixel.color.mlx_color != 0x00000000)
-				ksx_set_pixel(p_grph->img, &ray.pixel);
-			xy[0]++;
-			// if (ray.length >= 1e30f)
-			// 	continue ;
-			// t_pixel pix = ksx_draw_get_pixel(&grph->camera, &pixelPos, 0xFFFFFFFF);
-			// ksx_set_pixel(p_img, &pix);
+			ray = ray_generate(xy[1] % p_grph->img->width, xy[1] / p_grph->img->width, &p_grph->camera);
+			ray_check_boxes(&ray, p_grph);
+			if (ray.length != MAX_LEN)
+			{
+				if (ray.length < mm[0])
+					mm[0] = ray.length;
+				else if (ray.length > mm[1])
+					mm[1] = ray.length;
+				applyDepthAttenuation(&ray.pixel.color, (ray.length - 500.f)/750.f, 7.f);
+				// compute_lighting(&ray.point, &ray.norm, &ray.direction, &ray.pixel.color); // segmentation fault (NO norms ...)
+				ksx_set_pixel(p_img, &ray.pixel);
+			}
 		}
 		xy[1]++;
 	}
 	// mlx_delete_image(p_grph->mlx, p_grph->img);
 	// p_grph->img = p_img;
-	// mlx_image_to_window(p_grph->mlx, p_grph->img, 0, 0);
-	printf("TRI: finish\n");
+	printf("min: %f; max: %f\n", mm[0], mm[1]);
+	mlx_image_to_window(p_grph->mlx, p_img, 0, 0);
 }
 
-void	ray_check_boxes(t_ray *p_ray, t_box **pp_box, t_camera *p_camera)
+void	ray_check_boxes(t_ray *p_ray, t_graphics *p_grph)
 {
-	uint16_t	idx[2];
+	t_box		**pp_box;
+	uint32_t	idx[3];
 	t_vector3	v3;
 
-	idx[0] = 0;
-	while (pp_box && pp_box[idx[0]])
+	pp_box = p_grph->world.pp_box;
+	idx[0] = -1;
+	while (++idx[0] < p_grph->world.size_box)
 	{
-		idx[1] = 0;
-		while (pp_box[idx[0]]->pp_tris[idx[1]])
+		idx[2] = -1;
+		while (++idx[2] < 12)
 		{
-			// t_triangle *p_tri = pp_box[idx[0]]->pp_tris[idx[1]];
-			// triangle_intersection1(pp_box[idx[0]]->pp_tris[idx[1]], p_ray);
-			// intersect_tri(p_ray, *p_tri);
-			// if (p_ray->length < 1e30f)
-			// {
-			// 	printf("TRI[%p]: touch len = %f\n", pp_box[idx[0]]->pp_tris[idx[1]], p_ray->length);
-			// 	printf("P0: [%f, %f, %f]\n", p_tri->p_ver1->cp.x, p_tri->p_ver1->cp.y, p_tri->p_ver1->cp.z);
-			// 	printf("P1: [%f, %f, %f]\n", p_tri->p_ver2->cp.x, p_tri->p_ver2->cp.y, p_tri->p_ver2->cp.z);
-			// 	printf("P2: [%f, %f, %f]\n", p_tri->p_ver3->cp.x, p_tri->p_ver3->cp.y, p_tri->p_ver3->cp.z);
-			// }
-			v3 = triangle_intersection2(pp_box[idx[0]]->pp_tris[idx[1]], p_ray);
-			if (ksx_vec3_mag(&v3) != 0)
+			v3 = triangle_intersection(&pp_box[idx[0]]->tris[idx[2]], p_ray);
+			if (p_ray->length != MAX_LEN)
 			{
-				// printf("TRI: pixel [%ld, %ld]\n", p_ray->pixel.x, p_ray->pixel.y);
-				// printf("TRI[%p]: touch in %f, %f, %f\n", pp_box[idx[0]]->pp_tris[idx[1]], v3.x, v3.y, v3.z);
-				// p_ray->pixel = ksx_draw_get_pixel(p_camere, &v3, 0xFFFFFFFF);
-				p_ray->pixel.x = round(v3.x) + p_camera->right;
-				p_ray->pixel.y = round(v3.y) + p_camera->top;
-				p_ray->pixel.color.mlx_color = 0x84848484;
+				p_ray->length = MAX_LEN;
+				idx[1] = -1;
+				while (pp_box[idx[0]]->pp_tris[++idx[1]])
+				{
+					v3 = triangle_intersection(pp_box[idx[0]]->pp_tris[idx[1]], p_ray);
+					(void)v3;
+					if (p_ray->length != MAX_LEN)
+						p_ray->pixel.color.mlx_color = 0x84FFFFFF;// & p_grph->world.ambient.color.mlx_color;
+				}
 			}
-			idx[1]++;
-		}	
-		idx[0]++;
+		}
 	}
+}
+
+t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
+{
+	t_ray		ray;
+	float		xy[2];
+	t_vector3	v3;
+
+	// Преобразование экранных координат в NDC (-1 до 1)
+	xy[0] = (2.f * (float)x / (float)WIDTH - 1.f) * p_camera->tng;
+	xy[1] = (1.f - 2.f * (float)y / (float)HEIGHT) * p_camera->tng / p_camera->aspect;
+	// Направление луча в пространстве камеры
+	v3 = ksx_vec3_set(xy[0], xy[1], 1.0f);
+	v3 = ksx_vec3_unit(&v3);
+	ray.length = MAX_LEN;
+	ray.origin = p_camera->basis.o;
+	ray.direction = v3;
+	ray.pixel.x = x;
+	ray.pixel.y = y;
+	ray.pixel.color.mlx_color = 0x00000000;
+	// Преобразуем в мировые координаты
+	// ksx_transform(&v3, &p_camera->ivm, &ray.direction);
+	return (ray);
+}
+
+t_color compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
+	t_vector3 *p_light, t_color *p_color)
+{
+	// Направление к источнику света (нормализованное)
+	t_vector3 dir = ksx_vec3_sub(p_light, p_point);
+	dir = ksx_vec3_unit(&dir);
+	// Вычисление коэффициента освещенности (Lambertian shading)
+	float intensity = ksx_vec3_dot(p_norm, &dir);
+	intensity = fmax(0.f, intensity);
+	p_color->r = (unsigned char)(p_color->r * intensity);
+	p_color->g = (unsigned char)(p_color->g * intensity);
+	p_color->b = (unsigned char)(p_color->b * intensity);
+	return (*p_color);
 }

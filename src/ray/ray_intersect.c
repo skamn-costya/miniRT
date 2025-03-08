@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 21:28:32 by username          #+#    #+#             */
-/*   Updated: 2025/03/07 18:30:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/08 19:29:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "ksx_vec3_math.h"
 #include "math.h"
+#include <stdio.h>
 
 //Möller–Trumbore intersection algorithm
 void	intersect_tri(t_ray *ray, t_triangle tri)
@@ -48,72 +49,77 @@ void	intersect_tri(t_ray *ray, t_triangle tri)
 		ray->length = t;
 }
 
-// orig и dir задают начало и направление луча. v0, v1, v2 - вершины треугольника.
-// Функция возвращает расстояние от начала луча до точки пересечения или 0.
-float	triangle_intersection1(t_triangle *p_tri, t_ray *p_ray)
-{
-	t_vector3	vec3[5];
-	float		det[2];
-	float		uv[2];
 
-	vec3[0] = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp); // vec3 e1 = v1 - v0;
-	vec3[1] = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp); // vec3 e2 = v2 - v0;
-	// Вычисление вектора нормали к плоскости
-	vec3[2] = ksx_vec3_cross(&p_ray->direction, &vec3[1]); // vec3 pvec = cross(dir, e2);
-	det[0] = ksx_vec3_dot(&vec3[0], &vec3[2]); // float det = dot(e1, pvec);
-	// Луч параллелен плоскости
-	if (det[0] < 1e-8 && det[0] > -1e-8) // if (det < 1e-8 && det > -1e-8)
-		return (p_ray->length);
-	det[1] = 1.f / det[0]; // float inv_det = 1 / det;
-	vec3[3] = ksx_vec3_sub(&p_ray->origin, &p_tri->p_ver1->cp); // vec3 tvec = orig - v0;
-	uv[0] =  ksx_vec3_dot(&vec3[3], &vec3[2]) * det[1]; // float u = dot(tvec, pvec) * inv_det;
-	if (uv[0] < 0 || uv[0] > 1) //if (u < 0 || u > 1)
-		return (p_ray->length);
-	vec3[4] = ksx_vec3_cross(&vec3[3], &vec3[0]); // vec3 qvec = cross(tvec, e1);
-	uv[1] = ksx_vec3_dot(&p_ray->direction, &vec3[4]) * det[1]; // float v = dot(dir, qvec) * inv_det;
-	if (uv[1] < 0 || uv[0] + uv[1] > 1) // if (v < 0 || u + v > 1)
-		return (p_ray->length);
-	uv[0] = ksx_vec3_dot(&vec3[1], &vec3[4]); // return dot(e2, qvec) * inv_det;
-	if (p_ray->length < uv[0])
-		return (p_ray->length);
-	return (p_ray->length = uv[0], uv[0]);
+// t_vector3	edge1, edge2, pvec, tvec, qvec, intersection;
+// float		det, inv_det, u, v, t;
+
+/*
+v3[0] → edge1
+v3[1] → edge2
+v3[2] → pvec
+v3[3] → tvec
+v3[4] → qvec
+v3[5] and v3[6] are used to store the final intersection
+
+f[0] → det
+f[1] → inv_det
+f[2] → u
+f[3] → v
+f[4] → t
+*/
+
+t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray)
+{
+	t_vector3	v3[7];
+	float		f[5];
+
+	v3[0] = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp);
+	v3[1] = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp);
+	v3[2] = ksx_vec3_cross(&p_ray->direction, &v3[1]);
+	f[0] = ksx_vec3_dot(&v3[0], &v3[2]);
+	if (fabsf(f[0]) < EPSILON)  
+		return ksx_vec3_set(0.f, 0.f, 0.f);
+	f[1] = 1.f / f[0];
+	v3[3] = ksx_vec3_sub(&p_ray->origin, &p_tri->p_ver1->cp);
+	f[2] = ksx_vec3_dot(&v3[3], &v3[2]) * f[1];
+	if (f[2] < -BIAS || f[2] > 1.0f + BIAS)  
+		return ksx_vec3_set(0.f, 0.f, 0.f);
+	v3[4] = ksx_vec3_cross(&v3[3], &v3[0]);
+	f[3] = ksx_vec3_dot(&p_ray->direction, &v3[4]) * f[1];
+	if (f[3] < -BIAS || f[2] + f[3] > 1.0f + BIAS)  
+		return ksx_vec3_set(0.f, 0.f, 0.f);
+	f[4] = ksx_vec3_dot(&v3[1], &v3[4]) * f[1];
+	if (f[4] > EPSILON && p_ray->length > f[4])
+	{
+		p_ray->length = f[4];
+		p_ray->p_tri = p_tri;
+		v3[5] = ksx_vec3_smulti(&p_ray->direction, f[4]);
+		v3[6] = ksx_vec3_add(&p_ray->origin, &v3[5]);
+		p_ray->point = v3[6];
+		// p_ray->norm = triangle_normal(&v3[6], p_tri, v3); // segmentation fault (NO norms ...)
+		return v3[6];
+	}
+	return ksx_vec3_set(0.f, 0.f, 0.f);
 }
 
-// std::optional<vec3> ray_intersects_triangle( const vec3 &ray_origin,
-//     const vec3 &ray_vector,
-//     const triangle3& triangle)
-t_vector3	triangle_intersection2(t_triangle *p_tri, t_ray *p_ray)
+t_vector3	triangle_normal(t_vector3 *p_point,
+		t_triangle *p_tri, t_vector3 *p_v3)
 {
-	t_vector3	vec3[5];
-	float		det[2];
-	float		uv[2];
-	// constexpr float epsilon = std::numeric_limits<float>::epsilon();
-
-	vec3[0] = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp); // vec3 edge1 = triangle.b - triangle.a;
-	vec3[1] = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp); // vec3 edge2 = triangle.c - triangle.a;
-	vec3[2] = ksx_vec3_cross(&p_ray->direction, &vec3[1]); // vec3 ray_cross_e2 = cross(ray_vector, edge2);
-	det[0] = ksx_vec3_dot(&vec3[0], &vec3[2]); // float det = dot(edge1, ray_cross_e2);
-	if (det[0] > -EPSILON && det[0] < EPSILON) // if (det > -epsilon && det < epsilon)
-		return ksx_vec3_set(0.f, 0.f, 0.f); //	 return {};	// This ray is parallel to this triangle.
-	det[1] = 1.f / det[0]; // float inv_det = 1.0 / det;
-	vec3[3] = ksx_vec3_sub(&p_ray->origin, &p_tri->p_ver1->cp);// vec3 s = ray_origin - triangle.a;
-	uv[0] = det[1] * ksx_vec3_dot(&vec3[3], &vec3[2]);// float u = inv_det * dot(s, ray_cross_e2);
-	if ((uv[0] < 0 && fabs(uv[0]) > EPSILON) || (uv[0] > 1 && fabs(uv[0] - 1) > EPSILON))
-	// if ((u < 0 && abs(u) > epsilon) || (u > 1 && abs(u-1) > epsilon))
-		return ksx_vec3_set(0.f, 0.f, 0.f); //	 return {};
-	vec3[4] = ksx_vec3_cross(&vec3[3], &vec3[0]); // vec3 s_cross_e1 = cross(s, edge1);
-	uv[1] = det[1] * ksx_vec3_dot(&p_ray->direction, &vec3[4]); // float v = inv_det * dot(ray_vector, s_cross_e1);
-	if ((uv[1] < 0 && fabs(uv[1]) > EPSILON) || (uv[0] + uv[1] > 1 && fabs(uv[0] + uv[1] - 1) > EPSILON))
-	// if ((v < 0 && abs(v) > epsilon) || (u + v > 1 && abs(u + v - 1) > epsilon))
-		return ksx_vec3_set(0.f, 0.f, 0.f); //	 return {};
-	// At this stage we can compute t to find out where the intersection point is on the line.
-	uv[0] = det[1] * ksx_vec3_dot(&vec3[1], &vec3[4]);// float t = inv_det * dot(edge2, s_cross_e1);
-	// if (uv[0] > EPSILON) // if (t > epsilon) // ray intersection
-	{
-		vec3[0] = ksx_vec3_smulti(&p_ray->direction, uv[0]);
-		vec3[1] = ksx_vec3_add(&p_ray->origin, &vec3[0]); //	 return  vec3(ray_origin + ray_vector * t);
-		return (vec3[1]);
-	}
-	// else // This means that there is a line intersection but not a ray intersection.
-	// return ksx_vec3_set(0.f, 0.f, 0.f); //	 return {};
+	t_vector3	vec3[4];
+	float		f;
+	float		lambda[3];
+	
+	p_v3[2] = ksx_vec3_sub(p_point, &p_tri->p_ver1->cp); // point - p1
+	vec3[0] = ksx_vec3_cross(&p_v3[2], &p_v3[1]);
+	f = ksx_vec3_dot(&p_v3[0], &vec3[0]);
+	f = 1.f / f;
+	lambda[0] = ksx_vec3_dot(&p_v3[2], &vec3[0]) * f;
+	lambda[1] = ksx_vec3_dot(&p_v3[0], &vec3[0]) * f;
+	lambda[2] = 1.f - lambda[0] - lambda[1];
+	vec3[0] = ksx_vec3_smulti(&p_tri->p_norm1->cp, lambda[0]);
+	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm2->cp, lambda[1]);
+	vec3[2] = ksx_vec3_smulti(&p_tri->p_norm3->cp, lambda[2]);
+	vec3[3] = ksx_vec3_add(&vec3[0], &vec3[1]);
+	vec3[3] = ksx_vec3_add(&vec3[3], &vec3[2]);
+	return ksx_vec3_unit(&vec3[3]);
 }
