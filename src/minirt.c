@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/07 18:58:31 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:05:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 #include "ray.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <time.h>
 
 static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *));
 void		my_scrollhook(double xdelta, double ydelta, void *param);
@@ -53,26 +52,8 @@ int	main(int argc, char *argv[])
 	ft_lstclear(&p_list, &free_t_obj_descr);
 	// ksx_camera_set_pm2(&grph.camera, grph.camera.fov);
 	// ray_cast(&grph);
-	
-	time_t timer;
-    char buffer[26];
-    struct tm* tm_info;
-
-    timer = time(NULL);
-    tm_info = localtime(&timer);
-
-    strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
-    puts(buffer);
-
 	ksx_draw(&grph);
 	ray_cast_boxes(&grph);
-
-	timer = time(NULL);
-    tm_info = localtime(&timer);
-
-    strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
-    puts(buffer);
-
 	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
 	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);
 	mlx_loop(grph.mlx);
@@ -87,10 +68,11 @@ static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *))
 	p_grph->mlx = ksx_init();
 	if (!p_grph->mlx)
 		return (printf("MLX init failed!\n"), FALSE);
-	p_grph->img = ksx_create_image(p_grph->mlx);
-	if (!p_grph->img)
+	p_grph->img_proj = ksx_create_image(p_grph->mlx);
+	if (!p_grph->img_proj)
 		return (printf("Create image failed!\n"), FALSE);
-	if (mlx_image_to_window(p_grph->mlx, p_grph->img, 0, 0) < 0)
+	p_grph->img_ray = NULL;
+	if (mlx_image_to_window(p_grph->mlx, p_grph->img_proj, 0, 0) < 0)
 		return (printf("Image to window failed!\n"), FALSE);
 	return (TRUE);
 }
@@ -108,14 +90,9 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		|| keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_W
 		|| keydata.key == MLX_KEY_E || keydata.key == MLX_KEY_Z)
 		key_adswze(&keydata, p_grph);
-	else if ((keydata.key == MLX_KEY_1 || keydata.key == MLX_KEY_2
-			|| keydata.key == MLX_KEY_3 || keydata.key == MLX_KEY_4)
-		&& keydata.action == MLX_RELEASE)
-		key_1234(&keydata, p_grph);
-	else if ((keydata.key == MLX_KEY_5 || keydata.key == MLX_KEY_6
-			|| keydata.key == MLX_KEY_7 || keydata.key == MLX_KEY_8)
-		&& keydata.action == MLX_RELEASE)
-		key_5678(&keydata, p_grph);
+	else if (keydata.key >= MLX_KEY_F1 && keydata.key <= MLX_KEY_F12
+			&& keydata.action == MLX_RELEASE)
+		key_f(&keydata, p_grph);
 	else if ((keydata.key == MLX_KEY_9 || keydata.key == MLX_KEY_0
 			|| keydata.key == MLX_KEY_MINUS || keydata.key == MLX_KEY_EQUAL)
 		&& keydata.action == MLX_RELEASE)

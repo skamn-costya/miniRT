@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/08 19:28:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/10 23:13:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,21 @@ void	ray_cast_boxes(t_graphics *p_grph)
 {
 	uint32_t	xy[2];
 	t_ray		ray;
-	mlx_image_t *p_img = ksx_create_image(p_grph->mlx);
 	float		mm[2];
 
+	ksx_time_print();
+	mlx_delete_image(p_grph->mlx, p_grph->img_ray);
+	p_grph->img_ray = ksx_create_image(p_grph->mlx);
 	ray.origin = p_grph->camera.basis.o;
 	// xy[0] = HEIGHT * WIDTH;
 	mm[0] = 999999999.f;
 	mm[1] = -999999999.f;
-	xy[0] = p_grph->img->width * p_grph->img->height;
+	xy[0] = p_grph->img_proj->width * p_grph->img_proj->height;
 	xy[1] = 0;
 	while (xy[1] < xy[0])
 	{
 		{
-			ray = ray_generate(xy[1] % p_grph->img->width, xy[1] / p_grph->img->width, &p_grph->camera);
+			ray = ray_generate(xy[1] % p_grph->img_proj->width, xy[1] / p_grph->img_proj->width, &p_grph->camera);
 			ray_check_boxes(&ray, p_grph);
 			if (ray.length != MAX_LEN)
 			{
@@ -43,9 +45,9 @@ void	ray_cast_boxes(t_graphics *p_grph)
 					mm[0] = ray.length;
 				else if (ray.length > mm[1])
 					mm[1] = ray.length;
-				applyDepthAttenuation(&ray.pixel.color, (ray.length - 500.f)/750.f, 7.f);
-				// compute_lighting(&ray.point, &ray.norm, &ray.direction, &ray.pixel.color); // segmentation fault (NO norms ...)
-				ksx_set_pixel(p_img, &ray.pixel);
+				// applyDepthAttenuation(&ray.pixel.color, (ray.length - 500.f)/750.f, 7.f);
+				compute_lighting(&ray.point, &ray.norm, &ray.direction, &ray.pixel.color);
+				ksx_set_pixel(p_grph->img_ray, &ray.pixel);
 			}
 		}
 		xy[1]++;
@@ -53,7 +55,8 @@ void	ray_cast_boxes(t_graphics *p_grph)
 	// mlx_delete_image(p_grph->mlx, p_grph->img);
 	// p_grph->img = p_img;
 	printf("min: %f; max: %f\n", mm[0], mm[1]);
-	mlx_image_to_window(p_grph->mlx, p_img, 0, 0);
+	ksx_time_print();
+	mlx_image_to_window(p_grph->mlx, p_grph->img_ray, 0, 0);
 }
 
 void	ray_check_boxes(t_ray *p_ray, t_graphics *p_grph)
@@ -92,10 +95,8 @@ t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 	float		xy[2];
 	t_vector3	v3;
 
-	// Преобразование экранных координат в NDC (-1 до 1)
 	xy[0] = (2.f * (float)x / (float)WIDTH - 1.f) * p_camera->tng;
 	xy[1] = (1.f - 2.f * (float)y / (float)HEIGHT) * p_camera->tng / p_camera->aspect;
-	// Направление луча в пространстве камеры
 	v3 = ksx_vec3_set(xy[0], xy[1], 1.0f);
 	v3 = ksx_vec3_unit(&v3);
 	ray.length = MAX_LEN;
@@ -104,22 +105,30 @@ t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 	ray.pixel.x = x;
 	ray.pixel.y = y;
 	ray.pixel.color.mlx_color = 0x00000000;
-	// Преобразуем в мировые координаты
-	// ksx_transform(&v3, &p_camera->ivm, &ray.direction);
+	ray.pixel.color.a = 0xff;
 	return (ray);
 }
 
 t_color compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
 	t_vector3 *p_light, t_color *p_color)
 {
+
 	// Направление к источнику света (нормализованное)
 	t_vector3 dir = ksx_vec3_sub(p_light, p_point);
 	dir = ksx_vec3_unit(&dir);
 	// Вычисление коэффициента освещенности (Lambertian shading)
 	float intensity = ksx_vec3_dot(p_norm, &dir);
-	intensity = fmax(0.f, intensity);
-	p_color->r = (unsigned char)(p_color->r * intensity);
-	p_color->g = (unsigned char)(p_color->g * intensity);
-	p_color->b = (unsigned char)(p_color->b * intensity);
+	// printf("%f\n", intensity);
+	// intensity = fmax(0.f, intensity);
+	float brightness = intensity * 1000.f;
+	// p_color->r = (unsigned char)fminf(brightness, p_color->r);
+	// p_color->g = (unsigned char)fminf(brightness, p_color->g);
+	// p_color->b = (unsigned char)fminf(brightness, p_color->b);
+	// p_color->r = (unsigned char)(p_color->r * pow(intensity, 1/2.2));
+	// p_color->g = (unsigned char)(p_color->g * pow(intensity, 1/2.2));
+	// p_color->b = (unsigned char)(p_color->b * pow(intensity, 1/2.2));
+	p_color->r = (unsigned char)((p_color->r * brightness) / 1000.f);
+	p_color->g = (unsigned char)((p_color->g * brightness) / 1000.f);
+	p_color->b = (unsigned char)((p_color->b * brightness) / 1000.f);
 	return (*p_color);
 }

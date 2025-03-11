@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/04 00:30:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/09 10:57:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ksx_draw(t_graphics *p_grph)
 			ksx_draw_norms(p_object, p_img, &p_grph->camera);
 		idx++;
 	}
-	mlx_delete_image(p_grph->mlx, p_grph->img);
-	p_grph->img = p_img;
-	mlx_image_to_window(p_grph->mlx, p_grph->img, 0, 0);
+	mlx_delete_image(p_grph->mlx, p_grph->img_proj);
+	p_grph->img_proj = p_img;
+	mlx_image_to_window(p_grph->mlx, p_grph->img_proj, 0, 0);
 }

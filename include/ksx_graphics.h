@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/08 12:27:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/10 12:29:22 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@
 
 # define EDGE_SIZE	10.f
 // Sphere generation
-# define SPHERE_GEN 3
+# define SPHERE_GEN 4
 // Cylinder step angle
-# define CYLINDER_ANGLE 18.f
+# define CYLINDER_ANGLE 9.f
 
 # define ANGLE 2.5f
 # define STEP 5.f
@@ -446,7 +446,8 @@ typedef struct s_world
 typedef struct s_graphics
 {
 	mlx_t		*mlx;
-	mlx_image_t	*img;
+	mlx_image_t	*img_proj;
+	mlx_image_t	*img_ray;
 	t_world		world;
 	t_camera	camera;
 	uint32_t	obj_idx;

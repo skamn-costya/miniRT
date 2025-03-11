@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/08 17:08:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/09 12:17:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 float	ksx_fraction(const t_pixel *p_p, const t_pixel *p_p1,
 	const t_pixel *p_p2)
@@ -69,7 +70,7 @@ mlx_image_t	*ksx_create_image(mlx_t *mlx)
 		p_img->pixels[idx] = 0x0;
 		p_img->pixels[idx + 1] = 0x0;
 		p_img->pixels[idx + 2] = 0x0;
-		p_img->pixels[idx + 3] = 0x80;
+		p_img->pixels[idx + 3] = 0x0;
 		idx += 4;
 	}
 	return (p_img);
@@ -86,8 +87,22 @@ t_vector3	ksx_mid_point(const t_vector3 *p_p1, const t_vector3 *p_p2)
 {
 	t_vector3	result;
 
-	result.x = (p_p1->x + p_p2->x) * 0.5f;
-	result.y = (p_p1->y + p_p2->y) * 0.5f;
-	result.z = (p_p1->z + p_p2->z) * 0.5f;
+	result.x = (p_p1->x + p_p2->x) * .5f;
+	result.y = (p_p1->y + p_p2->y) * .5f;
+	result.z = (p_p1->z + p_p2->z) * .5f;
 	return (result);
+}
+
+void	ksx_time_print()
+{
+	// ksx_time_print - Remove before evaluation
+	time_t		timer;
+    char		buffer[26];
+    struct tm*	tm_info;
+
+    timer = time(NULL);
+    tm_info = localtime(&timer);
+
+    strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
+    puts(buffer);
 }
