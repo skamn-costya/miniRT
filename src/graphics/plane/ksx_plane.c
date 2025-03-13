@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 00:54:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:23:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_plane	*ksx_create_plane(t_vector3 point, t_vector3 norm, t_color color)
 t_plane	**ksx_pln2world(t_plane *p_plane, t_world *p_world)
 {
 	t_plane		**pp_plane;
-	uint32_t	idx;
+	int32_t		idx;
 
 	if (!p_plane || !p_world)
 		return (NULL);

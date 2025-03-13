@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/10 12:29:22 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:59:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define KSX_TRUE 1
 # define KSX_FALSE 0
 
-// # define PI 3.141592653589793115997963468544185161590576171875
+# define PI 3.141592653589793115997963468544185161590576171875
 
 // PI / 180.f
 # define PI180 0.01745329251f
@@ -303,6 +303,8 @@ typedef struct s_camera
 	float		hfov;
 	float		tng;
 	float		aspect;
+	float		half_width;
+	float 		half_height;
 	// float		vfov;
 	uint8_t		flags;
 	t_matrix4	vm;
@@ -312,32 +314,32 @@ typedef struct s_camera
 	union
 	{
 		float	near;
-		float	n;
+		// float	n;
 	};
 	union
 	{
 		float	far;
-		float	f;
+		// float	f;
 	};
 	union
 	{
 		float	left;
-		float	l;
+		// float	l;
 	};
 	union
 	{
 		float	right;
-		float	r;
+		// float	r;
 	};
 	union
 	{
 		float	top;
-		float	t;
+		// float	t;
 	};
 	union
 	{
 		float	bottom;
-		float	b;
+		// float	b;
 	};
 }	t_camera;
 
@@ -433,13 +435,13 @@ typedef struct s_world
 	t_vector3	far;
 	t_matrix4	tm;
 	t_box		**pp_box;
-	uint32_t	size_box;
+	int32_t		size_box;
 	t_object	**pp_obj;
-	uint32_t	size_obj;
+	int32_t		size_obj;
 	t_light		**pp_lgt;
-	uint32_t	size_lgt;
+	int32_t		size_lgt;
 	t_plane		**pp_pln;
-	uint32_t	size_pln;
+	int32_t		size_pln;
 	t_light		ambient;
 }	t_world;
 
@@ -450,7 +452,7 @@ typedef struct s_graphics
 	mlx_image_t	*img_ray;
 	t_world		world;
 	t_camera	camera;
-	uint32_t	obj_idx;
+	int32_t		obj_idx;
 	void		(*f_gc)(void *);
 }	t_graphics;
 

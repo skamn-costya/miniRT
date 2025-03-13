@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/05 12:46:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:11:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_object	*ksx_create_sphere(t_vector3 center,
 	ksx_sphere_norns(p_object);
 	ksx_obj_transform(p_object);
 	ksx_obj_tris2box(p_object);
+	// ksx_print_tri(p_object->pp_tri[0], 0);
+	// ksx_print_tri(p_object->pp_tri[0], 1);
 	return (p_object);
 }
 

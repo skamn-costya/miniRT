@@ -12,7 +12,8 @@ PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 
 # KSX utilites
 UTILS_DIR = graphics/utils/
-UTILS_FN =	ksx_utils04.c \
+UTILS_FN =	ksx_utils01.c \
+			ksx_utils04.c \
 			ksx_utils08.c
 UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
 

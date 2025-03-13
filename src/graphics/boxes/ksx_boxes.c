@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:18:43 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/05 12:46:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:00:50 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ static void	ksx_create_box_1(t_box *p_box)
 		&p_box->ver[3], &p_box->ver[4]);
 	ksx_tri_set_vertexes(&p_box->tris[5], &p_box->ver[3],
 		&p_box->ver[4], &p_box->ver[7]);
+	p_box->tris[0].p_norm1 = NULL;
+	p_box->tris[1].p_norm1 = NULL;
+	p_box->tris[2].p_norm1 = NULL;
+	p_box->tris[3].p_norm1 = NULL;
+	p_box->tris[4].p_norm1 = NULL;
+	p_box->tris[5].p_norm1 = NULL;
 }
 
 static void	ksx_create_box_2(t_box *p_box)
@@ -62,6 +68,12 @@ static void	ksx_create_box_2(t_box *p_box)
 		&p_box->ver[5], &p_box->ver[6]);
 	ksx_tri_set_vertexes(&p_box->tris[11], &p_box->ver[4],
 		&p_box->ver[6], &p_box->ver[7]);
+	p_box->tris[6].p_norm1 = NULL;
+	p_box->tris[7].p_norm1 = NULL;
+	p_box->tris[8].p_norm1 = NULL;
+	p_box->tris[9].p_norm1 = NULL;
+	p_box->tris[10].p_norm1 = NULL;
+	p_box->tris[11].p_norm1 = NULL;
 }
 
 t_box	*ksx_box_add_new(t_box ***ppp_box)

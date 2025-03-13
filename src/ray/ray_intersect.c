@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 21:28:32 by username          #+#    #+#             */
-/*   Updated: 2025/03/10 00:48:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:39:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,14 @@ t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray)
 	if (f[4] > EPSILON && p_ray->length > f[4])
 	{
 		p_ray->length = f[4];
-		p_ray->p_tri = p_tri;
 		v3[5] = ksx_vec3_smulti(&p_ray->direction, f[4]);
 		v3[6] = ksx_vec3_add(&p_ray->origin, &v3[5]);
 		p_ray->point = v3[6];
-		p_ray->norm = triangle_normal(&v3[6], p_tri);
+		if (p_tri->p_norm1)
+		{
+			p_ray->p_tri = p_tri;
+			p_ray->norm = triangle_normal(&v3[6], p_tri);
+		}
 		return v3[6];
 	}
 	return ksx_vec3_set(0.f, 0.f, 0.f);
@@ -204,12 +207,12 @@ t_vector3 triangle_normal(t_vector3 *p_point, t_triangle *p_tri)
 {
     // Проверка на наличие нормалей в вершинах
     if (!p_tri->p_norm1)
-        return ksx_vec3_set(0.f, 0.f, 0.f);
+		return ksx_vec3_set(0.f, 0.f, 0.f);
 
     // Вычисление барицентрических координат
-    t_vector3 v0 = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp);  // Ребро 1
-    t_vector3 v1 = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp);  // Ребро 2
-    t_vector3 v2 = ksx_vec3_sub(p_point, &p_tri->p_ver1->cp);             // Вектор от первой вершины до точки
+	t_vector3 v0 = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp);  // Ребро 1
+	t_vector3 v1 = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp);  // Ребро 2
+	t_vector3 v2 = ksx_vec3_sub(p_point, &p_tri->p_ver1->cp);             // Вектор от первой вершины до точки
 
     // Перекрёстное произведение
     t_vector3 cross_v2_v1 = ksx_vec3_cross(&v2, &v1);
@@ -233,10 +236,21 @@ t_vector3 triangle_normal(t_vector3 *p_point, t_triangle *p_tri)
     vec3[3] = ksx_vec3_add(&vec3[0], &vec3[1]);
     vec3[4] = ksx_vec3_add(&vec3[3], &vec3[2]);
 
-
+	vec3[4] = ksx_vec3_unit(&vec3[4]);
+	/*
+	250,0,651
+	150 -150 
+	*/
+	t_vector3	vec3check[2];
+	vec3check[0] = ksx_vec3_set(250.f, 0.f, 651.f);
+	vec3check[1] = ksx_vec3_sub(p_point, &vec3check[0]);
+	vec3check[1] = ksx_vec3_unit(&vec3check[0]);
+	// vec3check[0] = ksx_vec3_set(150.f, -150.f, 651.f);
+	// vec3check[1] = ksx_vec3_sub(p_point, &vec3check[0]);
+	// vec3check[1] = ksx_vec3_unit(&vec3check[0]);
 
     // Нормализуем итоговую нормаль
-	return ksx_vec3_unit(&vec3[4]);
+	return (vec3check[1]);
 }
 
 

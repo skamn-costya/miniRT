@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:13:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/05 13:41:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:23:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_light	*ksx_create_light(t_vector3 center, float bright, t_color color)
 t_light	**ksx_lgt2world(t_light *p_light, t_world *p_world)
 {
 	t_light		**pp_light;
-	uint32_t	idx;
+	int32_t		idx;
 
 	if (!p_light || !p_world)
 		return (NULL);

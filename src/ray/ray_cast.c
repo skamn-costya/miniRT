@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 21:50:40 by username          #+#    #+#             */
-/*   Updated: 2025/03/07 17:07:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/13 19:03:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,9 @@
 #include "stdio.h"
 #include "ksx_triangle.h"
 
-void print_vertex(t_vertex ver)
-{
-	printf("[%f, %f, %f]\n", ver.cp.x, ver.cp.y, ver.cp.z);
-}
-
-void print_tri(t_triangle tri)
-{
-	print_vertex(*tri.p_ver1);
-	print_vertex(*tri.p_ver2);
-	print_vertex(*tri.p_ver3);
-}
-
 static void ray_scan_scene(t_ray *ray, t_graphics grph)
 {
-	uint32_t	i;
+	int32_t	i;
 	int	j;
 
 	i = 0;
@@ -82,7 +70,7 @@ void	ray_cast(t_graphics *grph)
 	float	sh = (float)HEIGHT;
 	float	sw = (float)WIDTH;
 
-	mlx_image_t *p_img = ksx_create_image(grph->mlx);
+	// mlx_image_t *p_img = ksx_create_image(grph->mlx);
 	// Canvas points
 	float canvas_z = grph->camera.near;
 	t_vector3 p0 = ksx_vec3_set(-sw /2, sh /2, canvas_z);
@@ -116,12 +104,12 @@ void	ray_cast(t_graphics *grph)
 			x++;
 			if (ray.length >= 1e30f)
 				continue ;
-			t_pixel pix = ksx_draw_get_pixel(&grph->camera, &pixelPos, 0xFFFFFFFF);
+			// t_pixel pix = ksx_draw_get_pixel(&grph->camera, &pixelPos, 0xFFFFFFFF);
 			//printf("SETTING PIXEL: [%i, %i, %i]\n", (int)pix.x, (int)pix.y, pix.color.a);
-			ksx_set_pixel(p_img, &pix);
+			// ksx_set_pixel(p_img, &pix);
 		}
 		y++;
 	}
 	printf("Finished\n");
-	mlx_image_to_window(grph->mlx, p_img, 0, 0);
+	// mlx_image_to_window(grph->mlx, p_img, 0, 0);
 }

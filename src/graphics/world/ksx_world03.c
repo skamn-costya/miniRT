@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 15:25:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:24:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 {
 	t_object	**pp_object;
-	uint32_t	idx;
+	int32_t		idx;
 
 	if (!p_object || !p_world)
 		return (NULL);
@@ -46,7 +46,7 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 
 void	ksx_world_clean(t_world *p_world)
 {
-	uint32_t	idx[3];
+	int32_t		idx[3];
 	t_object	*p_object;
 
 	idx[0] = 0;
