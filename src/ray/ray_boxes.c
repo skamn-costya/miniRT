@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/14 13:22:29 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:33:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,9 @@ void	ray_cast_boxes(t_graphics *p_grph)
 		}
 		xy[1]++;
 	}
-	// mlx_delete_image(p_grph->mlx, p_grph->img);
-	// p_grph->img = p_img;
 	printf("min: %f; max: %f\n", mm[0], mm[1]);
 	ksx_time_print();
-	// mlx_delete_image(p_grph->mlx, p_grph->img_proj);
-	mlx_image_to_window(p_grph->mlx, p_grph->img_ray, 0, 0);
-	mlx_image_to_window(p_grph->mlx, p_grph->img_proj, 0, 0);
+	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
 }
 
 void	ray_check_boxes(t_ray *p_ray, t_graphics *p_grph)

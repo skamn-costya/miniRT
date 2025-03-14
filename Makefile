@@ -97,7 +97,7 @@ GRAPHICS_DIR = graphics/
 GRAPHICS_FN =	ksx_change.c \
 				ksx_draw.c \
 				ksx_init.c \
-				ksx_prep.c \
+				ksx_image.c \
 				ksx_gc.c
 GRAPHICS =	$(addprefix $(GRAPHICS_DIR), $(GRAPHICS_FN))
 
