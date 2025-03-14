@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/13 15:05:08 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:40:33 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,15 @@ static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *))
 	p_grph->mlx = ksx_init();
 	if (!p_grph->mlx)
 		return (printf("MLX init failed!\n"), FALSE);
-	p_grph->img_proj = ksx_create_image(p_grph->mlx);
+	p_grph->img_bg = ksx_create_image(p_grph->mlx, BACKGROUND);
+	if (!p_grph->img_bg)
+		return (printf("Create background failed!\n"), FALSE);
+	p_grph->img_proj = ksx_create_image(p_grph->mlx, TRANSPARENT);
 	if (!p_grph->img_proj)
 		return (printf("Create image failed!\n"), FALSE);
 	p_grph->img_ray = NULL;
+	if (mlx_image_to_window(p_grph->mlx, p_grph->img_bg, 0, 0) < 0)
+		return (printf("background to window failed!\n"), FALSE);
 	if (mlx_image_to_window(p_grph->mlx, p_grph->img_proj, 0, 0) < 0)
 		return (printf("Image to window failed!\n"), FALSE);
 	return (TRUE);
@@ -116,8 +121,5 @@ void	my_scrollhook(double xdelta, double ydelta, void *param)
 	else if (ydelta < 0)
 		scroll_zoom_out(p_grph);
 	ksx_draw (p_grph);
-	if (xdelta < 0)
-		puts("Sliiiide to the left!");
-	else if (xdelta > 0)
-		puts("Sliiiide to the right!");
+	(void)xdelta;
 }

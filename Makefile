@@ -260,7 +260,7 @@ fclean: clean
 
 re: fclean all
 
-go:
+valg:
 #	valgrind --leak-check=full --suppressions=mlx.supp ./minirt ./files.rt/example.rt
 	valgrind --leak-check=full --show-leak-kinds=all --suppressions=mlx.supp ./minirt ./files.rt/example.rt
 

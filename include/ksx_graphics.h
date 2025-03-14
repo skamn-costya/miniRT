@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/13 18:59:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:55:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@
 # define PRECISION	0.00001f
 /* Only support RGBA */
 # define BPP 4
+# define TRANSPARENT	0x00000000
+# define BACKGROUND		0xFFFFFFFF
 
 // Size if color structure 3 for RGB, 4 for RGBA
 # define COLOR_SIZE 3
@@ -311,36 +313,12 @@ typedef struct s_camera
 	t_matrix4	ivm;
 	t_matrix4	pm;
 	// float		focal_len;
-	union
-	{
-		float	near;
-		// float	n;
-	};
-	union
-	{
-		float	far;
-		// float	f;
-	};
-	union
-	{
-		float	left;
-		// float	l;
-	};
-	union
-	{
-		float	right;
-		// float	r;
-	};
-	union
-	{
-		float	top;
-		// float	t;
-	};
-	union
-	{
-		float	bottom;
-		// float	b;
-	};
+	float	near;
+	float	far;
+	float	left;
+	float	right;
+	float	top;
+	float	bottom;
 }	t_camera;
 
 typedef struct s_vertex
@@ -448,6 +426,7 @@ typedef struct s_world
 typedef struct s_graphics
 {
 	mlx_t		*mlx;
+	mlx_image_t	*img_bg;
 	mlx_image_t	*img_proj;
 	mlx_image_t	*img_ray;
 	t_world		world;

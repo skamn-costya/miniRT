@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/13 15:02:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:46:49 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,24 +54,25 @@ int32_t	ksx_abs(const int32_t num)
 	return (result);
 }
 
-mlx_image_t	*ksx_create_image(mlx_t *mlx)
+mlx_image_t	*ksx_create_image(mlx_t *mlx, uint32_t bg_color)
 {
 	mlx_image_t	*p_img;
-	uint32_t	size;
-	uint32_t	idx;
+	uint32_t	idx[2];
+	uint8_t		*pixel;
 
 	p_img = mlx_new_image(mlx, mlx->width, mlx->height);
 	if (!p_img)
 		return (printf("Error: MLX42 create mlx_image_t failed!\n"), NULL);
-	size = mlx->width * mlx->height * BPP;
-	idx = 0;
-	while (idx < size)
+	idx[0] = mlx->width * mlx->height;
+	idx[1] = 0;
+	while (idx[1] < idx[0])
 	{
-		p_img->pixels[idx] = 0x0;
-		p_img->pixels[idx + 1] = 0x0;
-		p_img->pixels[idx + 2] = 0x0;
-		p_img->pixels[idx + 3] = 0x0;
-		idx += 4;
+		pixel = &p_img->pixels[idx[1] * BPP];
+		*(pixel++) = (uint8_t)(bg_color >> 24);
+		*(pixel++) = (uint8_t)(bg_color >> 16);
+		*(pixel++) = (uint8_t)(bg_color >> 8);
+		*(pixel++) = (uint8_t)(bg_color & 0xFF);
+		idx[1]++;
 	}
 	return (p_img);
 }

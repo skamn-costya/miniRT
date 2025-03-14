@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:08:16 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/10 12:32:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:23:50 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ void	ksx_garbage_collector(t_graphics *p_grph)
 		p_g = p_grph;
 		return ;
 	}
-	mlx_delete_image(p_g->mlx, p_g->img_proj);
 	mlx_delete_image(p_g->mlx, p_g->img_ray);
+	mlx_delete_image(p_g->mlx, p_g->img_proj);
+	mlx_delete_image(p_g->mlx, p_g->img_bg);
 	mlx_close_window(p_g->mlx);
 	mlx_terminate(p_g->mlx);
 	ksx_world_clean(&p_g->world);

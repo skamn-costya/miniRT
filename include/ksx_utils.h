@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/13 12:54:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/14 12:40:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 float		ksx_fraction(const t_pixel *p_p, const t_pixel *p_p1,
 				const t_pixel *p_p2);
 int32_t		ksx_abs(const int32_t num);
-mlx_image_t	*ksx_create_image(mlx_t *mlx);
+mlx_image_t	*ksx_create_image(mlx_t *mlx, uint32_t bg_color);
 t_vector3	ksx_mid_point(const t_vector3 *p_p1, const t_vector3 *p_p2);
 void		ksx_time_print();
 

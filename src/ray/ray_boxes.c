@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/13 18:49:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/14 13:22:29 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ray_cast_boxes(t_graphics *p_grph)
 
 	ksx_time_print();
 	mlx_delete_image(p_grph->mlx, p_grph->img_ray);
-	p_grph->img_ray = ksx_create_image(p_grph->mlx);
+	p_grph->img_ray = ksx_create_image(p_grph->mlx, TRANSPARENT);
 	ray.origin = p_grph->camera.basis.o;
 	// xy[0] = HEIGHT * WIDTH;
 	mm[0] = 999999999.f;
@@ -60,7 +60,9 @@ void	ray_cast_boxes(t_graphics *p_grph)
 	// p_grph->img = p_img;
 	printf("min: %f; max: %f\n", mm[0], mm[1]);
 	ksx_time_print();
+	// mlx_delete_image(p_grph->mlx, p_grph->img_proj);
 	mlx_image_to_window(p_grph->mlx, p_grph->img_ray, 0, 0);
+	mlx_image_to_window(p_grph->mlx, p_grph->img_proj, 0, 0);
 }
 
 void	ray_check_boxes(t_ray *p_ray, t_graphics *p_grph)
@@ -86,7 +88,7 @@ void	ray_check_boxes(t_ray *p_ray, t_graphics *p_grph)
 					v3 = triangle_intersection(pp_box[idx[0]]->pp_tris[idx[1]], p_ray);
 					(void)v3;
 					if (p_ray->length != MAX_LEN)
-						p_ray->pixel.color.mlx_color = 0xFFFFFFFF;// & p_grph->world.ambient.color.mlx_color;
+						p_ray->pixel.color.mlx_color = 0xFFFFFF00;// & p_grph->world.ambient.color.mlx_color;
 				}
 				break;
 			}
@@ -119,7 +121,7 @@ t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 	ray.direction = v3;
 	ray.pixel.x = x;
 	ray.pixel.y = y;
-	ray.pixel.color.mlx_color = 0x00000000;
+	ray.pixel.color.mlx_color = TRANSPARENT;
 	ray.pixel.color.a = 0xff;
 	ray.norm = ksx_vec3_set(0.f, 0.f, 0.f);
 	ray.p_tri = NULL;
@@ -171,7 +173,7 @@ t_ray	ray_generate_w(int32_t x, int32_t y, t_camera *p_camera)
 	ray.origin = p_camera->basis.o;
 	ray.pixel.x = x;
 	ray.pixel.y = y;
-	ray.pixel.color.mlx_color = 0x00000000;
+	ray.pixel.color.mlx_color = TRANSPARENT;
 	ray.pixel.color.a = 0xff;
 	ray.norm = ksx_vec3_set(0.f, 0.f, 0.f);
 	ray.p_tri = NULL;
