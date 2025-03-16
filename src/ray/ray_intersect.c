@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 21:28:32 by username          #+#    #+#             */
-/*   Updated: 2025/03/13 18:39:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:12:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,18 +116,22 @@ t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray)
 	if (f[4] > EPSILON && p_ray->length > f[4])
 	{
 		p_ray->length = f[4];
-		v3[5] = ksx_vec3_smulti(&p_ray->direction, f[4]);
-		v3[6] = ksx_vec3_add(&p_ray->origin, &v3[5]);
-		p_ray->point = v3[6];
-		if (p_tri->p_norm1)
+		if (p_tri->p_norm1 && p_ray->length < p_ray->min_length)
 		{
+			p_ray->min_length = p_ray->length;
+			p_ray->pixel.color.mlx_color = p_tri->color.mlx_color;
+			v3[5] = ksx_vec3_smulti(&p_ray->direction, f[4]);
+			v3[6] = ksx_vec3_add(&p_ray->origin, &v3[5]);
+			p_ray->point = v3[6];
 			p_ray->p_tri = p_tri;
-			p_ray->norm = triangle_normal(&v3[6], p_tri);
+			p_ray->norm = triangle_normal_barycentric(&v3[6], p_tri);
 		}
 		return v3[6];
 	}
 	return ksx_vec3_set(0.f, 0.f, 0.f);
 }
+
+// triangle_normal_euler vs triangle_normal_barycentric
 
 // t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray)
 // {
@@ -179,6 +183,138 @@ t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray)
 // 	return ksx_vec3_set(0.f, 0.f, 0.f);
 // }
 
+t_vector3	triangle_normal_1(t_vector3 *p_point, t_triangle *p_tri)
+{
+    t_vector3 edge1, edge2, edge_p;
+    t_vector3 normal, interpolated_normal;
+    float area_inv, lambda0, lambda1, lambda2;
+	t_vector3	vec3[2];
+
+    // Вычисляем векторы ребер треугольника
+    edge1 = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp);
+    edge2 = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp);
+    edge_p = ksx_vec3_sub(p_point, &p_tri->p_ver1->cp); // Вектор к точке
+
+    // Вычисляем нормаль треугольника
+    normal = ksx_vec3_cross(&edge1, &edge2);
+    float area2 = ksx_vec3_mag(&normal); // Удвоенная площадь треугольника
+
+    // Вычисляем барицентрические координаты
+    area_inv = 1.0f / area2;
+
+	vec3[0] = ksx_vec3_cross(&edge_p, &edge2);
+	vec3[1] = ksx_vec3_cross(&edge1, &edge_p);
+    lambda0 = ksx_vec3_mag(&vec3[0]) * area_inv;
+    lambda1 = ksx_vec3_mag(&vec3[1]) * area_inv;
+    lambda2 = 1.0f - lambda0 - lambda1;
+
+    // Проверяем, чтобы веса были корректными
+    if (lambda0 < 0 || lambda1 < 0 || lambda2 < 0)
+		return ksx_vec3_set(0.f, 0.f, 0.f); // Если точка вне треугольника
+
+	// Интерполяция нормали
+	vec3[0] = ksx_vec3_smulti(&p_tri->p_norm1->lp, lambda0);
+	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm2->lp, lambda1);
+	vec3[0] = ksx_vec3_add(&vec3[0], &vec3[1]);
+	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm3->lp, lambda2);
+	interpolated_normal = ksx_vec3_add(&vec3[0], &vec3[1]);
+    return ksx_vec3_unit(&interpolated_normal); // Возвращаем нормализованную нормаль
+}
+
+t_vector3 triangle_normal_barycentric_(t_vector3 *p_point, t_triangle *p_tri)
+{
+    t_vector3 edge[3];
+    t_vector3 normal, interpolated_normal;
+    float area_inv, lambda0, lambda1, lambda2;
+    t_vector3 vec3[3];
+
+    // Вычисляем векторы треугольника
+    edge[0] = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp);
+    edge[1] = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp);
+    edge[2] = ksx_vec3_sub(p_point, &p_tri->p_ver1->cp);
+
+    // Вычисляем полную площадь треугольника
+    normal = ksx_vec3_cross(&edge[0], &edge[1]);
+    float area2 = ksx_vec3_mag(&normal);
+    area_inv = 1.f / area2;
+
+    // Вычисляем барицентрические координаты
+    vec3[0] = ksx_vec3_cross(&edge[2], &edge[1]);
+    vec3[1] = ksx_vec3_cross(&edge[0], &edge[2]);
+    lambda0 = ksx_vec3_mag(&vec3[0]) * area_inv;
+    lambda1 = ksx_vec3_mag(&vec3[1]) * area_inv;
+    lambda2 = 1.0f - lambda0 - lambda1;
+
+    // Нормализуем нормали вершин перед интерполяцией!
+    vec3[0] = ksx_vec3_unit(&p_tri->p_norm1->lp);
+    vec3[1] = ksx_vec3_unit(&p_tri->p_norm2->lp);
+    vec3[2] = ksx_vec3_unit(&p_tri->p_norm3->lp);
+
+    // Линейная интерполяция нормали
+    vec3[0] = ksx_vec3_smulti(&vec3[0], lambda0);
+    vec3[1] = ksx_vec3_smulti(&vec3[1], lambda1);
+    vec3[2] = ksx_vec3_smulti(&vec3[2], lambda2);
+
+    interpolated_normal = ksx_vec3_add(&vec3[0], &vec3[1]);
+    interpolated_normal = ksx_vec3_add(&interpolated_normal, &vec3[2]);
+
+    // Финальная нормализация
+    return ksx_vec3_unit(&interpolated_normal);
+}
+
+
+
+t_vector3	triangle_normal_barycentric(t_vector3 *p_point, t_triangle *p_tri)
+{
+    t_vector3	edge[3];
+    t_vector3 normal, interpolated_normal;
+    float area_inv, lambda0, lambda1, lambda2;
+	t_vector3	vec3[2];
+
+    edge[0] = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp);
+    edge[1] = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp);
+    edge[2] = ksx_vec3_sub(p_point, &p_tri->p_ver1->cp);
+    normal = ksx_vec3_cross(&edge[0], &edge[1]);
+    float area2 = ksx_vec3_mag(&normal);
+    area_inv = 1.f / area2;
+	vec3[0] = ksx_vec3_cross(&edge[2], &edge[0]);
+	vec3[1] = ksx_vec3_cross(&edge[2], &edge[1]);
+	
+	lambda2 = fmax(ksx_vec3_mag(&vec3[0]) * area_inv, 0.f);
+    lambda1 = fmax(ksx_vec3_mag(&vec3[1]) * area_inv, 0.f);
+    lambda0 = 1.0f - lambda1 - lambda2;
+	vec3[0] = ksx_vec3_smulti(&p_tri->p_norm1->lp, lambda0);
+	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm2->lp, lambda1);
+	vec3[0] = ksx_vec3_add(&vec3[0], &vec3[1]);
+	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm3->lp, lambda2);
+	interpolated_normal = ksx_vec3_add(&vec3[0], &vec3[1]);
+    return ksx_vec3_unit(&interpolated_normal);
+}
+
+t_vector3	triangle_normal_euler(t_vector3 *p_point, t_triangle *p_tri)
+{
+	t_vector3	vec3[4];
+	float		f;
+	float		lambda[3];
+	
+	lambda[0] = ksx_vec3_dist(p_point, &p_tri->p_ver1->cp);
+	lambda[1] = ksx_vec3_dist(p_point, &p_tri->p_ver2->cp);
+	lambda[2] = ksx_vec3_dist(p_point, &p_tri->p_ver3->cp);
+	f = 1 / (lambda[0] + lambda[1] + lambda[2]);
+	lambda[0] *= f;
+	lambda[1] *= f;
+	lambda[2] *= f;
+	lambda[0] = 1/lambda[0];
+	lambda[1] = 1/lambda[1];
+	lambda[2] = 1/lambda[2];
+	vec3[0] = ksx_vec3_smulti(&p_tri->p_norm1->lp, lambda[0]);
+	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm2->lp, lambda[1]);
+	vec3[2] = ksx_vec3_smulti(&p_tri->p_norm3->lp, lambda[2]);
+	vec3[3] = ksx_vec3_add(&vec3[0], &vec3[1]);
+	vec3[3] = ksx_vec3_add(&vec3[3], &vec3[2]);
+	return (ksx_vec3_unit(&vec3[3]));
+}
+
 // t_vector3	triangle_normal(t_vector3 *p_point,
 // 		t_triangle *p_tri, t_vector3 *p_v3)
 // {
@@ -203,55 +339,55 @@ t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray)
 // 	return ksx_vec3_unit(&vec3[3]);
 // }
 
-t_vector3 triangle_normal(t_vector3 *p_point, t_triangle *p_tri)
-{
-    // Проверка на наличие нормалей в вершинах
-    if (!p_tri->p_norm1)
-		return ksx_vec3_set(0.f, 0.f, 0.f);
+// t_vector3 triangle_normal(t_vector3 *p_point, t_triangle *p_tri)
+// {
+//     // Проверка на наличие нормалей в вершинах
+//     if (!p_tri->p_norm1)
+// 		return ksx_vec3_set(0.f, 0.f, 0.f);
 
-    // Вычисление барицентрических координат
-	t_vector3 v0 = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp);  // Ребро 1
-	t_vector3 v1 = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp);  // Ребро 2
-	t_vector3 v2 = ksx_vec3_sub(p_point, &p_tri->p_ver1->cp);             // Вектор от первой вершины до точки
+//     // Вычисление барицентрических координат
+// 	t_vector3 v0 = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp);  // Ребро 1
+// 	t_vector3 v1 = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp);  // Ребро 2
+// 	t_vector3 v2 = ksx_vec3_sub(p_point, &p_tri->p_ver1->cp);             // Вектор от первой вершины до точки
 
-    // Перекрёстное произведение
-    t_vector3 cross_v2_v1 = ksx_vec3_cross(&v2, &v1);
-    float f = ksx_vec3_dot(&v0, &cross_v2_v1);  // Нахождение детерминанта
+//     // Перекрёстное произведение
+//     t_vector3 cross_v2_v1 = ksx_vec3_cross(&v2, &v1);
+//     float f = ksx_vec3_dot(&v0, &cross_v2_v1);  // Нахождение детерминанта
 
-    // Если детерминант близок к нулю, значит точка вне треугольника
-    if (fabsf(f) < EPSILON)
-        return ksx_vec3_set(0.f, 0.f, 0.f);
+//     // Если детерминант близок к нулю, значит точка вне треугольника
+//     if (fabsf(f) < EPSILON)
+//         return ksx_vec3_set(0.f, 0.f, 0.f);
 
-    // Нормализуем барицентрические координаты
-    float inv_f = 1.f / f;
-    float lambda0 = ksx_vec3_dot(&v2, &cross_v2_v1) * inv_f;
-    float lambda1 = ksx_vec3_dot(&v0, &cross_v2_v1) * inv_f;
-    float lambda2 = 1.f - lambda0 - lambda1;
+//     // Нормализуем барицентрические координаты
+//     float inv_f = 1.f / f;
+//     float lambda0 = ksx_vec3_dot(&v2, &cross_v2_v1) * inv_f;
+//     float lambda1 = ksx_vec3_dot(&v0, &cross_v2_v1) * inv_f;
+//     float lambda2 = 1.f - lambda0 - lambda1;
 
-	t_vector3	vec3[5];
-    // Интерполяция нормали
-	vec3[0] = ksx_vec3_smulti(&p_tri->p_norm1->lp, lambda0);
-	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm2->lp, lambda1);
-	vec3[2] = ksx_vec3_smulti(&p_tri->p_norm3->lp, lambda2);
-    vec3[3] = ksx_vec3_add(&vec3[0], &vec3[1]);
-    vec3[4] = ksx_vec3_add(&vec3[3], &vec3[2]);
+// 	t_vector3	vec3[5];
+//     // Интерполяция нормали
+// 	vec3[0] = ksx_vec3_smulti(&p_tri->p_norm1->lp, lambda0);
+// 	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm2->lp, lambda1);
+// 	vec3[2] = ksx_vec3_smulti(&p_tri->p_norm3->lp, lambda2);
+//     vec3[3] = ksx_vec3_add(&vec3[0], &vec3[1]);
+//     vec3[4] = ksx_vec3_add(&vec3[3], &vec3[2]);
 
-	vec3[4] = ksx_vec3_unit(&vec3[4]);
-	/*
-	250,0,651
-	150 -150 
-	*/
-	t_vector3	vec3check[2];
-	vec3check[0] = ksx_vec3_set(250.f, 0.f, 651.f);
-	vec3check[1] = ksx_vec3_sub(p_point, &vec3check[0]);
-	vec3check[1] = ksx_vec3_unit(&vec3check[0]);
-	// vec3check[0] = ksx_vec3_set(150.f, -150.f, 651.f);
-	// vec3check[1] = ksx_vec3_sub(p_point, &vec3check[0]);
-	// vec3check[1] = ksx_vec3_unit(&vec3check[0]);
+// 	vec3[4] = ksx_vec3_unit(&vec3[4]);
+// 	/*
+// 	250,0,651
+// 	150 -150 
+// 	*/
+// 	t_vector3	vec3check[2];
+// 	vec3check[0] = ksx_vec3_set(250.f, 0.f, 651.f);
+// 	vec3check[1] = ksx_vec3_sub(p_point, &vec3check[0]);
+// 	vec3check[1] = ksx_vec3_unit(&vec3check[0]);
+// 	// vec3check[0] = ksx_vec3_set(150.f, -150.f, 651.f);
+// 	// vec3check[1] = ksx_vec3_sub(p_point, &vec3check[0]);
+// 	// vec3check[1] = ksx_vec3_unit(&vec3check[0]);
 
-    // Нормализуем итоговую нормаль
-	return (vec3check[1]);
-}
+//     // Нормализуем итоговую нормаль
+// 	return (vec3check[1]);
+// }
 
 
 // printf("vec3[0] [%f,%f,%f]\n", vec3[0].x, vec3[0].y, vec3[0].z);

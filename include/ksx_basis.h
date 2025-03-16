@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 13:21:05 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 21:19:46 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:56:38 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 // ksx_basis.c
 // t_basis		ksx_basis_get(const t_vector3 *p_norm);
 void		ksx_basis_set_norm(t_basis *p_basis, t_vector3 *p_norm);
+void		ksx_basis_set_norm_camera(t_basis *p_basis, t_vector3 *p_norm);
 void		ksx_basis_copy_len(t_basis *p_basis_src, t_basis *p_basis_des);
 uint32_t	ksx_basis_check(t_basis *p_basis, uint32_t axis);
 // void		ksx_basis_copy(t_basis *p_basis_src, t_basis *p_basis_des);

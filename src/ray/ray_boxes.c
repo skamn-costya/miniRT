@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/14 14:33:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/16 13:09:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ray_cast_boxes(t_graphics *p_grph)
 	mm[1] = -999999999.f;
 	xy[0] = p_grph->img_proj->width * p_grph->img_proj->height;
 	xy[1] = 0;
-	t_vector3 light = ksx_vec3_set(0.f, 0.f, -50.f);
+	t_vector3 light = ksx_vec3_set(450.f, 300.f, -250.f);
 	while (xy[1] < xy[0])
 	{
 		{
@@ -49,7 +49,7 @@ void	ray_cast_boxes(t_graphics *p_grph)
 				else if (ray.length > mm[1])
 					mm[1] = ray.length;
 				// applyDepthAttenuation(&ray.pixel.color, (ray.length - 500.f)/750.f, 7.f);
-				
+				// ray.pixel.color = color_bright(&ray.pixel.color, pixel_bright(&ray.norm, &light));
 				compute_lighting(&ray.point, &ray.norm, &light, &ray.pixel.color);
 				ksx_set_pixel(p_grph->img_ray, &ray.pixel);
 			}
@@ -83,8 +83,8 @@ void	ray_check_boxes(t_ray *p_ray, t_graphics *p_grph)
 				{
 					v3 = triangle_intersection(pp_box[idx[0]]->pp_tris[idx[1]], p_ray);
 					(void)v3;
-					if (p_ray->length != MAX_LEN)
-						p_ray->pixel.color.mlx_color = 0xFFFFFF00;// & p_grph->world.ambient.color.mlx_color;
+					if (p_ray->length < p_ray->min_length)
+						p_ray->pixel.color.mlx_color = pp_box[idx[0]]->pp_tris[idx[1]]->color.mlx_color;// & p_grph->world.ambient.color.mlx_color;
 				}
 				break;
 			}
@@ -113,6 +113,7 @@ t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 	v3 = ksx_vec3_set(xy[0], xy[1], 1.0f);
 	v3 = ksx_vec3_unit(&v3);
 	ray.length = MAX_LEN;
+	ray.min_length = MAX_LEN;
 	ray.origin = p_camera->basis.o;
 	ray.direction = v3;
 	ray.pixel.x = x;
@@ -179,23 +180,41 @@ t_ray	ray_generate_w(int32_t x, int32_t y, t_camera *p_camera)
 t_color compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
 	t_vector3 *p_light, t_color *p_color)
 {
-
-	// Направление к источнику света (нормализованное)
 	t_vector3 dir = ksx_vec3_sub(p_light, p_point);
 	dir = ksx_vec3_unit(&dir);
-	// Вычисление коэффициента освещенности (Lambertian shading)
+	*p_norm = ksx_vec3_unit(p_norm);
+
+	// Фоновая подсветка
+	float ambient = 0.2f; 
+
+	// Диффузное освещение
+	float diff = fmax(0.f, ksx_vec3_dot(p_norm, &dir));
+
+	// Зеркальное отражение
+	t_vector3 reflect_dir = ksx_vec3_reflect(&dir, p_norm);
+	t_vector3 view_dir = ksx_vec3_unit(p_point); // Камера в (0,0,0)
+	float spec = powf(fmax(ksx_vec3_dot(&reflect_dir, &view_dir), 0.f), 128);
+
+	// Итоговое освещение
+	float intensity = ambient + (1.0f - ambient) * diff + 0.5f * spec;
+	intensity = fminf(intensity, 1.0f); // Ограничение яркости
+
+	p_color->r = (uint8_t)((p_color->r * intensity));
+	p_color->g = (uint8_t)((p_color->g * intensity));
+	p_color->b = (uint8_t)((p_color->b * intensity));
+	return (*p_color);
+}
+
+
+t_color compute_lighting_my(t_vector3 *p_point, t_vector3 *p_norm,
+	t_vector3 *p_light, t_color *p_color)
+{
+	t_vector3 dir = ksx_vec3_sub(p_light, p_point);
+	dir = ksx_vec3_unit(&dir);
 	float intensity = ksx_vec3_dot(p_norm, &dir);
-	// printf("%f\n", intensity);
-	// intensity = fmax(0.f, intensity);
-	float brightness = intensity * 1.f;
-	// p_color->r = (unsigned char)fminf(brightness, p_color->r);
-	// p_color->g = (unsigned char)fminf(brightness, p_color->g);
-	// p_color->b = (unsigned char)fminf(brightness, p_color->b);
-	// p_color->r = (unsigned char)(p_color->r * pow(intensity, 1/2.2));
-	// p_color->g = (unsigned char)(p_color->g * pow(intensity, 1/2.2));
-	// p_color->b = (unsigned char)(p_color->b * pow(intensity, 1/2.2));
-	p_color->r = (unsigned char)((p_color->r * brightness) / 1.f);
-	p_color->g = (unsigned char)((p_color->g * brightness) / 1.f);
-	p_color->b = (unsigned char)((p_color->b * brightness) / 1.f);
+	intensity = fmax(0.f, intensity);
+	p_color->r = (uint8_t)((p_color->r * intensity));
+	p_color->g = (uint8_t)((p_color->g * intensity));
+	p_color->b = (uint8_t)((p_color->b * intensity));
 	return (*p_color);
 }

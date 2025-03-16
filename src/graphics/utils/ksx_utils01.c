@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/13 12:54:36 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/16 09:13:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+void	ksx_print_vector(t_vector3 *p_vec)
+{
+	printf("vector3: [%f, %f, %f]\n", p_vec->x, p_vec->y, p_vec->z);
+}
 
 void	ksx_print_vertex(t_vertex *p_ver, int32_t idx)
 {

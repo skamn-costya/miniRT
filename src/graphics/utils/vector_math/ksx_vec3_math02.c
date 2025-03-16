@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 21:23:33 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/16 09:59:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ t_vector3	ksx_vec3_unit(const t_vector3 *p_v)
 	return (v);
 }
 
-t_vector3	ksx_vec3_norm(const t_vector3 *p_v, const t_vector3 *p_norm)
-{
-	t_vector3	result;
+// t_vector3	ksx_vec3_norm(const t_vector3 *p_v, const t_vector3 *p_norm)
+// {
+// 	t_vector3	result;
 
-	result = ksx_vec3_cross(p_v, p_norm);
-	return (result);
-}
+// 	result = ksx_vec3_cross(p_v, p_norm);
+// 	return (result);
+// }
 
 /**
  * @brief returns the distance between v1 and v2.

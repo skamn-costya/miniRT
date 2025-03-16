@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 17:37:28 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:41:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static void	ksx_init_cylinder_1(t_object *p_object, uint32_t size)
 	t_vertex	**pp_norm;
 
 	// step = p_object->size2 * 2.f / roundf((p_object->size2 * 2.f) / p_object->edge);
-	step[0] = roundf(p_object->size2 * 2.f / p_object->size1);
+	step[0] = roundf(p_object->size2 * 2.f / p_object->size1) + 1;
 	step[1] = p_object->size2 * 2.f / step[0];
 	idx[0] = 1;
 	while (idx[0] < step[0])

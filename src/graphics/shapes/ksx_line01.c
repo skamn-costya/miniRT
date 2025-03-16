@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 12:52:47 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 15:09:30 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/16 09:18:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ static uint32_t	ksx_line_in(mlx_image_t *p_img,
 		|| p_pix1->x < 0 || p_pix2->x < 0 || p_pix1->y < 0 || p_pix2->y < 0
 		|| p_pix1->x >= p_img->width || p_pix1->y >= p_img->height
 		|| p_pix2->x >= p_img->width || p_pix2->y >= p_img->height)
-		return (printf ("NO line\n"), 0);
+		// return (printf ("NO line\n"), 0);
+		return (0);
 	return (1);
 }
 

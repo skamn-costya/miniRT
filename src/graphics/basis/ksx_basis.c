@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 12:07:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 21:35:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/16 12:56:29 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,26 @@
 // }
 
 void	ksx_basis_set_norm(t_basis *p_basis, t_vector3 *p_norm)
+{
+	t_vector3	tmp_v3;
+
+	if (!p_norm->x && !p_norm->y && !p_norm->z)
+		p_basis->j = ksx_vec3_set(0.f, 1.f, 0.f);
+	else
+		p_basis->j = ksx_vec3_unit(p_norm);
+	if (fabsf(p_basis->j.x) < fabsf(p_basis->j.y)
+		&& fabsf(p_basis->j.z) < fabsf(p_basis->j.y))
+		tmp_v3 = ksx_vec3_set(1.f, 0.f, 0.f);
+	else if (fabsf(p_basis->j.z) < fabsf(p_basis->j.y))
+		tmp_v3 = ksx_vec3_set(0.f, 0.f, 1.f);
+	else
+		tmp_v3 = ksx_vec3_set(0.f, 1.f, 0.f);
+	tmp_v3 = ksx_vec3_cross(&tmp_v3, &p_basis->j);
+	p_basis->k = ksx_vec3_unit(&tmp_v3);
+	p_basis->i = ksx_vec3_cross(&p_basis->j, &p_basis->k);
+}
+
+void	ksx_basis_set_norm_camera(t_basis *p_basis, t_vector3 *p_norm)
 {
 	t_vector3	tmp_v3;
 

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 17:29:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/14 14:50:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,21 @@ void	ksx_draw_norms(t_object *p_object,
 		v3[0] = p_object->pp_tri[idx]->p_norm1->lp;
 		ksx_vec3_resize(&v3[0], NORM_LEN);
 		v3[1] = ksx_vec3_add(&p_object->pp_tri[idx]->p_ver1->cp, &v3[0]);
-		pixel[1] = ksx_draw_get_pixel(p_camera, &v3[1], PIXEL_BLACK);
+		pixel[1] = ksx_draw_get_pixel(p_camera, &v3[1], BACKGROUND);
 		ksx_line(p_image, &pixel[0], &pixel[1]);
 		pixel[0] = ksx_draw_get_pixel(p_camera,
 				&p_object->pp_tri[idx]->p_ver2->cp, PIXEL_RED);
 		v3[0] = p_object->pp_tri[idx]->p_norm2->lp;
 		ksx_vec3_resize(&v3[0], NORM_LEN);
 		v3[1] = ksx_vec3_add(&p_object->pp_tri[idx]->p_ver2->cp, &v3[0]);
-		pixel[1] = ksx_draw_get_pixel(p_camera, &v3[1], PIXEL_BLACK);
+		pixel[1] = ksx_draw_get_pixel(p_camera, &v3[1], BACKGROUND);
 		ksx_line(p_image, &pixel[0], &pixel[1]);
 		pixel[0] = ksx_draw_get_pixel(p_camera,
 				&p_object->pp_tri[idx]->p_ver3->cp, PIXEL_RED);
 		v3[0] = p_object->pp_tri[idx]->p_norm3->lp;
 		ksx_vec3_resize(&v3[0], NORM_LEN);
 		v3[1] = ksx_vec3_add(&p_object->pp_tri[idx]->p_ver3->cp, &v3[0]);
-		pixel[1] = ksx_draw_get_pixel(p_camera, &v3[1], PIXEL_BLACK);
+		pixel[1] = ksx_draw_get_pixel(p_camera, &v3[1], BACKGROUND);
 		ksx_line(p_image, &pixel[0], &pixel[1]);
 		idx++;
 	}

@@ -146,7 +146,8 @@ RAY_DIR = ray/
 RAY_FN =	ray_intersect.c \
 			ray_boxes.c \
 			ray_init.c \
-			ray_cast.c
+			ray_cast.c \
+			ray_point.c
 RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
 # All sources

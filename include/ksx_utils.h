@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/14 14:31:30 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/16 09:12:36 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int32_t		ksx_point_on_ray(const t_vector3 *p_p, const t_vector3 *p_v);
 // t_object	*ksx_create_object(t_vector3 *p_center);
 
 // ksx_utils01.c
+void		ksx_print_vector(t_vector3 *p_vec);
 void		ksx_print_vertex(t_vertex *p_ver, int32_t idx);
 void		ksx_print_tri(t_triangle *p_tri, int32_t idx);
 
