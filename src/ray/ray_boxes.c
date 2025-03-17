@@ -158,8 +158,11 @@ t_ray	ray_generate_w(int32_t x, int32_t y, t_camera *p_camera)
 	float		xy[2];
 	t_vector3	v3[2];
 
+	// Added this - it won't compile - used values before initialization 
+	ray.pixel.x = 0; 
+	ray.pixel.y = 0;
 	xy[0] = ((2.0f * (ray.pixel.x + 0.5f) / WIDTH) - 1.0f) * p_camera->half_width;
-    xy[1] = (1.0f - (2.0f * (ray.pixel.y + 0.5f) / HEIGHT)) * p_camera->half_height;
+  xy[1] = (1.0f - (2.0f * (ray.pixel.y + 0.5f) / HEIGHT)) * p_camera->half_height;
 	v3[0] = ksx_vec3_smulti(&p_camera->basis.i, xy[0]);
 	v3[1] = ksx_vec3_smulti(&p_camera->basis.j, xy[1]);
 	v3[0] = ksx_vec3_add(&v3[0], &v3[1]);

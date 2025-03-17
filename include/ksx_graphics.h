@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/16 11:40:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/17 23:04:52 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,6 +360,7 @@ typedef struct s_triangle
 	};
 	// t_vector3	norm;
 	t_color		color;
+	t_vector3	centr;
 	// uint32_t	generation;
 }	t_triangle;
 
@@ -371,6 +372,16 @@ typedef struct s_box
 	t_triangle	**pp_tris;
 	void		*p_object;
 }	t_box;
+
+typedef struct	s_bvh {
+	t_vector3	aabb_min;
+	t_vector3	aabb_max;
+	uint32_t	left_ch;
+	uint32_t	right_ch;
+	uint8_t		is_leaf;
+	uint32_t	first_tri;
+	uint32_t	tri_count;
+}	t_bvh;
 
 typedef struct s_plane
 {
@@ -402,6 +413,7 @@ typedef struct s_object
 	uint32_t	size_vnrm;
 	t_triangle	**pp_tri;
 	uint32_t	size_tri;
+	t_bvh			*bvh;
 	// void		(*f_transform)(void *, t_basis *);
 }	t_object;
 
