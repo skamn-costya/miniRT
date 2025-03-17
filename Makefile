@@ -59,7 +59,8 @@ OBJECT_FN =	ksx_object01.c \
 			ksx_object02.c \
 			ksx_object03.c \
 			ksx_qrotation.c \
-			ksx_transform.c
+			ksx_transform.c \
+			ksx_norms.c
 OBJECT = $(addprefix $(OBJECT_DIR), $(OBJECT_FN))
 
 OBJ_FILE_DIR = graphics/obj_file/
@@ -145,8 +146,6 @@ PLANE =	$(addprefix $(PLANE_DIR), $(PLANE_FN))
 RAY_DIR = ray/
 RAY_FN =	ray_intersect.c \
 			ray_boxes.c \
-			ray_init.c \
-			ray_cast.c \
 			ray_point.c
 RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 

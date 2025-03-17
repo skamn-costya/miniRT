@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/16 11:40:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/17 14:24:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@
 
 # define EDGE_SIZE	10.f
 // Sphere generation
-# define SPHERE_GEN 4
+# define SPHERE_GEN 2
 // Cylinder step angle
-# define CYLINDER_ANGLE 9.f
+# define CYLINDER_ANGLE 18.f
 
 # define ANGLE 2.5f
 # define STEP 5.f
@@ -374,8 +374,8 @@ typedef struct s_box
 
 typedef struct s_plane
 {
-	t_vector3	point;
-	t_vector3	norm;
+	t_vertex	point;
+	t_vertex	norm;
 	t_color		color;
 }	t_plane;
 

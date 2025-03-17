@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 11:20:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/09 11:49:33 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/16 22:12:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,11 @@ void	key_f10(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 void	key_f11(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	(void) p_keydata;
-	(void) p_grph;
+	p_grph->img_ray->enabled = !p_grph->img_ray->enabled;
 }
 
 void	key_f12(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	(void) p_keydata;
-	(void) p_grph;
-	ray_cast_boxes(p_grph);
+	ray_cast(p_grph);
 }

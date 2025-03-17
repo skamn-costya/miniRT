@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:24:31 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 19:03:22 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/18 00:21:46 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_matrix4	ksx_m4_multi(const t_matrix4 *p_m1, const t_matrix4 *p_m2);
  * 
  * @param[in] p_m a pointer to the matrix for multiplication.
  * @param[in] p_v a pinter to the vector for multiplication.
- * @returns result of multiplication - a matrix 4x4.
+ * @returns result of multiplication - a vector 4
  */
 t_vector4	ksx_m4_vec4(const t_matrix4 *p_m, const t_vector4 *p_v);
 
@@ -47,6 +47,15 @@ t_vector4	ksx_m4_vec4(const t_matrix4 *p_m, const t_vector4 *p_v);
  * @returns determinant
  */
 float		ksx_m4_det(const t_matrix4 *p_m);
+
+/**
+ * @brief 4x4 matrix multiplication by vector 3.
+ * 
+ * @param[in] p_m a pointer to the matrix for multiplication.
+ * @param[in] p_v a pinter to the vector for multiplication.
+ * @returns result of multiplication - a vector 3.
+ */
+t_vector3		ksx_m4_vec3(const t_matrix4 *p_m, const t_vector3 *p_v);
 
 /**
  * @brief calculates invertible matrix of matrix 4x4

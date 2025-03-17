@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/12 16:23:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/17 19:52:46 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_basis.h"
 #include "ksx_utils.h"
+#include "ksx_vec3_math.h"
 #include <stdlib.h>
 
 t_plane	*ksx_create_plane(t_vector3 point, t_vector3 norm, t_color color)
@@ -22,8 +23,8 @@ t_plane	*ksx_create_plane(t_vector3 point, t_vector3 norm, t_color color)
 	p_plane = (t_plane *) malloc(sizeof(t_plane));
 	if (!p_plane)
 		ksx_error("memory allocation failure", __FILE__, __LINE__);
-	p_plane->point = point;
-	p_plane->norm = norm;
+	p_plane->point.wp = point;
+	p_plane->norm.wp = ksx_vec3_unit(&norm);
 	p_plane->color = color;
 	return (p_plane);
 }
@@ -57,12 +58,12 @@ t_plane	**ksx_pln2world(t_plane *p_plane, t_world *p_world)
 // (A,B,C) - вектор нормали
 // (a,b,c) - точка принадлежащая плоскости
 
-float	ksx_plane_check(t_vector3 *p_vec, t_plane *p_plane)
-{
-	float	result;
+// float	ksx_plane_check(t_vector3 *p_vec, t_plane *p_plane)
+// {
+// 	float	result;
 
-	result = p_plane->norm.x * (p_vec->x - p_plane->point.x)
-		+ p_plane->norm.y * (p_vec->y - p_plane->point.y)
-		+ p_plane->norm.z * (p_vec->z - p_plane->point.z);
-	return (result);
-}
+// 	result = p_plane->norm.wp.x * (p_vec->x - p_plane->point.x)
+// 		+ p_plane->norm.wp.y * (p_vec->y - p_plane->point.y)
+// 		+ p_plane->norm.wp.z * (p_vec->z - p_plane->point.z);
+// 	return (result);
+// }

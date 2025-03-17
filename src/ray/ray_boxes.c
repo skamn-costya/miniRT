@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/16 13:09:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/18 00:07:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdio.h>
 #include <math.h>
 
-void	ray_cast_boxes(t_graphics *p_grph)
+void	ray_cast(t_graphics *p_grph)
 {
 	uint32_t	xy[2];
 	t_ray		ray;
@@ -42,7 +42,8 @@ void	ray_cast_boxes(t_graphics *p_grph)
 			// t_ray ray1 = ray1_generate_w(xy[1] % p_grph->img_proj->width, xy[1] / p_grph->img_proj->width, &p_grph->camera);
 			// (void)ray1;
 			ray_check_boxes(&ray, p_grph);
-			if (ray.p_tri)
+			ray_check_planes(&ray, p_grph);
+			if (ray.p_tri || ray.p_pln)
 			{
 				if (ray.length < mm[0])
 					mm[0] = ray.length;
@@ -56,16 +57,36 @@ void	ray_cast_boxes(t_graphics *p_grph)
 		}
 		xy[1]++;
 	}
-	printf("min: %f; max: %f\n", mm[0], mm[1]);
+	// printf("min: %f; max: %f\n", mm[0], mm[1]);
+	ksx_print_basis(&p_grph->camera.basis);
+	ksx_print_vector(&p_grph->world.pp_pln[0]->norm.cp);
 	ksx_time_print();
 	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
 }
+/*
+basis:
+o: vector3: [0.000000, 0.000000, 0.000000]
+u: vector3: [1.000000, 0.000000, 0.000000]
+j: vector3: [0.000000, 1.000000, 0.000000]
+k: vector3: [0.000000, 0.000000, 1.000000]
+w_o: vector3: [0.000000, 0.000000, 0.000000]
+plane normal:
+vector3: [0.000000, 0.000000, -1.000000]
+
+basis:
+o: vector3: [0.000000, 0.000000, 0.000000]
+u: vector3: [0.991445, 0.000000, 0.130526]
+j: vector3: [0.000000, 1.000000, 0.000000]
+k: vector3: [-0.130526, 0.000000, 0.991445]
+w_o: vector3: [0.000000, 0.000000, 0.000000]
+plane normal:
+vector3: [0.130526, 0.000000, -0.991445]
+*/
 
 void	ray_check_boxes(t_ray *p_ray, t_graphics *p_grph)
 {
 	t_box		**pp_box;
 	int32_t		idx[3];
-	t_vector3	v3;
 
 	pp_box = p_grph->world.pp_box;
 	idx[0] = -1;
@@ -74,18 +95,13 @@ void	ray_check_boxes(t_ray *p_ray, t_graphics *p_grph)
 		idx[2] = -1;
 		while (++idx[2] < 12)
 		{
-			v3 = triangle_intersection(&pp_box[idx[0]]->tris[idx[2]], p_ray);
+			triangle_intersection(&pp_box[idx[0]]->tris[idx[2]], p_ray);
 			if (p_ray->length != MAX_LEN)
 			{
 				p_ray->length = MAX_LEN;
 				idx[1] = -1;
 				while (pp_box[idx[0]]->pp_tris[++idx[1]])
-				{
-					v3 = triangle_intersection(pp_box[idx[0]]->pp_tris[idx[1]], p_ray);
-					(void)v3;
-					if (p_ray->length < p_ray->min_length)
-						p_ray->pixel.color.mlx_color = pp_box[idx[0]]->pp_tris[idx[1]]->color.mlx_color;// & p_grph->world.ambient.color.mlx_color;
-				}
+					triangle_intersection(pp_box[idx[0]]->pp_tris[idx[1]], p_ray);
 				break;
 			}
 		}
@@ -101,6 +117,15 @@ with break
 2025-03-12 17:24:14
 2025-03-12 17:24:28
 */
+
+void	ray_check_planes(t_ray *p_ray, t_graphics *p_grph)
+{
+	int32_t		idx;
+
+	idx = -1;
+	while (++idx < p_grph->world.size_pln)
+		plane_intersection(p_grph->world.pp_pln[idx], p_ray);
+}
 
 t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 {
@@ -122,6 +147,7 @@ t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 	ray.pixel.color.a = 0xff;
 	ray.norm = ksx_vec3_set(0.f, 0.f, 0.f);
 	ray.p_tri = NULL;
+	ray.p_pln = NULL;
 	return (ray);
 }
 
@@ -193,7 +219,7 @@ t_color compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
 	// Зеркальное отражение
 	t_vector3 reflect_dir = ksx_vec3_reflect(&dir, p_norm);
 	t_vector3 view_dir = ksx_vec3_unit(p_point); // Камера в (0,0,0)
-	float spec = powf(fmax(ksx_vec3_dot(&reflect_dir, &view_dir), 0.f), 128);
+	float spec = powf(fmax(ksx_vec3_dot(&reflect_dir, &view_dir), 0.f), 256);
 
 	// Итоговое освещение
 	float intensity = ambient + (1.0f - ambient) * diff + 0.5f * spec;
