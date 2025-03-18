@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/17 00:32:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:07:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 # define EPSILON	1.19209e-07
 // # define EPSILON	1e-6f
-// to eliminate artifacts on the borders
+
 # define BIAS		1e-4f
 // # define EPSILON 0.0001f
 # define MAX_LEN 3.402823466e+38F
@@ -28,36 +28,46 @@ typedef struct s_ray
 	t_vector3	direction;
 	float		length;
 	float		min_length;
-	// t_triangle	**pp_box;
+	// t_triangle	*p_box;
 	t_triangle	*p_tri;
 	t_plane		*p_pln;
+	t_light		*p_lgt;
 	t_vector3	point;
 	t_vector3	norm;
 	t_pixel		pixel;
 }	t_ray;
 
-void		intersect_tri(t_ray *ray, t_triangle tri);
-t_ray		new_ray(t_vector3 o, t_vector3 d, float t);
-t_vector3	ray_end(t_ray ray);
 void		ray_cast(t_graphics *grph);
+t_ray		ray_generate(int32_t x, int32_t y, t_camera *p_camera);
 
-t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray);
-t_vector3	plane_intersection(t_plane *p_plane, t_ray *p_ray);
+void		ray_p2boxes(t_world *p_world, t_ray *p_ray);
+void		ray_p2tri(t_triangle *p_tri, t_ray *p_ray);
+void		ray_p2planes(t_world *p_world, t_ray *p_ray);
+void		ray_p2pln(t_plane *p_plane, t_ray *p_ray);
+
+t_vector3	triangle_normal_barycentric(t_vector3 *p_point, t_triangle *p_tri);
+
+// t_color 	compute_lightings(t_ray *p_ray, t_graphics *p_grph);
+t_color		compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
+				t_color *p_color);
+t_color		add_ambient_to_color(t_color base_color, float ambient_ratio,
+				t_color ambient_color);
+
+// t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray);
+// t_vector3	plane_intersection(t_plane *p_plane, t_ray *p_ray);
 // t_vector3	triangle_normal(t_vector3 *p_point,
 // 				t_triangle *p_tri, t_vector3 *p_v3);
-t_vector3	triangle_normal(t_vector3 *p_point, t_triangle *p_tri);
-t_vector3	triangle_normal_barycentric(t_vector3 *p_point, t_triangle *p_tri);
-t_vector3	triangle_normal_euler(t_vector3 *p_point, t_triangle *p_tri);
+// t_vector3	triangle_normal(t_vector3 *p_point, t_triangle *p_tri);
+// t_vector3	triangle_normal_euler(t_vector3 *p_point, t_triangle *p_tri);
 
-t_ray		ray_generate(int32_t x, int32_t y, t_camera *p_camera);
-t_ray		ray_generate_w(int32_t x, int32_t y, t_camera *p_camera);
-void		ray_cast(t_graphics *p_grph);
+// t_ray		ray_generate_w(int32_t x, int32_t y, t_camera *p_camera);
+// void		ray_cast(t_graphics *p_grph);
 // void 		ray_check_boxes(t_ray *p_ray, t_box **pp_box);
-void		ray_check_boxes(t_ray *p_ray, t_graphics *p_grph);
-void		ray_check_planes(t_ray *p_ray, t_graphics *p_grph);
-t_color		compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
-				t_vector3 *p_light, t_color *p_color);
+// void		ray_check_boxes(t_ray *p_ray, t_graphics *p_grph);
+// void		ray_check_planes(t_ray *p_ray, t_graphics *p_grph);
 
-float		pixel_bright(t_vector3 *p_normal, t_vector3 *p_light_dir);
-t_color		color_bright(t_color *p_color, float brightness);
+
+// float		pixel_bright(t_vector3 *p_normal, t_vector3 *p_light_dir);
+// t_color		color_bright(t_color *p_color, float brightness);
+
 #endif

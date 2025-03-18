@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/18 00:24:05 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:47:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,19 +97,12 @@ void	ksx_change_camera(t_graphics *p_grph)
 		p_plane = p_grph->world.pp_pln [idx];
 		ksx_transform(&p_plane->point.wp, &p_grph->camera.vm,
 			&p_plane->point.cp);
-		// p_plane->norm.cp = ksx_vec3_add(&p_plane->norm.wp, &p_grph->camera.basis.w_o);
-		// t_matrix4 m4= p_grph->camera.vm;
-		// m4.e_14 = 0;
-		// m4.e_24 = 0;
-		// m4.e_34 = 0;
-		// ksx_transform(&p_plane->norm.wp, &m4,
-		// 		&p_plane->norm.cp);
 		p_plane->norm.cp = ksx_m4_vec3(&p_grph->camera.vm, &p_plane->norm.wp);
-		// p_plane->norm.cp = transform_normal(&p_plane->norm.wp,
-		// 		&p_grph->world.basis, &p_grph->camera.basis);
-		// p_plane->norm.cp.x *= -1;
-		// p_plane->norm.cp.y *= -1;
 		p_plane->norm.cp = ksx_vec3_unit(&p_plane->norm.cp);
 	}
+	idx = -1;
+	while (++idx < p_grph->world.size_lgt)
+		ksx_transform(&p_grph->world.pp_pln[idx]->point.wp, &p_grph->camera.vm,
+			&p_grph->world.pp_pln[idx]->point.cp);
 	p_grph->camera.flags &= ~CHANGE;
 }

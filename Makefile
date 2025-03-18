@@ -144,9 +144,10 @@ PLANE_FN =	ksx_plane.c
 PLANE =	$(addprefix $(PLANE_DIR), $(PLANE_FN))
 
 RAY_DIR = ray/
-RAY_FN =	ray_intersect.c \
-			ray_boxes.c \
-			ray_point.c
+RAY_FN =	ray_cast.c \
+			ray_tri.c \
+			ray_pln.c \
+			ray_color.c
 RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
 # All sources

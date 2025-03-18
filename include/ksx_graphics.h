@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/17 14:24:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/18 18:10:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -381,7 +381,7 @@ typedef struct s_plane
 
 typedef struct s_light
 {
-	t_vector3	center;
+	t_vertex	point;
 	t_color		color;
 	float		bright;
 }	t_light;
