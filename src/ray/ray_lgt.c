@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 01:19:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 16:42:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,21 @@ void	ray_p2lights(t_world *p_world, t_ray *p_ray)
 
 void	ray_p2lgt(t_world *p_world, t_light *p_light, t_ray *p_ray)
 {
+	p_ray->p_lgt = p_light;
 	p_ray->direction = ksx_vec3_sub(&p_light->point.cp, &p_ray->point);
 	p_ray->direction = ksx_vec3_unit(&p_ray->direction);
 	p_ray->min_length = ksx_vec3_dist(&p_light->point.cp, &p_ray->point);
 	p_ray->length = p_ray->min_length;
 	ray_p2lgt_boxes(p_world, p_ray);
+	(void) p_world;
+	if (p_ray->p_lgt)
+		p_ray->pixel.color = compute_light_contribution(p_ray);
+		// ray_colors_calc(p_ray);
+		// p_ray->pixel.color = ray_colors_blending(&p_ray->pixel.color,
+		// 	&p_light->color, p_light->bright);
+	else
+		p_ray->pixel.color = ray_colors_blending(&p_ray->pixel.color,
+			&p_world->ambient.color, p_world->ambient.bright);
 }
 
 void	ray_p2lgt_boxes(t_world *p_world, t_ray *p_ray)

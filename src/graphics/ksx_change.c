@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/18 18:47:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:28:33 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	ksx_change_camera(t_graphics *p_grph)
 	}
 	idx = -1;
 	while (++idx < p_grph->world.size_lgt)
-		ksx_transform(&p_grph->world.pp_pln[idx]->point.wp, &p_grph->camera.vm,
-			&p_grph->world.pp_pln[idx]->point.cp);
+		ksx_transform(&p_grph->world.pp_lgt[idx]->point.wp, &p_grph->camera.vm,
+			&p_grph->world.pp_lgt[idx]->point.cp);
 	p_grph->camera.flags &= ~CHANGE;
 }

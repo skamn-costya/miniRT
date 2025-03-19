@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/19 00:59:52 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 14:17:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_ray
 {
 	t_vector3	origin;
 	t_vector3	direction;
+	t_vector3	copy_direction;
 	float		length;
 	float		min_length;
 	t_triangle	*p_tri;
@@ -43,14 +44,22 @@ void		ray_p2boxes(t_world *p_world, t_ray *p_ray);
 void		ray_p2tri(t_triangle *p_tri, t_ray *p_ray);
 void		ray_p2planes(t_world *p_world, t_ray *p_ray);
 void		ray_p2pln(t_plane *p_plane, t_ray *p_ray);
+void		ray_p2lights(t_world *p_world, t_ray *p_ray);
+void		ray_p2lgt(t_world *p_world, t_light *p_light, t_ray *p_ray);
+void		ray_p2lgt_boxes(t_world *p_world, t_ray *p_ray);
 
 t_vector3	triangle_normal_barycentric(t_vector3 *p_point, t_triangle *p_tri);
 
 // t_color 	compute_lightings(t_ray *p_ray, t_graphics *p_grph);
 t_color		compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
 				t_color *p_color);
-t_color		add_ambient_to_color(t_color base_color, float ambient_ratio,
-				t_color ambient_color);
+t_color		ray_colors_blending(t_color *p_color1, t_color *p_color2,
+				float ratio);
+void		ray_colors_calc(t_ray *p_ray);
+t_color 	compute_light_contribution(t_ray *p_ray);
+
+				// t_color		add_ambient_to_color(t_color base_color, float ambient_ratio,
+// 				t_color ambient_color);
 
 // t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray);
 // t_vector3	plane_intersection(t_plane *p_plane, t_ray *p_ray);

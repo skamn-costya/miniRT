@@ -147,7 +147,8 @@ RAY_DIR = ray/
 RAY_FN =	ray_cast.c \
 			ray_tri.c \
 			ray_pln.c \
-			ray_color.c
+			ray_color.c \
+			ray_lgt.c
 RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
 # All sources

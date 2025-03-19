@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/18 18:10:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 16:20:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 /* Only support RGBA */
 # define BPP 4
 # define TRANSPARENT	0x00000000
-# define BACKGROUND		0xFFFFFFFF
+# define BACKGROUND		0xFF000000
 
 // Size if color structure 3 for RGB, 4 for RGBA
 # define COLOR_SIZE 3
@@ -100,6 +100,16 @@
 # define MIN_AXIS .051f
 # define MAX_AXIS 5.f
 
+// Diffuse coefficient
+// Specular coefficient
+// Shininess exponent for specular highlight
+typedef struct s_material
+{
+	float	kd;
+	float	ks;
+	float	shininess;
+}	t_material;
+
 // Data type for colors, 32 bites: 8 - alfa, 8 - blue, 8 - green, 8 - red
 typedef struct s_color
 {
@@ -115,6 +125,18 @@ typedef struct s_color
 		uint8_t		rgba[4];
 		uint32_t	mlx_color;
 	};
+	union
+	{
+		struct
+		{
+			float	fr;
+			float	fg;
+			float	fb;
+			float	fa;			
+		};
+		float		frgba[4];
+	};
+	t_material	material;
 }	t_color;
 
 typedef struct s_pixel
@@ -306,19 +328,19 @@ typedef struct s_camera
 	float		tng;
 	float		aspect;
 	float		half_width;
-	float 		half_height;
+	float		half_height;
 	// float		vfov;
 	uint8_t		flags;
 	t_matrix4	vm;
 	t_matrix4	ivm;
 	t_matrix4	pm;
 	// float		focal_len;
-	float	near;
-	float	far;
-	float	left;
-	float	right;
-	float	top;
-	float	bottom;
+	float		near;
+	float		far;
+	float		left;
+	float		right;
+	float		top;
+	float		bottom;
 }	t_camera;
 
 typedef struct s_vertex
@@ -439,7 +461,7 @@ mlx_t		*ksx_init(void);
 int			ksx_prep(void *p_vars);
 t_pixel		ksx_get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y);
 void		ksx_set_pixel(mlx_image_t *p_img, t_pixel *p_pix);
-void	 	applyDepthAttenuation(t_color *p_color, float depth, float k);
+void		applyDepthAttenuation(t_color *p_color, float depth, float k);
 
 mlx_image_t	*ksx_create_image(mlx_t *mlx, uint32_t bg_color);
 int32_t		ksx_image_to_window(mlx_t *p_mlx, mlx_image_t *p_img, int32_t z);

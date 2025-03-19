@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/18 23:46:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 14:24:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ray_p2pln(t_plane *p_plane, t_ray *p_ray)
 	{
 		p_ray->length = f[1];
 		p_ray->min_length = p_ray->length;
-		p_ray->pixel.color.mlx_color = p_plane->color.mlx_color;
+		p_ray->pixel.color = p_plane->color;
 		p_ray->point = v3[1];
 		p_ray->p_tri = NULL;
 		p_ray->p_pln = p_plane;

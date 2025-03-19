@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 00:59:44 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 15:50:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	ray_cast(t_graphics *p_grph)
 		ray_p2planes(&p_grph->world, &ray);
 		if (ray.p_tri || ray.p_pln)
 		{
-			// compute_lightings(&ray, p_grph);
-			ray.pixel.color = compute_lighting(&ray.point, &ray.norm, &ray.pixel.color);
-			ray.pixel.color = add_ambient_to_color(ray.pixel.color,
-				p_grph->world.ambient.bright, p_grph->world.ambient.color);
+			ray_p2lights(&p_grph->world, &ray);
+			// ray.pixel.color = ray_colors_blending(&ray.pixel.color,
+			// 	&p_grph->world.ambient.color, p_grph->world.ambient.bright);
+			// ray.pixel.color = compute_lighting(&ray.point, &ray.norm, &ray.pixel.color);
 			ksx_set_pixel(p_grph->img_ray, &ray.pixel);
 		}
 	}
@@ -64,6 +64,7 @@ t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 	ray.min_length = MAX_LEN;
 	ray.origin = p_camera->basis.o;
 	ray.direction = v3;
+	ray.copy_direction = ray.direction;
 	ray.pixel.x = x;
 	ray.pixel.y = y;
 	ray.pixel.color.mlx_color = TRANSPARENT;
