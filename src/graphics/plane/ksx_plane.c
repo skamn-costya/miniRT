@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 13:45:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 23:41:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ t_plane	*ksx_create_plane(t_vector3 point, t_vector3 norm, t_color color)
 	p_plane->point.wp = point;
 	p_plane->norm.wp = ksx_vec3_unit(&norm);
 	p_plane->color = color;
-	p_plane->color.material.kd = .8f;
+	ksx_color_unit_fraction(&p_plane->color);
+	p_plane->color.material.kd = 1.f;
 	p_plane->color.material.ks = 0.f;
 	p_plane->color.material.shininess = 12.f;
 	return (p_plane);

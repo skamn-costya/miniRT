@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 15:25:38 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 22:04:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "ksx_obj_file.h"
 #include "ksx_vec3_math.h"
 #include "ksx_basis.h"
+#include "ksx_utils.h"
 #include "parser.h"
 #include "libft.h"
 
@@ -111,6 +112,7 @@ static void	ksx_init_world_3(t_graphics *p_grph, t_obj_descr *p_obj_descr)
 	{
 		p_grph->world.ambient.bright = p_obj_descr->ratio;
 		p_grph->world.ambient.color = p_obj_descr->color;
+		ksx_color_unit_fraction(&p_grph->world.ambient.color);
 	}
 	if (p_obj_descr->id == LIGHT)
 	{

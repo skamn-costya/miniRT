@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/05 12:13:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/18 18:11:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 22:36:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_light	*ksx_create_light(t_vector3 center, float bright, t_color color)
 	p_light->point.wp = center;
 	p_light->bright = bright;
 	p_light->color = color;
+	ksx_color_unit_fraction(&p_light->color);
 	return (p_light);
 }
 

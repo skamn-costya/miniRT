@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 15:50:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 22:11:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 	ray.pixel.x = x;
 	ray.pixel.y = y;
 	ray.pixel.color.mlx_color = TRANSPARENT;
-	ray.pixel.color.a = 0xff;
+	// ray.pixel.color.a = 0xff;
 	ray.norm = ksx_vec3_set(0.f, 0.f, 0.f);
 	ray.p_tri = NULL;
 	ray.p_pln = NULL;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/14 14:31:05 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 22:49:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,21 +54,11 @@ int32_t	ksx_abs(const int32_t num)
 	return (result);
 }
 
-/**
- * @brief returns coordinates of the midpoint (between p1 and p2)
- * 
- * @param p_p1 a pointer to the first point
- * @param p_p2 a pointer to the second point
- * @param p point
- */
-t_vector3	ksx_mid_point(const t_vector3 *p_p1, const t_vector3 *p_p2)
+void	ksx_color_unit_fraction(t_color *p_color)
 {
-	t_vector3	result;
-
-	result.x = (p_p1->x + p_p2->x) * .5f;
-	result.y = (p_p1->y + p_p2->y) * .5f;
-	result.z = (p_p1->z + p_p2->z) * .5f;
-	return (result);
+	p_color->ur = p_color->r / 255.f;
+	p_color->ug = p_color->g / 255.f;
+	p_color->ub = p_color->b / 255.f;
 }
 
 void	ksx_time_print()

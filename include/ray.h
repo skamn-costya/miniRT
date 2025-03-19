@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/19 14:17:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 22:27:11 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_ray
 	t_vector3	point;
 	t_vector3	norm;
 	t_pixel		pixel;
+	t_color		color;
 }	t_ray;
 
 void		ray_cast(t_graphics *grph);
@@ -50,11 +51,17 @@ void		ray_p2lgt_boxes(t_world *p_world, t_ray *p_ray);
 
 t_vector3	triangle_normal_barycentric(t_vector3 *p_point, t_triangle *p_tri);
 
+void		ray_colors_add(t_color *p_color1, t_color *p_color2);
+void		ray_colors_multiply(t_color *p_color1, const t_color *p_color2);
+void		ray_colors_scale(t_color *p_color, float scale);
+void		ray_colors_8bit(t_color *p_color);
+void		ray_colors_calc(t_ray *p_ray);
+
 // t_color 	compute_lightings(t_ray *p_ray, t_graphics *p_grph);
 t_color		compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
 				t_color *p_color);
-t_color		ray_colors_blending(t_color *p_color1, t_color *p_color2,
-				float ratio);
+// t_color		ray_colors_blending(t_color *p_color1, t_color *p_color2,
+// 				float ratio);
 void		ray_colors_calc(t_ray *p_ray);
 t_color 	compute_light_contribution(t_ray *p_ray);
 

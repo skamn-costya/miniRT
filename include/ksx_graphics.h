@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 16:20:47 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 23:27:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,11 +100,13 @@
 # define MIN_AXIS .051f
 # define MAX_AXIS 5.f
 
-// Diffuse coefficient
-// Specular coefficient
-// Shininess exponent for specular highlight
+// ka		 - Ambient reflectivity
+// kd		 - Diffuse reflectivity
+// ks		 - Specular reflectivity
+// shininess - Shininess exponent
 typedef struct s_material
 {
+	float	ka;
 	float	kd;
 	float	ks;
 	float	shininess;
@@ -129,13 +131,24 @@ typedef struct s_color
 	{
 		struct
 		{
-			float	fr;
-			float	fg;
-			float	fb;
-			float	fa;			
+			float	ur;
+			float	ug;
+			float	ub;
+			float	ua;			
 		};
-		float		frgba[4];
+		float		urgba[4];
 	};
+	// union
+	// {
+	// 	struct
+	// 	{
+	// 		float	fr;
+	// 		float	fg;
+	// 		float	fb;
+	// 		float	fa;			
+	// 	};
+	// 	float		frgba[4];
+	// };
 	t_material	material;
 }	t_color;
 

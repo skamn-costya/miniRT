@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:26:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 19:08:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 20:53:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	read_of(t_world *p_world, char *file_name)
 	p_list[1] = p_list[0];
 	p_object = ksx_create_object(NULL);
 	p_object->color.mlx_color = 0xffffffff;
+	ksx_color_unit_fraction(&p_object->color);
 	i[0] = 0;
 	i[1] = 0;
 	i[2] = 0;
