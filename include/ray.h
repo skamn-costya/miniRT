@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/19 00:07:24 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 00:59:52 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ typedef struct s_ray
 	t_vector3	direction;
 	float		length;
 	float		min_length;
-	// t_triangle	*p_box;
 	t_triangle	*p_tri;
 	t_plane		*p_pln;
 	t_light		*p_lgt;
