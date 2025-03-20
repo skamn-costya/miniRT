@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 22:04:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 18:19:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ static void	ksx_set_world_defaults(t_world *p_world)
 	p_world->size_lgt = 0;
 	p_world->pp_pln = NULL;
 	p_world->size_pln = 0;
+	p_world->pp_txtr = NULL;
 }
 
 static void	ksx_init_world_1(t_graphics *p_grph,

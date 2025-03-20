@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 23:27:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 18:16:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -396,6 +396,7 @@ typedef struct s_triangle
 	// t_vector3	norm;
 	t_color		color;
 	// uint32_t	generation;
+	void		*p_object;
 }	t_triangle;
 
 typedef struct s_box
@@ -407,19 +408,26 @@ typedef struct s_box
 	void		*p_object;
 }	t_box;
 
-typedef struct s_plane
-{
-	t_vertex	point;
-	t_vertex	norm;
-	t_color		color;
-}	t_plane;
-
 typedef struct s_light
 {
 	t_vertex	point;
 	t_color		color;
 	float		bright;
 }	t_light;
+
+typedef struct s_texture {
+    int width;
+    int height;
+    uint8_t *data; // Stores pixel colors in (R, G, B) format
+} t_texture;
+
+typedef struct s_plane
+{
+	t_vertex	point;
+	t_vertex	norm;
+	t_color		color;
+	t_texture	*p_texture;
+}	t_plane;
 
 typedef struct s_object
 {
@@ -437,6 +445,7 @@ typedef struct s_object
 	uint32_t	size_vnrm;
 	t_triangle	**pp_tri;
 	uint32_t	size_tri;
+	t_texture	*p_texture;
 	// void		(*f_transform)(void *, t_basis *);
 }	t_object;
 
@@ -455,6 +464,7 @@ typedef struct s_world
 	int32_t		size_lgt;
 	t_plane		**pp_pln;
 	int32_t		size_pln;
+	t_texture	**pp_txtr;
 	t_light		ambient;
 }	t_world;
 

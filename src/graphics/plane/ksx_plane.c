@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/20 11:00:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 16:52:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_plane	*ksx_create_plane(t_vector3 point, t_vector3 norm, t_color color)
 	p_plane->color.material.kd = 1.f;
 	p_plane->color.material.ks = 0.f;
 	p_plane->color.material.shininess = 12.f;
+	p_plane->p_texture = NULL;
 	return (p_plane);
 }
 

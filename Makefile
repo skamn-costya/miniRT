@@ -17,6 +17,12 @@ UTILS_FN =	ksx_utils01.c \
 			ksx_utils08.c
 UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
 
+# work with pointer to pointers structure
+PP_STRUCT_DIR = graphics/utils/pp_struct/
+PP_STRUCT_FN =	pp_struct01.c \
+				pp_struct02.c
+PP_STRUCT = $(addprefix $(PP_STRUCT_DIR), $(PP_STRUCT_FN))
+
 # KSX t_vector math
 VECTOR_MATH_DIR = graphics/utils/vector_math/
 VECTOR_MATH_FN =	ksx_vec3_math01.c \
@@ -154,6 +160,7 @@ RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 # All sources
 SRC_DIR = ./src/
 SRC = 	$(UTILS) \
+		$(PP_STRUCT) \
 		$(VECTOR_MATH) \
 		$(MATRIX_MATH) \
 		$(3D) \
@@ -223,6 +230,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)$(PARSER_DIR)
 	mkdir -p $(OBJ_DIR)$(UTILS_DIR)
+	mkdir -p $(OBJ_DIR)$(PP_STRUCT_DIR)
 	mkdir -p $(OBJ_DIR)$(VECTOR_MATH_DIR)
 	mkdir -p $(OBJ_DIR)$(MATRIX_MATH_DIR)
 	mkdir -p $(OBJ_DIR)$(BASIS_DIR)
