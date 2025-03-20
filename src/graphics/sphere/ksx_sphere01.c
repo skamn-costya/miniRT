@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 20:51:59 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 11:10:18 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_object	*ksx_create_sphere(t_vector3 center,
 
 	p_object = ksx_create_object(&center);
 	p_object->size1 = diameter * .5f;
-	p_object->color = color;
+	p_object->color.mlx_color = color.mlx_color;
 	ksx_color_unit_fraction(&p_object->color);
 	ksx_init_sphere_box (p_object);
 	ksx_init_sphere(p_object);
