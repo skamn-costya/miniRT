@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 14:23:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:34:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,8 @@ t_vector3	triangle_normal_barycentric(t_vector3 *p_point, t_triangle *p_tri)
 	f[0] = 1.f / ksx_vec3_mag(&normal[0]);
 	vec3[0] = ksx_vec3_cross(&edge[2], &edge[0]);
 	vec3[1] = ksx_vec3_cross(&edge[2], &edge[1]);
-	f[3] = fmax(ksx_vec3_mag(&vec3[0]) * f[0], 0.f);
-	f[2] = fmax(ksx_vec3_mag(&vec3[1]) * f[0], 0.f);
+	f[3] = fmaxf(0.f, ksx_vec3_mag(&vec3[0]) * f[0]);
+	f[2] = fmaxf(0.f, ksx_vec3_mag(&vec3[1]) * f[0]);
 	f[1] = 1.0f - f[2] - f[3];
 	vec3[0] = ksx_vec3_smulti(&p_tri->p_norm1->cp, f[1]);
 	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm2->cp, f[2]);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/19 22:27:11 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:21:56 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 # define EPSILON	1.19209e-07
 // # define EPSILON	1e-6f
 
-# define BIAS		1e-4f
+# define BIAS		1e-3f
 // # define EPSILON 0.0001f
 # define MAX_LEN 3.402823466e+38F
 
@@ -50,6 +50,7 @@ void		ray_p2lgt(t_world *p_world, t_light *p_light, t_ray *p_ray);
 void		ray_p2lgt_boxes(t_world *p_world, t_ray *p_ray);
 
 t_vector3	triangle_normal_barycentric(t_vector3 *p_point, t_triangle *p_tri);
+t_vector3	triangle_normal_euler(t_vector3 *p_point, t_triangle *p_tri);
 
 void		ray_colors_add(t_color *p_color1, t_color *p_color2);
 void		ray_colors_multiply(t_color *p_color1, const t_color *p_color2);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 23:45:31 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:13:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,15 +79,20 @@ void	ray_colors_calc(t_ray *p_ray)
 	t_vector3	vec3[3];
 	t_color		color[2];
 
-	f[0] = fmaxf(ksx_vec3_dot(&p_ray->norm, &p_ray->direction), 0.f);
+	t_vector3 dir = ksx_vec3_sub(&p_ray->p_lgt->point.cp, &p_ray->point);
+	dir = ksx_vec3_unit(&dir);
+	p_ray->norm = ksx_vec3_unit(&p_ray->norm);
+
+	f[0] = fmaxf(0.f, ksx_vec3_dot(&p_ray->norm, &dir));
 	color[0] = p_ray->color;
 	ray_colors_multiply(&color[0], &p_ray->p_lgt->color);
 	ray_colors_scale(&color[0], p_ray->p_lgt->bright * p_ray->color.material.kd * f[0]);
 	vec3[0] = ksx_vec3_reflect(&p_ray->direction, &p_ray->norm);
-	vec3[1] = ksx_vec3_set(0.f, 0.f, 0.f);
-	vec3[2] = ksx_vec3_sub(&vec3[1], &p_ray->point);
-	vec3[2] = ksx_vec3_unit(&vec3[2]);
-	f[1] = fmaxf(ksx_vec3_dot(&vec3[0], &vec3[2]), 0.f);
+	// vec3[1] = ksx_vec3_set(0.f, 0.f, 0.f);
+	// vec3[2] = ksx_vec3_sub(&vec3[1], &p_ray->point);
+	// vec3[2] = ksx_vec3_unit(&vec3[2]);
+	vec3[2] = ksx_vec3_unit(&p_ray->point);
+	f[1] = fmaxf(0.f, ksx_vec3_dot(&vec3[0], &vec3[2]));
 	f[2] = powf(f[1], p_ray->color.material.shininess);
 	color[1] = p_ray->p_lgt->color;
 	ray_colors_scale(&color[1], p_ray->p_lgt->bright * p_ray->color.material.ks * f[2]);
@@ -187,32 +192,32 @@ void	ray_colors_calc(t_ray *p_ray)
 // 	p_ray->pixel.color.b = (uint8_t)((p_ray->pixel.color.b * intensity));
 // }
 
-t_color compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
-	t_color *p_color)
-{
-	t_vector3 light  = ksx_vec3_set(450.f, 300.f, -250.f);
+// t_color compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
+// 	t_color *p_color)
+// {
+// 	t_vector3 light  = ksx_vec3_set(450.f, 300.f, -250.f);
 
-	t_vector3 dir = ksx_vec3_sub(&light, p_point);
-	dir = ksx_vec3_unit(&dir);
-	*p_norm = ksx_vec3_unit(p_norm);
+// 	t_vector3 dir = ksx_vec3_sub(&light, p_point);
+// 	dir = ksx_vec3_unit(&dir);
+// 	*p_norm = ksx_vec3_unit(p_norm);
 
-	// Фоновая подсветка
-	float ambient = 0.2f; 
+// 	// Фоновая подсветка
+// 	float ambient = 0.2f; 
 
-	// Диффузное освещение
-	float diff = fmax(0.f, ksx_vec3_dot(p_norm, &dir));
+// 	// Диффузное освещение
+// 	float diff = fmax(0.f, ksx_vec3_dot(p_norm, &dir));
 
-	// Зеркальное отражение
-	t_vector3 reflect_dir = ksx_vec3_reflect(&dir, p_norm);
-	t_vector3 view_dir = ksx_vec3_unit(p_point); // Камера в (0,0,0)
-	float spec = powf(fmax(ksx_vec3_dot(&reflect_dir, &view_dir), 0.f), 256);
+// 	// Зеркальное отражение
+// 	t_vector3 reflect_dir = ksx_vec3_reflect(&dir, p_norm);
+// 	t_vector3 view_dir = ksx_vec3_unit(p_point); // Камера в (0,0,0)
+// 	float spec = powf(fmax(ksx_vec3_dot(&reflect_dir, &view_dir), 0.f), 256);
 
-	// Итоговое освещение
-	float intensity = ambient + (1.0f - ambient) * diff + 0.5f * spec;
-	intensity = fminf(intensity, 1.0f); // Ограничение яркости
+// 	// Итоговое освещение
+// 	float intensity = ambient + (1.0f - ambient) * diff + 0.5f * spec;
+// 	intensity = fminf(intensity, 1.0f); // Ограничение яркости
 
-	p_color->r = (uint8_t)((p_color->r * intensity));
-	p_color->g = (uint8_t)((p_color->g * intensity));
-	p_color->b = (uint8_t)((p_color->b * intensity));
-	return (*p_color);
-}
+// 	p_color->r = (uint8_t)((p_color->r * intensity));
+// 	p_color->g = (uint8_t)((p_color->g * intensity));
+// 	p_color->b = (uint8_t)((p_color->b * intensity));
+// 	return (*p_color);
+// }

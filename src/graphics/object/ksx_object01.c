@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/20 10:59:59 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 12:36:54 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	ksx_obj_set_axis(p_object->axis, &p_object->basis);
 	ksx_create_object_1(p_object);
 	p_object->color.material.ka = 1.f;
-	p_object->color.material.kd = 1.f; // .2
-	p_object->color.material.ks = 0.f; // .9
+	p_object->color.material.kd = .5f; // .2
+	p_object->color.material.ks = .9f; // .9
 	p_object->color.material.shininess = 128.f;
 	return (p_object);
 }

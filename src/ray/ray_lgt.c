@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 22:30:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 14:21:28 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,23 @@
 
 static inline void clamp_color(t_color *p_color)
 {
-    p_color->ur = fminf(fmaxf(p_color->ur, 0.0f), 1.0f);
-    p_color->ug = fminf(fmaxf(p_color->ug, 0.0f), 1.0f);
-    p_color->ub = fminf(fmaxf(p_color->ub, 0.0f), 1.0f);
+    p_color->ur = fminf(fmaxf(0.f, p_color->ur), 1.f);
+    p_color->ug = fminf(fmaxf(0.f, p_color->ug), 1.f);
+    p_color->ub = fminf(fmaxf(0.f, p_color->ub), 1.f);
 }
 
 void	ray_p2lights(t_world *p_world, t_ray *p_ray)
 {
 	int32_t		idx;
+	t_vector3	vec3;
 
+	vec3 = ksx_vec3_smulti(&p_ray->norm, BIAS);
+	p_ray->point = ksx_vec3_add(&p_ray->point, &vec3);
 	p_ray->origin = p_ray->point;
 	p_ray->color = p_ray->pixel.color;
 	ray_colors_multiply(&p_ray->pixel.color, &p_world->ambient.color);
-	ray_colors_scale(&p_ray->pixel.color, p_world->ambient.bright);
+	ray_colors_scale(&p_ray->pixel.color,
+		p_world->ambient.bright * p_ray->pixel.color.material.ka);
 	idx = -1;
 	while (++idx < p_world->size_lgt)
 		ray_p2lgt(p_world, p_world->pp_lgt[idx], p_ray);
