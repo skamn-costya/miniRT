@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 11:19:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:03:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 # define KSX_TRUE 1
 # define KSX_FALSE 0
 
-# define PI 3.141592653589793115997963468544185161590576171875
+// # define PI 3.141592653589793115997963468544185161590576171875f
+# define PI 3.1415926535897931f
 
 // PI / 180.f
 # define PI180 0.01745329251f
@@ -419,7 +420,7 @@ typedef struct s_triangle
 		};
 		t_vector3	*p_norms[3];
 	};
-	t_color		*p_color;
+	//t_color		*p_color;
 	void		*p_object;
 }	t_triangle;
 
@@ -471,6 +472,7 @@ typedef struct s_object
 	t_triangle	**pp_tri;
 	uint32_t	size_tri;
 	t_texture	*p_texture;
+	void		(*ray_txtr_uv)(t_vector3 *, float *, float *);
 	// void		(*f_transform)(void *, t_basis *);
 }	t_object;
 

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 15:18:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:52:54 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,16 @@ t_vertex	**ksx_obj_add_vnrm(t_object *p_object, uint32_t size)
 	}
 	free(p_object->pp_vnrm);
 	return (p_object->pp_vnrm = pp_vnrm, &pp_vnrm[p_object->size_vnrm - size]);
+}
+
+void	ksx_obj_set_obj(t_object *p_object)
+{
+	uint32_t	idx;
+
+	idx = 0;
+	while (idx < p_object->size_tri)
+	{
+		p_object->pp_tri[idx]->p_object = (void *)p_object;
+		idx++;
+	}
 }

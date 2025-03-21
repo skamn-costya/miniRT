@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 11:12:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:34:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ inline static void	ksx_create_object_1(t_object	*p_object)
 	p_object->pp_tri = NULL;
 	p_object->size_tri = 0;
 	p_object->p_texture = NULL;
+	p_object->ray_txtr_uv = NULL;
 }
 
 void	ksx_obj_set_axis(t_vertex *p_ver, t_basis *p_basis)

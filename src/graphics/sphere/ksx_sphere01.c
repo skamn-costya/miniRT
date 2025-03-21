@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 11:19:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:53:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include "ksx_sphere.h"
 #include "ksx_3D.h"
 #include "ksx_boxes.h"
+#include "ray_texture.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,11 +38,9 @@ t_object	*ksx_create_sphere(t_vector3 center,
 	p_object->size1 = diameter * .5f;
 	p_object->color.mlx_color = color.mlx_color;
 	if (gen == 0)
-	{
-		p_object->color.material.kd = 0.9f;
-		p_object->color.material.ks = 0.1f;
-	}
+		p_object->color.material.ks = 0.05f;
 	ksx_color_unit_fraction(&p_object->color);
+	p_object->ray_txtr_uv = &ray_txtr_uv_spheres;
 	ksx_init_sphere_box (p_object);
 	ksx_init_sphere(p_object);
 	idx = 0;
@@ -53,6 +52,7 @@ t_object	*ksx_create_sphere(t_vector3 center,
 	ksx_sphere_norns(p_object);
 	ksx_obj_transform(p_object);
 	ksx_obj_tris2box(p_object);
+	ksx_obj_set_obj(p_object);
 	return (p_object);
 }
 
@@ -67,7 +67,7 @@ static void	ksx_init_sphere_box(t_object *p_object)
 	p_object->pp_box[0]->ver[5].op = ksx_vec3_set(-p_object->size1, -p_object->size1, p_object->size1);
 	p_object->pp_box[0]->ver[6].op = ksx_vec3_set(-p_object->size1, -p_object->size1, -p_object->size1);
 	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1, -p_object->size1, -p_object->size1);
-	ksx_create_box(p_object->pp_box[0], BOX_COLOR);
+	ksx_create_box(p_object->pp_box[0], p_object);
 	// ksx_obj_copy_boxvrts(p_object->pp_box[0]->ver, p_object->pp_box[0]->ver_origin, 8);
 }
 
@@ -90,12 +90,4 @@ static void	ksx_init_sphere(t_object *p_object)
 	ksx_tri_set_vertexes(p_object->pp_tri[5], p_object->pp_vrtx[3], p_object->pp_vrtx[2], p_object->pp_vrtx[4]);
 	ksx_tri_set_vertexes(p_object->pp_tri[6], p_object->pp_vrtx[3], p_object->pp_vrtx[4], p_object->pp_vrtx[5]);
 	ksx_tri_set_vertexes(p_object->pp_tri[7], p_object->pp_vrtx[3], p_object->pp_vrtx[5], p_object->pp_vrtx[1]);
-	p_object->pp_tri[0]->p_color = &p_object->color;
-	p_object->pp_tri[1]->p_color = &p_object->color;
-	p_object->pp_tri[2]->p_color = &p_object->color;
-	p_object->pp_tri[3]->p_color = &p_object->color;
-	p_object->pp_tri[4]->p_color = &p_object->color;
-	p_object->pp_tri[5]->p_color = &p_object->color;
-	p_object->pp_tri[6]->p_color = &p_object->color;
-	p_object->pp_tri[7]->p_color = &p_object->color;
 }

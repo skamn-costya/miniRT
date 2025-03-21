@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:17:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/05 12:46:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:53:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ksx_graphics.h"
 
-void	ksx_create_box(t_box *p_box, uint32_t mlx_color);
+void	ksx_create_box(t_box *p_box, t_object *p_object);
 t_box	*ksx_box_add_new(t_box ***ppp_box);
 t_box	*ksx_box_add(t_box ***ppp_box, t_box *p_box);
 

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:55:31 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/20 17:55:54 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:30:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	pp_null_pointers(void **pp_instance, int size)
 }
 
 void	**pp_add_instance(void **pp_instance, void *p_instance,
-	void *p_f_error(char*, char*, int))
+	void (*p_f_error)(char *, char *, int))
 {
 	void	**pp_instance_new;
 	int		size;
@@ -82,7 +82,7 @@ int	pp_search_instance(void **pp_instance, void *p_instance)
 }
 
 void	**pp_del_idx(void **pp_instance, int del_idx,
-	void *p_f_error(char*, char*, int))
+	void (*p_f_error)(char *, char *, int))
 {
 	void	**pp_instance_new;
 	int		size;

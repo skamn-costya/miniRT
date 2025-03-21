@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 11:20:27 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:13:26 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,6 @@ void	ksx_sphere_split(t_object *p_object)
 		ksx_vec3_resize(&pp_ver[idx * 3]->op, p_object->size1);
 		ksx_vec3_resize(&pp_ver[idx * 3 + 1]->op, p_object->size1);
 		ksx_vec3_resize(&pp_ver[idx * 3 + 2]->op, p_object->size1);
-		pp_tri[idx * 4]->p_color = &p_object->color;
-		pp_tri[idx * 4 + 1]->p_color = &p_object->color;
-		pp_tri[idx * 4 + 2]->p_color = &p_object->color;
-		pp_tri[idx * 4 + 3]->p_color = &p_object->color;
 		idx++;
 	}
 	ksx_free_pointers((void ***) &p_object->pp_tri);

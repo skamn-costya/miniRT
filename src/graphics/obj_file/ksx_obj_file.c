@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:26:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 11:18:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:56:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ void	read_of(t_world *p_world, char *file_name)
 	ft_lstclear(&p_list[0], &free_t_fline);
 	ksx_obj_transform(p_object);
 	ksx_obj2world(p_object, p_world);
+	ksx_obj_set_obj(p_object);
 }
 
 t_vertex	*get_v_of(t_fline *p_fline, t_object *p_object, int *p_idx)
@@ -89,7 +90,6 @@ t_triangle	*get_f_of(t_fline *p_fline, t_object *p_object, int *p_idx)
 	p_object->pp_tri[*p_idx]->p_ver1 = p_object->pp_vrtx[i[0][0] - 1];
 	p_object->pp_tri[*p_idx]->p_ver2 = p_object->pp_vrtx[i[1][0] - 1];
 	p_object->pp_tri[*p_idx]->p_ver3 = p_object->pp_vrtx[i[2][0] - 1];
-	p_object->pp_tri[*p_idx]->p_color = &p_object->color;
 	// if ((p_fline->words[4] && !is_i_number(p_fline->words[4])))
 	// {
 	// 	(*p_idx)++;

@@ -154,7 +154,10 @@ RAY_FN =	ray_cast.c \
 			ray_tri.c \
 			ray_pln.c \
 			ray_color01.c \
-			ray_lgt.c
+			ray_lgt.c \
+			ray_texture01.c \
+			ray_texture02.c
+
 RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
 # All sources

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 11:22:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:15:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ inline static void	ray_p_check_tri(t_triangle *p_tri, t_ray *p_ray)
 	if (p_ray->length < p_ray->min_length)
 	{
 		p_ray->min_length = p_ray->length;
-		p_ray->pixel.color = *p_tri->p_color;
+		p_ray->pixel.color = ((t_object *)p_tri->p_object)->color;
 		v3 = ksx_vec3_smulti(&p_ray->direction, p_ray->length);
 		v3 = ksx_vec3_add(&p_ray->origin, &v3);
 		p_ray->point = v3;
