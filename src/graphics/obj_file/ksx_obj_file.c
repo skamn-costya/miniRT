@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:26:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 20:53:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:18:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ t_triangle	*get_f_of(t_fline *p_fline, t_object *p_object, int *p_idx)
 	p_object->pp_tri[*p_idx]->p_ver1 = p_object->pp_vrtx[i[0][0] - 1];
 	p_object->pp_tri[*p_idx]->p_ver2 = p_object->pp_vrtx[i[1][0] - 1];
 	p_object->pp_tri[*p_idx]->p_ver3 = p_object->pp_vrtx[i[2][0] - 1];
-	p_object->pp_tri[*p_idx]->color.mlx_color = 0xffffffff;
+	p_object->pp_tri[*p_idx]->p_color = &p_object->color;
 	// if ((p_fline->words[4] && !is_i_number(p_fline->words[4])))
 	// {
 	// 	(*p_idx)++;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/20 14:13:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 01:23:18 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	ray_colors_calc(t_ray *p_ray)
 	// vec3[2] = ksx_vec3_unit(&vec3[2]);
 	vec3[2] = ksx_vec3_unit(&p_ray->point);
 	f[1] = fmaxf(0.f, ksx_vec3_dot(&vec3[0], &vec3[2]));
-	f[2] = powf(f[1], p_ray->color.material.shininess);
+	f[2] = powf(f[1], p_ray->color.material.ns);
 	color[1] = p_ray->p_lgt->color;
 	ray_colors_scale(&color[1], p_ray->p_lgt->bright * p_ray->color.material.ks * f[2]);
 	ray_colors_add(&color[0], &color[1]);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/20 18:16:00 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:19:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@
 # define BPP 4
 # define TRANSPARENT	0x00000000
 # define BACKGROUND		0xFF000000
+# define TRI_COLOR		0xFFFFFFFF
+// # define OBJ_COLOR		0xFFFFFFFF
 
 // Size if color structure 3 for RGB, 4 for RGBA
 # define COLOR_SIZE 3
@@ -100,16 +102,51 @@
 # define MIN_AXIS .051f
 # define MAX_AXIS 5.f
 
-// ka		 - Ambient reflectivity
-// kd		 - Diffuse reflectivity
-// ks		 - Specular reflectivity
-// shininess - Shininess exponent
+// MTL material format (Lightwave, OBJ)
+/*
+Ka: specifies ambient color, to account for light that is scattered about the
+	entire scene [see Wikipedia entry for Phong Reflection Model] using values
+	between 0 and 1 for the RGB components.
+
+Kd: specifies diffuse color, which typically contributes most of the color to
+	an object [see Wikipedia entry for Diffuse Reflection]. In this example,
+	Kd represents a grey color, which will get modified by a colored texture map
+	specified in the map_Kd statement
+
+Ks: specifies specular color, the color seen where the surface is shiny
+	and mirror-like [see Wikipedia entry for Specular Reflection].
+
+Ns: defines the focus of specular highlights in the material. Ns values normally
+	range from 0 to 1000, with a high value resulting in a tight, concentrated
+	highlight.
+
+Ni: defines the optical density (aka index of refraction) in the current
+	material. The values can range from 0.001 to 10. A value of 1.0 means that
+	light does not bend as it passes through an object.
+
+d: specifies a factor for dissolve, how much this material dissolves into
+	the background. A factor of 1.0 is fully opaque. A factor of 0.0 is
+	completely transparent.
+
+illum: specifies an illumination model, using a numeric value. See Notes below
+	for more detail on the illum keyword. The value 0 represents the simplest
+	illumination model, relying on the Kd for the material modified by a texture
+	map specified in a map_Kd statement if present. The compilers of this
+	resource believe that the choice of illumination model is irrelevant for
+	3D printing use and is ignored on import by some software applications.
+	For example, the MTL Loader in the threejs Javascript library appears to
+	ignore illum statements. Comments welcome.
+
+map_Kd: specifies a color texture file to be applied to the diffuse reflectivity
+	of the material. During rendering, map_Kd values are multiplied by the Kd
+	values to derive the RGB components.
+*/
 typedef struct s_material
 {
 	float	ka;
 	float	kd;
 	float	ks;
-	float	shininess;
+	float	ns;
 }	t_material;
 
 // Data type for colors, 32 bites: 8 - alfa, 8 - blue, 8 - green, 8 - red
@@ -138,17 +175,6 @@ typedef struct s_color
 		};
 		float		urgba[4];
 	};
-	// union
-	// {
-	// 	struct
-	// 	{
-	// 		float	fr;
-	// 		float	fg;
-	// 		float	fb;
-	// 		float	fa;			
-	// 	};
-	// 	float		frgba[4];
-	// };
 	t_material	material;
 }	t_color;
 
@@ -393,9 +419,7 @@ typedef struct s_triangle
 		};
 		t_vector3	*p_norms[3];
 	};
-	// t_vector3	norm;
-	t_color		color;
-	// uint32_t	generation;
+	t_color		*p_color;
 	void		*p_object;
 }	t_triangle;
 
@@ -415,11 +439,12 @@ typedef struct s_light
 	float		bright;
 }	t_light;
 
-typedef struct s_texture {
-    int width;
-    int height;
-    uint8_t *data; // Stores pixel colors in (R, G, B) format
-} t_texture;
+typedef struct s_texture
+{
+	int		width;
+	int		height;
+	uint8_t	*data; // Stores pixel colors in (R, G, B) format
+}	t_texture;
 
 typedef struct s_plane
 {

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/20 11:10:18 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 11:19:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ t_object	*ksx_create_sphere(t_vector3 center,
 	p_object = ksx_create_object(&center);
 	p_object->size1 = diameter * .5f;
 	p_object->color.mlx_color = color.mlx_color;
+	if (gen == 0)
+	{
+		p_object->color.material.kd = 0.9f;
+		p_object->color.material.ks = 0.1f;
+	}
 	ksx_color_unit_fraction(&p_object->color);
 	ksx_init_sphere_box (p_object);
 	ksx_init_sphere(p_object);
@@ -85,12 +90,12 @@ static void	ksx_init_sphere(t_object *p_object)
 	ksx_tri_set_vertexes(p_object->pp_tri[5], p_object->pp_vrtx[3], p_object->pp_vrtx[2], p_object->pp_vrtx[4]);
 	ksx_tri_set_vertexes(p_object->pp_tri[6], p_object->pp_vrtx[3], p_object->pp_vrtx[4], p_object->pp_vrtx[5]);
 	ksx_tri_set_vertexes(p_object->pp_tri[7], p_object->pp_vrtx[3], p_object->pp_vrtx[5], p_object->pp_vrtx[1]);
-	p_object->pp_tri[0]->color = p_object->color;
-	p_object->pp_tri[1]->color = p_object->color;
-	p_object->pp_tri[2]->color = p_object->color;
-	p_object->pp_tri[3]->color = p_object->color;
-	p_object->pp_tri[4]->color = p_object->color;
-	p_object->pp_tri[5]->color = p_object->color;
-	p_object->pp_tri[6]->color = p_object->color;
-	p_object->pp_tri[7]->color = p_object->color;
+	p_object->pp_tri[0]->p_color = &p_object->color;
+	p_object->pp_tri[1]->p_color = &p_object->color;
+	p_object->pp_tri[2]->p_color = &p_object->color;
+	p_object->pp_tri[3]->p_color = &p_object->color;
+	p_object->pp_tri[4]->p_color = &p_object->color;
+	p_object->pp_tri[5]->p_color = &p_object->color;
+	p_object->pp_tri[6]->p_color = &p_object->color;
+	p_object->pp_tri[7]->p_color = &p_object->color;
 }

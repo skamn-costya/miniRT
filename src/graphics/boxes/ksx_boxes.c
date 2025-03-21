@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 13:18:43 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/12 16:00:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 12:03:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,12 @@ void	ksx_create_box(t_box *p_box, uint32_t mlx_color)
 	ksx_create_box_2(p_box);
 	idx = -1;
 	while (++idx < 12)
-		p_box->tris[idx].color.mlx_color = mlx_color;
+	{
+		p_box->tris[idx].p_color = (t_color *)malloc(sizeof(t_color)); // needs free
+		if (!p_box->tris[idx].p_color)
+			ksx_error("memory allocation failure", __FILE__, __LINE__);
+		p_box->tris[idx].p_color->mlx_color = mlx_color;
+	}
 }
 
 static void	ksx_create_box_1(t_box *p_box)
