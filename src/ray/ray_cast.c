@@ -18,6 +18,7 @@
 #include "ksx_vec3_math.h"
 #include <stdio.h>
 #include <math.h>
+#include "bvh.h"
 
 void	ray_cast(t_graphics *p_grph)
 {
@@ -30,6 +31,7 @@ void	ray_cast(t_graphics *p_grph)
 	ray.origin = p_grph->camera.basis.o;
 	xy[0] = p_grph->img_proj->width * p_grph->img_proj->height;
 	xy[1] = -1;
+	p_grph->world.pp_obj[0]->bvh = build_bvh(p_grph->world.pp_obj[0]->pp_tri, p_grph->world.pp_obj[0]->size_tri);
 	while (++xy[1] < xy[0])
 	{
 		ray = ray_generate(xy[1] % p_grph->img_proj->width, xy[1]

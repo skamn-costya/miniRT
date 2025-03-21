@@ -59,8 +59,9 @@ void		ray_colors_8bit(t_color *p_color);
 void		ray_colors_calc(t_ray *p_ray);
 
 // t_color 	compute_lightings(t_ray *p_ray, t_graphics *p_grph);
-t_color		compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
-				t_color *p_color);
+
+t_color compute_lighting(t_vector3 *p_point, t_vector3 *p_norm,
+	t_vector3 *p_light, t_color *p_color);
 // t_color		ray_colors_blending(t_color *p_color1, t_color *p_color2,
 // 				float ratio);
 void		ray_colors_calc(t_ray *p_ray);
@@ -69,7 +70,7 @@ t_color 	compute_light_contribution(t_ray *p_ray);
 				// t_color		add_ambient_to_color(t_color base_color, float ambient_ratio,
 // 				t_color ambient_color);
 
-// t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray);
+t_vector3	triangle_intersection(t_triangle *p_tri, t_ray *p_ray);
 // t_vector3	plane_intersection(t_plane *p_plane, t_ray *p_ray);
 // t_vector3	triangle_normal(t_vector3 *p_point,
 // 				t_triangle *p_tri, t_vector3 *p_v3);
@@ -79,7 +80,7 @@ t_color 	compute_light_contribution(t_ray *p_ray);
 // t_ray		ray_generate_w(int32_t x, int32_t y, t_camera *p_camera);
 // void		ray_cast(t_graphics *p_grph);
 // void 		ray_check_boxes(t_ray *p_ray, t_box **pp_box);
-// void		ray_check_boxes(t_ray *p_ray, t_graphics *p_grph);
+void		ray_check_boxes(t_ray *p_ray, t_graphics *p_grph);
 // void		ray_check_planes(t_ray *p_ray, t_graphics *p_grph);
 
 

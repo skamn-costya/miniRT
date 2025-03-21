@@ -163,7 +163,7 @@ RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
 # BVH
 BVH_DIR = bvh/
-BVH_FN = 
+BVH_FN = bvh_build.c 
 BVH = $(addprefix $(BVH_DIR), $(BVH_FN))
 
 # All sources
@@ -231,7 +231,7 @@ INCLUDE_DIRS =	$(DIR_INCLUDE) \
 
 NAME = minirt
 CC = cc
-CCFLAGS = -g -Wall -Wextra -Werror
+# CCFLAGS = -g -Wall -Wextra -Werror
 
 $(NAME): $(OBJ_DIR) $(OBJS) make_lib
 	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_DIRS:%=-I%) $(LIB_DIRS:%=-L%) $(LIBS:lib%.a=-l%) -lm -ldl -lglfw -o $(NAME)

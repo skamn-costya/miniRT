@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 15:03:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 19:57:40 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define KSX_GRAPHICS_H
 
 # include "MLX42.h"
-# include <stdint.h>
+#include <stdint.h>
 
 # define AXIS_LEN 	25.f
 # define NORM_LEN 	15.f
@@ -422,6 +422,7 @@ typedef struct s_triangle
 	};
 	//t_color		*p_color;
 	void		*p_object;
+	t_vector3	centr;
 }	t_triangle;
 
 typedef struct s_box
@@ -433,7 +434,7 @@ typedef struct s_box
 	void		*p_object;
 }	t_box;
 
-typedef struct	s_bvh {
+typedef struct	s_bvhnode {
 	t_vector3	aabb_min;
 	t_vector3	aabb_max;
 	uint32_t	left_ch;
@@ -441,6 +442,13 @@ typedef struct	s_bvh {
 	uint8_t		is_leaf;
 	uint32_t	first_tri;
 	uint32_t	tri_count;
+}	t_bvhnode;
+
+typedef struct	s_bvh {
+	t_bvhnode	*all_nodes;
+	t_triangle	**pp_tri;
+	uint32_t	*tri_index;
+	uint32_t	nodes_used;
 }	t_bvh;
 
 typedef struct s_light

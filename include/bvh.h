@@ -15,6 +15,6 @@
 
 #include "minirt.h"
 
-
+t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n);
 
 #endif
