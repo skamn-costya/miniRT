@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 18:23:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:14:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ void	ksx_init_cylinder_tri(t_object *p_object,
 				idx[2] = 0;
 			ksx_tri_set_vertexes(pp_tri[idx[1]], pp_ver[idx[1]], pp_ver[idx[2]], pp_ver[idx[1] + size]);
 			ksx_tri_set_vertexes(pp_tri[idx[1] + size], pp_ver[idx[1] + size], pp_ver[idx[2] + size], pp_ver[idx[2]]);
-			pp_tri[idx[1]]->color = p_object->color;
-			pp_tri[idx[1] + size]->color = p_object->color;
 			idx[1]++;
 		}
 		idx[0]++;
@@ -81,10 +79,6 @@ static void	ksx_init_cylinder_tri_(t_object *p_object,
 		ksx_tri_set_vertexes(pp_tri[idx[1] + size], pp_ver[1][idx[0]], pp_ver[1][idx[1]], pp_ver[0][idx[1]]);
 		ksx_tri_set_vertexes(pp_tri[idx[1] + size * 2], pp_ver[2][idx[0]], pp_ver[2][idx[1]], pp_ver[3][idx[0]]);
 		ksx_tri_set_vertexes(pp_tri[idx[1] + size * 3], pp_ver[3][idx[0]], pp_ver[3][idx[1]], pp_ver[2][idx[1]]);
-		pp_tri[idx[1]]->color = p_object->color;
-		pp_tri[idx[1] + size]->color = p_object->color;
-		pp_tri[idx[1] + size * 2]->color = p_object->color;
-		pp_tri[idx[1] + size * 3]->color = p_object->color;
 		idx[0]++;
 	}
 }
@@ -107,8 +101,6 @@ static void	ksx_init_cylinder_tri_cup(t_object *p_object, uint32_t size, t_verte
 		ksx_tri_set_vertexes(pp_tri[idx[0]], pp_ver_a[idx[0]], pp_ver_a[idx[1]], p_object->pp_vrtx[0]);
 		// ksx_tri_set_vertexes(pp_tri[idx[0] + size], pp_ver_a[idx[0]], pp_ver_a[idx[1]], p_object->pp_vrtx[0]);
 		ksx_tri_set_vertexes(pp_tri[idx[0] + size], pp_ver_b[idx[0]], pp_ver_b[idx[1]], p_object->pp_vrtx[1]);
-		pp_tri[idx[0]]->color = p_object->color;
-		pp_tri[idx[0] + size]->color = p_object->color;
 		idx[0]++;
 	}
 }

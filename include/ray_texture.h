@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ksx_boxes.h                                        :+:      :+:    :+:   */
+/*   ray_texture.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 13:17:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 15:53:47 by ksorokol         ###   ########.fr       */
+/*   Created: 2025/03/20 16:45:28 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/03/21 14:37:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef KSX_BOXES_H
-# define KSX_BOXES_H
+#ifndef RAY_TEXTURE_H
+# define RAY_TEXTURE_H
 
 # include "ksx_graphics.h"
 
-void	ksx_create_box(t_box *p_box, t_object *p_object);
-t_box	*ksx_box_add_new(t_box ***ppp_box);
-t_box	*ksx_box_add(t_box ***ppp_box, t_box *p_box);
+# define PI_1	0.31830988618379069
+# define PI_12	0.15915494309189535
 
-#endif	// KSX_BOXES_H
+t_texture	*ray_txtr_create_checkerboard(t_world *p_worl);
+
+void	ray_txtr_uv_plan(t_vector3 *p_point, float *p_u, float *p_v);
+void	ray_txtr_uv_spheres(t_vector3 *p_point, float *p_u, float *p_v);
+void	ray_txtr_uv_cylinder(t_vector3 *p_point, float *p_u, float *p_v);
+
+#endif // RAY_TEXTURE_H

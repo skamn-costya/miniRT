@@ -17,6 +17,12 @@ UTILS_FN =	ksx_utils01.c \
 			ksx_utils08.c
 UTILS = $(addprefix $(UTILS_DIR), $(UTILS_FN))
 
+# work with pointer to pointers structure
+PP_STRUCT_DIR = graphics/utils/pp_struct/
+PP_STRUCT_FN =	pp_struct01.c \
+				pp_struct02.c
+PP_STRUCT = $(addprefix $(PP_STRUCT_DIR), $(PP_STRUCT_FN))
+
 # KSX t_vector math
 VECTOR_MATH_DIR = graphics/utils/vector_math/
 VECTOR_MATH_FN =	ksx_vec3_math01.c \
@@ -59,7 +65,8 @@ OBJECT_FN =	ksx_object01.c \
 			ksx_object02.c \
 			ksx_object03.c \
 			ksx_qrotation.c \
-			ksx_transform.c
+			ksx_transform.c \
+			ksx_norms.c
 OBJECT = $(addprefix $(OBJECT_DIR), $(OBJECT_FN))
 
 OBJ_FILE_DIR = graphics/obj_file/
@@ -144,11 +151,14 @@ PLANE =	$(addprefix $(PLANE_DIR), $(PLANE_FN))
 
 # Rays
 RAY_DIR = ray/
-RAY_FN =	ray_intersect.c \
-			ray_boxes.c \
-			ray_init.c \
-			ray_cast.c \
-			ray_point.c
+RAY_FN =	ray_cast.c \
+			ray_tri.c \
+			ray_pln.c \
+			ray_color01.c \
+			ray_lgt.c \
+			ray_texture01.c \
+			ray_texture02.c
+
 RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
 # BVH
@@ -159,6 +169,7 @@ BVH = $(addprefix $(BVH_DIR), $(BVH_FN))
 # All sources
 SRC_DIR = ./src/
 SRC = 	$(UTILS) \
+		$(PP_STRUCT) \
 		$(VECTOR_MATH) \
 		$(MATRIX_MATH) \
 		$(3D) \
@@ -229,6 +240,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 	mkdir -p $(OBJ_DIR)$(PARSER_DIR)
 	mkdir -p $(OBJ_DIR)$(UTILS_DIR)
+	mkdir -p $(OBJ_DIR)$(PP_STRUCT_DIR)
 	mkdir -p $(OBJ_DIR)$(VECTOR_MATH_DIR)
 	mkdir -p $(OBJ_DIR)$(MATRIX_MATH_DIR)
 	mkdir -p $(OBJ_DIR)$(BASIS_DIR)

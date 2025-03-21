@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 16:57:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:34:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+inline static void	ksx_create_object_1(t_object	*p_object);
 
 t_object	*ksx_create_object(t_vector3 *p_center)
 {
@@ -37,6 +39,16 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	if (p_center)
 		p_object->basis.w_o = *p_center;
 	ksx_obj_set_axis(p_object->axis, &p_object->basis);
+	ksx_create_object_1(p_object);
+	return (p_object);
+}
+
+inline static void	ksx_create_object_1(t_object	*p_object)
+{
+	p_object->color.material.ka = 1.f;
+	p_object->color.material.kd = .2f; // .2
+	p_object->color.material.ks = .9f; // .9
+	p_object->color.material.ns = 128.f;
 	p_object->pp_box = NULL;
 	p_object->pp_vrtx = NULL;
 	p_object->size_vrtx = 0;
@@ -44,7 +56,8 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object->size_vnrm = 0;
 	p_object->pp_tri = NULL;
 	p_object->size_tri = 0;
-	return (p_object);
+	p_object->p_texture = NULL;
+	p_object->ray_txtr_uv = NULL;
 }
 
 void	ksx_obj_set_axis(t_vertex *p_ver, t_basis *p_basis)

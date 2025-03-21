@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/14 14:41:24 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:54:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 #include "ksx_3D.h"
 #include "ksx_cylinder.h"
 #include "ksx_triangle.h"
+#include "ray_texture.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,9 +40,12 @@ t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 	p_object = ksx_create_object(&center);
 	if (!p_object)
 		return (NULL);
-	p_object->color = color;
+	p_object->color.mlx_color = color.mlx_color;
+	ksx_color_unit_fraction(&p_object->color);
+	p_object->ray_txtr_uv = &ray_txtr_uv_cylinder;
 	p_object->size1 = dia_ht[0] * .5f;
 	p_object->size2 = dia_ht[1] * .5f;
+	norm = ksx_vec3_unit(&norm);
 	ksx_basis_set_norm(&p_object->basis, &norm);
 	ksx_init_cylinder_box (p_object);
 	ksx_init_cylinder(p_object);
@@ -49,6 +53,7 @@ t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 	ksx_obj_transform(p_object);
 	ksx_obj_tris2box(p_object);
 	ksx_cylinder_norns(p_object);
+	ksx_obj_set_obj(p_object);
 	return (p_object);
 }
 
@@ -63,7 +68,7 @@ static void	ksx_init_cylinder_box(t_object *p_object)
 	p_object->pp_box[0]->ver[5].op = ksx_vec3_set(-p_object->size1, -p_object->size2, p_object->size1);
 	p_object->pp_box[0]->ver[6].op = ksx_vec3_set(-p_object->size1, -p_object->size2, -p_object->size1);
 	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1, -p_object->size2, -p_object->size1);
-	ksx_create_box(p_object->pp_box[0], BOX_COLOR);
+	ksx_create_box(p_object->pp_box[0], p_object);
 	// ksx_obj_copy_boxvrts(p_object->pp_box[0]->ver, p_object->pp_box[0]->ver_origin, 8);
 }
 

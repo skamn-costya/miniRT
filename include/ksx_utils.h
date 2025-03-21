@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/16 09:12:36 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 20:48:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 float		ksx_fraction(const t_pixel *p_p, const t_pixel *p_p1,
 				const t_pixel *p_p2);
 int32_t		ksx_abs(const int32_t num);
-t_vector3	ksx_mid_point(const t_vector3 *p_p1, const t_vector3 *p_p2);
 void		ksx_time_print();
+void		ksx_color_unit_fraction(t_color *p_color);
 
 // ksx_utils05.c
 
@@ -56,5 +56,6 @@ int32_t		ksx_point_on_ray(const t_vector3 *p_p, const t_vector3 *p_v);
 void		ksx_print_vector(t_vector3 *p_vec);
 void		ksx_print_vertex(t_vertex *p_ver, int32_t idx);
 void		ksx_print_tri(t_triangle *p_tri, int32_t idx);
+void		ksx_print_basis(t_basis *p_basis);
 
 #endif	// KSX_UTILS_H //

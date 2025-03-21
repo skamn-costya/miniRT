@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/12 16:23:08 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 12:28:33 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ksx_change(t_graphics *p_grph)
 {
 	t_object	**pp_object;
 	t_object	*p_object;
-	int32_t	idx;
+	int32_t		idx;
 
 	if (!p_grph->world.pp_obj)
 		return ;
@@ -60,7 +60,7 @@ void	ksx_change_world(t_graphics *p_grph)
 {
 	t_object	**pp_object;
 	t_object	*p_object;
-	int32_t	idx;
+	int32_t		idx;
 
 	if (!p_grph->world.pp_obj)
 		return ;
@@ -80,7 +80,7 @@ void	ksx_change_world(t_graphics *p_grph)
 void	ksx_change_camera(t_graphics *p_grph)
 {
 	t_object	**pp_object;
-	t_object	*p_object;
+	t_plane		*p_plane;
 	int32_t		idx;
 
 	ksx_camera_set_vm(&p_grph->camera);
@@ -88,12 +88,21 @@ void	ksx_change_camera(t_graphics *p_grph)
 	if (!p_grph->world.pp_obj)
 		return ;
 	pp_object = p_grph->world.pp_obj;
-	idx = 0;
-	while (idx < p_grph->world.size_obj)
+	idx = -1;
+	while (++idx < p_grph->world.size_obj)
+		ksx_camera_obj_vm (pp_object[idx], &p_grph->camera.vm);
+	idx = -1;
+	while (++idx < p_grph->world.size_pln)
 	{
-		p_object = pp_object[idx];
-		ksx_camera_obj_vm (p_object, &p_grph->camera.vm);
-		idx++;
+		p_plane = p_grph->world.pp_pln [idx];
+		ksx_transform(&p_plane->point.wp, &p_grph->camera.vm,
+			&p_plane->point.cp);
+		p_plane->norm.cp = ksx_m4_vec3(&p_grph->camera.vm, &p_plane->norm.wp);
+		p_plane->norm.cp = ksx_vec3_unit(&p_plane->norm.cp);
 	}
+	idx = -1;
+	while (++idx < p_grph->world.size_lgt)
+		ksx_transform(&p_grph->world.pp_lgt[idx]->point.wp, &p_grph->camera.vm,
+			&p_grph->world.pp_lgt[idx]->point.cp);
 	p_grph->camera.flags &= ~CHANGE;
 }

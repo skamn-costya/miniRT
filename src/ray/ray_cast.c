@@ -5,111 +5,73 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/23 21:50:40 by username          #+#    #+#             */
-/*   Updated: 2025/03/13 19:03:24 by ksorokol         ###   ########.fr       */
+/*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/03/19 22:11:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "ksx_graphics.h"
 #include "ray.h"
-#include "ksx_vec3_math.h"
-#include "ksx_3D.h"
+#include "ksx_object.h"
 #include "ksx_utils.h"
-#include "stdio.h"
-#include "ksx_triangle.h"
+#include "ksx_3D.h"
+#include "ksx_vec3_math.h"
+#include <stdio.h>
+#include <math.h>
 
-static void ray_scan_scene(t_ray *ray, t_graphics grph)
+void	ray_cast(t_graphics *p_grph)
 {
-	int32_t	i;
-	int	j;
+	int32_t	xy[2];
+	t_ray	ray;
 
-	i = 0;
-	t_triangle	tri;
-	t_triangle	tri2;
-	t_vertex a;
-	t_vertex b;
-	t_vertex c;
-
-	// Create custom triangle over whole screen
-	//float distance = 10;
-	a.cp = ksx_vec3_set(0, 100, 1072);
-	b.cp = ksx_vec3_set(-100, -100, 1072);
-	c.cp = ksx_vec3_set(100, -100, 1072);
-	ksx_tri_set_vertexes(&tri, &a, &b, &c);
-	t_vertex d, e, f;
-	d.cp = ksx_vec3_set(0, -200, 1072);
-	e.cp = ksx_vec3_set(-150, -50, 1072);
-	f.cp = ksx_vec3_set(50, -150, 1072);
-	ksx_tri_set_vertexes(&tri2, &d, &e, &f);
-	while (i < grph.world.size_box)
+	ksx_time_print();
+	mlx_delete_image(p_grph->mlx, p_grph->img_ray);
+	p_grph->img_ray = ksx_create_image(p_grph->mlx, TRANSPARENT);
+	ray.origin = p_grph->camera.basis.o;
+	xy[0] = p_grph->img_proj->width * p_grph->img_proj->height;
+	xy[1] = -1;
+	while (++xy[1] < xy[0])
 	{
-		j = 0;
-		while (grph.world.pp_box[i]->pp_tris[j])
+		ray = ray_generate(xy[1] % p_grph->img_proj->width, xy[1]
+				/ p_grph->img_proj->width, &p_grph->camera);
+		ray_p2boxes(&p_grph->world, &ray);
+		ray_p2planes(&p_grph->world, &ray);
+		if (ray.p_tri || ray.p_pln)
 		{
-			//print_tri(*grph.world.pp_box[i]->pp_tris[j]);
-			//printf("\n");
-			//if (grph.world.pp_box[i]->pp_tris[j]->p_ver1->cp.z < 0)
-			//	print_tri(*grph.world.pp_box[i]->pp_tris[j]);
-			intersect_tri(ray, *grph.world.pp_box[i]->pp_tris[j]);
-			j++;
+			ray_p2lights(&p_grph->world, &ray);
+			// ray.pixel.color = ray_colors_blending(&ray.pixel.color,
+			// 	&p_grph->world.ambient.color, p_grph->world.ambient.bright);
+			// ray.pixel.color = compute_lighting(&ray.point, &ray.norm, &ray.pixel.color);
+			ksx_set_pixel(p_grph->img_ray, &ray.pixel);
 		}
-		i++;
 	}
-	//intersect_tri(ray, tri);
-	// int random_tri = 50;
-	//if (*grph.world.pp_box[0]->pp_tris[])
-	//print_tri(*grph.world.pp_box[0]->pp_tris[0]);
-	// intersect_tri(ray, *grph.world.pp_box[0]->pp_tris[random_tri]);
+	ksx_time_print();
+	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
 }
 
-void	ray_cast(t_graphics *grph)
+t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 {
-	float		x;
-	float		y;
 	t_ray		ray;
-	t_vector3	pixelPos;
-	float	sh = (float)HEIGHT;
-	float	sw = (float)WIDTH;
+	float		xy[2];
+	t_vector3	v3;
 
-	// mlx_image_t *p_img = ksx_create_image(grph->mlx);
-	// Canvas points
-	float canvas_z = grph->camera.near;
-	t_vector3 p0 = ksx_vec3_set(-sw /2, sh /2, canvas_z);
-	t_vector3 p1 = ksx_vec3_set(sw / 2, sh / 2, canvas_z);
-	t_vector3 p2 = ksx_vec3_set(-sw / 2, -sh / 2, canvas_z);
-	printf("P0: [%f, %f, %f]\n", p0.x, p0.y, p0.z);
-	printf("P1: [%f, %f, %f]\n", p1.x, p1.y, p1.z);
-	printf("P2: [%f, %f, %f]\n", p2.x, p2.y, p2.z);
-	
-	ray.origin = grph->camera.basis.o; // Origin of ray = origin of camera
-	printf("CAMERA ORIGIN: [%f, %f, %f]\n", ray.origin.x, ray.origin.y, ray.origin.z);
-	y = 0;	
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			t_vector3	sub01 = ksx_vec3_sub(&p1, &p0);
-			t_vector3	mult1 = ksx_vec3_smulti(&sub01, (x / (float)WIDTH));
-			t_vector3	sub20 = ksx_vec3_sub(&p2, &p0);
-			t_vector3	mult2 = ksx_vec3_smulti(&sub20, (y / (float)HEIGHT));
-			pixelPos = ksx_vec3_add(&mult1, &mult2);
-			pixelPos = ksx_vec3_add(&p0, &pixelPos);
-			//printf("PIXPOS: [%f, %f, %f]\n", pixelPos.x, pixelPos.y, pixelPos.z);
-			t_vector3	direction = ksx_vec3_sub(&pixelPos, &ray.origin);
-			//printf("DIR: [%f, %f, %f]\n", direction.x, direction.y, direction.z);
-			ray.direction = ksx_vec3_unit(&direction);
-			printf("RAY DIR: [%f, %f, %f]\n", ray.direction.x, ray.direction.y, ray.direction.z);
-			ray.length = 1e30f;
-			ray_scan_scene(&ray, *grph);
-			x++;
-			if (ray.length >= 1e30f)
-				continue ;
-			// t_pixel pix = ksx_draw_get_pixel(&grph->camera, &pixelPos, 0xFFFFFFFF);
-			//printf("SETTING PIXEL: [%i, %i, %i]\n", (int)pix.x, (int)pix.y, pix.color.a);
-			// ksx_set_pixel(p_img, &pix);
-		}
-		y++;
-	}
-	printf("Finished\n");
-	// mlx_image_to_window(grph->mlx, p_img, 0, 0);
+	xy[0] = (2.f * (float)x / (float)WIDTH - 1.f) * p_camera->tng;
+	xy[1] = (1.f - 2.f * (float)y / (float)HEIGHT)
+		* p_camera->tng / p_camera->aspect;
+	v3 = ksx_vec3_set(xy[0], xy[1], 1.0f);
+	v3 = ksx_vec3_unit(&v3);
+	ray.length = MAX_LEN;
+	ray.min_length = MAX_LEN;
+	ray.origin = p_camera->basis.o;
+	ray.direction = v3;
+	ray.copy_direction = ray.direction;
+	ray.pixel.x = x;
+	ray.pixel.y = y;
+	ray.pixel.color.mlx_color = TRANSPARENT;
+	// ray.pixel.color.a = 0xff;
+	ray.norm = ksx_vec3_set(0.f, 0.f, 0.f);
+	ray.p_tri = NULL;
+	ray.p_pln = NULL;
+	ray.p_lgt = NULL;
+	return (ray);
 }

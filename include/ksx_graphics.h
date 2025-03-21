@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/17 23:04:52 by username         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:03:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 # define KSX_TRUE 1
 # define KSX_FALSE 0
 
-# define PI 3.141592653589793115997963468544185161590576171875
+// # define PI 3.141592653589793115997963468544185161590576171875f
+# define PI 3.1415926535897931f
 
 // PI / 180.f
 # define PI180 0.01745329251f
@@ -39,7 +40,9 @@
 /* Only support RGBA */
 # define BPP 4
 # define TRANSPARENT	0x00000000
-# define BACKGROUND		0xFFFFFFFF
+# define BACKGROUND		0xFF000000
+# define TRI_COLOR		0xFFFFFFFF
+// # define OBJ_COLOR		0xFFFFFFFF
 
 // Size if color structure 3 for RGB, 4 for RGBA
 # define COLOR_SIZE 3
@@ -90,15 +93,62 @@
 
 # define EDGE_SIZE	10.f
 // Sphere generation
-# define SPHERE_GEN 4
+# define SPHERE_GEN 2
 // Cylinder step angle
-# define CYLINDER_ANGLE 9.f
+# define CYLINDER_ANGLE 18.f
 
 # define ANGLE 2.5f
 # define STEP 5.f
 # define SCALE .05f
 # define MIN_AXIS .051f
 # define MAX_AXIS 5.f
+
+// MTL material format (Lightwave, OBJ)
+/*
+Ka: specifies ambient color, to account for light that is scattered about the
+	entire scene [see Wikipedia entry for Phong Reflection Model] using values
+	between 0 and 1 for the RGB components.
+
+Kd: specifies diffuse color, which typically contributes most of the color to
+	an object [see Wikipedia entry for Diffuse Reflection]. In this example,
+	Kd represents a grey color, which will get modified by a colored texture map
+	specified in the map_Kd statement
+
+Ks: specifies specular color, the color seen where the surface is shiny
+	and mirror-like [see Wikipedia entry for Specular Reflection].
+
+Ns: defines the focus of specular highlights in the material. Ns values normally
+	range from 0 to 1000, with a high value resulting in a tight, concentrated
+	highlight.
+
+Ni: defines the optical density (aka index of refraction) in the current
+	material. The values can range from 0.001 to 10. A value of 1.0 means that
+	light does not bend as it passes through an object.
+
+d: specifies a factor for dissolve, how much this material dissolves into
+	the background. A factor of 1.0 is fully opaque. A factor of 0.0 is
+	completely transparent.
+
+illum: specifies an illumination model, using a numeric value. See Notes below
+	for more detail on the illum keyword. The value 0 represents the simplest
+	illumination model, relying on the Kd for the material modified by a texture
+	map specified in a map_Kd statement if present. The compilers of this
+	resource believe that the choice of illumination model is irrelevant for
+	3D printing use and is ignored on import by some software applications.
+	For example, the MTL Loader in the threejs Javascript library appears to
+	ignore illum statements. Comments welcome.
+
+map_Kd: specifies a color texture file to be applied to the diffuse reflectivity
+	of the material. During rendering, map_Kd values are multiplied by the Kd
+	values to derive the RGB components.
+*/
+typedef struct s_material
+{
+	float	ka;
+	float	kd;
+	float	ks;
+	float	ns;
+}	t_material;
 
 // Data type for colors, 32 bites: 8 - alfa, 8 - blue, 8 - green, 8 - red
 typedef struct s_color
@@ -115,6 +165,18 @@ typedef struct s_color
 		uint8_t		rgba[4];
 		uint32_t	mlx_color;
 	};
+	union
+	{
+		struct
+		{
+			float	ur;
+			float	ug;
+			float	ub;
+			float	ua;			
+		};
+		float		urgba[4];
+	};
+	t_material	material;
 }	t_color;
 
 typedef struct s_pixel
@@ -306,19 +368,19 @@ typedef struct s_camera
 	float		tng;
 	float		aspect;
 	float		half_width;
-	float 		half_height;
+	float		half_height;
 	// float		vfov;
 	uint8_t		flags;
 	t_matrix4	vm;
 	t_matrix4	ivm;
 	t_matrix4	pm;
 	// float		focal_len;
-	float	near;
-	float	far;
-	float	left;
-	float	right;
-	float	top;
-	float	bottom;
+	float		near;
+	float		far;
+	float		left;
+	float		right;
+	float		top;
+	float		bottom;
 }	t_camera;
 
 typedef struct s_vertex
@@ -358,10 +420,8 @@ typedef struct s_triangle
 		};
 		t_vector3	*p_norms[3];
 	};
-	// t_vector3	norm;
-	t_color		color;
-	t_vector3	centr;
-	// uint32_t	generation;
+	//t_color		*p_color;
+	void		*p_object;
 }	t_triangle;
 
 typedef struct s_box
@@ -383,19 +443,27 @@ typedef struct	s_bvh {
 	uint32_t	tri_count;
 }	t_bvh;
 
-typedef struct s_plane
-{
-	t_vector3	point;
-	t_vector3	norm;
-	t_color		color;
-}	t_plane;
-
 typedef struct s_light
 {
-	t_vector3	center;
+	t_vertex	point;
 	t_color		color;
 	float		bright;
 }	t_light;
+
+typedef struct s_texture
+{
+	int		width;
+	int		height;
+	uint8_t	*data; // Stores pixel colors in (R, G, B) format
+}	t_texture;
+
+typedef struct s_plane
+{
+	t_vertex	point;
+	t_vertex	norm;
+	t_color		color;
+	t_texture	*p_texture;
+}	t_plane;
 
 typedef struct s_object
 {
@@ -413,8 +481,10 @@ typedef struct s_object
 	uint32_t	size_vnrm;
 	t_triangle	**pp_tri;
 	uint32_t	size_tri;
-	t_bvh			*bvh;
+	t_texture	*p_texture;
+	void		(*ray_txtr_uv)(t_vector3 *, float *, float *);
 	// void		(*f_transform)(void *, t_basis *);
+	t_bvh	*bvh;
 }	t_object;
 
 typedef struct s_world
@@ -432,6 +502,7 @@ typedef struct s_world
 	int32_t		size_lgt;
 	t_plane		**pp_pln;
 	int32_t		size_pln;
+	t_texture	**pp_txtr;
 	t_light		ambient;
 }	t_world;
 
@@ -451,7 +522,7 @@ mlx_t		*ksx_init(void);
 int			ksx_prep(void *p_vars);
 t_pixel		ksx_get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y);
 void		ksx_set_pixel(mlx_image_t *p_img, t_pixel *p_pix);
-void	 	applyDepthAttenuation(t_color *p_color, float depth, float k);
+void		applyDepthAttenuation(t_color *p_color, float depth, float k);
 
 mlx_image_t	*ksx_create_image(mlx_t *mlx, uint32_t bg_color);
 int32_t		ksx_image_to_window(mlx_t *p_mlx, mlx_image_t *p_img, int32_t z);

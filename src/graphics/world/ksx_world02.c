@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 16:11:28 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/18 00:36:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "ksx_object.h"
 #include "ksx_obj_file.h"
 #include "ksx_vec3_math.h"
+#include "ksx_m4_math.h"
 #include "ksx_basis.h"
 #include "parser.h"
 #include "libft.h"
@@ -35,14 +36,8 @@ void	ksx_world_obj_tm(t_world *p_world, t_object *p_object)
 		ksx_world_obj_tm_1(p_world, p_object, idx);
 	idx = -1;
 	while (++idx < p_object->size_vnrm)
-		ksx_transform(&p_object->pp_vnrm[idx]->lp,
-			&p_world->tm, &p_object->pp_vnrm[idx]->wp);
-	// {
-	// 	ksx_transform(&p_object->pp_vrtx[idx]->lp,
-	// 		&p_world->tm, &p_object->pp_vrtx[idx]->wp);
-	// 	ksx_transform(&p_object->pp_vrtx[idx]->lnorm,
-	// 		&p_world->tm, &p_object->pp_vrtx[idx]->wnorm);
-	// }
+		p_object->pp_vnrm[idx]->wp = ksx_m4_vec3(&p_world->tm,
+			&p_object->pp_vnrm[idx]->lp);
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{

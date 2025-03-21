@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 11:20:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/09 11:44:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/16 22:11:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	key_f5(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 void	key_f6(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	(void) p_keydata;
-	(void) p_grph;
+	p_grph->img_proj->enabled = !p_grph->img_proj->enabled;
 }
 
 void	key_f7(mlx_key_data_t *p_keydata, t_graphics *p_grph)

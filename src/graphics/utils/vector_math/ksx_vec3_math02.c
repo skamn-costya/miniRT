@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/16 09:59:39 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/19 20:46:58 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,23 @@ void	ksx_vec3_resize(t_vector3 *p_v, const float size)
 	p_v->x = p_v->x * f;
 	p_v->y = p_v->y * f;
 	p_v->z = p_v->z * f;
+}
+
+/**
+ * @brief returns coordinates of the midpoint (between p1 and p2)
+ * 
+ * @param p_p1 a pointer to the first point
+ * @param p_p2 a pointer to the second point
+ * @param p point
+ */
+t_vector3	ksx_mid_point(const t_vector3 *p_v1, const t_vector3 *p_v2)
+{
+	t_vector3	result;
+
+	result.x = (p_v1->x + p_v2->x) * .5f;
+	result.y = (p_v1->y + p_v2->y) * .5f;
+	result.z = (p_v1->z + p_v2->z) * .5f;
+	return (result);
 }
 
 t_matrix3	ksx_vec3_tensor(const t_vector3 *p_v1, const t_vector3 *p_v2)
