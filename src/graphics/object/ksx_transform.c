@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:32:03 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 15:35:32 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/23 00:44:56 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,19 +110,39 @@ static void	ksx_obj_transform_(t_object *p_object, t_matrix4 *p_tm)
 void	ksx_get_tm(t_matrix4 *p_m4, t_basis *p_basis)
 {
 	p_m4->e_11 = p_basis->i.x;
-	p_m4->e_12 = p_basis->i.y;
-	p_m4->e_13 = p_basis->i.z;
-	p_m4->e_14 = 0;
-	p_m4->e_21 = p_basis->j.x;
-	p_m4->e_22 = p_basis->j.y;
-	p_m4->e_23 = p_basis->j.z;
-	p_m4->e_24 = 0;
-	p_m4->e_31 = p_basis->k.x;
-	p_m4->e_32 = p_basis->k.y;
-	p_m4->e_33 = p_basis->k.z;
-	p_m4->e_34 = 0;
+	p_m4->e_21 = p_basis->i.y;
+	p_m4->e_31 = p_basis->i.z;
 	p_m4->e_41 = 0;
+	p_m4->e_12 = p_basis->j.x;
+	p_m4->e_22 = p_basis->j.y;
+	p_m4->e_32 = p_basis->j.z;
 	p_m4->e_42 = 0;
+	p_m4->e_13 = p_basis->k.x;
+	p_m4->e_23 = p_basis->k.y;
+	p_m4->e_33 = p_basis->k.z;
 	p_m4->e_43 = 0;
+	p_m4->e_14 = 0;
+	p_m4->e_24 = 0;
+	p_m4->e_34 = 0;
 	p_m4->e_44 = 1;
 }
+
+// void	ksx_get_tm(t_matrix4 *p_m4, t_basis *p_basis)
+// {
+// 	p_m4->e_11 = p_basis->i.x;
+// 	p_m4->e_12 = p_basis->i.y;
+// 	p_m4->e_13 = p_basis->i.z;
+// 	p_m4->e_14 = 0;
+// 	p_m4->e_21 = p_basis->j.x;
+// 	p_m4->e_22 = p_basis->j.y;
+// 	p_m4->e_23 = p_basis->j.z;
+// 	p_m4->e_24 = 0;
+// 	p_m4->e_31 = p_basis->k.x;
+// 	p_m4->e_32 = p_basis->k.y;
+// 	p_m4->e_33 = p_basis->k.z;
+// 	p_m4->e_34 = 0;
+// 	p_m4->e_41 = 0;
+// 	p_m4->e_42 = 0;
+// 	p_m4->e_43 = 0;
+// 	p_m4->e_44 = 1;
+// }

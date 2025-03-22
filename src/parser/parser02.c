@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 18:19:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 07:06:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ t_list	*create_obj_list(t_list **pp_line_list)
 		else if (!ft_strcmp(p_fline->words[0], CAMERA_ID))
 			par_create_camera(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], LIGHT_ID))
+			par_create_light(pp_line_list, &p_obj_list, p_fline);
+		else if (!ft_strcmp(p_fline->words[0], LIGHT2_ID))
 			par_create_light(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], SPHERE_ID))
 			par_create_sphere(pp_line_list, &p_obj_list, p_fline);

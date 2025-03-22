@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 16:25:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 08:15:10 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	ray_txtr_create_checkerboard_1(t_texture *p_txtr)
 	idx = p_txtr->height * p_txtr->width / BPP;
 	while (idx <= 0)
 	{
-		bit = 0x00000000;
+		bit = 0xFF000000;
 		if (idx % p_txtr->width == 0)
 		{
 			if ((idx % 10) % 2 == 0)

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 18:20:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 07:04:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,6 @@ t_obj_descr	*create_obj(t_list **pp_line_list, t_list **pp_obj_list);
 // parser03.c
 t_obj_descr	*par_create_sphere(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);
-t_obj_descr	*par_create_octahedron(t_list **pp_line_list,
-				t_list **pp_obj_list, t_fline *p_fline);
 t_obj_descr	*par_create_plane(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);
 t_obj_descr	*par_create_cylinder(t_list **pp_line_list,
@@ -108,6 +106,8 @@ t_obj_descr	*par_create_obj(t_list **pp_line_list,
 
 // parser04.c
 t_obj_descr	*par_create_cone(t_list **pp_line_list,
+				t_list **pp_obj_list, t_fline *p_fline);
+t_obj_descr	*par_create_octahedron(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);
 
 // parser04.c

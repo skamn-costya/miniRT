@@ -28,6 +28,19 @@ void	ksx_m3_reset(t_matrix3 *p_m)
 	p_m->e_33 = 0.f;
 }
 
+void	ksx_m3_unit(t_matrix3 *p_m)
+{
+	p_m->e_11 = 1.f;
+	p_m->e_12 = 1.f;
+	p_m->e_13 = 1.f;
+	p_m->e_21 = 1.f;
+	p_m->e_22 = 1.f;
+	p_m->e_23 = 1.f;
+	p_m->e_31 = 1.f;
+	p_m->e_32 = 1.f;
+	p_m->e_33 = 1.f;
+}
+
 t_matrix3	ksx_m3_multi(const t_matrix3 *p_m1, const t_matrix3 *p_m2)
 {
 	t_matrix3	m3;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 18:22:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 12:20:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,9 @@
 // # define PI180 0.017453292519943
 
 # define PRECISION	0.00001f
+# define EPSILON	1.19209e-07
+// # define EPSILON	1e-6f
+
 /* Only support RGBA */
 # define BPP 4
 # define TRANSPARENT	0x00000000

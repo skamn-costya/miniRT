@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/20 14:21:56 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 12:19:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define RAY_H
 
 # include "ksx_graphics.h"
-
-# define EPSILON	1.19209e-07
-// # define EPSILON	1e-6f
 
 # define BIAS		1e-3f
 // # define EPSILON 0.0001f

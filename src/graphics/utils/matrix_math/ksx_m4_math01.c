@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:22:40 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/15 10:02:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/23 00:39:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,20 @@ t_vector4	ksx_m4_vec4(const t_matrix4 *p_m, const t_vector4 *p_v)
 		+ (p_m->e_33 * p_v->z) + (p_m->e_34 * p_v->w);
 	v4.w = (p_m->e_41 * p_v->x) + (p_m->e_42 * p_v->y)
 		+ (p_m->e_43 * p_v->z) + (p_m->e_44 * p_v->w);
+	return (v4);
+}
+
+t_vector4	ksx_m4_vec4_dx(const t_matrix4 *p_m, const t_vector4 *p_v)
+{
+	t_vector4	v4;
+
+	v4.x = (p_m->e_11 * p_v->x) + (p_m->e_21 * p_v->y)
+		+ (p_m->e_31 * p_v->z) + (p_m->e_41 * p_v->w);
+	v4.y = (p_m->e_12 * p_v->x) + (p_m->e_22 * p_v->y)
+		+ (p_m->e_32 * p_v->z) + (p_m->e_42 * p_v->w);
+	v4.z = (p_m->e_13 * p_v->x) + (p_m->e_23 * p_v->y)
+		+ (p_m->e_33 * p_v->z) + (p_m->e_43 * p_v->w);
+	v4.w = (p_m->e_14 * p_v->x) + (p_m->e_24 * p_v->y)
+		+ (p_m->e_34 * p_v->z) + (p_m->e_44 * p_v->w);
 	return (v4);
 }

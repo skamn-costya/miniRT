@@ -40,7 +40,8 @@ MATRIX_MATH_DIR = graphics/utils/matrix_math/
 MATRIX_MATH_FN =	ksx_m4_math01.c \
 					ksx_m4_math02.c \
 					ksx_m4_math03.c \
-					ksx_m3_math01.c
+					ksx_m3_math01.c \
+					ksx_m3_math02.c
 MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 
 3D_DIR = graphics/3D/
@@ -55,7 +56,8 @@ MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 3D = $(addprefix $(3D_DIR), $(3D_FN))
 
 BASIS_DIR = graphics/basis/
-BASIS_FN =	ksx_basis.c \
+BASIS_FN =	ksx_basis01.c \
+			ksx_basis02.c \
 			ksx_basis_move.c \
 			ksx_basis_rotation.c
 BASIS = $(addprefix $(BASIS_DIR), $(BASIS_FN))
@@ -159,7 +161,7 @@ RAY_DIR = ray/
 RAY_FN =	ray_cast.c \
 			ray_tri.c \
 			ray_pln.c \
-			ray_color01.c \
+			ray_color.c \
 			ray_lgt.c \
 			ray_texture01.c \
 			ray_texture02.c
