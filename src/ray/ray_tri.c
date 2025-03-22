@@ -6,37 +6,39 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 15:15:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 12:05:39 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "ksx_vec3_math.h"
 #include "math.h"
+#include "bvh.h"
 #include <stdio.h>
 
 inline static void	ray_p_check_tri(t_triangle *p_tri, t_ray *p_ray);
 
-void	ray_p2boxes(t_world *p_world, t_ray *p_ray)
+void	ray_p2boxes(t_graphics *p_grph, t_ray *p_ray)
 {
 	int32_t	idx[3];
 
 	idx[0] = -1;
-	while (++idx[0] < p_world->size_box)
+	while (++idx[0] < p_grph->world.size_box)
 	{
 		idx[1] = -1;
 		while (++idx[1] < 12)
 		{
-			ray_p2tri(&p_world->pp_box[idx[0]]->tris[idx[1]], p_ray);
+			ray_p2tri(&p_grph->world.pp_box[idx[0]]->tris[idx[1]], p_ray);
 			if (p_ray->length != p_ray->min_length)
 			{
 				p_ray->length = p_ray->min_length;
 				idx[2] = -1;
-				while (p_world->pp_box[idx[0]]->pp_tris[++idx[2]])
+				p_grph->world.pp_obj[idx[0]]->bvh = build_bvh(p_grph->world.pp_obj[idx[0]]->pp_tri, p_grph->world.pp_obj[idx[0]]->size_tri, p_grph);
+				while (p_grph->world.pp_box[idx[0]]->pp_tris[++idx[2]])
 				{
-					ray_p2tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
+					ray_p2tri(p_grph->world.pp_box[idx[0]]->pp_tris[idx[2]],
 						p_ray);
-					ray_p_check_tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
+					ray_p_check_tri(p_grph->world.pp_box[idx[0]]->pp_tris[idx[2]],
 						p_ray);
 				}
 				break ;

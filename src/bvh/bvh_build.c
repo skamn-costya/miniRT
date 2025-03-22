@@ -6,51 +6,13 @@
 /*   By: username <your@email.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 19:35:07 by username          #+#    #+#             */
-/*   Updated: 2025/03/21 20:45:39 by username         ###   ########.fr       */
+/*   Updated: 2025/03/22 12:20:11 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bvh.h"
-#include "ksx_vec3_math.h"
-#include "ksx_utils.h"
-#include "math.h"
-#include "stdio.h"
 
-static void	set_centroids(t_triangle **pp_tri, uint32_t *tri_index)
-{
-	uint32_t	i;
-	t_vector3	tmp;
-	t_vector3	sum;
-
-	i = 0;
-	while (pp_tri[i])
-	{
-		sum = ksx_vec3_add(&pp_tri[i]->p_ver2->cp, &pp_tri[i]->p_ver3->cp);
-		tmp = ksx_vec3_add(&pp_tri[i]->p_ver1->cp, &sum);
-		tmp = ksx_vec3_smulti(&tmp, 0.3333f);
-		pp_tri[i]->centr = ksx_vec3_set(tmp.x, tmp.y, tmp.z);
-		tri_index[i] = i;
-		i++;
-	}
-}
-
-t_vector3	min_vec(t_vector3 a, t_vector3 b)
-{
-	t_vector3	res;
-
-	res = ksx_vec3_set(fminf(a.x, b.x), fminf(a.y, b.y), fminf(a.z, b.z));
-	return (res);
-}
-
-t_vector3	max_vec(t_vector3 a, t_vector3 b)
-{
-	t_vector3	res;
-
-	res = ksx_vec3_set(fmaxf(a.x, b.x), fmaxf(a.y, b.y), fmaxf(a.z, b.z));
-	return (res);
-}
-
-void	grow_bvh(uint32_t	idx, t_bvh *bvh)
+static void	grow_bvh(uint32_t	idx, t_bvh *bvh)
 {
 	t_triangle	*curr_tri;
 	uint32_t	curr_tri_idx;
@@ -79,16 +41,7 @@ void	grow_bvh(uint32_t	idx, t_bvh *bvh)
 	//printf("MAX: [%f, %f, %f]\n", all_nodes[idx].aabb_max.x, all_nodes[idx].aabb_max.y, all_nodes[idx].aabb_max.z);
 }
 
-static void	swap(uint32_t *a, uint32_t *b)
-{
-	uint32_t	tmp;
-
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-
-void	subdivide(uint32_t idx, t_bvh *bvh)
+static void	subdivide(uint32_t idx, t_bvh *bvh, t_graphics *grph)
 {
 	t_vector3	extent;
 	uint32_t	axis;
@@ -101,7 +54,7 @@ void	subdivide(uint32_t idx, t_bvh *bvh)
 	t_bvhnode	*all_nodes;
 
 	all_nodes = bvh->all_nodes;
-	if (all_nodes[idx].tri_count <= 2)
+	if (all_nodes[idx].tri_count <= BVH_LEAF_TRI)
 		return ;
 	extent = ksx_vec3_sub(&all_nodes[idx].aabb_max, &all_nodes[idx].aabb_min);
 	axis = 0;
@@ -136,13 +89,13 @@ void	subdivide(uint32_t idx, t_bvh *bvh)
 	all_nodes[idx].tri_count = 0;
 	grow_bvh(l_ch_idx, bvh);
 	grow_bvh(r_ch_idx, bvh);
-	printf("LCH: %i, %i\n", all_nodes[l_ch_idx].first_tri, all_nodes[l_ch_idx].tri_count);
-	printf("RCH: %i, %i\n", all_nodes[r_ch_idx].first_tri, all_nodes[r_ch_idx].tri_count);
-	subdivide(l_ch_idx, bvh);
-	subdivide(r_ch_idx, bvh);
+	//printf("LCH: %i, %i\n", all_nodes[l_ch_idx].first_tri, all_nodes[l_ch_idx].tri_count);
+	//printf("RCH: %i, %i\n", all_nodes[r_ch_idx].first_tri, all_nodes[r_ch_idx].tri_count);
+	subdivide(l_ch_idx, bvh, grph);
+	subdivide(r_ch_idx, bvh, grph);
 }
 
-t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n)
+t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n, t_graphics *grph)
 {
 	t_bvhnode	*all_nodes;
 	uint32_t	*tri_index;
@@ -154,6 +107,7 @@ t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n)
 	all_nodes = malloc(sizeof(t_bvhnode) * (tri_n * 2 - 1));
 	if (!all_nodes)
 		return (free(res), NULL);
+	ft_bzero(all_nodes, sizeof(t_bvhnode) * (tri_n * 2 - 1));
 	tri_index = malloc(sizeof(uint32_t) * tri_n);
 	if (!tri_index)
 		return (free(all_nodes), free(res), NULL);
@@ -166,13 +120,15 @@ t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n)
 	res->pp_tri = pp_tri;
 	res->nodes_used = 2;
 	grow_bvh(0, res);
-	subdivide(0, res);
-	// printf("Nodes used: %i\n", res->nodes_used);
-	// int i = 0;
-	// while (i < res->nodes_used)
-	// {
-	// 	printf("FROM: %i, COUNT: %i, DEPTH: %i\n", all_nodes[i].first_tri, all_nodes[i].tri_count, all_nodes[i].left_ch);
-	// 	i++;
-	// }
+	subdivide(0, res, grph);
+	
+	// Draw debug boxes
+	uint32_t i = 0;
+	uint32_t color = 0xFFFFFFFF;
+	while (i < res->nodes_used) {
+		bvh_draw_box(&all_nodes[i], grph, color);
+		color -= 32;
+		i++;
+	}
 	return (res);
 }

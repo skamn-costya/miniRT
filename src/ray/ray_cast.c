@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 22:11:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 11:50:01 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,11 @@ void	ray_cast(t_graphics *p_grph)
 	ray.origin = p_grph->camera.basis.o;
 	xy[0] = p_grph->img_proj->width * p_grph->img_proj->height;
 	xy[1] = -1;
-	p_grph->world.pp_obj[0]->bvh = build_bvh(p_grph->world.pp_obj[0]->pp_tri, p_grph->world.pp_obj[0]->size_tri);
 	while (++xy[1] < xy[0])
 	{
 		ray = ray_generate(xy[1] % p_grph->img_proj->width, xy[1]
 				/ p_grph->img_proj->width, &p_grph->camera);
-		ray_p2boxes(&p_grph->world, &ray);
+		ray_p2boxes(p_grph, &ray);
 		ray_p2planes(&p_grph->world, &ray);
 		if (ray.p_tri || ray.p_pln)
 		{
@@ -46,7 +45,7 @@ void	ray_cast(t_graphics *p_grph)
 			// ray.pixel.color = compute_lighting(&ray.point, &ray.norm, &ray.pixel.color);
 			ksx_set_pixel(p_grph->img_ray, &ray.pixel);
 		}
-	}
+	}	
 	ksx_time_print();
 	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
 }

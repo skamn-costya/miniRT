@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/20 14:21:56 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 11:49:49 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_ray
 void		ray_cast(t_graphics *grph);
 t_ray		ray_generate(int32_t x, int32_t y, t_camera *p_camera);
 
-void		ray_p2boxes(t_world *p_world, t_ray *p_ray);
+void		ray_p2boxes(t_graphics *p_graph, t_ray *p_ray);
 void		ray_p2tri(t_triangle *p_tri, t_ray *p_ray);
 void		ray_p2planes(t_world *p_world, t_ray *p_ray);
 void		ray_p2pln(t_plane *p_plane, t_ray *p_ray);
