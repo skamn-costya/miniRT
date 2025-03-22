@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 19:01:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 06:27:10 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 #include <stdlib.h>
 
 static void	ksx_init_cone_box(t_object *p_object);
-// static t_triangle	**ksx_init_cone_tri(t_object *p_object);
+
 static void	ksx_init_cone(t_object *p_object);
 
 t_object	*ksx_create_cone(t_vector3 center, t_vector3 norm,
@@ -64,7 +64,6 @@ static void	ksx_init_cone_box(t_object *p_object)
 	p_object->pp_box[0]->ver[6].op = ksx_vec3_set(-p_object->size1, -p_object->size2, -p_object->size1);
 	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1, -p_object->size2, -p_object->size1);
 	ksx_create_box(p_object->pp_box[0], p_object);
-	// ksx_obj_copy_boxvrts(p_object->pp_box[0]->ver, p_object->pp_box[0]->ver_origin, 8);
 }
 
 static void	ksx_init_cone(t_object *p_obj)
@@ -88,6 +87,8 @@ static void	ksx_init_cone(t_object *p_obj)
 		xz[0] = p_obj->size1 * cosf(CYLINDER_ANGLE * (idx - 2) * PI180);
 		xz[1] = p_obj->size1 * sinf(CYLINDER_ANGLE * (idx - 2) * PI180);
 		p_obj->pp_vrtx[idx]->op = ksx_vec3_set(xz[0], -p_obj->size2, xz[1]);
+		p_obj->pp_vnrm[idx]->op =
+			ksx_vec3_unit(&p_obj->pp_vnrm[idx]->op);
 		p_obj->pp_vnrm[idx + size]->op = ksx_vec3_set(xz[0], 0, xz[1]);
 		p_obj->pp_vnrm[idx + size]->op =
 			ksx_vec3_unit(&p_obj->pp_vnrm[idx + size]->op);
@@ -111,13 +112,13 @@ void	ksx_init_cone_tri(t_object *p_object, uint32_t size)
 		if (idx[1] == size)
 			idx[1] = 0;
 		ksx_tri_set_vertexes(pp_tri[idx[0]], pp_ver_a[idx[0]], pp_ver_a[idx[1]], p_object->pp_vrtx[0]);
+		pp_tri[idx[0]]->p_norm1 = p_object->pp_vnrm[idx[0] + size + 2];
+		pp_tri[idx[0]]->p_norm2 = p_object->pp_vnrm[idx[1] + size + 2];
+		pp_tri[idx[0]]->p_norm3 = p_object->pp_vnrm[idx[1] + size + 2];
+		ksx_tri_set_vertexes(pp_tri[idx[0] + size], pp_ver_a[idx[0]], pp_ver_a[idx[1]], p_object->pp_vrtx[1]);
 		pp_tri[idx[0] + size]->p_norm1 = p_object->pp_vnrm[1];
 		pp_tri[idx[0] + size]->p_norm2 = p_object->pp_vnrm[1];
 		pp_tri[idx[0] + size]->p_norm3 = p_object->pp_vnrm[1];
-		ksx_tri_set_vertexes(pp_tri[idx[0] + size], pp_ver_a[idx[0]], pp_ver_a[idx[1]], p_object->pp_vrtx[1]);
-		pp_tri[idx[0]]->p_norm1 = p_object->pp_vnrm[idx[0] + 2];
-		pp_tri[idx[0]]->p_norm2 = p_object->pp_vnrm[idx[1] + 2];
-		pp_tri[idx[0]]->p_norm3 = p_object->pp_vnrm[idx[1] + 2];
 		idx[0]++;
 	}
 }
