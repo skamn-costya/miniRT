@@ -1,61 +1,123 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser05.c                                         :+:      :+:    :+:   */
+/*   parser04.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/04 13:58:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:38:45 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
-#include <stdio.h>
 
-char	*comma_trim(char *str)
+int	is_f_number(char *str)
 {
-	char	**p_str;
-	size_t	size;
-	char	*str_;
+	size_t	idx;
+	int		dot;
+
+	idx = 0;
+	dot = 0;
+	if (str[idx] == '-' || str[idx] == '+')
+		idx++;
+	while (str[idx])
+	{
+		if (!ft_isdigit(str[idx]) && str[idx] != '.')
+			return (FALSE);
+		if (str[idx] == '.')
+			dot++;
+		if (dot > 1)
+			return (FALSE);
+		idx++;
+	}
+	return (TRUE);
+}
+
+int	is_i_number(char *str)
+{
 	size_t	idx;
 
-	if (!str)
-		return (NULL);
-	p_str = ft_split(str, ',');
-	size = ft_pparrsize((void **) p_str);
-	if (size < 2)
-		return (ft_pparrclear((void **) p_str), ft_strdup(str));
 	idx = 0;
-	str_ = ft_strtrim(p_str[idx], TRIM_SYMBOLS);
-	while (++idx < size)
+	if (str[idx] == '-' || str[idx] == '+')
+		idx++;
+	while (str[idx])
 	{
-		str_ = ft_new_strcmp(str_, ",", 1);
-		str_ = ft_new_strcmp(str_, ft_strtrim(p_str[idx], TRIM_SYMBOLS), 3);
+		if (!ft_isdigit(str[idx]))
+			return (FALSE);
+		idx++;
 	}
-	return (ft_pparrclear((void **) p_str), str_);
+	return (TRUE);
 }
 
-void	free_t_obj_descr(void *p_obj_descr)
+int	get_rgb(char **pp_str, size_t idx, t_obj_descr *p_obj_descr)
 {
-	t_obj_descr	*p_obj_descr_;
+	char	**pp_str_;
+	size_t	size;
+	int		i;
 
-	if (!p_obj_descr)
-		return ;
-	p_obj_descr_ = (t_obj_descr *) p_obj_descr;
-	free (p_obj_descr_->texture);
-	free (p_obj_descr_->obj_file);
-	free (p_obj_descr);
+	if (!pp_str || !pp_str[idx])
+		return (FALSE);
+	pp_str_ = ft_split(pp_str[idx], ',');
+	size = ft_pparrsize((void **) pp_str_);
+	if (size != COLOR_SIZE)
+		return (ft_pparrclear((void **)pp_str_), FALSE);
+	p_obj_descr->color.rgba[3] = 255;
+	while (size--)
+	{
+		if (!is_i_number(pp_str_[size]))
+			return (ft_pparrclear((void **)pp_str_), FALSE);
+		i = ft_atoi(pp_str_[size]);
+		if (i < 0 || i > 255)
+			return (ft_pparrclear((void **)pp_str_), FALSE);
+		p_obj_descr->color.rgba[size] = i;
+	}
+	return (ft_pparrclear((void **)pp_str_), TRUE);
 }
 
-void	parser_crash_exit(t_list **pp_line_list, t_list **pp_obj_list)
+int	get_coord(char **pp_str, size_t idx, t_obj_descr *p_obj_descr)
 {
-	printf("\033[0;31mError:\033[0m\n\tWrong file format or ");
-	printf("Memory allocation failed\n\tExit from the process\n");
-	if (pp_line_list)
-		ft_lstclear(pp_line_list, &free_t_fline);
-	if (pp_obj_list)
-		ft_lstclear(pp_obj_list, &free_t_obj_descr);
-	exit (EXIT_FAILURE);
+	char	**pp_str_;
+	size_t	size;
+	float	f;
+
+	if (!pp_str || !pp_str[idx])
+		return (FALSE);
+	pp_str_ = ft_split(pp_str[idx], ',');
+	size = ft_pparrsize((void **) pp_str_);
+	if (size != 3)
+		return (ft_pparrclear((void **)pp_str_), FALSE);
+	while (size--)
+	{
+		if (!is_f_number(pp_str_[size]))
+			return (ft_pparrclear((void **)pp_str_), FALSE);
+		f = ft_atof(pp_str_[size]);
+		p_obj_descr->coord.xyz[size] = f;
+	}
+	return (ft_pparrclear((void **)pp_str_), TRUE);
+}
+
+int	get_vector(char **pp_str, size_t idx, t_obj_descr *p_obj_descr)
+{
+	char	**pp_str_;
+	size_t	size;
+	float	f;
+
+	if (!pp_str || !pp_str[idx])
+		return (FALSE);
+	pp_str_ = ft_split(pp_str[idx], ',');
+	size = ft_pparrsize((void **) pp_str_);
+	if (size != 3)
+		return (ft_pparrclear((void **)pp_str_), FALSE);
+	while (size--)
+	{
+		if (!is_f_number(pp_str_[size]))
+			return (ft_pparrclear((void **)pp_str_), FALSE);
+		f = ft_atof(pp_str_[size]);
+		if (f < -1 || f > 1)
+			return (ft_pparrclear((void **)pp_str_), FALSE);
+		p_obj_descr->norm.xyz[size] = f;
+	}
+	return (ft_pparrclear((void **)pp_str_), TRUE);
 }
