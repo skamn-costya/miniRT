@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/22 12:28:59 by username         ###   ########.fr       */
+/*   Updated: 2025/03/21 19:57:40 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -292,7 +292,7 @@ typedef struct s_basis
 	// };
 	t_vector3	o;
 	t_vector3	w_o;
-	t_vector3	c_o;
+	// t_vector3	c_o;
 }	t_basis;
 
 typedef struct s_matrix22
@@ -545,8 +545,6 @@ void		ksx_world_clean(t_world *p_world);
 t_object	*ksx_create_sphere(t_vector3 center,
 				uint32_t diameter, t_color color, uint8_t gen);
 t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
-				float dia_ht[], t_color color);
-t_object	*ksx_create_cone(t_vector3 center, t_vector3 norm,
 				float dia_ht[], t_color color);
 void		ksx_draw(t_graphics *p_grph);
 

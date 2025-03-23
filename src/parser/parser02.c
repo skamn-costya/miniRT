@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 18:19:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:58:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ t_list	*create_obj_list(t_list **pp_line_list)
 			par_create_plane(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], CYLINDER_ID))
 			par_create_cylinder(pp_line_list, &p_obj_list, p_fline);
-		else if (!ft_strcmp(p_fline->words[0], CONE_ID))
-			par_create_cone(pp_line_list, &p_obj_list, p_fline);
 		else if (!ft_strcmp(p_fline->words[0], OBJ_ID))
 			par_create_obj(pp_line_list, &p_obj_list, p_fline);
 		p_list = p_list->next;

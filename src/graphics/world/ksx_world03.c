@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 17:07:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:24:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@
 #include "libft.h"
 #include <stdlib.h>
 #include <stdio.h>
-
-// static void	ksx_obj_clean(t_object *p_object);
 
 t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 {
@@ -69,14 +67,3 @@ void	ksx_world_clean(t_world *p_world)
 	free(p_world->pp_obj);
 	p_world->pp_obj = NULL;
 }
-
-// static void	ksx_obj_clean(t_object *p_object)
-// {
-// 	int32_t	idx;
-
-// 	idx = 0;
-// 	while (idx < 12)
-// 	{
-// 		idx++;
-// 	}
-// }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 19:09:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/05 13:30:44 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,24 +108,26 @@ static int	is_obj(char *id)
 {
 	static int	a = 0;
 	static int	c = 0;
-	static int	l = 0;
+	// static int	l = 0;
 
 	if (!ft_strcmp(id, AMBIENT_ID) && a)
 		return (FALSE);
 	if (!ft_strcmp(id, CAMERA_ID) && c)
 		return (FALSE);
-	if (!ft_strcmp(id, LIGHT_ID) && l)
-		return (FALSE);
+	// if (!ft_strcmp(id, LIGHT_ID) && l)
+	// 	return (FALSE);
 	if (!ft_strcmp(id, AMBIENT_ID))
 		return (a++, TRUE);
 	if (!ft_strcmp(id, CAMERA_ID))
 		return (c++, TRUE);
 	if (!ft_strcmp(id, LIGHT_ID))
-		return (l++, TRUE);
-	if (!ft_strcmp(id, SPHERE_ID) || !ft_strcmp(id, OCTAHEDRON_ID)
-		|| !ft_strcmp(id, PLANE_ID) || !ft_strcmp(id, CYLINDER_ID)
-		|| !ft_strcmp(id, CONE_ID) || !ft_strcmp(id, OBJ_ID)
-		|| !ft_strcmp(id, LIGHT2_ID))
+		return (TRUE);
+		// return (l++, TRUE);
+	if (!ft_strcmp(id, SPHERE_ID)
+		|| !ft_strcmp(id, OCTAHEDRON_ID)
+		|| !ft_strcmp(id, PLANE_ID)
+		|| !ft_strcmp(id, CYLINDER_ID)
+		|| !ft_strcmp(id, OBJ_ID))
 		return (TRUE);
 	else
 		return (FALSE);

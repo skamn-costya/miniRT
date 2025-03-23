@@ -7,8 +7,7 @@ PARSER_FN =	parser01.c \
 			parser02.c \
 			parser03.c \
 			parser04.c \
-			parser05.c \
-			parser06.c
+			parser05.c
 PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 
 # KSX utilites
@@ -91,11 +90,6 @@ CYLINDER_DIR = graphics/cylinder/
 CYLINDER_FN =	ksx_cylinder01.c \
 				ksx_cylinder02.c
 CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FN))
-
-# Cone object
-CONE_DIR = graphics/cone/
-CONE_FN =	ksx_cone01.c
-CONE = $(addprefix $(CONE_DIR), $(CONE_FN))
 
 # Draw shapes functions
 SHAPES_DIR = graphics/shapes/
@@ -188,7 +182,6 @@ SRC = 	$(UTILS) \
 		$(CAMERA) \
 		$(SPHERE) \
 		$(CYLINDER) \
-		$(CONE) \
 		$(SHAPES) \
 		$(GRAPHICS) \
 		$(KYES) \
@@ -259,7 +252,6 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(CAMERA_DIR)
 	mkdir -p $(OBJ_DIR)$(SPHERE_DIR)
 	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)
-	mkdir -p $(OBJ_DIR)$(CONE_DIR)
 	mkdir -p $(OBJ_DIR)$(SHAPES_DIR)
 	mkdir -p $(OBJ_DIR)$(KYES_DIR)
 	mkdir -p $(OBJ_DIR)$(TRIANGLE_DIR)

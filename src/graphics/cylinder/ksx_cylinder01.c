@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 18:36:47 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:54:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,8 @@ static void	ksx_init_cylinder(t_object *p_object)
 	idx++;
 	while (idx < size + 2)
 	{
-		xz[0] = p_object->size1 * cosf(CYLINDER_ANGLE * (idx - 2) * PI180);
-		xz[1] = p_object->size1 * sinf(CYLINDER_ANGLE * (idx - 2) * PI180);
+		xz[0] = p_object->size1 * cosf(CYLINDER_ANGLE * idx * PI180);
+		xz[1] = p_object->size1 * sinf(CYLINDER_ANGLE * idx * PI180);
 		p_object->pp_vrtx[idx]->op = ksx_vec3_set(xz[0], p_object->size2, xz[1]);
 		p_object->pp_vnrm[idx]->op = ksx_vec3_set(0, 1.f , 0);
 		p_object->pp_vrtx[idx + size]->op = ksx_vec3_set(xz[0], -p_object->size2, xz[1]);

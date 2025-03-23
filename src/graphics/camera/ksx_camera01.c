@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 16:19:36 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/18 00:38:55 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ void	ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 	uint32_t	idx;
 	t_box		**pp_box;
 
-	p_object->basis.c_o = ksx_m4_vec3(p_vm,
-		&p_object->basis.w_o);
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
 		ksx_transform(&p_object->pp_vrtx[idx]->wp, p_vm,

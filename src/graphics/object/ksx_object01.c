@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 16:45:08 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/21 14:34:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 inline static void	ksx_create_object_1(t_object	*p_object)
 {
 	p_object->color.material.ka = 1.f;
-	p_object->color.material.kd = .2f;
-	p_object->color.material.ks = .9f;
+	p_object->color.material.kd = .2f; // .2
+	p_object->color.material.ks = .9f; // .9
 	p_object->color.material.ns = 128.f;
 	p_object->pp_box = NULL;
 	p_object->pp_vrtx = NULL;

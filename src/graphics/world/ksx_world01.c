@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 18:21:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 18:19:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 #include "ksx_utils.h"
 #include "parser.h"
 #include "libft.h"
-#include "ray_texture.h"
 
 static void	ksx_set_world_defaults(t_world *p_world);
 static void	ksx_init_world_1(t_graphics *p_grph,
@@ -45,7 +44,7 @@ void	ksx_init_world(t_graphics *p_grph, t_list *p_list)
 		if (p_obj_descr->id == CAMERA || p_obj_descr->id == SPHERE
 			|| p_obj_descr->id == OCTAHEDRON || p_obj_descr->id == OBJ)
 			ksx_init_world_1(p_grph, &p_object, p_obj_descr);
-		else if (p_obj_descr->id == CYLINDER || p_obj_descr->id == CONE)
+		else if (p_obj_descr->id == CYLINDER)
 			ksx_init_world_2(&p_object, p_obj_descr);
 		else if (p_obj_descr->id == AMBIENT || p_obj_descr->id == LIGHT
 			|| p_obj_descr->id == PLANE)
@@ -73,7 +72,7 @@ static void	ksx_set_world_defaults(t_world *p_world)
 	p_world->size_lgt = 0;
 	p_world->pp_pln = NULL;
 	p_world->size_pln = 0;
-	ray_txtr_create_checkerboard(p_world);
+	p_world->pp_txtr = NULL;
 }
 
 static void	ksx_init_world_1(t_graphics *p_grph,
@@ -101,13 +100,6 @@ static void	ksx_init_world_2(t_object **pp_object, t_obj_descr *p_obj_descr)
 		f[0] = p_obj_descr->d;
 		f[1] = p_obj_descr->h;
 		*pp_object = ksx_create_cylinder(p_obj_descr->coord,
-				p_obj_descr->norm, f, p_obj_descr->color);
-	}
-	if (p_obj_descr->id == CONE)
-	{
-		f[0] = p_obj_descr->d;
-		f[1] = p_obj_descr->h;
-		*pp_object = ksx_create_cone(p_obj_descr->coord,
 				p_obj_descr->norm, f, p_obj_descr->color);
 	}
 }

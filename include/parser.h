@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 18:20:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/20 15:48:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@
 # define AMBIENT_ID		"A"
 # define CAMERA_ID		"C"
 # define LIGHT_ID		"L"
-# define LIGHT2_ID		"l"
 # define SPHERE_ID		"sp"
 # define PLANE_ID		"pl"
 # define CYLINDER_ID	"cy"
 # define OCTAHEDRON_ID	"oc"
-# define CONE_ID		"co"
 # define OBJ_ID			"obj"
 
 # define CONE_ID		"co"
@@ -104,10 +102,6 @@ t_obj_descr	*par_create_plane(t_list **pp_line_list,
 t_obj_descr	*par_create_cylinder(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);
 t_obj_descr	*par_create_obj(t_list **pp_line_list,
-				t_list **pp_obj_list, t_fline *p_fline);
-
-// parser04.c
-t_obj_descr	*par_create_cone(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);
 
 // parser04.c
