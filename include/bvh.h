@@ -27,7 +27,6 @@
 
 // Core
 t_bvh		*build_bvh(t_triangle **pp_tri, uint32_t tri_n);
-void		bvh_for_obj(t_object *obj);
 void		bvh_build_world(t_graphics *grph);
 
 // Utils

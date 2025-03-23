@@ -131,22 +131,16 @@ t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n)
 	return (res);
 }
 
-void	bvh_for_obj(t_object *obj)
-{
-	static int i = 1;
-
-	printf("BUILDING BVH No %i\n", i++);
-	obj->bvh = build_bvh(obj->pp_tri, obj->size_tri);
-}
-
 void	bvh_build_world(t_graphics *grph)
 {
-	int32_t	i;
+	int32_t		i;
+	t_object	*obj;
 
 	i = 0;
 	while (i < grph->world.size_obj)
 	{
-		bvh_for_obj(grph->world.pp_obj[i]);
+		obj = grph->world.pp_obj[i];
+		obj->bvh = build_bvh(obj->pp_tri, obj->size_tri);
 		i++;
 	}
 }
