@@ -12,54 +12,67 @@
 
 #include "bvh.h"
 
-void	bvh_draw_box(t_bvhnode *bvh_node, t_graphics *grph, uint32_t color)
+static void	bvh_init_vertices(t_bvhnode *bvh_node, t_vector3 v[8])
 {
-	t_vector3 a, b, c, d, e, f, g, h;
-	t_pixel	pa, pb, pc, pd, pe, pf, pg, ph;
-	t_vector3 *min = &bvh_node->aabb_min;
-	t_vector3 *max = &bvh_node->aabb_max;
-	a = *min;
-	b = ksx_vec3_set(max->x, min->y, min->z);
-	c = ksx_vec3_set(max->x, min->y, max->z);
-	d = ksx_vec3_set(min->x, min->y, max->z);
-	e = ksx_vec3_set(min->x, max->y, min->z);
-	f = ksx_vec3_set(max->x, max->y, min->z);
-	g = *max;
-	h = ksx_vec3_set(min->x, max->y, max->z);
-
-	pa = ksx_draw_get_pixel(&grph->camera, &a, color);
-	pb = ksx_draw_get_pixel(&grph->camera, &b, color);
-	pc = ksx_draw_get_pixel(&grph->camera, &c, color);
-	pd = ksx_draw_get_pixel(&grph->camera, &d, color);
-	pe = ksx_draw_get_pixel(&grph->camera, &e, color);
-	pf = ksx_draw_get_pixel(&grph->camera, &f, color);
-	pg = ksx_draw_get_pixel(&grph->camera, &g, color);
-	ph = ksx_draw_get_pixel(&grph->camera, &h, color);
-
-	ksx_line(grph->img_ray, &pa, &pb);
-	ksx_line(grph->img_ray, &pb, &pc);
-	ksx_line(grph->img_ray, &pc, &pd);
-	ksx_line(grph->img_ray, &pd, &pa);
-
-	ksx_line(grph->img_ray, &pa, &pe);
-	ksx_line(grph->img_ray, &pb, &pf);
-	ksx_line(grph->img_ray, &pc, &pg);
-	ksx_line(grph->img_ray, &pd, &ph);
-
-	ksx_line(grph->img_ray, &pe, &pf);
-	ksx_line(grph->img_ray, &pf, &pg);
-	ksx_line(grph->img_ray, &pg, &ph);
-	ksx_line(grph->img_ray, &ph, &pe);
+	v[0] = bvh_node->aabb_min;
+	v[1] = ksx_vec3_set(
+			bvh_node->aabb_max.x, bvh_node->aabb_min.y, bvh_node->aabb_min.z);
+	v[2] = ksx_vec3_set(
+			bvh_node->aabb_max.x, bvh_node->aabb_min.y, bvh_node->aabb_max.z);
+	v[3] = ksx_vec3_set(
+			bvh_node->aabb_min.x, bvh_node->aabb_min.y, bvh_node->aabb_max.z);
+	v[4] = ksx_vec3_set(
+			bvh_node->aabb_min.x, bvh_node->aabb_max.y, bvh_node->aabb_min.z);
+	v[5] = ksx_vec3_set(
+			bvh_node->aabb_max.x, bvh_node->aabb_max.y, bvh_node->aabb_min.z);
+	v[6] = bvh_node->aabb_max;
+	v[7] = ksx_vec3_set(
+			bvh_node->aabb_min.x, bvh_node->aabb_max.y, bvh_node->aabb_max.z);
 }
 
-void		bvh_draw_obj(t_object *obj, t_graphics *grph)
-{	
-	uint32_t i;
-	uint32_t color;
+static void	bvh_project_vertices(t_vector3 v[8], t_pixel p[8],
+	t_graphics *grph, uint32_t color)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		p[i] = ksx_draw_get_pixel(&grph->camera, &v[i], color);
+		i++;
+	}
+}
+
+void	bvh_draw_box(t_bvhnode *bvh_node, t_graphics *grph, uint32_t color)
+{
+	t_vector3	v[8];
+	t_pixel		p[8];
+	const int	edges[12][2] = {
+	{0, 1}, {1, 2}, {2, 3}, {3, 0},
+	{0, 4}, {1, 5}, {2, 6}, {3, 7},
+	{4, 5}, {5, 6}, {6, 7}, {7, 4}
+	};
+	int			i;
+
+	bvh_init_vertices(bvh_node, v);
+	bvh_project_vertices(v, p, grph, color);
+	i = 0;
+	while (i < 12)
+	{
+		ksx_line(grph->img_ray, &p[edges[i][0]], &p[edges[i][1]]);
+		i++;
+	}
+}
+
+void	bvh_draw_obj(t_object *obj, t_graphics *grph)
+{
+	uint32_t	i;
+	uint32_t	color;
 
 	i = 0;
 	color = 0xFFFFFFFF;
-	while (i < obj->bvh->used_n) {
+	while (i < obj->bvh->used_n)
+	{
 		bvh_draw_box(&obj->bvh->nodes[i], grph, color);
 		color -= 32;
 		i++;
