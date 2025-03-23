@@ -23,7 +23,7 @@
 // Number of triangles in smallest BVH box
 // - higher number = less boxes
 // - don't set less than 2!
-# define BVH_LEAF_TRI_COUNT 2
+# define BVH_LEAF_TRI_COUNT 32
 
 // Core
 t_bvh		*build_bvh(t_triangle **pp_tri, uint32_t tri_n);

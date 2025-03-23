@@ -115,6 +115,7 @@ t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n)
 	nodes = malloc(sizeof(t_bvhnode) * (tri_n * 2 - 1));
 	if (!nodes)
 		return (free(res), NULL);
+	//ft_bzero(nodes, sizeof(t_bvhnode) * (tri_n * 2 - 1));
 	tri_index = malloc(sizeof(uint32_t) * tri_n);
 	if (!tri_index)
 		return (free(nodes), free(res), NULL);
@@ -133,12 +134,15 @@ t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n)
 
 void	bvh_build_world(t_graphics *grph)
 {
+	static int	count = 1;
 	int32_t		i;
 	t_object	*obj;
 
 	i = 0;
+	ksx_time_print();
 	while (i < grph->world.size_obj)
 	{
+		printf("Buliding BVH No.%i\n", count++);
 		obj = grph->world.pp_obj[i];
 		obj->bvh = build_bvh(obj->pp_tri, obj->size_tri);
 		i++;
