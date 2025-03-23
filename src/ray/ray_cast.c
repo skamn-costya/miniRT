@@ -36,7 +36,7 @@ void	ray_cast(t_graphics *p_grph)
 	{
 		ray = ray_generate(xy[1] % p_grph->img_proj->width, xy[1]
 				/ p_grph->img_proj->width, &p_grph->camera);
-		ray_p2boxes(p_grph, &ray);
+		ray_p2boxes(&p_grph->world, &ray);
 		ray_p2planes(&p_grph->world, &ray);
 		if (ray.p_tri || ray.p_pln)
 		{

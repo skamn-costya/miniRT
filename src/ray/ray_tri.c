@@ -16,26 +16,26 @@
 
 inline static void	ray_p_check_tri(t_triangle *p_tri, t_ray *p_ray);
 
-void	ray_p2boxes(t_graphics *p_grph, t_ray *p_ray)
+void	ray_p2boxes(t_world *p_world, t_ray *p_ray)
 {
 	int32_t	idx[3];
 
 	idx[0] = -1;
-	while (++idx[0] < p_grph->world.size_box)
+	while (++idx[0] < p_world->size_box)
 	{
 		idx[1] = -1;
 		while (++idx[1] < 12)
 		{
-			ray_p2tri(&p_grph->world.pp_box[idx[0]]->tris[idx[1]], p_ray);
+			ray_p2tri(&p_world->pp_box[idx[0]]->tris[idx[1]], p_ray);
 			if (p_ray->length != p_ray->min_length)
 			{
 				p_ray->length = p_ray->min_length;
 				idx[2] = -1;
-				while (p_grph->world.pp_box[idx[0]]->pp_tris[++idx[2]])
+				while (p_world->pp_box[idx[0]]->pp_tris[++idx[2]])
 				{
-					ray_p2tri(p_grph->world.pp_box[idx[0]]->pp_tris[idx[2]],
+					ray_p2tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
 						p_ray);
-					ray_p_check_tri(p_grph->world.pp_box[idx[0]]->pp_tris[idx[2]],
+					ray_p_check_tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
 						p_ray);
 				}
 				break ;
