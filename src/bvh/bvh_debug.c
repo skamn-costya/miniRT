@@ -51,3 +51,26 @@ void	bvh_draw_box(t_bvhnode *bvh_node, t_graphics *grph, uint32_t color)
 	ksx_line(grph->img_ray, &pg, &ph);
 	ksx_line(grph->img_ray, &ph, &pe);
 }
+
+void		bvh_draw_obj(t_object *obj, t_graphics *grph)
+{	
+	uint32_t i;
+	uint32_t color;
+
+	i = 0;
+	color = 0xFFFFFFFF;
+	while (i < obj->bvh->used_n) {
+		bvh_draw_box(&obj->bvh->nodes[i], grph, color);
+		color -= 32;
+		i++;
+	}
+}
+
+void	bvh_draw_world(t_graphics *grph)
+{
+	int32_t	i;
+
+	i = -1;
+	while (++i < grph->world.size_obj)
+		bvh_draw_obj(grph->world.pp_obj[i], grph);
+}

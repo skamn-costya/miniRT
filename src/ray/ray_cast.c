@@ -31,6 +31,7 @@ void	ray_cast(t_graphics *p_grph)
 	ray.origin = p_grph->camera.basis.o;
 	xy[0] = p_grph->img_proj->width * p_grph->img_proj->height;
 	xy[1] = -1;
+	bvh_build_world(p_grph);
 	while (++xy[1] < xy[0])
 	{
 		ray = ray_generate(xy[1] % p_grph->img_proj->width, xy[1]
@@ -45,8 +46,9 @@ void	ray_cast(t_graphics *p_grph)
 			// ray.pixel.color = compute_lighting(&ray.point, &ray.norm, &ray.pixel.color);
 			ksx_set_pixel(p_grph->img_ray, &ray.pixel);
 		}
-	}	
+	}
 	ksx_time_print();
+	bvh_draw_world(p_grph);
 	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
 }
 

@@ -13,8 +13,6 @@
 #include "ray.h"
 #include "ksx_vec3_math.h"
 #include "math.h"
-#include "bvh.h"
-#include <stdio.h>
 
 inline static void	ray_p_check_tri(t_triangle *p_tri, t_ray *p_ray);
 
@@ -33,7 +31,6 @@ void	ray_p2boxes(t_graphics *p_grph, t_ray *p_ray)
 			{
 				p_ray->length = p_ray->min_length;
 				idx[2] = -1;
-				p_grph->world.pp_obj[idx[0]]->bvh = build_bvh(p_grph->world.pp_obj[idx[0]]->pp_tri, p_grph->world.pp_obj[idx[0]]->size_tri, p_grph);
 				while (p_grph->world.pp_box[idx[0]]->pp_tris[++idx[2]])
 				{
 					ray_p2tri(p_grph->world.pp_box[idx[0]]->pp_tris[idx[2]],

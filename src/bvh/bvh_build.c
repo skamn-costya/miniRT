@@ -12,7 +12,7 @@
 
 #include "bvh.h"
 
-static void	subdivide(uint32_t idx, t_bvh *bvh, t_graphics *grph);
+static void	subdivide(uint32_t idx, t_bvh *bvh);
 
 static void	grow_bvh(uint32_t idx, t_bvh *bvh)
 {
@@ -43,8 +43,8 @@ static void	grow_bvh(uint32_t idx, t_bvh *bvh)
 	//printf("MAX: [%f, %f, %f]\n", nodes[idx].aabb_max.x, nodes[idx].aabb_max.y, nodes[idx].aabb_max.z);
 }
 
-static void	create_children(uint32_t idx, int32_t i,
-		t_bvh *bvh, t_graphics *grph) {
+static void	create_children(uint32_t idx, int32_t i, t_bvh *bvh)
+{
 	uint32_t	left_count;
 	uint32_t	l_ch_idx;
 	uint32_t	r_ch_idx;
@@ -66,11 +66,11 @@ static void	create_children(uint32_t idx, int32_t i,
 	grow_bvh(r_ch_idx, bvh);
 	//printf("LCH: %i, %i\n", nodes[l_ch_idx].first_tri, nodes[l_ch_idx].tri_num);
 	//printf("RCH: %i, %i\n", nodes[r_ch_idx].first_tri, nodes[r_ch_idx].tri_num);
-	subdivide(l_ch_idx, bvh, grph);
-	subdivide(r_ch_idx, bvh, grph);
+	subdivide(l_ch_idx, bvh);
+	subdivide(r_ch_idx, bvh);
 }
 
-static void	subdivide(uint32_t idx, t_bvh *bvh, t_graphics *grph)
+static void	subdivide(uint32_t idx, t_bvh *bvh)
 {
 	t_vector3	ext;
 	uint32_t	axis;
@@ -100,10 +100,10 @@ static void	subdivide(uint32_t idx, t_bvh *bvh, t_graphics *grph)
 		else
 			swap(&(bvh->tri_index[i]), &(bvh->tri_index[j--]));
 	}
-	create_children(idx, i, bvh, grph);
+	create_children(idx, i, bvh);
 }
 
-t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n, t_graphics *grph)
+t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n)
 {
 	t_bvhnode	*nodes;
 	uint32_t	*tri_index;
@@ -127,15 +127,26 @@ t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n, t_graphics *grph)
 	res->pp_tri = pp_tri;
 	res->used_n = 2;
 	grow_bvh(0, res);
-	subdivide(0, res, grph);
-	
-	// Draw debug boxes
-	uint32_t i = 0;
-	uint32_t color = 0xFFFFFFFF;
-	while (i < res->used_n) {
-		bvh_draw_box(&nodes[i], grph, color);
-		color -= 32;
+	subdivide(0, res);
+	return (res);
+}
+
+void	bvh_for_obj(t_object *obj)
+{
+	static int i = 1;
+
+	printf("BUILDING BVH No %i\n", i++);
+	obj->bvh = build_bvh(obj->pp_tri, obj->size_tri);
+}
+
+void	bvh_build_world(t_graphics *grph)
+{
+	int32_t	i;
+
+	i = 0;
+	while (i < grph->world.size_obj)
+	{
+		bvh_for_obj(grph->world.pp_obj[i]);
 		i++;
 	}
-	return (res);
 }
