@@ -14,8 +14,6 @@
 
 void	bvh_draw_box(t_bvhnode *bvh_node, t_graphics *grph, uint32_t color)
 {
-	//t_pixel	pix1 = ksx_draw_get_pixel(&grph->camera, min, 0xFFFFFFFF);
-	//t_pixel	pix2 = ksx_draw_get_pixel(&grph->camera, max, 0xFFFFFFFF);
 	t_vector3 a, b, c, d, e, f, g, h;
 	t_pixel	pa, pb, pc, pd, pe, pf, pg, ph;
 	t_vector3 *min = &bvh_node->aabb_min;

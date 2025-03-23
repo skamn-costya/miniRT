@@ -12,121 +12,128 @@
 
 #include "bvh.h"
 
-static void	grow_bvh(uint32_t	idx, t_bvh *bvh)
+static void	subdivide(uint32_t idx, t_bvh *bvh, t_graphics *grph);
+
+static void	grow_bvh(uint32_t idx, t_bvh *bvh)
 {
-	t_triangle	*curr_tri;
+	t_triangle	*curr_t;
 	uint32_t	curr_tri_idx;
 	uint32_t	i;
-	t_bvhnode	*all_nodes;
+	t_bvhnode	*nodes;
 
-	all_nodes = bvh->all_nodes;
-	all_nodes[idx].aabb_min = ksx_vec3_set(1e30f, 1e30f, 1e30f);
-	all_nodes[idx].aabb_max = ksx_vec3_set(-1e30f, -1e30f, -1e30f);
+	nodes = bvh->nodes;
+	nodes[idx].aabb_min = ksx_vec3_set(1e30f, 1e30f, 1e30f);
+	nodes[idx].aabb_max = ksx_vec3_set(-1e30f, -1e30f, -1e30f);
 	i = 0;
-	//printf("TRI COUNT %i\n", all_nodes[idx].tri_count);
-	while (i < all_nodes[idx].tri_count)
+	//printf("TRI COUNT %i\n", nodes[idx].tri_num);
+	while (i < nodes[idx].tri_num)
 	{
-		//printf("FIRST TRI %i\n", all_nodes[idx].first_tri + i);
-		curr_tri_idx = bvh->tri_index[all_nodes[idx].first_tri + i];
-		curr_tri = bvh->pp_tri[curr_tri_idx];
-		all_nodes[idx].aabb_min = min_vec(all_nodes[idx].aabb_min, curr_tri->p_ver1->cp);
-		all_nodes[idx].aabb_min = min_vec(all_nodes[idx].aabb_min, curr_tri->p_ver2->cp);
-		all_nodes[idx].aabb_min = min_vec(all_nodes[idx].aabb_min, curr_tri->p_ver3->cp);
-		all_nodes[idx].aabb_max = max_vec(all_nodes[idx].aabb_max, curr_tri->p_ver1->cp);
-		all_nodes[idx].aabb_max = max_vec(all_nodes[idx].aabb_max, curr_tri->p_ver2->cp);
-		all_nodes[idx].aabb_max = max_vec(all_nodes[idx].aabb_max, curr_tri->p_ver3->cp);
+		//printf("FIRST TRI %i\n", nodes[idx].first_tri + i);
+		curr_tri_idx = bvh->tri_index[nodes[idx].first_tri + i];
+		curr_t = bvh->pp_tri[curr_tri_idx];
+		nodes[idx].aabb_min = min_vec(nodes[idx].aabb_min, curr_t->p_ver1->cp);
+		nodes[idx].aabb_min = min_vec(nodes[idx].aabb_min, curr_t->p_ver2->cp);
+		nodes[idx].aabb_min = min_vec(nodes[idx].aabb_min, curr_t->p_ver3->cp);
+		nodes[idx].aabb_max = max_vec(nodes[idx].aabb_max, curr_t->p_ver1->cp);
+		nodes[idx].aabb_max = max_vec(nodes[idx].aabb_max, curr_t->p_ver2->cp);
+		nodes[idx].aabb_max = max_vec(nodes[idx].aabb_max, curr_t->p_ver3->cp);
 		i++;
 	}
-	//printf("MIN: [%f, %f, %f]\n", all_nodes[idx].aabb_min.x, all_nodes[idx].aabb_min.y, all_nodes[idx].aabb_min.z);
-	//printf("MAX: [%f, %f, %f]\n", all_nodes[idx].aabb_max.x, all_nodes[idx].aabb_max.y, all_nodes[idx].aabb_max.z);
+	//printf("MIN: [%f, %f, %f]\n", nodes[idx].aabb_min.x, nodes[idx].aabb_min.y, nodes[idx].aabb_min.z);
+	//printf("MAX: [%f, %f, %f]\n", nodes[idx].aabb_max.x, nodes[idx].aabb_max.y, nodes[idx].aabb_max.z);
+}
+
+static void	create_children(uint32_t idx, int32_t i,
+		t_bvh *bvh, t_graphics *grph) {
+	uint32_t	left_count;
+	uint32_t	l_ch_idx;
+	uint32_t	r_ch_idx;
+	t_bvhnode	*nodes;
+
+	nodes = bvh->nodes;
+	left_count = i - nodes[idx].first_tri;
+	if (left_count == 0 || left_count == nodes[idx].tri_num)
+		return ;
+	l_ch_idx = bvh->used_n++;
+	r_ch_idx = bvh->used_n++;
+	nodes[l_ch_idx].first_tri = nodes[idx].first_tri;
+	nodes[l_ch_idx].tri_num = left_count;
+	nodes[r_ch_idx].first_tri = i;
+	nodes[r_ch_idx].tri_num = nodes[idx].tri_num - left_count;
+	nodes[idx].left_ch = l_ch_idx;
+	nodes[idx].tri_num = 0;
+	grow_bvh(l_ch_idx, bvh);
+	grow_bvh(r_ch_idx, bvh);
+	//printf("LCH: %i, %i\n", nodes[l_ch_idx].first_tri, nodes[l_ch_idx].tri_num);
+	//printf("RCH: %i, %i\n", nodes[r_ch_idx].first_tri, nodes[r_ch_idx].tri_num);
+	subdivide(l_ch_idx, bvh, grph);
+	subdivide(r_ch_idx, bvh, grph);
 }
 
 static void	subdivide(uint32_t idx, t_bvh *bvh, t_graphics *grph)
 {
-	t_vector3	extent;
+	t_vector3	ext;
 	uint32_t	axis;
-	float	split_pos;
-	int32_t	i;
-	int32_t	j;
-	uint32_t	left_count;
-	uint32_t	l_ch_idx;
-	uint32_t	r_ch_idx;
-	t_bvhnode	*all_nodes;
+	float		split_pos;
+	int32_t		i;
+	int32_t		j;
 
-	all_nodes = bvh->all_nodes;
-	if (all_nodes[idx].tri_count <= BVH_LEAF_TRI)
+	if (bvh->nodes[idx].tri_num <= BVH_LEAF_TRI_COUNT)
 		return ;
-	extent = ksx_vec3_sub(&all_nodes[idx].aabb_max, &all_nodes[idx].aabb_min);
+	ext = ksx_vec3_sub(&bvh->nodes[idx].aabb_max, &bvh->nodes[idx].aabb_min);
 	axis = 0;
-	if (extent.y > extent.x)
+	if (ext.y > ext.x)
 		axis = 1;
-	if (extent.z > extent.xyz[axis])
+	if (ext.z > ext.xyz[axis])
 		axis = 2;
-	split_pos = all_nodes[idx].aabb_min.xyz[axis] + extent.xyz[axis] * 0.5f;
-	i = all_nodes[idx].first_tri;
-	j = i + all_nodes[idx].tri_count - 1;
+	split_pos = bvh->nodes[idx].aabb_min.xyz[axis] + ext.xyz[axis] * 0.5f;
+	i = bvh->nodes[idx].first_tri;
+	j = i + bvh->nodes[idx].tri_num - 1;
 	//printf("AXIS: [%f, %i]\n", split_pos, axis);
 	//printf("CENTROID: [%f, %f, %f]\n", bvh->pp_tri[0]->centr.x, bvh->pp_tri[0]->centr.y, bvh->pp_tri[0]->centr.z);
-	//printf("EXTENT: [%f, %f, %f]\n", extent.x, extent.y, extent.z);
+	//printf("EXTENT: [%f, %f, %f]\n", ext.x, ext.y, ext.z);
 	while (i <= j)
 	{
 		//printf("CENTR: %f, tri_idx: %i\n", bvh->pp_tri[bvh->tri_index[i]]->centr.xyz[axis], bvh->tri_index[i]);
 		if (bvh->pp_tri[bvh->tri_index[i]]->centr.xyz[axis] < split_pos)
 			i++;
 		else
-			swap(&(bvh->tri_index[i]), &(bvh->tri_index[j--]));	
+			swap(&(bvh->tri_index[i]), &(bvh->tri_index[j--]));
 	}
-	left_count = i - all_nodes[idx].first_tri;
-	if (left_count == 0 || left_count == all_nodes[idx].tri_count)
-		return ;
-	l_ch_idx = bvh->nodes_used++;
-	r_ch_idx = bvh->nodes_used++;
-	all_nodes[l_ch_idx].first_tri = all_nodes[idx].first_tri;
-	all_nodes[l_ch_idx].tri_count = left_count;
-	all_nodes[r_ch_idx].first_tri = i;
-	all_nodes[r_ch_idx].tri_count = all_nodes[idx].tri_count - left_count;
-	all_nodes[idx].left_ch = l_ch_idx;
-	all_nodes[idx].tri_count = 0;
-	grow_bvh(l_ch_idx, bvh);
-	grow_bvh(r_ch_idx, bvh);
-	//printf("LCH: %i, %i\n", all_nodes[l_ch_idx].first_tri, all_nodes[l_ch_idx].tri_count);
-	//printf("RCH: %i, %i\n", all_nodes[r_ch_idx].first_tri, all_nodes[r_ch_idx].tri_count);
-	subdivide(l_ch_idx, bvh, grph);
-	subdivide(r_ch_idx, bvh, grph);
+	create_children(idx, i, bvh, grph);
 }
 
 t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n, t_graphics *grph)
 {
-	t_bvhnode	*all_nodes;
+	t_bvhnode	*nodes;
 	uint32_t	*tri_index;
-	t_bvh	*res;
+	t_bvh		*res;
 
 	res = malloc(sizeof(t_bvh));
 	if (!res)
 		return (NULL);
-	all_nodes = malloc(sizeof(t_bvhnode) * (tri_n * 2 - 1));
-	if (!all_nodes)
+	nodes = malloc(sizeof(t_bvhnode) * (tri_n * 2 - 1));
+	if (!nodes)
 		return (free(res), NULL);
-	ft_bzero(all_nodes, sizeof(t_bvhnode) * (tri_n * 2 - 1));
 	tri_index = malloc(sizeof(uint32_t) * tri_n);
 	if (!tri_index)
-		return (free(all_nodes), free(res), NULL);
+		return (free(nodes), free(res), NULL);
 	set_centroids(pp_tri, tri_index);
-	all_nodes[0].left_ch = 0;
-	all_nodes[0].first_tri = 0;
-	all_nodes[0].tri_count = tri_n;
-	res->all_nodes = all_nodes;
+	nodes[0].left_ch = 0;
+	nodes[0].first_tri = 0;
+	nodes[0].tri_num = tri_n;
+	res->nodes = nodes;
 	res->tri_index = tri_index;
 	res->pp_tri = pp_tri;
-	res->nodes_used = 2;
+	res->used_n = 2;
 	grow_bvh(0, res);
 	subdivide(0, res, grph);
 	
 	// Draw debug boxes
 	uint32_t i = 0;
 	uint32_t color = 0xFFFFFFFF;
-	while (i < res->nodes_used) {
-		bvh_draw_box(&all_nodes[i], grph, color);
+	while (i < res->used_n) {
+		bvh_draw_box(&nodes[i], grph, color);
 		color -= 32;
 		i++;
 	}

@@ -441,14 +441,14 @@ typedef struct	s_bvhnode {
 	uint32_t	right_ch;
 	uint8_t		is_leaf;
 	uint32_t	first_tri;
-	uint32_t	tri_count;
+	uint32_t	tri_num;
 }	t_bvhnode;
 
 typedef struct	s_bvh {
-	t_bvhnode	*all_nodes;
+	t_bvhnode	*nodes;
 	t_triangle	**pp_tri;
 	uint32_t	*tri_index;
-	uint32_t	nodes_used;
+	uint32_t	used_n;
 }	t_bvh;
 
 typedef struct s_light
