@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:45:28 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 14:37:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:29:48 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ t_texture	*ray_txtr_create_checkerboard(t_world *p_worl);
 void	ray_txtr_uv_plan(t_vector3 *p_point, float *p_u, float *p_v);
 void	ray_txtr_uv_spheres(t_vector3 *p_point, float *p_u, float *p_v);
 void	ray_txtr_uv_cylinder(t_vector3 *p_point, float *p_u, float *p_v);
+
+void 	ray_txtr_free_data(void *p_txtr);
 
 #endif // RAY_TEXTURE_H

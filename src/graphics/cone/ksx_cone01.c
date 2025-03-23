@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/22 06:27:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:16:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,11 +87,9 @@ static void	ksx_init_cone(t_object *p_obj)
 		xz[0] = p_obj->size1 * cosf(CYLINDER_ANGLE * (idx - 2) * PI180);
 		xz[1] = p_obj->size1 * sinf(CYLINDER_ANGLE * (idx - 2) * PI180);
 		p_obj->pp_vrtx[idx]->op = ksx_vec3_set(xz[0], -p_obj->size2, xz[1]);
-		p_obj->pp_vnrm[idx]->op =
-			ksx_vec3_unit(&p_obj->pp_vnrm[idx]->op);
-		p_obj->pp_vnrm[idx + size]->op = ksx_vec3_set(xz[0], 0, xz[1]);
-		p_obj->pp_vnrm[idx + size]->op =
-			ksx_vec3_unit(&p_obj->pp_vnrm[idx + size]->op);
+		p_obj->pp_vnrm[idx]->op = ksx_vec3_set(xz[0], 0, xz[1]);
+		p_obj->pp_vnrm[idx]->op = ksx_vec3_unit(&p_obj->pp_vnrm[idx]->op);
+		p_obj->pp_vnrm[idx + size]->op = p_obj->pp_vnrm[idx]->op;
 		idx++;
 	}
 	ksx_init_cone_tri(p_obj, size);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 14:37:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:29:29 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,12 @@ void	ray_txtr_uv_cylinder(t_vector3 *p_point, float *p_u, float *p_v)
 {
 	*p_u = 0.5 + atan2f(p_point->z, p_point->x) * PI_12;
 	*p_v = p_point->y * .5f;
+}
+
+void ray_txtr_free_data(void *p_txtr)
+{
+	t_texture	*p_txtr_;
+
+	p_txtr_ = (t_texture *)p_txtr;
+	free(p_txtr_->data);
 }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:55:31 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 13:30:56 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:31:41 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	**pp_del_instance(void **pp_instance, void *p_instance,
 	return (pp_instance_new);
 }
 
-void	**pp_del_all(void **pp_instance)
+void	**pp_del_all(void **pp_instance, void (*f)(void *))
 {
 	int	idx;
 
@@ -42,6 +42,7 @@ void	**pp_del_all(void **pp_instance)
 		return (NULL);
 	while (pp_instance[idx])
 	{
+		f(pp_instance[idx]);
 		free(pp_instance[idx]);
 		idx++;
 	}

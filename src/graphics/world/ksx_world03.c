@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 17:07:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:31:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #include "ksx_boxes.h"
 #include "ksx_utils.h"
 #include "libft.h"
+#include "pp_struct.h"
+#include "ray_texture.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -65,6 +67,7 @@ void	ksx_world_clean(t_world *p_world)
 	}
 	ksx_free_pointers((void ***) &p_world->pp_lgt);
 	ksx_free_pointers((void ***) &p_world->pp_pln);
+	p_world->pp_txtr = (t_texture **)pp_del_all((void **)p_world->pp_txtr, &ray_txtr_free_data);
 	free(p_world->pp_box);
 	free(p_world->pp_obj);
 	p_world->pp_obj = NULL;

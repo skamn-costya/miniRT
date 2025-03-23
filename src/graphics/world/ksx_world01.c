@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 18:21:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:07:46 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ static void	ksx_set_world_defaults(t_world *p_world)
 	p_world->size_lgt = 0;
 	p_world->pp_pln = NULL;
 	p_world->size_pln = 0;
+	p_world->pp_txtr = NULL;
 	ray_txtr_create_checkerboard(p_world);
 }
 
