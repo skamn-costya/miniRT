@@ -6,16 +6,18 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 15:15:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:57:52 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "ksx_vec3_math.h"
 #include "math.h"
+#include "ray_texture.h"
 #include <stdio.h>
 
-inline static void	ray_p_check_tri(t_triangle *p_tri, t_ray *p_ray);
+inline static void	ray_p_check_tri(t_triangle *p_tri,
+						t_ray *p_ray, t_world *p_world);
 
 void	ray_p2boxes(t_world *p_world, t_ray *p_ray)
 {
@@ -37,7 +39,7 @@ void	ray_p2boxes(t_world *p_world, t_ray *p_ray)
 					ray_p2tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
 						p_ray);
 					ray_p_check_tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
-						p_ray);
+						p_ray, p_world);
 				}
 				break ;
 			}
@@ -70,19 +72,31 @@ void	ray_p2tri(t_triangle *p_tri, t_ray *p_ray)
 		p_ray->length = f[4];
 }
 
-inline static void	ray_p_check_tri(t_triangle *p_tri, t_ray *p_ray)
+inline static void	ray_p_check_tri(t_triangle *p_tri,
+	t_ray *p_ray, t_world *p_world)
 {
 	t_vector3	v3;
+	t_color		color;
 
 	if (p_ray->length < p_ray->min_length)
 	{
 		p_ray->min_length = p_ray->length;
-		p_ray->pixel.color = ((t_object *)p_tri->p_object)->color;
 		v3 = ksx_vec3_smulti(&p_ray->direction, p_ray->length);
 		v3 = ksx_vec3_add(&p_ray->origin, &v3);
 		p_ray->point = v3;
 		p_ray->p_tri = p_tri;
 		p_ray->norm = triangle_normal_barycentric(&p_ray->point, p_tri);
+		p_ray->pixel.color = ((t_object *)p_tri->p_object)->color;
+		if (((t_object *)p_tri->p_object)->p_texture)
+			{
+				color = ray_txtr_object(p_world,
+					(t_object *)p_tri->p_object, &p_ray->norm);
+					p_ray->pixel.color.mlx_color = color.mlx_color;
+					p_ray->pixel.color.ur = color.ur;
+					p_ray->pixel.color.ug = color.ug;
+					p_ray->pixel.color.ub = color.ub;
+					p_ray->pixel.color.ua = color.ua;
+			}
 	}
 }
 
@@ -116,7 +130,7 @@ t_vector3	triangle_normal_barycentric(t_vector3 *p_point, t_triangle *p_tri)
 // 	t_vector3	vec3[4];
 // 	float		f;
 // 	float		lambda[3];
-	
+
 // 	lambda[0] = ksx_vec3_dist(p_point, &p_tri->p_ver1->cp);
 // 	lambda[1] = ksx_vec3_dist(p_point, &p_tri->p_ver2->cp);
 // 	lambda[2] = ksx_vec3_dist(p_point, &p_tri->p_ver3->cp);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/22 12:20:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/25 16:07:06 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@
 
 # define EDGE_SIZE	10.f
 // Sphere generation
-# define SPHERE_GEN 2
+# define SPHERE_GEN 3
 // Cylinder step angle
 # define CYLINDER_ANGLE 18.f
 
@@ -429,7 +429,6 @@ typedef struct s_triangle
 
 typedef struct s_box
 {
-	t_vertex	ver_origin[8];
 	t_vertex	ver[8];
 	t_triangle	tris[12];
 	t_triangle	**pp_tris;
@@ -445,9 +444,8 @@ typedef struct s_light
 
 typedef struct s_texture
 {
-	int		width;
-	int		height;
-	uint8_t	*data; // Stores pixel colors in (R, G, B) format
+	char			*name;
+	mlx_texture_t	*p_data;
 }	t_texture;
 
 typedef struct s_plane
@@ -481,7 +479,6 @@ typedef struct s_object
 
 typedef struct s_world
 {
-	// t_triangle	*p_tris;
 	uint8_t		flags;
 	t_basis		basis;
 	t_vector3	far;
@@ -496,6 +493,7 @@ typedef struct s_world
 	int32_t		size_pln;
 	t_texture	**pp_txtr;
 	t_light		ambient;
+	t_camera	*p_camera;
 }	t_world;
 
 typedef struct s_graphics

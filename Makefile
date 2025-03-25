@@ -164,7 +164,8 @@ RAY_FN =	ray_cast.c \
 			ray_color.c \
 			ray_lgt.c \
 			ray_texture01.c \
-			ray_texture02.c
+			ray_texture02.c \
+			ray_texture03.c
 
 RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
