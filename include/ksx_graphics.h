@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 19:57:40 by username         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:26:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define KSX_GRAPHICS_H
 
 # include "MLX42.h"
-#include <stdint.h>
+# include <stdint.h>
 
 # define AXIS_LEN 	25.f
 # define NORM_LEN 	15.f
@@ -37,6 +37,9 @@
 // # define PI180 0.017453292519943
 
 # define PRECISION	0.00001f
+# define EPSILON	1.19209e-07
+// # define EPSILON	1e-6f
+
 /* Only support RGBA */
 # define BPP 4
 # define TRANSPARENT	0x00000000
@@ -93,7 +96,7 @@
 
 # define EDGE_SIZE	10.f
 // Sphere generation
-# define SPHERE_GEN 2
+# define SPHERE_GEN 3
 // Cylinder step angle
 # define CYLINDER_ANGLE 18.f
 
@@ -292,7 +295,7 @@ typedef struct s_basis
 	// };
 	t_vector3	o;
 	t_vector3	w_o;
-	// t_vector3	c_o;
+	t_vector3	c_o;
 }	t_basis;
 
 typedef struct s_matrix22
@@ -427,7 +430,6 @@ typedef struct s_triangle
 
 typedef struct s_box
 {
-	t_vertex	ver_origin[8];
 	t_vertex	ver[8];
 	t_triangle	tris[12];
 	t_triangle	**pp_tris;
@@ -460,9 +462,8 @@ typedef struct s_light
 
 typedef struct s_texture
 {
-	int		width;
-	int		height;
-	uint8_t	*data; // Stores pixel colors in (R, G, B) format
+	char			*name;
+	mlx_texture_t	*p_data;
 }	t_texture;
 
 typedef struct s_plane
@@ -497,7 +498,6 @@ typedef struct s_object
 
 typedef struct s_world
 {
-	// t_triangle	*p_tris;
 	uint8_t		flags;
 	t_basis		basis;
 	t_vector3	far;
@@ -512,6 +512,7 @@ typedef struct s_world
 	int32_t		size_pln;
 	t_texture	**pp_txtr;
 	t_light		ambient;
+	t_camera	*p_camera;
 }	t_world;
 
 typedef struct s_graphics
@@ -545,6 +546,8 @@ void		ksx_world_clean(t_world *p_world);
 t_object	*ksx_create_sphere(t_vector3 center,
 				uint32_t diameter, t_color color, uint8_t gen);
 t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
+				float dia_ht[], t_color color);
+t_object	*ksx_create_cone(t_vector3 center, t_vector3 norm,
 				float dia_ht[], t_color color);
 void		ksx_draw(t_graphics *p_grph);
 

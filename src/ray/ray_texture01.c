@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 14:23:52 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/25 14:59:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,64 +22,97 @@
 #include <stdio.h>
 #include <math.h>
 
-static void	ray_txtr_create_checkerboard_1(t_texture *p_txtr);
-
-t_texture	*ray_txtr_create_checkerboard(t_world *p_worl)
+t_texture	*ray_txtr_load(t_world *p_world, char *p_filename)
 {
-	t_texture	*p_txtr;
+	t_texture *p_texture;
 
-	p_txtr = (t_texture *)malloc(sizeof(t_texture));
-	if (!p_txtr)
+	p_texture = (t_texture *)malloc(sizeof(t_texture));
+	if (!p_texture)
 		ksx_error("memory allocation failure", __FILE__, __LINE__);
-	p_worl->pp_txtr = (t_texture **)pp_add_instance((void **)p_worl->pp_txtr,
-			(void *)p_txtr, &ksx_error);
-	p_txtr->width = 80;
-	p_txtr->height = 80;
-	p_txtr->data = (uint8_t *)malloc(sizeof(uint8_t) * BPP * p_txtr->width
-			* p_txtr->height);
-	if (!p_txtr->data)
-		ksx_error("memory allocation failure", __FILE__, __LINE__);
-	ray_txtr_create_checkerboard_1(p_txtr);
-	return (p_txtr);
+	p_texture->p_data = mlx_load_png(p_filename);
+	if (!p_texture)
+		return (p_texture);
+	p_texture->name = ft_strdup(p_filename);
+	p_world->pp_txtr = (t_texture **)pp_add_instance((void **)
+			p_world->pp_txtr, (void *)p_texture, &ksx_error);
+	return (p_texture);
 }
 
-static void	ray_txtr_create_checkerboard_1(t_texture *p_txtr)
+// uint32_t	ray_txtr_sample_nearest(t_texture *p_txtr, float u, float v)
+t_color	ray_txtr_sample(t_texture *p_txtr, float u, float v)
 {
-	int			idx;
-	uint32_t	bit;
-
-	idx = p_txtr->height * p_txtr->width / BPP;
-	while (idx <= 0)
-	{
-		bit = 0x00000000;
-		if (idx % p_txtr->width == 0)
-		{
-			if ((idx % 10) % 2 == 0)
-				bit = 0xFFFFFFFF;
-		}
-		else
-		{
-			if ((idx % 10) % 2 != 0)
-				bit = 0xFFFFFFFF;
-		}
-		p_txtr->data[idx * BPP + 0] = bit;
-		p_txtr->data[idx * BPP + 1] = bit;
-		p_txtr->data[idx * BPP + 2] = bit;
-		p_txtr->data[idx * BPP + 3] = bit;
-		idx--;
-	}
-}
-
-uint32_t ray_txtr_sample_nearest(t_texture *p_txtr, float u, float v)
-{
-	uint32_t	color;
-
-    int x = (int)(u * p_txtr->width) % p_txtr->width;
-    int y = (int)(v * p_txtr->height) % p_txtr->height;
-    int index = (y * p_txtr->width + x) * BPP;
-    color = p_txtr->data[index + 0] ;
-    color = p_txtr->data[index + 1] << 8;
-    color = p_txtr->data[index + 2] << 16;
-	color = p_txtr->data[index + 3] << 24;
+	t_color color;
+    int width = p_txtr->p_data->width;
+    int height = p_txtr->p_data->height;
+    int x = (int)floorf(fmodf(u * width, width));
+    int y = (int)floorf(fmodf(v * height, height));
+    // if (x < 0) x += width;
+    // if (y < 0) y += height;
+    int index = (y * width + x) * BPP;
+    // if (index + 3 >= width * height * BPP)
+    //     return 0;  // Предотвращаем выход за границы памяти
+    color.r = p_txtr->p_data->pixels[index + 0]; 
+    color.g = p_txtr->p_data->pixels[index + 1];
+    color.b = p_txtr->p_data->pixels[index + 2];
+    color.a = p_txtr->p_data->pixels[index + 3];
+	ksx_color_unit_fraction(&color);
     return (color);
 }
+
+// uint32_t ray_txtr_sample_bilinear(t_texture *p_txtr, float u, float v)
+// uint32_t ray_txtr_sample(t_texture *p_txtr, float u, float v)
+// {
+//     u = u * p_txtr->p_data->width - 0.5f;
+//     v = v * p_txtr->p_data->height - 0.5f;
+// 	t_color c00;
+// 	t_color c10;
+// 	t_color c01;
+// 	t_color c11;
+
+
+//     int x = (int)u;
+//     int y = (int)v;
+//     float dx = u - x;
+//     float dy = v - y;
+
+//     int index00 = ((y % p_txtr->p_data->height) * p_txtr->p_data->width + (x % p_txtr->p_data->width)) * BPP;
+//     int index10 = ((y % p_txtr->p_data->height) * p_txtr->p_data->width + ((x + 1) % p_txtr->p_data->width)) * BPP;
+//     int index01 = (((y + 1) % p_txtr->p_data->height) * p_txtr->p_data->width + (x % p_txtr->p_data->width)) * BPP;
+//     int index11 = (((y + 1) % p_txtr->p_data->height) * p_txtr->p_data->width + ((x + 1) % p_txtr->p_data->width)) * BPP;
+
+//     c00.r = p_txtr->p_data->pixels[index00];
+// 	c00.g = p_txtr->p_data->pixels[index00 + 1];
+// 	c00.b = p_txtr->p_data->pixels[index00 + 2];
+// 	c00.a = p_txtr->p_data->pixels[index00 + 3];
+	
+// 	c10.r = p_txtr->p_data->pixels[index10];
+// 	c10.g = p_txtr->p_data->pixels[index10 + 1];
+// 	c10.b = p_txtr->p_data->pixels[index10 + 2];
+// 	c10.a = p_txtr->p_data->pixels[index10 + 3];
+
+// 	c01.r = p_txtr->p_data->pixels[index01];
+// 	c01.g = p_txtr->p_data->pixels[index01 + 1];
+// 	c01.b = p_txtr->p_data->pixels[index01 + 2];
+// 	c01.a = p_txtr->p_data->pixels[index01 + 3];
+
+// 	c11.r = p_txtr->p_data->pixels[index11];
+// 	c11.g = p_txtr->p_data->pixels[index11 + 1];
+// 	c11.b = p_txtr->p_data->pixels[index11 + 2];
+// 	c11.a = p_txtr->p_data->pixels[index11 + 3];
+
+//     // c10.r = p_txtr->p_data->pixels[index10], p_txtr->p_data->pixels[index10 + 1], p_txtr->p_data->pixels[index10 + 2];
+//     // c01.r = p_txtr->p_data->pixels[index01], p_txtr->p_data->pixels[index01 + 1], p_txtr->p_data->pixels[index01 + 2];
+//     // c11.r = p_txtr->p_data->pixels[index11], p_txtr->p_data->pixels[index11 + 1], p_txtr->p_data->pixels[index11 + 2];
+
+//     t_color result;
+//     result.r = (uint8_t)((1 - dx) * (1 - dy) * c00.r + dx * (1 - dy) * c10.r +
+//                           (1 - dx) * dy * c01.r + dx * dy * c11.r);
+//     result.g = (uint8_t)((1 - dx) * (1 - dy) * c00.g + dx * (1 - dy) * c10.g +
+//                           (1 - dx) * dy * c01.g + dx * dy * c11.g);
+//     result.b = (uint8_t)((1 - dx) * (1 - dy) * c00.b + dx * (1 - dy) * c10.b +
+//                           (1 - dx) * dy * c01.b + dx * dy * c11.b);
+// 	result.b = (uint8_t)((1 - dx) * (1 - dy) * c00.a + dx * (1 - dy) * c10.a +
+//                           (1 - dx) * dy * c01.a + dx * dy * c11.a);
+
+//     return result.mlx_color;
+// }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/22 11:50:01 by username         ###   ########.fr       */
+/*   Updated: 2025/03/23 16:31:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 #include "ksx_vec3_math.h"
 #include <stdio.h>
 #include <math.h>
-#include "bvh.h"
 
 void	ray_cast(t_graphics *p_grph)
 {
@@ -40,13 +39,10 @@ void	ray_cast(t_graphics *p_grph)
 		if (ray.p_tri || ray.p_pln)
 		{
 			ray_p2lights(&p_grph->world, &ray);
-			// ray.pixel.color = ray_colors_blending(&ray.pixel.color,
-			// 	&p_grph->world.ambient.color, p_grph->world.ambient.bright);
-			// ray.pixel.color = compute_lighting(&ray.point, &ray.norm, &ray.pixel.color);
 			ksx_set_pixel(p_grph->img_ray, &ray.pixel);
 		}
 	}
-	ksx_time_print();	
+	ksx_time_print();
 	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
 }
 

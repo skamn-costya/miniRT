@@ -7,7 +7,8 @@ PARSER_FN =	parser01.c \
 			parser02.c \
 			parser03.c \
 			parser04.c \
-			parser05.c
+			parser05.c \
+			parser06.c
 PARSER = $(addprefix $(PARSER_DIR), $(PARSER_FN))
 
 # KSX utilites
@@ -39,7 +40,8 @@ MATRIX_MATH_DIR = graphics/utils/matrix_math/
 MATRIX_MATH_FN =	ksx_m4_math01.c \
 					ksx_m4_math02.c \
 					ksx_m4_math03.c \
-					ksx_m3_math01.c
+					ksx_m3_math01.c \
+					ksx_m3_math02.c
 MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 
 3D_DIR = graphics/3D/
@@ -54,7 +56,8 @@ MATRIX_MATH = $(addprefix $(MATRIX_MATH_DIR), $(MATRIX_MATH_FN))
 3D = $(addprefix $(3D_DIR), $(3D_FN))
 
 BASIS_DIR = graphics/basis/
-BASIS_FN =	ksx_basis.c \
+BASIS_FN =	ksx_basis01.c \
+			ksx_basis02.c \
 			ksx_basis_move.c \
 			ksx_basis_rotation.c
 BASIS = $(addprefix $(BASIS_DIR), $(BASIS_FN))
@@ -90,6 +93,11 @@ CYLINDER_DIR = graphics/cylinder/
 CYLINDER_FN =	ksx_cylinder01.c \
 				ksx_cylinder02.c
 CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FN))
+
+# Cone object
+CONE_DIR = graphics/cone/
+CONE_FN =	ksx_cone01.c
+CONE = $(addprefix $(CONE_DIR), $(CONE_FN))
 
 # Draw shapes functions
 SHAPES_DIR = graphics/shapes/
@@ -149,15 +157,15 @@ PLANE_DIR = graphics/plane/
 PLANE_FN =	ksx_plane.c
 PLANE =	$(addprefix $(PLANE_DIR), $(PLANE_FN))
 
-# Rays
 RAY_DIR = ray/
 RAY_FN =	ray_cast.c \
 			ray_tri.c \
 			ray_pln.c \
-			ray_color01.c \
+			ray_color.c \
 			ray_lgt.c \
 			ray_texture01.c \
-			ray_texture02.c
+			ray_texture02.c \
+			ray_texture03.c
 
 RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
@@ -182,6 +190,7 @@ SRC = 	$(UTILS) \
 		$(CAMERA) \
 		$(SPHERE) \
 		$(CYLINDER) \
+		$(CONE) \
 		$(SHAPES) \
 		$(GRAPHICS) \
 		$(KYES) \
@@ -252,6 +261,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(CAMERA_DIR)
 	mkdir -p $(OBJ_DIR)$(SPHERE_DIR)
 	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)
+	mkdir -p $(OBJ_DIR)$(CONE_DIR)
 	mkdir -p $(OBJ_DIR)$(SHAPES_DIR)
 	mkdir -p $(OBJ_DIR)$(KYES_DIR)
 	mkdir -p $(OBJ_DIR)$(TRIANGLE_DIR)

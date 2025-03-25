@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minirt.h                                           :+:      :+:    :+:   */
+/*   ksx_cone.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/25 00:05:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/23 00:32:09 by ksorokol         ###   ########.fr       */
+/*   Created: 2025/02/05 23:56:26 by ksorokol          #+#    #+#             */
+/*   Updated: 2025/03/21 18:06:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINIRT_H
-# define MINIRT_H
+#ifndef KSX_CONE_H
+# define KSX_CONE_H
 
-# include "libft.h"
 # include "ksx_graphics.h"
 
-# define RETURN_ERR -1
-# define TRUE 1
-# define FALSE 0
+void	ksx_init_cone_tri(t_object *p_object, uint32_t size);
 
-// gc.c
-// void	clear_exit(char *str, uint8_t fd);
-void	garbage_collector(void *p_grph);
-void	error(char *error, char *file_name, int str_num);
-
-#endif	// MINIRT_H
-
-// sudo apt updatesudo apt update
-// sudo apt install build-essential libx11-dev libglfw3-dev libglfw3 xorg-dev
+#endif	// KSX_CONE_H

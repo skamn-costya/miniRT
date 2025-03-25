@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:24:31 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/15 08:46:33 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 17:06:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
  * @param[in] p_m a pointer to the matrix, which will reset.
  */
 void		ksx_m3_reset(t_matrix3 *p_m);
+
+/**
+ * @brief set every elements of the matrix 3x3 to 1.0f.
+ * 
+ * @param[in] p_m a pointer to the matrix, which will reset.
+ */
+void		ksx_m3_unit(t_matrix3 *p_m);
 
 /**
  * @brief 3x3 matrixes multiplication.
@@ -47,5 +54,12 @@ t_vector3	ksx_m3_vec3(const t_matrix3 *p_m, const t_vector3 *p_v);
  * @returns determinant.
  */
 float		ksx_m3_det(const t_matrix3 *p_m);
+
+/**
+ * @brief set diagonal elements of the matrix 3x3 to 1.0f.
+ * 
+ * @param[in] p_m a pointer to the matrix, which will reset.
+ */
+void		ksx_m3_identity(t_matrix3 *p_m);
 
 #endif	// KSX_M3_MATH_H

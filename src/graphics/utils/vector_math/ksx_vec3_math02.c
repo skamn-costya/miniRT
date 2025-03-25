@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 20:46:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/22 12:23:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,17 @@ void	ksx_vec3_resize(t_vector3 *p_v, const float size)
 {
 	float		f;
 
-	if (size <= 0)
-		return ;
-	f = size / ksx_vec3_mag(p_v);
-	p_v->x = p_v->x * f;
-	p_v->y = p_v->y * f;
-	p_v->z = p_v->z * f;
+	if (size > 0)
+	{
+		f = ksx_vec3_mag(p_v);
+		f = size / f;
+		if (f > EPSILON)
+		{
+			p_v->x *= f;
+			p_v->y *= f;
+			p_v->z *= f;
+		}
+	}
 }
 
 /**

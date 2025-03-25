@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:55:53 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 13:30:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/23 11:26:18 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ void	**pp_del_idx(void **pp_instance, int del_idx,
 
 void	**pp_del_instance(void **pp_instance, void *p_instance,
 			void (*p_f_error)(char *, char *, int));
-void	**pp_del_all(void **pp_instance);
+void	**pp_del_all(void **pp_instance, void (*f)(void *));
 
 #endif	// PP_STRUCT_H

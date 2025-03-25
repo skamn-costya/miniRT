@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/12 16:24:01 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/25 15:01:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 #include "ksx_boxes.h"
 #include "ksx_utils.h"
 #include "libft.h"
+#include "pp_struct.h"
+#include "ray_texture.h"
 #include <stdlib.h>
 #include <stdio.h>
+
+// static void	ksx_obj_clean(t_object *p_object);
 
 t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 {
@@ -41,6 +45,8 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 	free (p_world->pp_obj);
 	p_world->pp_obj = pp_object;
 	p_world->size_obj++;
+	if (p_object->color.mlx_color == 0xFF010101)
+		p_object->p_texture = ray_txtr_load(p_world, "./textures/checkerboard_1.png");
 	return (pp_object);
 }
 
@@ -63,7 +69,19 @@ void	ksx_world_clean(t_world *p_world)
 	}
 	ksx_free_pointers((void ***) &p_world->pp_lgt);
 	ksx_free_pointers((void ***) &p_world->pp_pln);
+	p_world->pp_txtr = (t_texture **)pp_del_all((void **)p_world->pp_txtr, &ray_txtr_free_data);
 	free(p_world->pp_box);
 	free(p_world->pp_obj);
 	p_world->pp_obj = NULL;
 }
+
+// static void	ksx_obj_clean(t_object *p_object)
+// {
+// 	int32_t	idx;
+
+// 	idx = 0;
+// 	while (idx < 12)
+// 	{
+// 		idx++;
+// 	}
+// }
