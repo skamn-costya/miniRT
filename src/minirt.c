@@ -23,6 +23,7 @@
 #include "ksx_camera.h"
 #include "keys.h"
 #include "ray.h"
+#include "bvh.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -47,11 +48,13 @@ int	main(int argc, char *argv[])
 	{
 		printf("There isn't any object.\n");
 		ksx_garbage_collector(NULL);
-	}	
+	}
 	grph.obj_idx = 0;
 	ft_lstclear(&p_list, &free_t_obj_descr);
 	ksx_draw(&grph);
+	bvh_build_world(&grph);
 	ray_cast(&grph);
+	bvh_draw_world(&grph);
 	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
 	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);
 	mlx_loop(grph.mlx);

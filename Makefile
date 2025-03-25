@@ -169,6 +169,13 @@ RAY_FN =	ray_cast.c \
 
 RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
+# BVH
+BVH_DIR = bvh/
+BVH_FN = bvh_build.c \
+				 bvh_debug.c \
+				 bvh_utils.c
+BVH = $(addprefix $(BVH_DIR), $(BVH_FN))
+
 # All sources
 SRC_DIR = ./src/
 SRC = 	$(UTILS) \
@@ -192,6 +199,7 @@ SRC = 	$(UTILS) \
 		$(PLANE) \
 		$(WORLD) \
 		$(RAY) \
+		$(BVH) \
 		$(PARSER) \
 		$(MAIN) \
 		gc.c
@@ -262,6 +270,7 @@ $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)$(PLANE_DIR)
 	mkdir -p $(OBJ_DIR)$(WORLD_DIR)
 	mkdir -p $(OBJ_DIR)$(RAY_DIR)
+	mkdir -p $(OBJ_DIR)$(BVH_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -c $< -o $@

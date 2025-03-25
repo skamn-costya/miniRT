@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/25 16:07:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/25 18:26:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -425,6 +425,7 @@ typedef struct s_triangle
 	};
 	//t_color		*p_color;
 	void		*p_object;
+	t_vector3	centr;
 }	t_triangle;
 
 typedef struct s_box
@@ -434,6 +435,23 @@ typedef struct s_box
 	t_triangle	**pp_tris;
 	void		*p_object;
 }	t_box;
+
+typedef struct	s_bvhnode {
+	t_vector3	aabb_min;
+	t_vector3	aabb_max;
+	uint32_t	left_ch;
+	uint32_t	right_ch;
+	uint8_t		is_leaf;
+	uint32_t	first_tri;
+	uint32_t	tri_num;
+}	t_bvhnode;
+
+typedef struct	s_bvh {
+	t_bvhnode	*nodes;
+	t_triangle	**pp_tri;
+	uint32_t	*tri_index;
+	uint32_t	used_n;
+}	t_bvh;
 
 typedef struct s_light
 {
@@ -475,6 +493,7 @@ typedef struct s_object
 	t_texture	*p_texture;
 	void		(*ray_txtr_uv)(t_vector3 *, float *, float *);
 	// void		(*f_transform)(void *, t_basis *);
+	t_bvh	*bvh;
 }	t_object;
 
 typedef struct s_world
