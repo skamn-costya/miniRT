@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/25 15:01:00 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/25 22:10:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 	p_world->pp_obj = pp_object;
 	p_world->size_obj++;
 	if (p_object->color.mlx_color == 0xFF010101)
-		p_object->p_texture = ray_txtr_load(p_world, "./textures/checkerboard_1.png");
+		p_object->p_texture = ray_txtr_load(p_world, "./textures/earth_daymap.png");
 	return (pp_object);
 }
 

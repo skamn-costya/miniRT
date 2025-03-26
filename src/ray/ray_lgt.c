@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/20 14:21:28 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 00:27:50 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	ray_p2lights(t_world *p_world, t_ray *p_ray)
 	t_vector3	vec3;
 
 	vec3 = ksx_vec3_smulti(&p_ray->norm, BIAS);
-	p_ray->point = ksx_vec3_add(&p_ray->point, &vec3);
-	p_ray->origin = p_ray->point;
+	p_ray->point.cp = ksx_vec3_add(&p_ray->point.cp, &vec3);
+	p_ray->origin = p_ray->point.cp;
 	p_ray->color = p_ray->pixel.color;
 	ray_colors_multiply(&p_ray->pixel.color, &p_world->ambient.color);
 	ray_colors_scale(&p_ray->pixel.color,
@@ -44,9 +44,9 @@ void	ray_p2lights(t_world *p_world, t_ray *p_ray)
 void	ray_p2lgt(t_world *p_world, t_light *p_light, t_ray *p_ray)
 {
 	p_ray->p_lgt = p_light;
-	p_ray->direction = ksx_vec3_sub(&p_light->point.cp, &p_ray->point);
+	p_ray->direction = ksx_vec3_sub(&p_light->point.cp, &p_ray->point.cp);
 	p_ray->direction = ksx_vec3_unit(&p_ray->direction);
-	p_ray->min_length = ksx_vec3_dist(&p_light->point.cp, &p_ray->point);
+	p_ray->min_length = ksx_vec3_dist(&p_light->point.cp, &p_ray->point.cp);
 	p_ray->length = p_ray->min_length;
 	ray_p2lgt_boxes(p_world, p_ray);
 	(void) p_world;

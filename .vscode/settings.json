@@ -4,5 +4,11 @@
 		"${workspaceRoot}/lib/libft",
 		// "${workspaceRoot}/lib/minilibx",
 		"${workspaceRoot}/lib/MLX42/include/MLX42"
-	]
+	],
+	"files.associations": {
+		"ksx_3d.h": "c",
+		"ksx_utils.h": "c",
+		"ksx_object.h": "c",
+		"ray.h": "c"
+	}
 }

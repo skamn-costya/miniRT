@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/25 14:57:52 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 00:18:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@ inline static void	ray_p_check_tri(t_triangle *p_tri,
 		p_ray->min_length = p_ray->length;
 		v3 = ksx_vec3_smulti(&p_ray->direction, p_ray->length);
 		v3 = ksx_vec3_add(&p_ray->origin, &v3);
-		p_ray->point = v3;
+		p_ray->point.cp = v3;
 		p_ray->p_tri = p_tri;
-		p_ray->norm = triangle_normal_barycentric(&p_ray->point, p_tri);
+		p_ray->norm = triangle_normal_barycentric(&p_ray->point.cp, p_tri);
 		p_ray->pixel.color = ((t_object *)p_tri->p_object)->color;
 		if (((t_object *)p_tri->p_object)->p_texture)
 			{

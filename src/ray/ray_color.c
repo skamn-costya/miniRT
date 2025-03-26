@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray_color01.c                                      :+:      :+:    :+:   */
+/*   ray_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/22 08:13:56 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 00:26:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ray_colors_calc(t_ray *p_ray)
 	t_vector3	vec3[3];
 	t_color		color[2];
 
-	t_vector3 dir = ksx_vec3_sub(&p_ray->p_lgt->point.cp, &p_ray->point);
+	t_vector3 dir = ksx_vec3_sub(&p_ray->p_lgt->point.cp, &p_ray->point.cp);
 	dir = ksx_vec3_unit(&dir);
 	p_ray->norm = ksx_vec3_unit(&p_ray->norm);
 
@@ -91,7 +91,7 @@ void	ray_colors_calc(t_ray *p_ray)
 	// vec3[1] = ksx_vec3_set(0.f, 0.f, 0.f);
 	// vec3[2] = ksx_vec3_sub(&vec3[1], &p_ray->point);
 	// vec3[2] = ksx_vec3_unit(&vec3[2]);
-	vec3[2] = ksx_vec3_unit(&p_ray->point);
+	vec3[2] = ksx_vec3_unit(&p_ray->point.cp);
 	f[1] = fmaxf(0.f, ksx_vec3_dot(&vec3[0], &vec3[2]));
 	f[2] = powf(f[1], p_ray->color.material.ns);
 	color[1] = p_ray->p_lgt->color;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/25 12:06:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/25 23:20:24 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	ray_txtr_uv_plan(t_vector3 *p_point, float *p_u, float *p_v)
 
 void	ray_txtr_uv_spheres(t_vector3 *p_point, float *p_u, float *p_v)
 {
-	static const float INV_PI = 1.f / PI;
-    static const float INV_2PI = 1.f / (2.f * PI);
+	// static const float INV_PI = 1.f / PI;
+    // static const float INV_2PI = 1.f / (2.f * PI);
 	
-    *p_u = .5f + atan2f(p_point->z, p_point->x) * INV_2PI;
-    *p_v = .5f - asinf(p_point->y) * INV_PI;
-	// *p_u = .5f + atan2f(p_point->z, p_point->x) * PI_12;
-	// *p_v = .5f - asinf(p_point->y) * PI_1;
+    // *p_u = atan2f(p_point->z, p_point->x) * INV_2PI;
+    // *p_v = asinf(p_point->y) * INV_PI;
+	*p_u = .5f + atan2f(p_point->z, p_point->x) * PI_12;
+	*p_v = .15f - asinf(p_point->y) * PI_1;
 }
 
 void	ray_txtr_uv_cylinder(t_vector3 *p_point, float *p_u, float *p_v)

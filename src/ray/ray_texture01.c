@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/25 14:59:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/25 23:39:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_color	ray_txtr_sample(t_texture *p_txtr, float u, float v)
     int height = p_txtr->p_data->height;
     int x = (int)floorf(fmodf(u * width, width));
     int y = (int)floorf(fmodf(v * height, height));
-    // if (x < 0) x += width;
-    // if (y < 0) y += height;
+    if (x < 0) x += width;
+    if (y < 0) y += height;
     int index = (y * width + x) * BPP;
     // if (index + 3 >= width * height * BPP)
     //     return 0;  // Предотвращаем выход за границы памяти
@@ -55,12 +55,11 @@ t_color	ray_txtr_sample(t_texture *p_txtr, float u, float v)
     color.g = p_txtr->p_data->pixels[index + 1];
     color.b = p_txtr->p_data->pixels[index + 2];
     color.a = p_txtr->p_data->pixels[index + 3];
-	ksx_color_unit_fraction(&color);
     return (color);
 }
 
-// uint32_t ray_txtr_sample_bilinear(t_texture *p_txtr, float u, float v)
-// uint32_t ray_txtr_sample(t_texture *p_txtr, float u, float v)
+// // uint32_t ray_txtr_sample_bilinear(t_texture *p_txtr, float u, float v)
+// t_color ray_txtr_sample(t_texture *p_txtr, float u, float v)
 // {
 //     u = u * p_txtr->p_data->width - 0.5f;
 //     v = v * p_txtr->p_data->height - 0.5f;
@@ -114,5 +113,5 @@ t_color	ray_txtr_sample(t_texture *p_txtr, float u, float v)
 // 	result.b = (uint8_t)((1 - dx) * (1 - dy) * c00.a + dx * (1 - dy) * c10.a +
 //                           (1 - dx) * dy * c01.a + dx * dy * c11.a);
 
-//     return result.mlx_color;
+//     return result;
 // }

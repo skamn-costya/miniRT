@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/22 12:19:01 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 00:17:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_ray
 	t_triangle	*p_tri;
 	t_plane		*p_pln;
 	t_light		*p_lgt;
-	t_vector3	point;
+	t_vertex	point;
 	t_vector3	norm;
 	t_pixel		pixel;
 	t_color		color;
