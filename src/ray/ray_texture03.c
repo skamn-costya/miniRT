@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 15:26:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:22:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ t_color	ray_txtr_object(t_object *p_object, t_vector3 *p_point,
 	p_object->color.material.ks = .7f;
 	v3 = *p_point;
 	p_object->ray_txtr_uv(&v3, &uv[0], &uv[1]);
-	if (p_color->mlx_color == 0xFF010000)
+	if (p_color->b < 4)
 		result = ray_txtr_sample(p_object->p_texture, uv[0], uv[1]);
-	else if (p_color->mlx_color == 0xFF020000)
+	else if (p_color->b == 4)
 		result = ray_uv_checker(uv[0], uv[1], 20);
 	else
 		result = ray_uv_debug_color(uv[0], uv[1]);

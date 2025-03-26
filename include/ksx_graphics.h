@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/25 18:26:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:03:10 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -463,7 +463,8 @@ typedef struct s_light
 typedef struct s_texture
 {
 	char			*name;
-	mlx_texture_t	*p_data;
+	mlx_texture_t	*p_mapdata;
+	mlx_texture_t	*p_bumpdata;
 }	t_texture;
 
 typedef struct s_plane

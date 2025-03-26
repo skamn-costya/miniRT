@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 13:43:35 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:03:05 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ void ray_txtr_free_data(void *p_txtr)
 
 	p_txtr_ = (t_texture *)p_txtr;
 	free(p_txtr_->name);
-	mlx_delete_texture(p_txtr_->p_data);
+	mlx_delete_texture(p_txtr_->p_mapdata);
+	mlx_delete_texture(p_txtr_->p_bumpdata);
 }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/25 22:03:31 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 16:26:30 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 #include <stdio.h>
 
 static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *));
+mlx_image_t	*ksx_load_bg(t_graphics *p_grph);
 void		my_scrollhook(double xdelta, double ydelta, void *param);
 void		my_keyhook(mlx_key_data_t keydata, void *param);
 
@@ -69,7 +70,7 @@ static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *))
 	p_grph->mlx = ksx_init();
 	if (!p_grph->mlx)
 		return (printf("MLX init failed!\n"), FALSE);
-	p_grph->img_bg = ksx_create_image(p_grph->mlx, BACKGROUND);
+	p_grph->img_bg = ksx_load_bg(p_grph);
 	if (!p_grph->img_bg)
 		return (printf("Create background failed!\n"), FALSE);
 	p_grph->img_proj = ksx_create_image(p_grph->mlx, TRANSPARENT);
@@ -81,6 +82,20 @@ static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *))
 	if (ksx_image_to_window(p_grph->mlx, p_grph->img_proj, 2) < 0)
 		return (printf("Image to window failed!\n"), FALSE);
 	return (TRUE);
+}
+
+mlx_image_t	*ksx_load_bg(t_graphics *p_grph)
+{
+	mlx_image_t		*p_img;
+	mlx_texture_t	*p_txtr;
+	
+	p_txtr = mlx_load_png("./textures/stars_milky_way.png");
+	if (!p_txtr)
+		return (p_img = ksx_create_image(p_grph->mlx, BACKGROUND));
+	p_img = mlx_texture_to_image(p_grph->mlx, p_txtr);
+	mlx_delete_texture(p_txtr);
+	mlx_resize_image(p_img, WIDTH, HEIGHT);
+	return (p_img);
 }
 
 void	my_keyhook(mlx_key_data_t keydata, void *param)

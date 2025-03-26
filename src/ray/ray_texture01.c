@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 12:15:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:11:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,20 @@
 #include <stdio.h>
 #include <math.h>
 
-t_texture	*ray_txtr_load(t_world *p_world, char *p_filename)
+t_texture	*ray_txtr_load(t_world *p_world, char *p_mapname, char *p_bumpname)
 {
 	t_texture *p_texture;
 
 	p_texture = (t_texture *)malloc(sizeof(t_texture));
 	if (!p_texture)
 		ksx_error("memory allocation failure", __FILE__, __LINE__);
-	p_texture->p_data = mlx_load_png(p_filename);
+	p_texture->p_mapdata = mlx_load_png(p_mapname);
 	if (!p_texture)
 		return (p_texture);
-	p_texture->name = ft_strdup(p_filename);
+	p_texture->p_bumpdata = NULL;
+	if (p_bumpname)
+		p_texture->p_bumpdata = mlx_load_png(p_bumpname);
+	p_texture->name = ft_strdup(p_mapname);
 	p_world->pp_txtr = (t_texture **)pp_add_instance((void **)
 			p_world->pp_txtr, (void *)p_texture, &ksx_error);
 	return (p_texture);
@@ -42,8 +45,8 @@ t_texture	*ray_txtr_load(t_world *p_world, char *p_filename)
 t_color	ray_txtr_sample(t_texture *p_txtr, float u, float v)
 {
 	t_color color;
-    int width = p_txtr->p_data->width;
-    int height = p_txtr->p_data->height;
+    int width = p_txtr->p_mapdata->width;
+    int height = p_txtr->p_mapdata->height;
     int x = (int)floorf(fmodf(u * width, width));
     int y = (int)floorf(fmodf(v * height, height));
     // if (x < 0) x += width;
@@ -51,10 +54,10 @@ t_color	ray_txtr_sample(t_texture *p_txtr, float u, float v)
     int index = (y * width + x) * BPP;
     // if (index + 3 >= width * height * BPP)
     //     return 0;  // Предотвращаем выход за границы памяти
-    color.r = p_txtr->p_data->pixels[index + 0]; 
-    color.g = p_txtr->p_data->pixels[index + 1];
-    color.b = p_txtr->p_data->pixels[index + 2];
-    color.a = p_txtr->p_data->pixels[index + 3];
+    color.r = p_txtr->p_mapdata->pixels[index + 0]; 
+    color.g = p_txtr->p_mapdata->pixels[index + 1];
+    color.b = p_txtr->p_mapdata->pixels[index + 2];
+    color.a = p_txtr->p_mapdata->pixels[index + 3];
     return (color);
 }
 

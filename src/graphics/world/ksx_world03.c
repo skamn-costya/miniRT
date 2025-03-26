@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 15:25:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 17:25:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+static void	ksx_obj_texture(t_object *p_object, t_world *p_world);
 // static void	ksx_obj_clean(t_object *p_object);
 
-t_object	**ksx_obj2world(t_object *p_obj, t_world *p_world)
+t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 {
 	t_object	**pp_object;
 	int32_t		idx;
 
-	if (!p_obj || !p_world)
+	if (!p_object || !p_world)
 		return (NULL);
 	pp_object = (t_object **) malloc
 		(sizeof(t_object *) * (p_world->size_obj + 1));
@@ -38,17 +39,36 @@ t_object	**ksx_obj2world(t_object *p_obj, t_world *p_world)
 		pp_object[idx] = p_world->pp_obj[idx];
 		idx++;
 	}
-	pp_object[idx] = p_obj;
-	if (p_obj->pp_box && p_obj->pp_box[0])
-		ksx_box_add (&p_world->pp_box, p_obj->pp_box[0]);
+	pp_object[idx] = p_object;
+	if (p_object->pp_box && p_object->pp_box[0])
+		ksx_box_add (&p_world->pp_box, p_object->pp_box[0]);
 	p_world->size_box++;
 	free (p_world->pp_obj);
 	p_world->pp_obj = pp_object;
 	p_world->size_obj++;
-	// if (p_object->color.mlx_color == 0xFF000001)
-	if (p_obj->color.r == 0 && p_obj->color.g == 0 && p_obj->color.r < 4)
-		p_obj->p_texture = ray_txtr_load(p_world, "./textures/earthmap1k.png");
+	ksx_obj_texture(p_object, p_world);
 	return (pp_object);
+}
+
+static void	ksx_obj_texture(t_object *p_object, t_world *p_world)
+{
+
+	if (p_object->color.r == 0 && p_object->color.g == 0)
+	{
+		if (p_object->color.b == 1)
+			p_object->p_texture = ray_txtr_load(p_world, "./textures/earthmap1k.png",
+				"./textures/earthbump1k.png");
+		else if (p_object->color.b == 2)
+			p_object->p_texture = ray_txtr_load(p_world, "./textures/moonmap1k.png",
+				"./textures/moonbump1k.png");
+		else if (p_object->color.b == 3)
+			p_object->p_texture = ray_txtr_load(p_world, "./textures/sunmap.png",
+				NULL);
+		else if (p_object->color.b == 4)
+			p_object->p_texture = (t_texture *)1;
+		else if (p_object->color.b == 5)
+			p_object->p_texture = (t_texture *)1;
+	}
 }
 
 void	ksx_world_clean(t_world *p_world)
