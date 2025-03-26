@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/26 00:17:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:58:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@
 // # define EPSILON 0.0001f
 # define MAX_LEN 3.402823466e+38F
 
+typedef struct s_brcntrc
+{
+	union
+	{
+		struct
+		{
+			float	lambda1;
+			float	lambda2;
+			float	lambda3;
+		};
+		float	lambda[3];
+	};
+}	t_brcntrc;
+
 typedef struct s_ray
 {
 	t_vector3	origin;
@@ -30,6 +44,7 @@ typedef struct s_ray
 	t_plane		*p_pln;
 	t_light		*p_lgt;
 	t_vertex	point;
+	t_brcntrc	brcntrc;
 	t_vector3	norm;
 	t_pixel		pixel;
 	t_color		color;
@@ -46,7 +61,9 @@ void		ray_p2lights(t_world *p_world, t_ray *p_ray);
 void		ray_p2lgt(t_world *p_world, t_light *p_light, t_ray *p_ray);
 void		ray_p2lgt_boxes(t_world *p_world, t_ray *p_ray);
 
-t_vector3	triangle_normal_barycentric(t_vector3 *p_point, t_triangle *p_tri);
+t_vector3	triangle_normal_barycentric(t_triangle *p_tri, t_ray *p_ray);
+void		rey_get_barycentric(t_vector3 *p_point,
+				t_triangle *p_tri, t_ray *p_ray);
 t_vector3	triangle_normal_euler(t_vector3 *p_point, t_triangle *p_tri);
 
 void		ray_colors_add(t_color *p_color1, t_color *p_color2);

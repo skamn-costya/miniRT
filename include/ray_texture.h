@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:45:28 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/25 23:44:43 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 13:01:41 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void		ray_txtr_uv_cylinder(t_vector3 *p_point, float *p_u, float *p_v);
 t_color		ray_txtr_sample(t_texture *p_txtr, float u, float v);
 void		ray_txtr_free_data(void *p_txtr);
 
-t_color		ray_txtr_object(t_world *p_world,
-				t_object *p_object, t_vector3 *p_point);
+t_color		ray_txtr_object(t_object *p_object, t_vector3 *p_point,
+				t_color	*p_color);
 
 t_color		ray_uv_debug_color(float u, float v);
 t_color		ray_uv_checker(float u, float v, int scale);

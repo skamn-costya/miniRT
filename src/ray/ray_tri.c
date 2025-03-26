@@ -6,12 +6,13 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 00:18:01 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 15:13:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ray.h"
 #include "ksx_vec3_math.h"
+#include "ksx_utils.h"
 #include "math.h"
 #include "ray_texture.h"
 #include <stdio.h>
@@ -36,6 +37,11 @@ void	ray_p2boxes(t_world *p_world, t_ray *p_ray)
 				idx[2] = -1;
 				while (p_world->pp_box[idx[0]]->pp_tris[++idx[2]])
 				{
+					// if (p_world->pp_box[idx[0]]->pp_tris[idx[2]] == p_world->pp_box[0]->pp_tris[0])
+					// {
+					// 	ksx_print_tri(p_world->pp_box[0]->pp_tris[0], ORIP);
+					// 	ksx_print_tri(p_world->pp_box[0]->pp_tris[0], LOCP);
+					// }
 					ray_p2tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
 						p_ray);
 					ray_p_check_tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
@@ -78,6 +84,7 @@ inline static void	ray_p_check_tri(t_triangle *p_tri,
 	t_vector3	v3;
 	t_color		color;
 
+	(void)p_world; // delete
 	if (p_ray->length < p_ray->min_length)
 	{
 		p_ray->min_length = p_ray->length;
@@ -85,44 +92,66 @@ inline static void	ray_p_check_tri(t_triangle *p_tri,
 		v3 = ksx_vec3_add(&p_ray->origin, &v3);
 		p_ray->point.cp = v3;
 		p_ray->p_tri = p_tri;
-		p_ray->norm = triangle_normal_barycentric(&p_ray->point.cp, p_tri);
+		rey_get_barycentric(&p_ray->point.cp, p_tri, p_ray);
+		p_ray->norm = triangle_normal_barycentric(p_tri, p_ray);
 		p_ray->pixel.color = ((t_object *)p_tri->p_object)->color;
 		if (((t_object *)p_tri->p_object)->p_texture)
-			{
-				color = ray_txtr_object(p_world,
-					(t_object *)p_tri->p_object, &p_ray->norm);
-					p_ray->pixel.color.mlx_color = color.mlx_color;
-					p_ray->pixel.color.ur = color.ur;
-					p_ray->pixel.color.ug = color.ug;
-					p_ray->pixel.color.ub = color.ub;
-					p_ray->pixel.color.ua = color.ua;
-			}
+		{
+			color = ray_txtr_object((t_object *)p_tri->p_object,
+					&p_ray->point.op, &p_ray->pixel.color);
+			p_ray->pixel.color.mlx_color = color.mlx_color;
+			p_ray->pixel.color.ur = color.ur;
+			p_ray->pixel.color.ug = color.ug;
+			p_ray->pixel.color.ub = color.ub;
+			p_ray->pixel.color.ua = color.ua;
+		}
 	}
 }
 
-t_vector3	triangle_normal_barycentric(t_vector3 *p_point, t_triangle *p_tri)
+t_vector3	triangle_normal_barycentric(t_triangle *p_tri, t_ray *p_ray)
+{
+	t_vector3	vec3[2];
+	t_vector3	normal;
+
+	vec3[0] = ksx_vec3_smulti(&p_tri->p_norm1->cp,
+			p_ray->brcntrc.lambda1);
+	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm2->cp,
+			p_ray->brcntrc.lambda2);
+	vec3[0] = ksx_vec3_add(&vec3[0], &vec3[1]);
+	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm3->cp,
+			p_ray->brcntrc.lambda3);
+	normal = ksx_vec3_add(&vec3[0], &vec3[1]);
+	return (ksx_vec3_unit(&normal));
+}
+
+void	rey_get_barycentric(t_vector3 *p_point,
+		t_triangle *p_tri, t_ray *p_ray)
 {
 	t_vector3	edge[3];
-	t_vector3	normal[2];
-	float		f[4];
+	t_vector3	normal;
+	float		f;
 	t_vector3	vec3[2];
 
 	edge[0] = ksx_vec3_sub(&p_tri->p_ver2->cp, &p_tri->p_ver1->cp);
 	edge[1] = ksx_vec3_sub(&p_tri->p_ver3->cp, &p_tri->p_ver1->cp);
 	edge[2] = ksx_vec3_sub(p_point, &p_tri->p_ver1->cp);
-	normal[0] = ksx_vec3_cross(&edge[0], &edge[1]);
-	f[0] = 1.f / ksx_vec3_mag(&normal[0]);
+	normal = ksx_vec3_cross(&edge[0], &edge[1]);
+	f = 1.f / ksx_vec3_mag(&normal);
 	vec3[0] = ksx_vec3_cross(&edge[2], &edge[0]);
 	vec3[1] = ksx_vec3_cross(&edge[2], &edge[1]);
-	f[3] = fmaxf(0.f, ksx_vec3_mag(&vec3[0]) * f[0]);
-	f[2] = fmaxf(0.f, ksx_vec3_mag(&vec3[1]) * f[0]);
-	f[1] = 1.0f - f[2] - f[3];
-	vec3[0] = ksx_vec3_smulti(&p_tri->p_norm1->cp, f[1]);
-	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm2->cp, f[2]);
-	vec3[0] = ksx_vec3_add(&vec3[0], &vec3[1]);
-	vec3[1] = ksx_vec3_smulti(&p_tri->p_norm3->cp, f[3]);
-	normal[1] = ksx_vec3_add(&vec3[0], &vec3[1]);
-	return (ksx_vec3_unit(&normal[1]));
+	p_ray->brcntrc.lambda3 = fmaxf(0.f, ksx_vec3_mag(&vec3[0]) * f);
+	p_ray->brcntrc.lambda2 = fmaxf(0.f, ksx_vec3_mag(&vec3[1]) * f);
+	p_ray->brcntrc.lambda1 = 1.f - p_ray->brcntrc.lambda2
+		- p_ray->brcntrc.lambda3;
+	p_ray->point.op.x = p_tri->p_ver1->op.x * p_ray->brcntrc.lambda1
+		+ p_tri->p_ver2->op.x * p_ray->brcntrc.lambda2
+		+ p_tri->p_ver3->op.x * p_ray->brcntrc.lambda3;
+	p_ray->point.op.y = p_tri->p_ver1->op.y * p_ray->brcntrc.lambda1
+		+ p_tri->p_ver2->op.y * p_ray->brcntrc.lambda2
+		+ p_tri->p_ver3->op.y * p_ray->brcntrc.lambda3;
+	p_ray->point.op.z = p_tri->p_ver1->op.z * p_ray->brcntrc.lambda1
+		+ p_tri->p_ver2->op.z * p_ray->brcntrc.lambda2
+		+ p_tri->p_ver3->op.z * p_ray->brcntrc.lambda3;
 }
 
 // t_vector3	triangle_normal_euler(t_vector3 *p_point, t_triangle *p_tri)

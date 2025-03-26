@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/25 23:39:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:15:12 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ t_color	ray_txtr_sample(t_texture *p_txtr, float u, float v)
     int height = p_txtr->p_data->height;
     int x = (int)floorf(fmodf(u * width, width));
     int y = (int)floorf(fmodf(v * height, height));
-    if (x < 0) x += width;
-    if (y < 0) y += height;
+    // if (x < 0) x += width;
+    // if (y < 0) y += height;
     int index = (y * width + x) * BPP;
     // if (index + 3 >= width * height * BPP)
     //     return 0;  // Предотвращаем выход за границы памяти

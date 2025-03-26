@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/25 22:10:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/26 15:25:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@
 
 // static void	ksx_obj_clean(t_object *p_object);
 
-t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
+t_object	**ksx_obj2world(t_object *p_obj, t_world *p_world)
 {
 	t_object	**pp_object;
 	int32_t		idx;
 
-	if (!p_object || !p_world)
+	if (!p_obj || !p_world)
 		return (NULL);
 	pp_object = (t_object **) malloc
 		(sizeof(t_object *) * (p_world->size_obj + 1));
@@ -38,15 +38,16 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 		pp_object[idx] = p_world->pp_obj[idx];
 		idx++;
 	}
-	pp_object[idx] = p_object;
-	if (p_object->pp_box && p_object->pp_box[0])
-		ksx_box_add (&p_world->pp_box, p_object->pp_box[0]);
+	pp_object[idx] = p_obj;
+	if (p_obj->pp_box && p_obj->pp_box[0])
+		ksx_box_add (&p_world->pp_box, p_obj->pp_box[0]);
 	p_world->size_box++;
 	free (p_world->pp_obj);
 	p_world->pp_obj = pp_object;
 	p_world->size_obj++;
-	if (p_object->color.mlx_color == 0xFF010101)
-		p_object->p_texture = ray_txtr_load(p_world, "./textures/earth_daymap.png");
+	// if (p_object->color.mlx_color == 0xFF000001)
+	if (p_obj->color.r == 0 && p_obj->color.g == 0 && p_obj->color.r < 4)
+		p_obj->p_texture = ray_txtr_load(p_world, "./textures/earthmap1k.png");
 	return (pp_object);
 }
 
