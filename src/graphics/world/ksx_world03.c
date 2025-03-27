@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 12:58:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/27 18:34:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static void	ksx_obj_texture(t_object *p_object, t_world *p_world)
 				"./textures/moonbump1k.png");
 		else if (p_object->color.b == 3)
 			p_object->p_texture = ray_txtr_load(p_world, "./textures/sunmap.png",
-				NULL);
+				"./textures/sunbump.png");
 		else if (p_object->color.b == 4)
 			p_object->p_texture = (t_texture *)4;
 		else if (p_object->color.b == 5)
