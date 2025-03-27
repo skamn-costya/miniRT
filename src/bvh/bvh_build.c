@@ -126,7 +126,7 @@ t_bvh	*build_bvh(t_triangle **pp_tri, uint32_t tri_n)
 	res->nodes = nodes;
 	res->tri_index = tri_index;
 	res->pp_tri = pp_tri;
-	res->used_n = 2;
+	res->used_n = 1;
 	grow_bvh(0, res);
 	subdivide(0, res);
 	return (res);

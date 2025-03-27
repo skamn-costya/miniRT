@@ -73,7 +73,6 @@ void	bvh_draw_obj(t_object *obj, t_graphics *grph)
 	color = 0xFF3ADFFF;	
 	while (i < obj->bvh->used_n)
 	{
-		printf("%i\n", i);
 		bvh_draw_box(&obj->bvh->nodes[i], grph, color);
 		//color -= 32;
 		i++;
