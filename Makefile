@@ -165,7 +165,8 @@ RAY_FN =	ray_cast.c \
 			ray_lgt.c \
 			ray_texture01.c \
 			ray_texture02.c \
-			ray_texture03.c
+			ray_texture03.c \
+			ray_cast_thread.c
 
 RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
@@ -209,6 +210,10 @@ SRCS =	$(addprefix $(SRC_DIR), $(SRC))
 OBJ_DIR = ./build/
 OBJS = $(addprefix $(OBJ_DIR), $(SRC:.c=.o))
 
+# All bonus .o files
+OBJ_DIR_BONUS = bonus/
+OBJS_BONUS = $(addprefix $(OBJ_DIR), $(addprefix $(OBJ_DIR_BONUS), $(SRC:.c=.o)))
+
 # My libft library
 LIBFT_DIR = ./lib/libft/
 LIBFT_INCLUDE = ./lib/libft
@@ -244,33 +249,50 @@ NAME = minirt
 CC = cc
 CCFLAGS = -g -Wall -Wextra -Werror
 
+DIRS =	$(PARSER_DIR) \
+		$(UTILS_DIR) \
+		$(PP_STRUCT_DIR) \
+		$(VECTOR_MATH_DIR) \
+		$(MATRIX_MATH_DIR) \
+		$(BASIS_DIR) \
+		$(3D_DIR) \
+		$(OBJECT_DIR) \
+		$(OBJ_FILE_DIR) \
+		$(CAMERA_DIR) \
+		$(SPHERE_DIR) \
+		$(CYLINDER_DIR) \
+		$(CONE_DIR) \
+		$(SHAPES_DIR) \
+		$(KYES_DIR) \
+		$(TRIANGLE_DIR) \
+		$(BOXES_DIR) \
+		$(LIGHT_DIR) \
+		$(PLANE_DIR) \
+		$(WORLD_DIR) \
+		$(RAY_DIR) \
+		$(BVH_DIR)
+
 $(NAME): $(OBJ_DIR) $(OBJS) make_lib
 	$(CC) $(CCFLAGS) $(OBJS) $(INCLUDE_DIRS:%=-I%) $(LIB_DIRS:%=-L%) $(LIBS:lib%.a=-l%) -lm -ldl -lglfw -o $(NAME)
 
+BONUS: $(OBJ_DIR_BONUS) $(OBJS_BONUS) make_lib
+	$(CC) $(CCFLAGS) $(OBJS_BONUS) $(INCLUDE_DIRS:%=-I%) $(LIB_DIRS:%=-L%) $(LIBS:lib%.a=-l%) -lm -ldl -lglfw -D BONUS -o $(NAME)
+
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
-	mkdir -p $(OBJ_DIR)$(PARSER_DIR)
-	mkdir -p $(OBJ_DIR)$(UTILS_DIR)
-	mkdir -p $(OBJ_DIR)$(PP_STRUCT_DIR)
-	mkdir -p $(OBJ_DIR)$(VECTOR_MATH_DIR)
-	mkdir -p $(OBJ_DIR)$(MATRIX_MATH_DIR)
-	mkdir -p $(OBJ_DIR)$(BASIS_DIR)
-	mkdir -p $(OBJ_DIR)$(3D_DIR)
-	mkdir -p $(OBJ_DIR)$(OBJECT_DIR)
-	mkdir -p $(OBJ_DIR)$(OBJ_FILE_DIR)
-	mkdir -p $(OBJ_DIR)$(CAMERA_DIR)
-	mkdir -p $(OBJ_DIR)$(SPHERE_DIR)
-	mkdir -p $(OBJ_DIR)$(CYLINDER_DIR)
-	mkdir -p $(OBJ_DIR)$(CONE_DIR)
-	mkdir -p $(OBJ_DIR)$(SHAPES_DIR)
-	mkdir -p $(OBJ_DIR)$(KYES_DIR)
-	mkdir -p $(OBJ_DIR)$(TRIANGLE_DIR)
-	mkdir -p $(OBJ_DIR)$(BOXES_DIR)
-	mkdir -p $(OBJ_DIR)$(LIGHT_DIR)
-	mkdir -p $(OBJ_DIR)$(PLANE_DIR)
-	mkdir -p $(OBJ_DIR)$(WORLD_DIR)
-	mkdir -p $(OBJ_DIR)$(RAY_DIR)
-	mkdir -p $(OBJ_DIR)$(BVH_DIR)
+	for DIR in $(DIRS) ; do \
+        mkdir -p $(OBJ_DIR)$$DIR ; \
+    done
+
+$(OBJ_DIR_BONUS):
+	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)$(OBJ_DIR_BONUS)
+	for DIR in $(DIRS) ; do \
+        mkdir -p $(OBJ_DIR)$(OBJ_DIR_BONUS)$$DIR ; \
+    done
+
+$(OBJ_DIR)$(OBJ_DIR_BONUS)%.o: $(SRC_DIR)%.c
+	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -D BONUS -c $< -o $@
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CCFLAGS) $(INCLUDE_DIRS:%=-I%) -c $< -o $@

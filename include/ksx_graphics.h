@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 17:03:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/27 00:59:14 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@
 
 # define EDGE_SIZE	10.f
 // Sphere generation
-# define SPHERE_GEN 3
+# define SPHERE_GEN 4
 // Cylinder step angle
-# define CYLINDER_ANGLE 18.f
+# define CYLINDER_ANGLE 4.5f
 
 # define ANGLE 2.5f
 # define STEP 5.f

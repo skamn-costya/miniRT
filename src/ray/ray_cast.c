@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/23 16:31:59 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/27 00:43:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 #include <stdio.h>
 #include <math.h>
 
+#ifndef BONUS
+
 void	ray_cast(t_graphics *p_grph)
 {
 	int32_t	xy[2];
@@ -27,7 +29,6 @@ void	ray_cast(t_graphics *p_grph)
 	ksx_time_print();
 	mlx_delete_image(p_grph->mlx, p_grph->img_ray);
 	p_grph->img_ray = ksx_create_image(p_grph->mlx, TRANSPARENT);
-	ray.origin = p_grph->camera.basis.o;
 	xy[0] = p_grph->img_proj->width * p_grph->img_proj->height;
 	xy[1] = -1;
 	while (++xy[1] < xy[0])
@@ -45,6 +46,66 @@ void	ray_cast(t_graphics *p_grph)
 	ksx_time_print();
 	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
 }
+
+#else 
+
+void	*ksx_ray_thrd(void *p_data);
+
+void	ray_cast(t_graphics *p_grph)
+{
+	int32_t		idx[2];
+	t_thrddata	thrddata[THREADS];
+	pthread_t	pthrd[THREADS + 1];
+	t_mondata	mondata;
+
+	ksx_time_print();
+	ksx_ray_thrd_init(&mondata, thrddata, p_grph);
+	pthread_create(&pthrd[THREADS], NULL, &ksx_ray_thrd_mon,
+		&mondata);
+	mlx_delete_image(p_grph->mlx, p_grph->img_ray);
+	p_grph->img_ray = ksx_create_image(p_grph->mlx, TRANSPARENT);
+	idx[0] = 0;
+	idx[1] = p_grph->img_proj->width * p_grph->img_proj->height / THREADS;
+	while (idx[0] < THREADS)
+	{
+		thrddata[idx[0]].start = idx[0] * idx[1];
+		thrddata[idx[0]].finish = idx[0] * idx[1] + idx[1];
+		pthread_create(&pthrd[idx[0]], NULL, &ksx_ray_thrd, &thrddata[idx[0]]);
+		idx[0]++;
+	}
+	pthread_join (pthrd[THREADS], NULL);
+	ksx_time_print();
+	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
+}
+
+void	*ksx_ray_thrd(void *p_data)
+{
+	int32_t			idx;
+	t_ray			ray;
+	t_thrddata	*p_thrddata;
+
+	p_thrddata = (t_thrddata *)p_data;
+	idx = p_thrddata->start;
+	p_thrddata->flags |= F_TH_START;
+	while (idx < p_thrddata->finish)
+	{
+		ray = ray_generate(idx % p_thrddata->p_grph->img_proj->width, idx
+				/ p_thrddata->p_grph->img_proj->width,
+				&p_thrddata->p_grph->camera);
+		ray_p2boxes(&p_thrddata->p_grph->world, &ray);
+		ray_p2planes(&p_thrddata->p_grph->world, &ray);
+		if (ray.p_tri || ray.p_pln)
+		{
+			ray_p2lights(&p_thrddata->p_grph->world, &ray);
+			ksx_set_pixel(p_thrddata->p_grph->img_ray, &ray.pixel);
+		}
+		idx++;
+	}
+	p_thrddata->flags |= F_TH_FINISH;
+	return (p_data);
+}
+
+#endif
 
 t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 {
@@ -65,7 +126,6 @@ t_ray	ray_generate(int32_t x, int32_t y, t_camera *p_camera)
 	ray.pixel.x = x;
 	ray.pixel.y = y;
 	ray.pixel.color.mlx_color = TRANSPARENT;
-	// ray.pixel.color.a = 0xff;
 	ray.norm = ksx_vec3_set(0.f, 0.f, 0.f);
 	ray.p_tri = NULL;
 	ray.p_pln = NULL;
