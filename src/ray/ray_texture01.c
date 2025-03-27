@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 17:11:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:04:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ t_texture	*ray_txtr_load(t_world *p_world, char *p_mapname, char *p_bumpname)
 	if (!p_texture)
 		ksx_error("memory allocation failure", __FILE__, __LINE__);
 	p_texture->p_mapdata = mlx_load_png(p_mapname);
-	if (!p_texture)
-		return (p_texture);
+	if (!p_texture->p_mapdata)
+		return (free(p_texture), NULL);
 	p_texture->p_bumpdata = NULL;
 	if (p_bumpname)
 		p_texture->p_bumpdata = mlx_load_png(p_bumpname);
