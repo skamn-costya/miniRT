@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 00:59:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:47:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -545,7 +545,7 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world);
 void		ksx_world_clean(t_world *p_world);
 
 t_object	*ksx_create_sphere(t_vector3 center,
-				uint32_t diameter, t_color color, uint8_t gen);
+				float diameter, t_color color, uint8_t gen);
 t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 				float dia_ht[], t_color color);
 t_object	*ksx_create_cone(t_vector3 center, t_vector3 norm,

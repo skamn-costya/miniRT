@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/27 00:59:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:59:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define BIAS		1e-3f
 // # define EPSILON 0.0001f
 # define MAX_LEN 3.402823466e+38F
-# define THREADS 80
+# define THREADS 32
 
 typedef struct s_brcntrc
 {

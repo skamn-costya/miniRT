@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 15:53:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/27 13:47:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		ksx_init_sphere_box(t_object *p_object);
 static void		ksx_init_sphere(t_object *p_object);
 
 t_object	*ksx_create_sphere(t_vector3 center,
-			uint32_t diameter, t_color color, uint8_t gen)
+			float diameter, t_color color, uint8_t gen)
 {
 	t_object	*p_object;
 	uint8_t		idx;
