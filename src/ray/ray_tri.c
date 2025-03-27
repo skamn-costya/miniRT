@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 15:13:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:10:29 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ inline static void	ray_p_check_tri(t_triangle *p_tri,
 	t_ray *p_ray, t_world *p_world)
 {
 	t_vector3	v3;
-	t_color		color;
+	// t_color		color;
 
 	(void)p_world; // delete
 	if (p_ray->length < p_ray->min_length)
@@ -96,15 +96,7 @@ inline static void	ray_p_check_tri(t_triangle *p_tri,
 		p_ray->norm = triangle_normal_barycentric(p_tri, p_ray);
 		p_ray->pixel.color = ((t_object *)p_tri->p_object)->color;
 		if (((t_object *)p_tri->p_object)->p_texture)
-		{
-			color = ray_txtr_object((t_object *)p_tri->p_object,
-					&p_ray->point.op, &p_ray->pixel.color);
-			p_ray->pixel.color.mlx_color = color.mlx_color;
-			p_ray->pixel.color.ur = color.ur;
-			p_ray->pixel.color.ug = color.ug;
-			p_ray->pixel.color.ub = color.ub;
-			p_ray->pixel.color.ua = color.ua;
-		}
+			ray_txtr_object((t_object *)p_tri->p_object, p_ray);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 13:04:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/27 16:27:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_texture	*ray_txtr_load(t_world *p_world, char *p_mapname, char *p_bumpname)
 t_color	ray_txtr_sample(t_texture *p_txtr, float u, float v)
 {
 	t_color color;
+
     int width = p_txtr->p_mapdata->width;
     int height = p_txtr->p_mapdata->height;
     int x = (int)floorf(fmodf(u * width, width));
@@ -60,6 +61,23 @@ t_color	ray_txtr_sample(t_texture *p_txtr, float u, float v)
     color.a = p_txtr->p_mapdata->pixels[index + 3];
     return (color);
 }
+
+float	ray_bump_sample(t_texture *p_txtr, float u, float v)
+{
+	int	x;
+	int	y;
+	int	idx;
+
+	x = (int)(u * p_txtr->p_bumpdata->width) % p_txtr->p_bumpdata->width;
+    y = (int)(v * p_txtr->p_bumpdata->height) % p_txtr->p_bumpdata->height;
+    idx = (y * p_txtr->p_bumpdata->width + x) * BPP;
+    return p_txtr->p_bumpdata->pixels[idx] / 255.0f;
+}
+
+// void	ray_bump_normal()
+// {
+
+// }
 
 // // uint32_t ray_txtr_sample_bilinear(t_texture *p_txtr, float u, float v)
 // t_color ray_txtr_sample(t_texture *p_txtr, float u, float v)
