@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 15:24:31 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/18 00:21:46 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:02:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ float		ksx_m4_det(const t_matrix4 *p_m);
  * @param[in] p_v a pinter to the vector for multiplication.
  * @returns result of multiplication - a vector 3.
  */
-t_vector3		ksx_m4_vec3(const t_matrix4 *p_m, const t_vector3 *p_v);
+t_vector3	ksx_m4_vec3(const t_matrix4 *p_m, const t_vector3 *p_v);
 
 /**
  * @brief calculates invertible matrix of matrix 4x4

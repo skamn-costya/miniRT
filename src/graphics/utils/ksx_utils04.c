@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 22:49:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:00:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,9 @@ void	ksx_color_unit_fraction(t_color *p_color)
 	p_color->ub = p_color->b / 255.f;
 }
 
-void	ksx_time_print()
+#ifdef BONUS
+
+void	ksx_time_print(void)
 {
 	// ksx_time_print - Remove before evaluation
 	time_t		timer;
@@ -74,3 +76,5 @@ void	ksx_time_print()
     strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
     puts(buffer);
 }
+
+#endif

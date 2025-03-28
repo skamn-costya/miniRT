@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/19 12:28:33 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:00:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ void	ksx_change_world(t_graphics *p_grph)
 
 void	ksx_change_camera(t_graphics *p_grph)
 {
-	t_object	**pp_object;
 	t_plane		*p_plane;
 	int32_t		idx;
 
@@ -87,10 +86,9 @@ void	ksx_change_camera(t_graphics *p_grph)
 	ksx_camera_refresh_pm(p_grph, p_grph->camera.fov);
 	if (!p_grph->world.pp_obj)
 		return ;
-	pp_object = p_grph->world.pp_obj;
 	idx = -1;
 	while (++idx < p_grph->world.size_obj)
-		ksx_camera_obj_vm (pp_object[idx], &p_grph->camera.vm);
+		ksx_camera_obj_vm (p_grph->world.pp_obj[idx], &p_grph->camera.vm);
 	idx = -1;
 	while (++idx < p_grph->world.size_pln)
 	{

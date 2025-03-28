@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 13:47:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:51:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -436,7 +436,8 @@ typedef struct s_box
 	void		*p_object;
 }	t_box;
 
-typedef struct	s_bvhnode {
+typedef struct s_bvhnode
+{
 	t_vector3	aabb_min;
 	t_vector3	aabb_max;
 	uint32_t	left_ch;
@@ -446,7 +447,8 @@ typedef struct	s_bvhnode {
 	uint32_t	tri_num;
 }	t_bvhnode;
 
-typedef struct	s_bvh {
+typedef struct s_bvh
+{
 	t_bvhnode	*nodes;
 	t_triangle	**pp_tri;
 	uint32_t	*tri_index;
@@ -494,7 +496,7 @@ typedef struct s_object
 	t_texture	*p_texture;
 	void		(*ray_txtr_uv)(t_vector3 *, float *, float *);
 	// void		(*f_transform)(void *, t_basis *);
-	t_bvh	*bvh;
+	t_bvh		*bvh;
 }	t_object;
 
 typedef struct s_world

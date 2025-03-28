@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 22:09:32 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/14 14:31:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:03:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ mlx_image_t	*ksx_create_image(mlx_t *mlx, uint32_t bg_color)
 
 int32_t	ksx_image_to_window(mlx_t *p_mlx, mlx_image_t *p_img, int32_t z)
 {
-	int32_t result;
+	int32_t	result;
 
 	result = mlx_image_to_window(p_mlx, p_img, 0, 0);
 	mlx_set_instance_depth(&p_img->instances[0], z);

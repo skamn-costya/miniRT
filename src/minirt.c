@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 16:26:30 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 16:55:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,11 @@ int	main(int argc, char *argv[])
 	garbage_collector((void **) &p_list);
 	ksx_init_grph(&grph, &garbage_collector);
 	ksx_init_world(&grph, p_list);
-	if (grph.world.size_obj < 1)
-	{
-		printf("There isn't any object.\n");
-		ksx_garbage_collector(NULL);
-	}
 	grph.obj_idx = 0;
 	ft_lstclear(&p_list, &free_t_obj_descr);
 	ksx_draw(&grph);
 	bvh_build_world(&grph);
 	ray_cast(&grph);
-	// bvh_draw_world(&grph);
 	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
 	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);
 	mlx_loop(grph.mlx);
@@ -88,7 +82,7 @@ mlx_image_t	*ksx_load_bg(t_graphics *p_grph)
 {
 	mlx_image_t		*p_img;
 	mlx_texture_t	*p_txtr;
-	
+
 	p_txtr = mlx_load_png("./textures/stars_milky_way.png");
 	if (!p_txtr)
 		return (p_img = ksx_create_image(p_grph->mlx, BACKGROUND));
@@ -112,7 +106,7 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		|| keydata.key == MLX_KEY_E || keydata.key == MLX_KEY_Z)
 		key_adswze(&keydata, p_grph);
 	else if (keydata.key >= MLX_KEY_F1 && keydata.key <= MLX_KEY_F12
-			&& keydata.action == MLX_RELEASE)
+		&& keydata.action == MLX_RELEASE)
 		key_f(&keydata, p_grph);
 	else if ((keydata.key == MLX_KEY_9 || keydata.key == MLX_KEY_0
 			|| keydata.key == MLX_KEY_MINUS || keydata.key == MLX_KEY_EQUAL)

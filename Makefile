@@ -91,7 +91,8 @@ SPHERE = $(addprefix $(SPHERE_DIR), $(SPHERE_FN))
 # Cylinder object
 CYLINDER_DIR = graphics/cylinder/
 CYLINDER_FN =	ksx_cylinder01.c \
-				ksx_cylinder02.c
+				ksx_cylinder02.c \
+				ksx_cylinder03.c
 CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FN))
 
 # Cone object

@@ -1,0 +1,919 @@
+./src/gc.c: OK!
+./src/minirt.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  58, col:   5):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  64, col:   1):	Function has more than 25 lines
+Error: SPACE_EMPTY_LINE     (line:  91, col:   1):	Space on empty line
+Error: TOO_MANY_TAB         (line: 115, col:  13):	Extra tabs for indent level
+./src/graphics/ksx_init.c: OK!
+./src/graphics/ksx_change.c: Error!
+Error: TOO_MANY_LINES       (line: 108, col:   1):	Function has more than 25 lines
+./src/graphics/ksx_draw.c: Error!
+Error: TOO_MANY_LINES       (line:  53, col:   1):	Function has more than 25 lines
+./src/graphics/ksx_gc.c: OK!
+./src/graphics/ksx_image.c: Error!
+Error: SPACE_REPLACE_TAB    (line:  45, col:  12):	Found space when expecting tab
+./src/graphics/camera/ksx_camera.c: OK!
+./src/graphics/camera/ksx_camera01.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  63, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  73, col:   5):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line:  90, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line:  98, col:   1):	Missing tabs for indent level
+./src/graphics/camera/ksx_camera02.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:  13):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  53, col:  84):	line too long
+./src/graphics/cylinder/ksx_cylinder01.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  52, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  63, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  64, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  65, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  66, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  67, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  68, col:  85):	line too long
+Error: LINE_TOO_LONG        (line:  69, col:  85):	line too long
+Error: LINE_TOO_LONG        (line:  70, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  72, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  72, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  72, col:  91):	line too long
+Error: NO_SPC_BFR_OPR       (line:  86, col:  54):	extra space before operator
+Error: NO_SPC_BFR_OPR       (line:  89, col:  55):	extra space before operator
+Error: LINE_TOO_LONG        (line:  95, col:  82):	line too long
+Error: NO_SPC_BFR_OPR       (line:  96, col:  58):	extra space before operator
+Error: LINE_TOO_LONG        (line:  97, col:  82):	line too long
+Error: NO_SPC_BFR_OPR       (line:  98, col:  66):	extra space before operator
+Error: EMPTY_LINE_FUNCTION  (line:  99, col:   1):	Empty line in function
+Error: LINE_TOO_LONG        (line: 100, col:  84):	line too long
+Error: LINE_TOO_LONG        (line: 102, col:  82):	line too long
+Error: EMPTY_LINE_FUNCTION  (line: 103, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 103, col:   1):	Space on empty line
+Error: LINE_TOO_LONG        (line: 104, col:  85):	line too long
+Error: LINE_TOO_LONG        (line: 106, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 109, col:  82):	line too long
+Error: TOO_MANY_LINES       (line: 111, col:   1):	Function has more than 25 lines
+Error: LINE_TOO_LONG        (line: 120, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 120, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 120, col:  88):	line too long
+Error: LINE_TOO_LONG        (line: 131, col:  83):	line too long
+Error: LINE_TOO_LONG        (line: 132, col:  84):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 136, col:  13):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 137, col:  13):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 137, col:  13):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 137, col:  83):	line too long
+Error: TOO_MANY_LINES       (line: 143, col:   1):	Function has more than 25 lines
+Error: TAB_INSTEAD_SPC      (line: 153, col:  45):	Found tab when expecting space
+Error: SPACE_AFTER_KW       (line: 155, col:  13):	Missing space after keyword
+Error: SPC_BFR_PAR          (line: 155, col:  15):	Missing space before parenthesis (brace/bracket)
+Error: SPACE_AFTER_KW       (line: 157, col:  18):	Missing space after keyword
+Error: SPC_BFR_PAR          (line: 157, col:  20):	Missing space before parenthesis (brace/bracket)
+Error: LINE_TOO_LONG        (line: 157, col:  82):	line too long
+Error: SPACE_AFTER_KW       (line: 159, col:  18):	Missing space after keyword
+Error: SPC_BFR_PAR          (line: 159, col:  20):	Missing space before parenthesis (brace/bracket)
+Error: LINE_TOO_LONG        (line: 159, col:  82):	line too long
+./src/graphics/cylinder/ksx_cylinder02.c: Error!
+Error: LINE_TOO_LONG        (line:  50, col:  82):	line too long
+Error: LINE_TOO_LONG        (line:  51, col:  86):	line too long
+Error: LINE_TOO_LONG        (line:  56, col:  82):	line too long
+Error: LINE_TOO_LONG        (line:  57, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  78, col:  82):	line too long
+Error: LINE_TOO_LONG        (line:  79, col:  82):	line too long
+Error: LINE_TOO_LONG        (line:  80, col:  82):	line too long
+Error: LINE_TOO_LONG        (line:  81, col:  82):	line too long
+Error: LINE_TOO_LONG        (line:  86, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 101, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 102, col:   9):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 102, col:   9):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 102, col: 114):	line too long
+Error: LINE_TOO_LONG        (line: 103, col:  83):	line too long
+./src/graphics/plane/ksx_plane.c: OK!
+./src/graphics/3D/ksx_draw_axis.c: OK!
+./src/graphics/3D/ksx_draw_obj.c: OK!
+./src/graphics/3D/ksx_draw_tri.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  27, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  29, col:   5):	Comment is invalid in this scope
+./src/graphics/3D/ksx_draw_box.c: OK!
+./src/graphics/3D/ksx_draw_get_pixel.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  32, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  33, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  33, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  33, col:  90):	line too long
+./src/graphics/3D/ksx_draw_norm.c: Error!
+Error: TOO_MANY_LINES       (line:  55, col:   1):	Function has more than 25 lines
+Error: LINE_TOO_LONG        (line:  57, col:   9):	line too long
+Error: LINE_TOO_LONG        (line:  57, col:  93):	line too long
+Error: LINE_TOO_LONG        (line:  58, col:   9):	line too long
+Error: LINE_TOO_LONG        (line:  58, col: 110):	line too long
+Error: LINE_TOO_LONG        (line:  59, col:   9):	line too long
+Error: LINE_TOO_LONG        (line:  59, col: 125):	line too long
+./src/graphics/3D/ksx_draw_tris.c: OK!
+./src/graphics/3D/ksx_draw_vertex.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  29, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  47, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  48, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  49, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  50, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:   9):	Comment is invalid in this scope
+./src/graphics/basis/ksx_basis_move.c: OK!
+./src/graphics/basis/ksx_basis_rotation.c: OK!
+./src/graphics/basis/ksx_basis01.c: OK!
+./src/graphics/basis/ksx_basis02.c: OK!
+./src/graphics/boxes/ksx_boxes.c: Error!
+Error: LINE_TOO_LONG        (line:  33, col:   9):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  33, col:   9):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  33, col:  88):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  34, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  35, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  36, col:   9):	Comment is invalid in this scope
+./src/graphics/keys/key_arrows.c: OK!
+./src/graphics/keys/key_kp02.c: Error!
+Error: EMPTY_LINE_FUNCTION  (line:  81, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line:  81, col:   1):	Space on empty line
+Error: LINE_TOO_LONG        (line:  85, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  87, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  89, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  94, col:  82):	line too long
+Error: LINE_TOO_LONG        (line:  96, col:  82):	line too long
+Error: LINE_TOO_LONG        (line:  98, col:  82):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 100, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 101, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 102, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 103, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 104, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 105, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 106, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 107, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 108, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 109, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 110, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 111, col:   5):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 112, col:   1):	Function has more than 25 lines
+./src/graphics/keys/key_adsw.c: Error!
+Error: EMPTY_LINE_FUNCTION  (line:  41, col:  10):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:   9):	Comment is invalid in this scope
+Error: EMPTY_LINE_FUNCTION  (line:  54, col:  10):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  55, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  56, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  57, col:   9):	Comment is invalid in this scope
+Error: EMPTY_LINE_FUNCTION  (line:  67, col:  10):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  68, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  69, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  70, col:   9):	Comment is invalid in this scope
+Error: EMPTY_LINE_FUNCTION  (line:  80, col:  10):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  81, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  82, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  83, col:   9):	Comment is invalid in this scope
+./src/graphics/keys/key_kp01.c: OK!
+./src/graphics/keys/key_scroll.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  51, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  52, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  54, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  55, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  56, col:   5):	Comment is invalid in this scope
+./src/graphics/keys/key_ze.c: Error!
+Error: EMPTY_LINE_FUNCTION  (line:  24, col:  10):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  25, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  26, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  27, col:   9):	Comment is invalid in this scope
+Error: EMPTY_LINE_FUNCTION  (line:  37, col:  10):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  38, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  39, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:   9):	Comment is invalid in this scope
+./src/graphics/keys/key_90-=.c: OK!
+./src/graphics/keys/key_f.c: OK!
+./src/graphics/keys/key_f5_f8.c: OK!
+./src/graphics/keys/key_f9_f12.c: Error!
+Error: CONSECUTIVE_NEWLINES (line:  21, col:   1):	Consecutive newlines
+./src/graphics/obj_file/ksx_obj_file.c: Error!
+Error: LINE_TOO_LONG        (line:  31, col:  82):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  57, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_COMMENT  (line:  61, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  62, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  63, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  64, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  93, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  94, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  95, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  96, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  97, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  97, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  97, col:  94):	line too long
+Error: LINE_TOO_LONG        (line:  98, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  98, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  98, col:  94):	line too long
+Error: LINE_TOO_LONG        (line:  99, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  99, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  99, col:  94):	line too long
+Error: WRONG_SCOPE_COMMENT  (line: 100, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 101, col:   5):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line: 112, col:   1):	Function has more than 25 lines
+./src/graphics/object/ksx_object03.c: OK!
+./src/graphics/object/ksx_qrotation.c: OK!
+./src/graphics/object/ksx_norms.c: OK!
+./src/graphics/object/ksx_object01.c: OK!
+./src/graphics/object/ksx_object02.c: Error!
+Error: BRACE_SHOULD_EOL     (line:  87, col:   1):	Expected newline after brace
+./src/graphics/object/ksx_transform.c: OK!
+./src/graphics/shapes/ksx_circle.c: OK!
+./src/graphics/shapes/ksx_line02.c: OK!
+./src/graphics/shapes/ksx_line01.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  63, col:   9):	Comment is invalid in this scope
+./src/graphics/shapes/ksx_pixel.c: Error!
+Error: CONSECUTIVE_NEWLINES (line:  17, col:   1):	Consecutive newlines
+Error: TOO_MANY_TAB         (line:  58, col:   1):	Extra tabs for indent level
+Error: SPACE_BEFORE_FUNC    (line:  58, col:   9):	space before function name
+Error: FORBIDDEN_CHAR_NAME  (line:  58, col:  10):	user defined identifiers should contain only lowercase characters, digits or '_'
+Error: FORBIDDEN_CHAR_NAME  (line:  58, col:  10):	user defined identifiers should contain only lowercase characters, digits or '_'
+Error: WRONG_SCOPE_COMMENT  (line:  60, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_TAB         (line:  61, col:   1):	Extra tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  61, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  61, col:  16):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  61, col:  19):	Declaration and assignation on a single line
+Error: TOO_MANY_TAB         (line:  62, col:   1):	Extra tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  62, col:  16):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  62, col:  19):	Declaration and assignation on a single line
+Error: TOO_MANY_TAB         (line:  63, col:   1):	Extra tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  63, col:  16):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  63, col:  19):	Declaration and assignation on a single line
+Error: CONSECUTIVE_SPC      (line:  63, col:  46):	Two or more consecutives spaces
+Error: TOO_MANY_TAB         (line:  64, col:   1):	Extra tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  64, col:  16):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  64, col:  19):	Declaration and assignation on a single line
+Error: CONSECUTIVE_SPC      (line:  64, col:  41):	Two or more consecutives spaces
+Error: SPACE_EMPTY_LINE     (line:  65, col:   1):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line:  66, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_TAB         (line:  67, col:   1):	Extra tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  67, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  67, col:  14):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  67, col:  15):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  67, col:  27):	Declaration and assignation on a single line
+Error: WRONG_SCOPE_COMMENT  (line:  67, col:  47):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  67, col:  47):	Comment is invalid in this scope
+Error: EMPTY_LINE_FUNCTION  (line:  68, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line:  68, col:   1):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line:  69, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_TAB         (line:  70, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line:  71, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line:  72, col:   1):	Extra tabs for indent level
+Error: EMPTY_LINE_FUNCTION  (line:  73, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line:  73, col:   1):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line:  74, col:   9):	Comment is invalid in this scope
+Error: TOO_MANY_TAB         (line:  75, col:   1):	Extra tabs for indent level
+Error: TOO_MANY_TAB         (line:  76, col:   1):	Extra tabs for indent level
+./src/graphics/sphere/ksx_sphere01.c: Error!
+Error: LINE_TOO_LONG        (line:  62, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  63, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  64, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  65, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  66, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  67, col:  85):	line too long
+Error: LINE_TOO_LONG        (line:  68, col:  85):	line too long
+Error: LINE_TOO_LONG        (line:  69, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  71, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  71, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  71, col:  91):	line too long
+Error: LINE_TOO_LONG        (line:  85, col:  86):	line too long
+Error: LINE_TOO_LONG        (line:  86, col:  86):	line too long
+Error: LINE_TOO_LONG        (line:  87, col:  86):	line too long
+Error: LINE_TOO_LONG        (line:  88, col:  86):	line too long
+Error: LINE_TOO_LONG        (line:  89, col:  86):	line too long
+Error: LINE_TOO_LONG        (line:  90, col:  86):	line too long
+Error: LINE_TOO_LONG        (line:  91, col:  86):	line too long
+Error: LINE_TOO_LONG        (line:  92, col:  86):	line too long
+./src/graphics/sphere/ksx_sphere02.c: Error!
+Error: SPACE_AFTER_KW       (line:  86, col:  13):	Missing space after keyword
+Error: SPC_BFR_PAR          (line:  86, col:  15):	Missing space before parenthesis (brace/bracket)
+Error: SPACE_AFTER_KW       (line:  88, col:  18):	Missing space after keyword
+Error: SPC_BFR_PAR          (line:  88, col:  20):	Missing space before parenthesis (brace/bracket)
+Error: LINE_TOO_LONG        (line:  88, col:  82):	line too long
+Error: SPACE_AFTER_KW       (line:  90, col:  18):	Missing space after keyword
+Error: SPC_BFR_PAR          (line:  90, col:  20):	Missing space before parenthesis (brace/bracket)
+Error: LINE_TOO_LONG        (line:  90, col:  82):	line too long
+./src/graphics/triangle/ksx_triangle.c: OK!
+./src/graphics/utils/ksx_utils01.c: Error!
+Error: BRACE_SHOULD_EOL     (line:  59, col:   1):	Expected newline after brace
+./src/graphics/utils/ksx_utils04.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  68, col:   5):	Comment is invalid in this scope
+Error: VAR_DECL_START_FUNC  (line:  69, col:   1):	Variable declaration not at start of function
+Error: TOO_FEW_TAB          (line:  70, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  70, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  71, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  71, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  71, col:  14):	Found space when expecting tab
+Error: SPC_AFTER_POINTER    (line:  71, col:  14):	space after pointer
+Error: TOO_FEW_TAB          (line:  73, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  73, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  74, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  74, col:   5):	Found space when expecting tab
+Error: EMPTY_LINE_FUNCTION  (line:  75, col:   1):	Empty line in function
+Error: TOO_FEW_TAB          (line:  76, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  76, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  77, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  77, col:   5):	Found space when expecting tab
+./src/graphics/utils/ksx_utils08.c: OK!
+./src/graphics/utils/matrix_math/ksx_m4_math03.c: OK!
+./src/graphics/utils/matrix_math/ksx_m3_math01.c: OK!
+./src/graphics/utils/matrix_math/ksx_m3_math02.c: OK!
+./src/graphics/utils/matrix_math/ksx_m4_math01.c: OK!
+./src/graphics/utils/matrix_math/ksx_m4_math02.c: OK!
+./src/graphics/utils/vector_math/ksx_vec3_math03.c: OK!
+./src/graphics/utils/vector_math/ksx_vec4_math01.c: OK!
+./src/graphics/utils/vector_math/ksx_vec4_math02.c: OK!
+./src/graphics/utils/vector_math/ksx_vec4_math03.c: OK!
+./src/graphics/utils/vector_math/ksx_vec3_math01.c: OK!
+./src/graphics/utils/vector_math/ksx_vec3_math02.c: OK!
+./src/graphics/utils/vector_math/ksx_vec3_math04.c: Error!
+Error: TOO_FEW_TAB          (line:  39, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  39, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  41, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  41, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  42, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  42, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  43, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  43, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  44, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  44, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  44, col:  12):	Return value must be in parenthesis
+Error: TOO_FEW_TAB          (line:  49, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  49, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  49, col:  10):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  49, col:  15):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  50, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  50, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  50, col:  14):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  50, col:  15):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  50, col:  24):	Declaration and assignation on a single line
+Error: NL_AFTER_VAR_DECL    (line:  51, col:   1):	Variable declarations must be followed by a newline
+Error: TOO_FEW_TAB          (line:  51, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  51, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  51, col:  12):	Return value must be in parenthesis
+./src/graphics/utils/pp_struct/pp_struct01.c: OK!
+./src/graphics/utils/pp_struct/pp_struct02.c: OK!
+./src/graphics/world/ksx_world02.c: Error!
+Error: TOO_FEW_TAB          (line:  40, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_COMMENT  (line:  63, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  64, col:   5):	Comment is invalid in this scope
+./src/graphics/world/ksx_world01.c: Error!
+Error: TOO_FEW_TAB          (line:  67, col:  53):	Missing tabs for indent level
+Error: EMPTY_LINE_FUNCTION  (line:  67, col:  54):	Empty line in function
+Error: TOO_FEW_TAB          (line: 130, col:   1):	Missing tabs for indent level
+Error: TOO_FEW_TAB          (line: 136, col:   1):	Missing tabs for indent level
+./src/graphics/world/ksx_world03.c: Error!
+Error: EMPTY_LINE_FUNCTION  (line:  55, col:   1):	Empty line in function
+Error: LINE_TOO_LONG        (line:  59, col:  82):	line too long
+Error: TOO_FEW_TAB          (line:  60, col:   1):	Missing tabs for indent level
+Error: LINE_TOO_LONG        (line:  62, col:  85):	line too long
+Error: TOO_FEW_TAB          (line:  63, col:   1):	Missing tabs for indent level
+Error: LINE_TOO_LONG        (line:  65, col:  84):	line too long
+Error: TOO_FEW_TAB          (line:  66, col:   1):	Missing tabs for indent level
+Error: LINE_TOO_LONG        (line:  68, col:  85):	line too long
+Error: TOO_FEW_TAB          (line:  69, col:   1):	Missing tabs for indent level
+Error: LINE_TOO_LONG        (line:  96, col:  95):	line too long
+./src/graphics/cone/ksx_cone01.c: Error!
+Error: LINE_TOO_LONG        (line:  58, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  59, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  60, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  61, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  62, col:  84):	line too long
+Error: LINE_TOO_LONG        (line:  63, col:  85):	line too long
+Error: LINE_TOO_LONG        (line:  64, col:  85):	line too long
+Error: LINE_TOO_LONG        (line:  65, col:  84):	line too long
+Error: NO_SPC_BFR_OPR       (line:  80, col:  51):	extra space before operator
+Error: NO_SPC_BFR_OPR       (line:  83, col:  52):	extra space before operator
+Error: LINE_TOO_LONG        (line: 112, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 116, col:  83):	line too long
+./src/graphics/light/ksx_light.c: OK!
+./src/parser/parser01.c: OK!
+./src/parser/parser02.c: Error!
+Error: TOO_MANY_LINES       (line:  57, col:   1):	Function has more than 25 lines
+./src/parser/parser03.c: OK!
+./src/parser/parser04.c: OK!
+./src/parser/parser05.c: OK!
+./src/parser/parser06.c: OK!
+./src/ray/ray_color02.c: Error!
+Error: FORBIDDEN_TYPEDEF    (line:  22, col:   1):	Typedef declaration are not allowed in .c files
+Error: BRACE_NEWLINE        (line:  22, col:  24):	Expected newline before brace
+Error: TOO_FEW_TAB          (line:  23, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  23, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  23, col:  10):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  24, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  24, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  24, col:  10):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  25, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  25, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  25, col:  10):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  26, col:   2):	Found space when expecting tab
+Error: FORBIDDEN_TYPEDEF    (line:  29, col:   1):	Typedef declaration are not allowed in .c files
+Error: BRACE_NEWLINE        (line:  29, col:  26):	Expected newline before brace
+Error: TOO_FEW_TAB          (line:  30, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  30, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  30, col:  10):	Found space when expecting tab
+Error: MULT_DECL_LINE       (line:  30, col:  12):	Multiple declarations on a single line
+Error: MULT_DECL_LINE       (line:  30, col:  15):	Multiple declarations on a single line
+Error: SPACE_REPLACE_TAB    (line:  31, col:   2):	Found space when expecting tab
+Error: FORBIDDEN_TYPEDEF    (line:  34, col:   1):	Typedef declaration are not allowed in .c files
+Error: BRACE_NEWLINE        (line:  34, col:  24):	Expected newline before brace
+Error: TOO_FEW_TAB          (line:  35, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  35, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  35, col:  14):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  35, col:  24):	Two or more consecutives spaces
+Error: TOO_FEW_TAB          (line:  36, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  36, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  36, col:  13):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  36, col:  14):	Misaligned variable declaration
+Error: CONSECUTIVE_SPC      (line:  36, col:  20):	Two or more consecutives spaces
+Error: TOO_FEW_TAB          (line:  37, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  37, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  37, col:  10):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  37, col:  11):	Misaligned variable declaration
+Error: CONSECUTIVE_SPC      (line:  37, col:  22):	Two or more consecutives spaces
+Error: SPACE_REPLACE_TAB    (line:  38, col:   2):	Found space when expecting tab
+Error: SPACE_BEFORE_FUNC    (line:  44, col:   8):	space before function name
+Error: BRACE_NEWLINE        (line:  44, col:  43):	Expected newline before brace
+Error: TOO_FEW_TAB          (line:  45, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  45, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  45, col:  12):	Found space when expecting tab
+Error: NL_AFTER_VAR_DECL    (line:  46, col:   1):	Variable declarations must be followed by a newline
+Error: TOO_FEW_TAB          (line:  46, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  46, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  47, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  47, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  48, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  48, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  49, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  49, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  49, col:  12):	Return value must be in parenthesis
+Error: SPACE_BEFORE_FUNC    (line:  53, col:   9):	space before function name
+Error: BRACE_NEWLINE        (line:  53, col:  42):	Expected newline before brace
+Error: TOO_FEW_TAB          (line:  54, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  54, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  54, col:  12):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  54, col:  15):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  55, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  55, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  55, col:  12):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  55, col:  15):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  56, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  56, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  56, col:  12):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  56, col:  15):	Declaration and assignation on a single line
+Error: NL_AFTER_VAR_DECL    (line:  57, col:   1):	Variable declarations must be followed by a newline
+Error: TOO_FEW_TAB          (line:  57, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  57, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  57, col:  21):	Return value must be in parenthesis
+Error: SPACE_BEFORE_FUNC    (line:  61, col:   8):	space before function name
+Error: BRACE_NEWLINE        (line:  61, col:  55):	Expected newline before brace
+Error: TOO_FEW_TAB          (line:  62, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  62, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  62, col:  12):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  62, col:  17):	Declaration and assignation on a single line
+Error: NO_SPC_AFR_PAR       (line:  62, col:  19):	Extra space after parenthesis (brace/bracket)
+Error: NO_SPC_BFR_PAR       (line:  62, col:  59):	Extra space before parenthesis (brace/bracket)
+Error: NL_AFTER_VAR_DECL    (line:  63, col:   1):	Variable declarations must be followed by a newline
+Error: TOO_FEW_TAB          (line:  63, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  63, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  63, col:  12):	Return value must be in parenthesis
+Error: SPACE_BEFORE_FUNC    (line:  67, col:   8):	space before function name
+Error: BRACE_NEWLINE        (line:  67, col:  53):	Expected newline before brace
+Error: TOO_FEW_TAB          (line:  68, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  68, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  68, col:  12):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line:  68, col:  17):	Declaration and assignation on a single line
+Error: NO_SPC_AFR_PAR       (line:  68, col:  19):	Extra space after parenthesis (brace/bracket)
+Error: NO_SPC_BFR_PAR       (line:  68, col:  65):	Extra space before parenthesis (brace/bracket)
+Error: NL_AFTER_VAR_DECL    (line:  69, col:   1):	Variable declarations must be followed by a newline
+Error: TOO_FEW_TAB          (line:  69, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  69, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  69, col:  12):	Return value must be in parenthesis
+Error: SPACE_BEFORE_FUNC    (line:  73, col:   8):	space before function name
+Error: BRACE_NEWLINE        (line:  73, col:  39):	Expected newline before brace
+Error: TOO_FEW_TAB          (line:  74, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  74, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  74, col:  12):	Found space when expecting tab
+Error: NL_AFTER_VAR_DECL    (line:  75, col:   1):	Variable declarations must be followed by a newline
+Error: TOO_FEW_TAB          (line:  75, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  75, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  76, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  76, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  77, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  77, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  78, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  78, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  78, col:  12):	Return value must be in parenthesis
+Error: LINE_TOO_LONG        (line:  84, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  84, col:  88):	line too long
+Error: TOO_MANY_FUNCS       (line:  91, col:   1):	Too many functions in file
+Error: SPACE_BEFORE_FUNC    (line:  91, col:   9):	space before function name
+Error: SPACE_REPLACE_TAB    (line:  92, col:  36):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  93, col:  36):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  94, col:  36):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  95, col:  36):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  96, col:  36):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  97, col:  36):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  98, col:  36):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  99, col:  36):	Found space when expecting tab
+Error: CONSECUTIVE_SPC      (line:  99, col:  52):	Two or more consecutives spaces
+Error: TOO_MANY_ARGS        (line:  99, col:  52):	Function has more than 4 arguments
+Error: LINE_TOO_LONG        (line:  99, col:  91):	line too long
+Error: SPACE_EMPTY_LINE     (line: 101, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 101, col:   5):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 102, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line: 102, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 102, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 102, col:  12):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 102, col:  24):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 103, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 103, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 103, col:  12):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 103, col:  27):	Declaration and assignation on a single line
+Error: SPACE_EMPTY_LINE     (line: 105, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 105, col:   5):	Comment is invalid in this scope
+Error: SPACE_EMPTY_LINE     (line: 106, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 106, col:   5):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 107, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line: 107, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line: 107, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 107, col:  12):	Found space when expecting tab
+Error: DECL_ASSIGN_LINE     (line: 107, col:  25):	Declaration and assignation on a single line
+Error: LINE_TOO_LONG        (line: 107, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 108, col:   5):	line too long
+Error: SPACE_EMPTY_LINE     (line: 108, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 108, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 108, col:  98):	line too long
+Error: SPACE_EMPTY_LINE     (line: 109, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 109, col:   5):	Comment is invalid in this scope
+Error: SPACE_EMPTY_LINE     (line: 110, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 110, col:   5):	Comment is invalid in this scope
+Error: SPACE_EMPTY_LINE     (line: 111, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 111, col:   5):	Comment is invalid in this scope
+Error: SPACE_EMPTY_LINE     (line: 112, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 112, col:   5):	Comment is invalid in this scope
+Error: SPACE_EMPTY_LINE     (line: 113, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 113, col:   5):	Comment is invalid in this scope
+Error: EMPTY_LINE_FUNCTION  (line: 114, col:   1):	Empty line in function
+Error: LINE_TOO_LONG        (line: 115, col:   5):	line too long
+Error: SPACE_EMPTY_LINE     (line: 115, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 115, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 115, col:  90):	line too long
+Error: TOO_FEW_TAB          (line: 116, col:   1):	Missing tabs for indent level
+Error: FORBIDDEN_CS         (line: 116, col:   5):	Forbidden control structure
+Error: SPACE_REPLACE_TAB    (line: 116, col:   5):	Found space when expecting tab
+Error: NO_SPC_AFR_PAR       (line: 116, col:  39):	Extra space after parenthesis (brace/bracket)
+Error: TOO_FEW_TAB          (line: 116, col:  41):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 117, col:   9):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 117, col:   9):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 118, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 118, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 118, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 118, col:  18):	Found space when expecting tab
+Error: FORBIDDEN_CHAR_NAME  (line: 118, col:  19):	user defined identifiers should contain only lowercase characters, digits or '_'
+Error: DECL_ASSIGN_LINE     (line: 118, col:  21):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 119, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 119, col:   9):	Found space when expecting tab
+Error: EMPTY_LINE_FUNCTION  (line: 120, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 121, col:   9):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 121, col:   9):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 122, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 122, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 122, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 122, col:  14):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 122, col:  15):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 122, col:  23):	Declaration and assignation on a single line
+Error: LINE_TOO_LONG        (line: 124, col:   9):	line too long
+Error: SPACE_EMPTY_LINE     (line: 124, col:   9):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 124, col:   9):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line: 124, col:  82):	line too long
+Error: TOO_FEW_TAB          (line: 125, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 125, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 125, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 125, col:  16):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 125, col:  17):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 125, col:  29):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 126, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 126, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 126, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 126, col:  16):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 126, col:  17):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 126, col:  25):	Declaration and assignation on a single line
+Error: LINE_TOO_LONG        (line: 126, col:  82):	line too long
+Error: TOO_FEW_TAB          (line: 127, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 127, col:  39):	Found space when expecting tab
+Error: SPACE_EMPTY_LINE     (line: 129, col:   9):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 129, col:   9):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 130, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 130, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 130, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 130, col:  18):	Found space when expecting tab
+Error: FORBIDDEN_CHAR_NAME  (line: 130, col:  19):	user defined identifiers should contain only lowercase characters, digits or '_'
+Error: DECL_ASSIGN_LINE     (line: 130, col:  21):	Declaration and assignation on a single line
+Error: SPACE_EMPTY_LINE     (line: 132, col:   9):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 132, col:   9):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 133, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 133, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 133, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 133, col:  18):	Found space when expecting tab
+Error: FORBIDDEN_CHAR_NAME  (line: 133, col:  19):	user defined identifiers should contain only lowercase characters, digits or '_'
+Error: DECL_ASSIGN_LINE     (line: 133, col:  21):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 134, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 134, col:   9):	Found space when expecting tab
+Error: EMPTY_LINE_FUNCTION  (line: 135, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 136, col:   9):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 136, col:   9):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 137, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 137, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 137, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 137, col:  14):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 137, col:  15):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 137, col:  26):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 138, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 138, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 138, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 138, col:  14):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 138, col:  15):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 138, col:  20):	Declaration and assignation on a single line
+Error: CONSECUTIVE_SPC      (line: 138, col:  50):	Two or more consecutives spaces
+Error: WRONG_SCOPE_COMMENT  (line: 138, col:  52):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line: 138, col:  52):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 139, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 139, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 139, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 139, col:  16):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 139, col:  17):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 139, col:  26):	Declaration and assignation on a single line
+Error: LINE_TOO_LONG        (line: 139, col:  82):	line too long
+Error: SPACE_EMPTY_LINE     (line: 141, col:   9):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 141, col:   9):	Comment is invalid in this scope
+Error: SPACE_EMPTY_LINE     (line: 142, col:   9):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 142, col:   9):	Comment is invalid in this scope
+Error: SPACE_EMPTY_LINE     (line: 143, col:   9):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 143, col:   9):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 144, col:   1):	Missing tabs for indent level
+Error: WRONG_SCOPE_VAR      (line: 144, col:   1):	Variable declared in incorrect scope
+Error: SPACE_REPLACE_TAB    (line: 144, col:   9):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line: 144, col:  16):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line: 144, col:  17):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line: 144, col:  25):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line: 145, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 145, col:   9):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 146, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line: 146, col:   5):	Space on empty line
+Error: EMPTY_LINE_FUNCTION  (line: 147, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 148, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 148, col:   5):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 149, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 149, col:   5):	Found space when expecting tab
+Error: EMPTY_LINE_FUNCTION  (line: 150, col:   1):	Empty line in function
+Error: SPACE_EMPTY_LINE     (line: 151, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line: 151, col:   5):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line: 152, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 152, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 152, col:  12):	Return value must be in parenthesis
+Error: TOO_MANY_LINES       (line: 153, col:   1):	Function has more than 25 lines
+./src/ray/ray_cast.c: Error!
+Error: MISALIGNED_VAR_DECL  (line:  83, col:  17):	Misaligned variable declaration
+./src/ray/ray_cast_thread.c: OK!
+./src/ray/ray_color.c: Error!
+Error: LINE_TOO_LONG        (line:  27, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  27, col:  83):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  58, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  66, col:   5):	Comment is invalid in this scope
+Error: SPACE_BEFORE_FUNC    (line:  69, col:   5):	space before function name
+Error: TOO_FEW_TAB          (line:  71, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  71, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  72, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  72, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  73, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  73, col:   5):	Found space when expecting tab
+Error: VAR_DECL_START_FUNC  (line:  82, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  82, col:  14):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  82, col:  15):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  82, col:  19):	Declaration and assignation on a single line
+Error: EMPTY_LINE_FUNCTION  (line:  85, col:   1):	Empty line in function
+Error: LINE_TOO_LONG        (line:  89, col:  82):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  91, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  92, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  93, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  98, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 109, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 109, col:  91):	line too long
+Error: SPACE_EMPTY_LINE     (line: 121, col:   1):	Space on empty line
+Error: LINE_TOO_LONG        (line: 134, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 134, col: 114):	line too long
+Error: LINE_TOO_LONG        (line: 135, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 135, col: 114):	line too long
+Error: LINE_TOO_LONG        (line: 136, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 136, col: 114):	line too long
+Error: LINE_TOO_LONG        (line: 139, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 139, col:  99):	line too long
+Error: LINE_TOO_LONG        (line: 147, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 147, col: 113):	line too long
+Error: LINE_TOO_LONG        (line: 148, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 148, col: 113):	line too long
+Error: LINE_TOO_LONG        (line: 149, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 149, col: 113):	line too long
+Error: LINE_TOO_LONG        (line: 170, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 170, col:  93):	line too long
+Error: SPACE_EMPTY_LINE     (line: 172, col:   1):	Space on empty line
+./src/ray/ray_lgt.c: Error!
+Error: SPACE_BEFORE_FUNC    (line:  18, col:  19):	space before function name
+Error: TOO_FEW_TAB          (line:  20, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  20, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  21, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  21, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  22, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  22, col:   5):	Found space when expecting tab
+Error: WRONG_SCOPE_COMMENT  (line:  55, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  56, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  57, col:   9):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  58, col:   9):	Comment is invalid in this scope
+Error: TAB_INSTEAD_SPC      (line:  78, col:  72):	Found tab when expecting space
+Error: SPACE_AFTER_KW       (line:  82, col:  25):	Missing space after keyword
+Error: TOO_MANY_LINES       (line:  89, col:   1):	Function has more than 25 lines
+./src/ray/ray_pln.c: OK!
+./src/ray/ray_texture02.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:   5):	Comment is invalid in this scope
+Error: SPACE_BEFORE_FUNC    (line:  52, col:   5):	space before function name
+./src/ray/ray_tri.c: Error!
+Error: LINE_TOO_LONG        (line:  40, col:  21):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  40, col:  21):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  40, col: 103):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  41, col:  21):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:  21):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:  21):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  44, col:  21):	Comment is invalid in this scope
+Error: TOO_MANY_LINES       (line:  54, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_COMMENT  (line:  85, col:   5):	Comment is invalid in this scope
+Error: EMPTY_LINE_FUNCTION  (line:  86, col:   1):	Empty line in function
+Error: WRONG_SCOPE_COMMENT  (line:  87, col:  20):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  87, col:  20):	Comment is invalid in this scope
+./src/ray/ray_texture01.c: Error!
+Error: SPACE_REPLACE_TAB    (line:  27, col:  14):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  47, col:  12):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  49, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  49, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  49, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  49, col:   8):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  49, col:   9):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  49, col:  15):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  50, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  50, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  50, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  50, col:   8):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  50, col:   9):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  50, col:  16):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  51, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  51, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  51, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  51, col:   8):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  51, col:   9):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  51, col:  11):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  52, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  52, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  52, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  52, col:   8):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  52, col:   9):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  52, col:  11):	Declaration and assignation on a single line
+Error: SPACE_EMPTY_LINE     (line:  53, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line:  53, col:   5):	Comment is invalid in this scope
+Error: SPACE_EMPTY_LINE     (line:  54, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line:  54, col:   5):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line:  55, col:   1):	Missing tabs for indent level
+Error: TOO_MANY_VARS_FUNC   (line:  55, col:   1):	Too many variables declarations in a function
+Error: VAR_DECL_START_FUNC  (line:  55, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  55, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  55, col:   8):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  55, col:   9):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  55, col:  15):	Declaration and assignation on a single line
+Error: SPACE_EMPTY_LINE     (line:  56, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line:  56, col:   5):	Comment is invalid in this scope
+Error: SPACE_EMPTY_LINE     (line:  57, col:   5):	Space on empty line
+Error: WRONG_SCOPE_COMMENT  (line:  57, col:   5):	Comment is invalid in this scope
+Error: TOO_FEW_TAB          (line:  58, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  58, col:   5):	Found space when expecting tab
+Error: SPC_BEFORE_NL        (line:  58, col:  52):	Space before newline
+Error: TOO_FEW_TAB          (line:  59, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  59, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  60, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  60, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  61, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  61, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  62, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  62, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  72, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  72, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  73, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  73, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  74, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  74, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line:  74, col:  12):	Return value must be in parenthesis
+Error: CONSECUTIVE_NEWLINES (line:  92, col:   1):	Consecutive newlines
+Error: LINE_TOO_LONG        (line:  98, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  98, col: 113):	line too long
+Error: LINE_TOO_LONG        (line:  99, col:   1):	line too long
+Error: LINE_TOO_LONG        (line:  99, col: 119):	line too long
+Error: LINE_TOO_LONG        (line: 100, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 100, col: 119):	line too long
+Error: LINE_TOO_LONG        (line: 101, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 101, col: 125):	line too long
+Error: SPACE_EMPTY_LINE     (line: 107, col:   1):	Space on empty line
+Error: LINE_TOO_LONG        (line: 123, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 123, col: 125):	line too long
+Error: LINE_TOO_LONG        (line: 124, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 124, col: 125):	line too long
+Error: LINE_TOO_LONG        (line: 125, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 125, col: 125):	line too long
+Error: LINE_TOO_LONG        (line: 128, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 128, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 130, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 130, col:  82):	line too long
+Error: LINE_TOO_LONG        (line: 132, col:   1):	line too long
+Error: LINE_TOO_LONG        (line: 132, col:  82):	line too long
+./src/ray/ray_texture03.c: Error!
+Error: SPACE_BEFORE_FUNC    (line:  56, col:   8):	space before function name
+Error: TOO_FEW_TAB          (line:  58, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  58, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  58, col:  12):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  60, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  60, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  61, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  61, col:   5):	Found space when expecting tab
+Error: SPC_BEFORE_NL        (line:  62, col:  40):	Space before newline
+Error: TOO_FEW_TAB          (line:  63, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  63, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  64, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  64, col:   5):	Found space when expecting tab
+Error: SPACE_BEFORE_FUNC    (line:  67, col:   8):	space before function name
+Error: SPACE_REPLACE_TAB    (line:  69, col:  12):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  71, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  71, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  71, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  71, col:   8):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  71, col:   9):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  71, col:  11):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  72, col:   1):	Missing tabs for indent level
+Error: VAR_DECL_START_FUNC  (line:  72, col:   1):	Variable declaration not at start of function
+Error: SPACE_REPLACE_TAB    (line:  72, col:   5):	Found space when expecting tab
+Error: SPACE_REPLACE_TAB    (line:  72, col:   8):	Found space when expecting tab
+Error: MISALIGNED_VAR_DECL  (line:  72, col:   9):	Misaligned variable declaration
+Error: DECL_ASSIGN_LINE     (line:  72, col:  11):	Declaration and assignation on a single line
+Error: TOO_FEW_TAB          (line:  74, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  74, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  76, col:   1):	Missing tabs for indent level
+Error: SPACE_EMPTY_LINE     (line:  76, col:   5):	Space on empty line
+Error: TOO_FEW_TAB          (line:  87, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  87, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  88, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  88, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  89, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  89, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  90, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  90, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  91, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  91, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  92, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  92, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  93, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  93, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  94, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  94, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  95, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  95, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line:  96, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line:  96, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 100, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 100, col:   5):	Found space when expecting tab
+Error: TOO_FEW_TAB          (line: 101, col:   1):	Missing tabs for indent level
+Error: SPACE_REPLACE_TAB    (line: 101, col:   5):	Found space when expecting tab
+Error: RETURN_PARENTHESIS   (line: 101, col:  12):	Return value must be in parenthesis
+./src/bvh/bvh_utils.c: OK!
+./src/bvh/bvh_debug.c: Error!
+Error: TAB_INSTEAD_SPC      (line:  73, col:  24):	Found tab when expecting space
+Error: WRONG_SCOPE_COMMENT  (line:  77, col:   9):	Comment is invalid in this scope
+./src/bvh/bvh_build.c: Error!
+Error: WRONG_SCOPE_COMMENT  (line:  28, col:   5):	Comment is invalid in this scope
+Error: WRONG_SCOPE_COMMENT  (line:  31, col:   9):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  42, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  42, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  42, col: 106):	line too long
+Error: LINE_TOO_LONG        (line:  43, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  43, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  43, col: 106):	line too long
+Error: LINE_TOO_LONG        (line:  67, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  67, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  67, col:  83):	line too long
+Error: LINE_TOO_LONG        (line:  68, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  68, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  68, col:  83):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  92, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  93, col:   5):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  93, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  93, col: 117):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  94, col:   5):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  97, col:   9):	line too long
+Error: WRONG_SCOPE_COMMENT  (line:  97, col:   9):	Comment is invalid in this scope
+Error: LINE_TOO_LONG        (line:  97, col: 114):	line too long
+Error: TOO_MANY_LINES       (line: 104, col:   1):	Function has more than 25 lines
+Error: WRONG_SCOPE_COMMENT  (line: 118, col:   5):	Comment is invalid in this scope

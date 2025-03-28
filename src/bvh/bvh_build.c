@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bvh_build.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: username <your@email.com>                  +#+  +:+       +#+        */
+/*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 19:35:07 by username          #+#    #+#             */
-/*   Updated: 2025/03/22 12:20:11 by username         ###   ########.fr       */
+/*   Updated: 2025/03/28 15:00:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,6 @@ void	bvh_build_world(t_graphics *grph)
 	t_object	*obj;
 
 	i = 0;
-	ksx_time_print();
 	while (i < grph->world.size_obj)
 	{
 		printf("Buliding BVH No.%i\n", count++);

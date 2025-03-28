@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/13 18:58:23 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:04:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	ksx_camera_refresh_pm(t_graphics *p_grph, float fov)
 		{
 			ksx_transform(&p_grph->world.far, &p_grph->camera.vm, &vec3);
 			p_grph->camera.far = p_grph->camera.near + vec3.z + .1f;
-			// p_grph->camera.far = 1000.f; // near is 500
 			p_grph->camera.far = p_grph->camera.near * 2.f;
-			printf("near = %f; far = %f\n", p_grph->camera.near, p_grph->camera.far);
+			printf("near = %f; far = %f\n", p_grph->camera.near,
+				p_grph->camera.far);
 		}
 		ksx_camera_set_pm2(&p_grph->camera, fov);
 	}
