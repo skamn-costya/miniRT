@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 18:49:10 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 00:39:45 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ void	ray_txtr_object(t_object *p_object, t_ray *p_ray)
 	float		uv[2];
 	t_color		result;
 
-	p_object->color.material.kd = .8f;
-	p_object->color.material.ks = .7f;
-	p_object->color.material.ns = 32.f;
+	p_object->color.material.ka = 1.f;
+	p_object->color.material.kd = .64f;
+	p_object->color.material.ks = .5f;
+	p_object->color.material.ns = 3.f;
 	v3 = p_ray->point.op;
 	p_object->ray_txtr_uv(&v3, &uv[0], &uv[1]);
 	if (p_ray->pixel.color.b < 4)
@@ -88,7 +89,7 @@ t_vector3	ray_bump_object(t_vector3 *p_normal, t_texture *p_txtr,
     f[2] = ray_bump_sample(p_txtr, u, v);
     f[3] = ray_bump_sample(p_txtr, u + f[0], v);
     f[4] = ray_bump_sample(p_txtr, u, v + f[1]);
-    f[5] = 0.2f;
+    f[5] = 0.8f;
     f[6] = (f[3] - f[2]) * f[5];
     f[7] = (f[4] - f[2]) * f[5];
     vec3[0] = ksx_vec3_set(1.f, 0.f, 0.f);
