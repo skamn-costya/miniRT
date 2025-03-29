@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 16:45:08 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/29 21:24:05 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	p_object->edge = EDGE_SIZE;
 	p_object->size1 = 0;
 	p_object->size2 = 0;
+	p_object->bvh = NULL;
 	p_object->basis.o = ksx_vec3_set(0, 0, 0);
 	ksx_basis_set_norm(&p_object->basis, &p_object->basis.o);
 	p_object->basis.w_o = p_object->basis.o;

@@ -6,7 +6,7 @@
 /*   By: username <your@email.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 22:44:00 by username          #+#    #+#             */
-/*   Updated: 2025/03/29 19:30:22 by username         ###   ########.fr       */
+/*   Updated: 2025/03/29 21:11:01 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@
 
 // Number of triangles in smallest BVH box
 // - higher number = less boxes
-// - don't set less than 2!
-# define BVH_LEAF_TRI_COUNT 2
+# define BVH_LEAF_TRI_COUNT 1
 
 // Core
 t_bvh		*build_bvh(t_triangle **pp_tri, uint32_t tri_n);
@@ -44,5 +43,8 @@ void		bvh_draw_box(t_bvhnode *bvh_node, t_graphics *grph, uint32_t color);
 void		bvh_draw_world(t_graphics *grph);
 void		intersect_bvh(t_ray *ray, uint32_t idx,
 				t_bvh *bvh, t_world *p_world);
+
+// Memory
+void		bvh_free_world(t_world *world);
 
 #endif

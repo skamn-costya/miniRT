@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 16:55:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/29 21:33:15 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,12 @@ int	main(int argc, char *argv[])
 	grph.obj_idx = 0;
 	ft_lstclear(&p_list, &free_t_obj_descr);
 	ksx_draw(&grph);
-	bvh_build_world(&grph);
 	ray_cast(&grph);
 	//bvh_draw_world(&grph);
 	mlx_key_hook(grph.mlx, &my_keyhook, &grph);
 	mlx_scroll_hook(grph.mlx, &my_scrollhook, &grph);
 	mlx_loop(grph.mlx);
+	bvh_free_world(&grph.world);
 	ksx_garbage_collector(NULL);
 	return (EXIT_SUCCESS);
 }

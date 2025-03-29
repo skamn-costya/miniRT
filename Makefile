@@ -178,7 +178,8 @@ BVH_DIR = bvh/
 BVH_FN = 	bvh_build.c \
 			bvh_debug.c \
 			bvh_utils.c \
-			bvh_traverse.c
+			bvh_traverse.c \
+			bvh_memory.c
 BVH = $(addprefix $(BVH_DIR), $(BVH_FN))
 
 # All sources

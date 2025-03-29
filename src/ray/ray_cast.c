@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 21:20:34 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/29 21:33:01 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "ksx_vec3_math.h"
 #include <stdio.h>
 #include <math.h>
+#include "bvh.h"
 
 #ifndef BONUS
 
@@ -26,6 +27,7 @@ void	ray_cast(t_graphics *p_grph)
 	int32_t	xy[2];
 	t_ray	ray;
 
+	bvh_build_world(p_grph);
 	ksx_time_print();
 	printf("Ray tracing\n");
 	mlx_delete_image(p_grph->mlx, p_grph->img_ray);
@@ -59,6 +61,7 @@ void	ray_cast(t_graphics *p_grph)
 	pthread_t	pthrd[THREADS + 1];
 	t_mondata	mondata;
 
+	bvh_build_world(p_grph);
 	ksx_time_print();
 	printf("Ray tracing\n");
 	ksx_ray_thrd_init(&mondata, thrddata, p_grph);
