@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 17:27:52 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/29 13:12:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	ksx_init_cylinder_box(t_object *p_object)
 			-p_object->size2, -p_object->size1);
 	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1,
 			-p_object->size2, -p_object->size1);
-	ksx_create_box(p_object->pp_box[0], p_object);
+	ksx_box_triangles(p_object->pp_box[0], p_object);
 }
 
 static void	ksx_init_cylinder(t_object *p_object)

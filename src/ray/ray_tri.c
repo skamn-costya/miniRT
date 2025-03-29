@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 16:10:29 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 21:22:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,6 @@ void	ray_p2boxes(t_world *p_world, t_ray *p_ray)
 				idx[2] = -1;
 				while (p_world->pp_box[idx[0]]->pp_tris[++idx[2]])
 				{
-					// if (p_world->pp_box[idx[0]]->pp_tris[idx[2]] == p_world->pp_box[0]->pp_tris[0])
-					// {
-					// 	ksx_print_tri(p_world->pp_box[0]->pp_tris[0], ORIP);
-					// 	ksx_print_tri(p_world->pp_box[0]->pp_tris[0], LOCP);
-					// }
 					ray_p2tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
 						p_ray);
 					ray_p_check_tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
@@ -82,9 +77,8 @@ inline static void	ray_p_check_tri(t_triangle *p_tri,
 	t_ray *p_ray, t_world *p_world)
 {
 	t_vector3	v3;
-	// t_color		color;
 
-	(void)p_world; // delete
+	(void)p_world;
 	if (p_ray->length < p_ray->min_length)
 	{
 		p_ray->min_length = p_ray->length;

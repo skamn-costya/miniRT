@@ -10,12 +10,12 @@
 			"request": "launch",
 			"program": "${workspaceRoot}/minirt",
 			// "args": ["./files.rt/room.rt"],
-			// "args": ["./files.rt/example.rt"],
+			"args": ["./files.rt/example.rt"],
 			// "args": ["./files.rt/temple_m.rt"],
 			// "args": ["./files.rt/temple_m2.rt"],
 			// "args": ["./files.rt/cylinder.rt"],
 			// "args": ["./files.rt/sphere.rt"],
-			"args": ["./files.rt/earth.rt"],
+			// "args": ["./files.rt/earth.rt"],
 			"stopAtEntry": false,
 			"cwd": "${workspaceRoot}",
 			"environment": [],
@@ -54,7 +54,7 @@
 				}
 			],
 			// "preLaunchTask": "C/C++: gcc build subproject",
-			"preLaunchTask":"make project",
+			// "preLaunchTask":"make project",
 			"miDebuggerPath": "/usr/bin/gdb"
 		}
 	]

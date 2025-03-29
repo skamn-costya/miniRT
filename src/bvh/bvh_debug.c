@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bvh_debug.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: username <your@email.com>                  +#+  +:+       +#+        */
+/*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/22 11:41:01 by username          #+#    #+#             */
-/*   Updated: 2025/03/22 12:17:46 by username         ###   ########.fr       */
+/*   Updated: 2025/03/29 10:56:53 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,10 @@ void	bvh_draw_obj(t_object *obj, t_graphics *grph)
 	uint32_t	color;
 
 	i = 0;
-	color = 0xFF3ADFFF;	
+	color = 0xFF3ADFFF;
 	while (i < obj->bvh->used_n)
 	{
 		bvh_draw_box(&obj->bvh->nodes[i], grph, color);
-		//color -= 32;
 		i++;
 	}
 }

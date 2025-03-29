@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 00:27:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 21:14:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 #include "math.h"
 #include <stdio.h>
 
-static inline void clamp_color(t_color *p_color)
+static inline void	clamp_color(t_color *p_color)
 {
-    p_color->ur = fminf(fmaxf(0.f, p_color->ur), 1.f);
-    p_color->ug = fminf(fmaxf(0.f, p_color->ug), 1.f);
-    p_color->ub = fminf(fmaxf(0.f, p_color->ub), 1.f);
+	p_color->ur = fminf(fmaxf(0.f, p_color->ur), 1.f);
+	p_color->ug = fminf(fmaxf(0.f, p_color->ug), 1.f);
+	p_color->ub = fminf(fmaxf(0.f, p_color->ub), 1.f);
 }
 
 void	ray_p2lights(t_world *p_world, t_ray *p_ray)
@@ -43,25 +43,21 @@ void	ray_p2lights(t_world *p_world, t_ray *p_ray)
 
 void	ray_p2lgt(t_world *p_world, t_light *p_light, t_ray *p_ray)
 {
+	int32_t	idx[3];
+
 	p_ray->p_lgt = p_light;
 	p_ray->direction = ksx_vec3_sub(&p_light->point.cp, &p_ray->point.cp);
 	p_ray->direction = ksx_vec3_unit(&p_ray->direction);
 	p_ray->min_length = ksx_vec3_dist(&p_light->point.cp, &p_ray->point.cp);
 	p_ray->length = p_ray->min_length;
-	ray_p2lgt_boxes(p_world, p_ray);
+	ray_p2lgt_boxes(p_world, p_ray, idx);
 	(void) p_world;
 	if (p_ray->p_lgt)
 		ray_colors_calc(p_ray);
-		// p_ray->pixel.color = compute_light_contribution(p_ray);
-		// ray_colors_calc(p_ray);
-		// p_ray->pixel.color = ray_colors_blending(&p_ray->pixel.color,
-		// 	&p_light->color, p_light->bright);
 }
 
-void	ray_p2lgt_boxes(t_world *p_world, t_ray *p_ray)
+void	ray_p2lgt_boxes(t_world *p_world, t_ray *p_ray, int32_t *idx)
 {
-	int32_t	idx[3];
-
 	idx[0] = -1;
 	while (++idx[0] < p_world->size_box)
 	{
@@ -75,11 +71,11 @@ void	ray_p2lgt_boxes(t_world *p_world, t_ray *p_ray)
 				idx[2] = -1;
 				while (p_world->pp_box[idx[0]]->pp_tris[++idx[2]])
 				{
-					ray_p2tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],	p_ray);
+					ray_p2tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]], p_ray);
 					if (p_ray->length < p_ray->min_length)
 					{
 						p_ray->p_lgt = NULL;
-						break;
+						break ;
 					}
 				}
 				break ;
