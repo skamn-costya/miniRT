@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/29 19:53:32 by username         ###   ########.fr       */
+/*   Updated: 2025/03/28 21:20:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	*ksx_ray_thrd(void *p_data)
 {
 	int32_t			idx;
 	t_ray			ray;
-	t_thrddata	*p_thrddata;
+	t_thrddata		*p_thrddata;
 
 	p_thrddata = (t_thrddata *)p_data;
 	idx = p_thrddata->start;

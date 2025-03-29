@@ -73,7 +73,8 @@ OBJECT_FN =	ksx_object01.c \
 OBJECT = $(addprefix $(OBJECT_DIR), $(OBJECT_FN))
 
 OBJ_FILE_DIR = graphics/obj_file/
-OBJ_FILE_FN = ksx_obj_file.c
+OBJ_FILE_FN =	ksx_obj_file.c \
+				ksx_obj_crearte.c
 OBJ_FILE = $(addprefix $(OBJ_FILE_DIR), $(OBJ_FILE_FN))
 
 # Camera object
@@ -91,7 +92,8 @@ SPHERE = $(addprefix $(SPHERE_DIR), $(SPHERE_FN))
 # Cylinder object
 CYLINDER_DIR = graphics/cylinder/
 CYLINDER_FN =	ksx_cylinder01.c \
-				ksx_cylinder02.c
+				ksx_cylinder02.c \
+				ksx_cylinder03.c
 CYLINDER = $(addprefix $(CYLINDER_DIR), $(CYLINDER_FN))
 
 # Cone object
@@ -132,7 +134,8 @@ KYES =	$(addprefix $(KYES_DIR), $(KYES_FN))
 
 # Boxes
 BOXES_DIR = graphics/boxes/
-BOXES_FN =	ksx_boxes.c
+BOXES_FN =	ksx_boxes01.c \
+			ksx_boxes02.c
 BOXES =	$(addprefix $(BOXES_DIR), $(BOXES_FN))
 
 # Triangle

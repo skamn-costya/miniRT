@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 12:31:56 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:50:18 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ void	ksx_draw_vertex(t_vertex *p_vertex, mlx_image_t *p_image,
 	pixel = ksx_draw_get_pixel(p_camera, &p_vertex->cp, mlx_color);
 	if (pixel.w <= 0 || pixel.z <= 0 || pixel.x < 0 || pixel.y < 0
 		|| pixel.x >= p_image->width || pixel.y >= p_image->height)
-	{
-		// printf ("NO vertex\n");
 		return ;
-	}
 	ksx_set_pixel(p_image, &pixel);
 }
 
@@ -44,11 +41,6 @@ void	ksx_draw_vertexes(t_object *p_object, mlx_image_t *p_image,
 	idx = 0;
 	while (idx < p_object->size_vrtx)
 	{
-		// if (!idx)
-		// 	printf("%p: [%f, %f, %f]\n", p_object->pp_vrtx[idx],
-		// 		p_object->pp_vrtx[idx]->cp.x,
-		// 		p_object->pp_vrtx[idx]->cp.y,
-		// 		p_object->pp_vrtx[idx]->cp.z);
 		ksx_draw_vertex(p_object->pp_vrtx[idx], p_image,
 			&p_grph->camera, mlx_color);
 		idx++;

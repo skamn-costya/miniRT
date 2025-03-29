@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 15:53:58 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/29 13:12:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void		ksx_init_sphere_box(t_object *p_object);
 static void		ksx_init_sphere(t_object *p_object);
 
 t_object	*ksx_create_sphere(t_vector3 center,
-			uint32_t diameter, t_color color, uint8_t gen)
+			float diameter, t_color color, uint8_t gen)
 {
 	t_object	*p_object;
 	uint8_t		idx;
@@ -67,7 +67,7 @@ static void	ksx_init_sphere_box(t_object *p_object)
 	p_object->pp_box[0]->ver[5].op = ksx_vec3_set(-p_object->size1, -p_object->size1, p_object->size1);
 	p_object->pp_box[0]->ver[6].op = ksx_vec3_set(-p_object->size1, -p_object->size1, -p_object->size1);
 	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1, -p_object->size1, -p_object->size1);
-	ksx_create_box(p_object->pp_box[0], p_object);
+	ksx_box_triangles(p_object->pp_box[0], p_object);
 	// ksx_obj_copy_boxvrts(p_object->pp_box[0]->ver, p_object->pp_box[0]->ver_origin, 8);
 }
 

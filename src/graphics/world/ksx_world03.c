@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 12:58:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:45:51 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,21 @@ static void	ksx_obj_texture(t_object *p_object, t_world *p_world)
 	if (p_object->color.r == 0 && p_object->color.g == 0)
 	{
 		if (p_object->color.b == 1)
+			p_object->p_texture = ray_txtr_load(p_world, "./textures/2k_sun.png",
+				"./textures/sunbump.png");
+		else if (p_object->color.b == 2)
 			p_object->p_texture = ray_txtr_load(p_world, "./textures/earthmap1k.png",
 				"./textures/earthbump1k.png");
-		else if (p_object->color.b == 2)
-			p_object->p_texture = ray_txtr_load(p_world, "./textures/moonmap1k.png",
-				"./textures/moonbump1k.png");
 		else if (p_object->color.b == 3)
-			p_object->p_texture = ray_txtr_load(p_world, "./textures/sunmap.png",
-				NULL);
+			p_object->p_texture = ray_txtr_load(p_world, "./textures/moonmap4k.png",
+				"./textures/moonbump4k.png");
 		else if (p_object->color.b == 4)
-			p_object->p_texture = (t_texture *)4;
+			p_object->p_texture = ray_txtr_load(p_world, "./textures/plutomap2k.png",
+				"./textures/plutobump2k.png");
 		else if (p_object->color.b == 5)
 			p_object->p_texture = (t_texture *)5;
+		else if (p_object->color.b == 6)
+			p_object->p_texture = (t_texture *)6;
 	}
 }
 

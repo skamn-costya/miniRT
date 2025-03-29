@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 17:03:05 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 19:48:02 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	ray_txtr_uv_spheres(t_vector3 *p_point, float *p_u, float *p_v)
 	p_point->x = p_point->x / len;
 	p_point->y = p_point->y / len;
 	p_point->z = p_point->z / len;
-	// p_point->x /= .85f;
-	// p_point->y /= .85f;
 	*p_u = .5f + atan2f(p_point->z, p_point->x) * PI_12;
 	*p_v = .5f - asinf(p_point->y) * PI_1;
 }
@@ -49,7 +47,7 @@ void	ray_txtr_uv_cylinder(t_vector3 *p_point, float *p_u, float *p_v)
 	*p_v = p_point->y * .5f;
 }
 
-void ray_txtr_free_data(void *p_txtr)
+void	ray_txtr_free_data(void *p_txtr)
 {
 	t_texture	*p_txtr_;
 

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/14 14:33:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:01:22 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	ksx_draw(t_graphics *p_grph)
 	t_object	*p_object;
 	int32_t		idx;
 
-	if (!p_grph->world.pp_obj)
-		return ;
 	ksx_change(p_grph);
 	p_img = ksx_create_image(p_grph->mlx, TRANSPARENT);
 	pp_object = p_grph->world.pp_obj;

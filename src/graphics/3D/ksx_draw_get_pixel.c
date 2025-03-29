@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/06 12:40:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:34:18 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,5 @@ t_pixel	ksx_draw_get_pixel(t_camera *p_camera,
 	pixel.y = round(vec4.y / vec4.w) + p_camera->top;
 	pixel.z = p_point->z;
 	pixel.w = vec4.w;
-	// if (pixel.w <= 0)
-	// 	printf("x = %ld;  y= %ld; z = %f; w = %f\n", pixel.x, pixel.y, pixel.z, pixel.w);
 	return (pixel);
 }

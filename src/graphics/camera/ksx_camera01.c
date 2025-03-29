@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 10:50:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/22 17:21:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 17:04:19 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.hfov = fov * PI180;
 	camera.tng = tanf(camera.hfov * .5f);
 	camera.near = (WIDTH * .5f) / camera.tng;
-	// camera.near = 250.f;
 	camera.far = 0.f;
 	camera.right = WIDTH * .5f;
 	camera.left = -camera.right;
@@ -70,10 +69,10 @@ t_camera	ksx_create_camera(t_vector3 center, t_vector3 norm, float fov)
 	camera.half_width = camera.hfov;
 	camera.half_height = camera.half_width / camera.aspect;
 	ksx_camera_set_vm(&camera);
-	// camera.flags = DRAW_OBJ | CHANGE | DRAW_LINE | DRAW_NORM;// | CAM_PM;
 	camera.flags = CHANGE | CAM_PM;
 	return (camera);
 }
+// camera.flags = DRAW_OBJ | CHANGE | DRAW_LINE | DRAW_NORM;// | CAM_PM;
 
 // void ksx_camera_set_vm(t_camera *p_camera)
 // {
@@ -87,7 +86,7 @@ void	ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 	t_box		**pp_box;
 
 	p_object->basis.c_o = ksx_m4_vec3(p_vm,
-		&p_object->basis.w_o);
+			&p_object->basis.w_o);
 	idx = -1;
 	while (++idx < p_object->size_vrtx)
 		ksx_transform(&p_object->pp_vrtx[idx]->wp, p_vm,
@@ -95,7 +94,7 @@ void	ksx_camera_obj_vm(t_object *p_object, t_matrix4 *p_vm)
 	idx = -1;
 	while (++idx < p_object->size_vnrm)
 		p_object->pp_vnrm[idx]->cp = ksx_m4_vec3(p_vm,
-			&p_object->pp_vnrm[idx]->wp);
+				&p_object->pp_vnrm[idx]->wp);
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 00:59:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 14:51:15 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -436,7 +436,8 @@ typedef struct s_box
 	void		*p_object;
 }	t_box;
 
-typedef struct	s_bvhnode {
+typedef struct s_bvhnode
+{
 	t_vector3	aabb_min;
 	t_vector3	aabb_max;
 	uint32_t	left_ch;
@@ -446,7 +447,8 @@ typedef struct	s_bvhnode {
 	uint32_t	tri_num;
 }	t_bvhnode;
 
-typedef struct	s_bvh {
+typedef struct s_bvh
+{
 	t_bvhnode	*nodes;
 	t_triangle	**pp_tri;
 	uint32_t	*tri_index;
@@ -494,7 +496,7 @@ typedef struct s_object
 	t_texture	*p_texture;
 	void		(*ray_txtr_uv)(t_vector3 *, float *, float *);
 	// void		(*f_transform)(void *, t_basis *);
-	t_bvh	*bvh;
+	t_bvh		*bvh;
 }	t_object;
 
 typedef struct s_world
@@ -545,7 +547,7 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world);
 void		ksx_world_clean(t_world *p_world);
 
 t_object	*ksx_create_sphere(t_vector3 center,
-				uint32_t diameter, t_color color, uint8_t gen);
+				float diameter, t_color color, uint8_t gen);
 t_object	*ksx_create_cylinder(t_vector3 center, t_vector3 norm,
 				float dia_ht[], t_color color);
 t_object	*ksx_create_cone(t_vector3 center, t_vector3 norm,

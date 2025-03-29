@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 13:04:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/28 20:00:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 t_texture	*ray_txtr_load(t_world *p_world, char *p_mapname, char *p_bumpname)
 {
-	t_texture *p_texture;
+	t_texture	*p_texture;
 
 	p_texture = (t_texture *)malloc(sizeof(t_texture));
 	if (!p_texture)
@@ -44,77 +44,31 @@ t_texture	*ray_txtr_load(t_world *p_world, char *p_mapname, char *p_bumpname)
 // uint32_t	ray_txtr_sample_nearest(t_texture *p_txtr, float u, float v)
 t_color	ray_txtr_sample(t_texture *p_txtr, float u, float v)
 {
-	t_color color;
-    int width = p_txtr->p_mapdata->width;
-    int height = p_txtr->p_mapdata->height;
-    int x = (int)floorf(fmodf(u * width, width));
-    int y = (int)floorf(fmodf(v * height, height));
-    // if (x < 0) x += width;
-    // if (y < 0) y += height;
-    int index = (y * width + x) * BPP;
-    // if (index + 3 >= width * height * BPP)
-    //     return 0;  // Предотвращаем выход за границы памяти
-    color.r = p_txtr->p_mapdata->pixels[index + 0]; 
-    color.g = p_txtr->p_mapdata->pixels[index + 1];
-    color.b = p_txtr->p_mapdata->pixels[index + 2];
-    color.a = p_txtr->p_mapdata->pixels[index + 3];
-    return (color);
+	t_color	color;
+	int32_t	wh[2];
+	int32_t	xy[2];
+	int		idx;
+
+	wh[0] = p_txtr->p_mapdata->width;
+	wh[1] = p_txtr->p_mapdata->height;
+	xy[0] = (int)floorf(fmodf(u * wh[0], wh[0]));
+	xy[1] = (int)floorf(fmodf(v * wh[1], wh[1]));
+	idx = (xy[1] * wh[0] + xy[0]) * BPP;
+	color.r = p_txtr->p_mapdata->pixels[idx + 0];
+	color.g = p_txtr->p_mapdata->pixels[idx + 1];
+	color.b = p_txtr->p_mapdata->pixels[idx + 2];
+	color.a = p_txtr->p_mapdata->pixels[idx + 3];
+	return (color);
 }
 
-// // uint32_t ray_txtr_sample_bilinear(t_texture *p_txtr, float u, float v)
-// t_color ray_txtr_sample(t_texture *p_txtr, float u, float v)
-// {
-//     u = u * p_txtr->p_data->width - 0.5f;
-//     v = v * p_txtr->p_data->height - 0.5f;
-// 	t_color c00;
-// 	t_color c10;
-// 	t_color c01;
-// 	t_color c11;
+float	ray_bump_sample(t_texture *p_txtr, float u, float v)
+{
+	int	x;
+	int	y;
+	int	idx;
 
-
-//     int x = (int)u;
-//     int y = (int)v;
-//     float dx = u - x;
-//     float dy = v - y;
-
-//     int index00 = ((y % p_txtr->p_data->height) * p_txtr->p_data->width + (x % p_txtr->p_data->width)) * BPP;
-//     int index10 = ((y % p_txtr->p_data->height) * p_txtr->p_data->width + ((x + 1) % p_txtr->p_data->width)) * BPP;
-//     int index01 = (((y + 1) % p_txtr->p_data->height) * p_txtr->p_data->width + (x % p_txtr->p_data->width)) * BPP;
-//     int index11 = (((y + 1) % p_txtr->p_data->height) * p_txtr->p_data->width + ((x + 1) % p_txtr->p_data->width)) * BPP;
-
-//     c00.r = p_txtr->p_data->pixels[index00];
-// 	c00.g = p_txtr->p_data->pixels[index00 + 1];
-// 	c00.b = p_txtr->p_data->pixels[index00 + 2];
-// 	c00.a = p_txtr->p_data->pixels[index00 + 3];
-	
-// 	c10.r = p_txtr->p_data->pixels[index10];
-// 	c10.g = p_txtr->p_data->pixels[index10 + 1];
-// 	c10.b = p_txtr->p_data->pixels[index10 + 2];
-// 	c10.a = p_txtr->p_data->pixels[index10 + 3];
-
-// 	c01.r = p_txtr->p_data->pixels[index01];
-// 	c01.g = p_txtr->p_data->pixels[index01 + 1];
-// 	c01.b = p_txtr->p_data->pixels[index01 + 2];
-// 	c01.a = p_txtr->p_data->pixels[index01 + 3];
-
-// 	c11.r = p_txtr->p_data->pixels[index11];
-// 	c11.g = p_txtr->p_data->pixels[index11 + 1];
-// 	c11.b = p_txtr->p_data->pixels[index11 + 2];
-// 	c11.a = p_txtr->p_data->pixels[index11 + 3];
-
-//     // c10.r = p_txtr->p_data->pixels[index10], p_txtr->p_data->pixels[index10 + 1], p_txtr->p_data->pixels[index10 + 2];
-//     // c01.r = p_txtr->p_data->pixels[index01], p_txtr->p_data->pixels[index01 + 1], p_txtr->p_data->pixels[index01 + 2];
-//     // c11.r = p_txtr->p_data->pixels[index11], p_txtr->p_data->pixels[index11 + 1], p_txtr->p_data->pixels[index11 + 2];
-
-//     t_color result;
-//     result.r = (uint8_t)((1 - dx) * (1 - dy) * c00.r + dx * (1 - dy) * c10.r +
-//                           (1 - dx) * dy * c01.r + dx * dy * c11.r);
-//     result.g = (uint8_t)((1 - dx) * (1 - dy) * c00.g + dx * (1 - dy) * c10.g +
-//                           (1 - dx) * dy * c01.g + dx * dy * c11.g);
-//     result.b = (uint8_t)((1 - dx) * (1 - dy) * c00.b + dx * (1 - dy) * c10.b +
-//                           (1 - dx) * dy * c01.b + dx * dy * c11.b);
-// 	result.b = (uint8_t)((1 - dx) * (1 - dy) * c00.a + dx * (1 - dy) * c10.a +
-//                           (1 - dx) * dy * c01.a + dx * dy * c11.a);
-
-//     return result;
-// }
+	x = (int)(u * p_txtr->p_bumpdata->width) % p_txtr->p_bumpdata->width;
+	y = (int)(v * p_txtr->p_bumpdata->height) % p_txtr->p_bumpdata->height;
+	idx = (y * p_txtr->p_bumpdata->width + x) * BPP;
+	return (p_txtr->p_bumpdata->pixels[idx] / 255.f);
+}

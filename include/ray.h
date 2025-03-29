@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/29 16:24:53 by username         ###   ########.fr       */
+/*   Updated: 2025/03/28 21:14:42 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define BIAS		1e-3f
 // # define EPSILON 0.0001f
 # define MAX_LEN 3.402823466e+38F
-# define THREADS 80
+# define THREADS 32
 
 typedef struct s_brcntrc
 {
@@ -111,7 +111,7 @@ void		ray_p2planes(t_world *p_world, t_ray *p_ray);
 void		ray_p2pln(t_plane *p_plane, t_ray *p_ray);
 void		ray_p2lights(t_world *p_world, t_ray *p_ray);
 void		ray_p2lgt(t_world *p_world, t_light *p_light, t_ray *p_ray);
-void		ray_p2lgt_boxes(t_world *p_world, t_ray *p_ray);
+void		ray_p2lgt_boxes(t_world *p_world, t_ray *p_ray, int32_t *idx);
 
 t_vector3	triangle_normal_barycentric(t_triangle *p_tri, t_ray *p_ray);
 void		rey_get_barycentric(t_vector3 *p_point,

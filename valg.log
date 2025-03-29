@@ -1,0 +1,122 @@
+make valg
+valgrind --leak-check=full --show-leak-kinds=all --suppressions=mlx.supp ./minirt ./files.rt/example.rt
+==1441020== Memcheck, a memory error detector
+==1441020== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1441020== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1441020== Command: ./minirt ./files.rt/example.rt
+==1441020== 
+==1441020== Invalid read of size 8
+==1441020==    at 0x40286A8: strncmp (strcmp.S:172)
+==1441020==    by 0x400668D: is_dst (dl-load.c:216)
+==1441020==    by 0x400810E: _dl_dst_count (dl-load.c:253)
+==1441020==    by 0x400810E: expand_dynamic_string_token (dl-load.c:395)
+==1441020==    by 0x40082B7: fillin_rpath.isra.0 (dl-load.c:483)
+==1441020==    by 0x4008602: decompose_rpath (dl-load.c:654)
+==1441020==    by 0x400ABF5: cache_rpath (dl-load.c:696)
+==1441020==    by 0x400ABF5: cache_rpath (dl-load.c:677)
+==1441020==    by 0x400ABF5: _dl_map_object (dl-load.c:2165)
+==1441020==    by 0x4003494: openaux (dl-deps.c:64)
+==1441020==    by 0x4B33A97: _dl_catch_exception (dl-error-skeleton.c:208)
+==1441020==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==1441020==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==1441020==    by 0x4B33A97: _dl_catch_exception (dl-error-skeleton.c:208)
+==1441020==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==1441020==  Address 0x5008ee9 is 9 bytes inside a block of size 15 alloc'd
+==1441020==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1441020==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==1441020==    by 0x40271DF: strdup (strdup.c:42)
+==1441020==    by 0x4008594: decompose_rpath (dl-load.c:629)
+==1441020==    by 0x400ABF5: cache_rpath (dl-load.c:696)
+==1441020==    by 0x400ABF5: cache_rpath (dl-load.c:677)
+==1441020==    by 0x400ABF5: _dl_map_object (dl-load.c:2165)
+==1441020==    by 0x4003494: openaux (dl-deps.c:64)
+==1441020==    by 0x4B33A97: _dl_catch_exception (dl-error-skeleton.c:208)
+==1441020==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==1441020==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==1441020==    by 0x4B33A97: _dl_catch_exception (dl-error-skeleton.c:208)
+==1441020==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==1441020==    by 0x4B33A97: _dl_catch_exception (dl-error-skeleton.c:208)
+==1441020==    by 0x400E34D: _dl_open (dl-open.c:883)
+==1441020== 
+==1441020== Invalid read of size 8
+==1441020==    at 0x40286A8: strncmp (strcmp.S:172)
+==1441020==    by 0x400668D: is_dst (dl-load.c:216)
+==1441020==    by 0x4007F79: _dl_dst_substitute (dl-load.c:295)
+==1441020==    by 0x40082B7: fillin_rpath.isra.0 (dl-load.c:483)
+==1441020==    by 0x4008602: decompose_rpath (dl-load.c:654)
+==1441020==    by 0x400ABF5: cache_rpath (dl-load.c:696)
+==1441020==    by 0x400ABF5: cache_rpath (dl-load.c:677)
+==1441020==    by 0x400ABF5: _dl_map_object (dl-load.c:2165)
+==1441020==    by 0x4003494: openaux (dl-deps.c:64)
+==1441020==    by 0x4B33A97: _dl_catch_exception (dl-error-skeleton.c:208)
+==1441020==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==1441020==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==1441020==    by 0x4B33A97: _dl_catch_exception (dl-error-skeleton.c:208)
+==1441020==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==1441020==  Address 0x5008ee9 is 9 bytes inside a block of size 15 alloc'd
+==1441020==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1441020==    by 0x40271DF: malloc (rtld-malloc.h:56)
+==1441020==    by 0x40271DF: strdup (strdup.c:42)
+==1441020==    by 0x4008594: decompose_rpath (dl-load.c:629)
+==1441020==    by 0x400ABF5: cache_rpath (dl-load.c:696)
+==1441020==    by 0x400ABF5: cache_rpath (dl-load.c:677)
+==1441020==    by 0x400ABF5: _dl_map_object (dl-load.c:2165)
+==1441020==    by 0x4003494: openaux (dl-deps.c:64)
+==1441020==    by 0x4B33A97: _dl_catch_exception (dl-error-skeleton.c:208)
+==1441020==    by 0x4003C7B: _dl_map_object_deps (dl-deps.c:248)
+==1441020==    by 0x400EA0E: dl_open_worker_begin (dl-open.c:592)
+==1441020==    by 0x4B33A97: _dl_catch_exception (dl-error-skeleton.c:208)
+==1441020==    by 0x400DF99: dl_open_worker (dl-open.c:782)
+==1441020==    by 0x4B33A97: _dl_catch_exception (dl-error-skeleton.c:208)
+==1441020==    by 0x400E34D: _dl_open (dl-open.c:883)
+==1441020== 
+near = 500.000000; far = 1000.000000
+2025-03-27 18:02:01
+Buliding BVH No.1
+Buliding BVH No.2
+Buliding BVH No.3
+Buliding BVH No.4
+2025-03-27 18:02:01
+2025-03-27 18:05:45
+==1441020== 
+==1441020== HEAP SUMMARY:
+==1441020==     in use at exit: 617,857 bytes in 3,110 blocks
+==1441020==   total heap usage: 1,201,032 allocs, 1,197,922 frees, 259,699,796 bytes allocated
+==1441020== 
+==1441020== 12,288 bytes in 32 blocks are possibly lost in loss record 2,228 of 2,234
+==1441020==    at 0x484DA83: calloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1441020==    by 0x40147D9: calloc (rtld-malloc.h:44)
+==1441020==    by 0x40147D9: allocate_dtv (dl-tls.c:375)
+==1441020==    by 0x40147D9: _dl_allocate_tls (dl-tls.c:634)
+==1441020==    by 0x4A547B4: allocate_stack (allocatestack.c:430)
+==1441020==    by 0x4A547B4: pthread_create@@GLIBC_2.34 (pthread_create.c:647)
+==1441020==    by 0x411D20: ray_cast (ray_cast.c:73)
+==1441020==    by 0x4172DB: main (minirt.c:57)
+==1441020== 
+==1441020== 12,704 bytes in 4 blocks are indirectly lost in loss record 2,229 of 2,234
+==1441020==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1441020==    by 0x4144DB: build_bvh (bvh_build.c:119)
+==1441020==    by 0x414D51: bvh_build_world (bvh_build.c:147)
+==1441020==    by 0x4172CF: main (minirt.c:56)
+==1441020== 
+==1441020== 279,312 bytes in 4 blocks are indirectly lost in loss record 2,233 of 2,234
+==1441020==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1441020==    by 0x4144A8: build_bvh (bvh_build.c:115)
+==1441020==    by 0x414D51: bvh_build_world (bvh_build.c:147)
+==1441020==    by 0x4172CF: main (minirt.c:56)
+==1441020== 
+==1441020== 292,144 (128 direct, 292,016 indirect) bytes in 4 blocks are definitely lost in loss record 2,234 of 2,234
+==1441020==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1441020==    by 0x414478: build_bvh (bvh_build.c:112)
+==1441020==    by 0x414D51: bvh_build_world (bvh_build.c:147)
+==1441020==    by 0x4172CF: main (minirt.c:56)
+==1441020== 
+==1441020== LEAK SUMMARY:
+==1441020==    definitely lost: 128 bytes in 4 blocks
+==1441020==    indirectly lost: 292,016 bytes in 8 blocks
+==1441020==      possibly lost: 12,288 bytes in 32 blocks
+==1441020==    still reachable: 0 bytes in 0 blocks
+==1441020==         suppressed: 313,425 bytes in 3,066 blocks
+==1441020== 
+==1441020== For lists of detected and suppressed errors, rerun with: -s
+==1441020== ERROR SUMMARY: 4 errors from 4 contexts (suppressed: 1 from 1)
