@@ -172,9 +172,10 @@ RAY =	$(addprefix $(RAY_DIR), $(RAY_FN))
 
 # BVH
 BVH_DIR = bvh/
-BVH_FN = bvh_build.c \
-				 bvh_debug.c \
-				 bvh_utils.c
+BVH_FN = 	bvh_build.c \
+			bvh_debug.c \
+			bvh_utils.c \
+			bvh_traverse.c
 BVH = $(addprefix $(BVH_DIR), $(BVH_FN))
 
 # All sources

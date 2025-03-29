@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 00:43:59 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/29 19:11:04 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	ray_cast(t_graphics *p_grph)
 	t_ray	ray;
 
 	ksx_time_print();
+	printf("Ray tracing\n");
 	mlx_delete_image(p_grph->mlx, p_grph->img_ray);
 	p_grph->img_ray = ksx_create_image(p_grph->mlx, TRANSPARENT);
 	xy[0] = p_grph->img_proj->width * p_grph->img_proj->height;

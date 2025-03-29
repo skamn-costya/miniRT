@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 15:13:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/29 19:26:32 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,41 +16,15 @@
 #include "math.h"
 #include "ray_texture.h"
 #include <stdio.h>
-
-inline static void	ray_p_check_tri(t_triangle *p_tri,
-						t_ray *p_ray, t_world *p_world);
+#include "bvh.h"
 
 void	ray_p2boxes(t_world *p_world, t_ray *p_ray)
 {
 	int32_t	idx[3];
 
 	idx[0] = -1;
-	while (++idx[0] < p_world->size_box)
-	{
-		idx[1] = -1;
-		while (++idx[1] < 12)
-		{
-			ray_p2tri(&p_world->pp_box[idx[0]]->tris[idx[1]], p_ray);
-			if (p_ray->length != p_ray->min_length)
-			{
-				p_ray->length = p_ray->min_length;
-				idx[2] = -1;
-				while (p_world->pp_box[idx[0]]->pp_tris[++idx[2]])
-				{
-					// if (p_world->pp_box[idx[0]]->pp_tris[idx[2]] == p_world->pp_box[0]->pp_tris[0])
-					// {
-					// 	ksx_print_tri(p_world->pp_box[0]->pp_tris[0], ORIP);
-					// 	ksx_print_tri(p_world->pp_box[0]->pp_tris[0], LOCP);
-					// }
-					ray_p2tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
-						p_ray);
-					ray_p_check_tri(p_world->pp_box[idx[0]]->pp_tris[idx[2]],
-						p_ray, p_world);
-				}
-				break ;
-			}
-		}
-	}
+	while (++idx[0] < p_world->size_obj)
+		intersect_bvh(p_ray, 0, p_world->pp_obj[idx[0]]->bvh, p_world);
 }
 
 void	ray_p2tri(t_triangle *p_tri, t_ray *p_ray)
@@ -76,36 +50,6 @@ void	ray_p2tri(t_triangle *p_tri, t_ray *p_ray)
 	f[4] = ksx_vec3_dot(&v3[1], &v3[4]) * f[1];
 	if (f[4] > EPSILON && p_ray->length > f[4])
 		p_ray->length = f[4];
-}
-
-inline static void	ray_p_check_tri(t_triangle *p_tri,
-	t_ray *p_ray, t_world *p_world)
-{
-	t_vector3	v3;
-	t_color		color;
-
-	(void)p_world; // delete
-	if (p_ray->length < p_ray->min_length)
-	{
-		p_ray->min_length = p_ray->length;
-		v3 = ksx_vec3_smulti(&p_ray->direction, p_ray->length);
-		v3 = ksx_vec3_add(&p_ray->origin, &v3);
-		p_ray->point.cp = v3;
-		p_ray->p_tri = p_tri;
-		rey_get_barycentric(&p_ray->point.cp, p_tri, p_ray);
-		p_ray->norm = triangle_normal_barycentric(p_tri, p_ray);
-		p_ray->pixel.color = ((t_object *)p_tri->p_object)->color;
-		if (((t_object *)p_tri->p_object)->p_texture)
-		{
-			color = ray_txtr_object((t_object *)p_tri->p_object,
-					&p_ray->point.op, &p_ray->pixel.color);
-			p_ray->pixel.color.mlx_color = color.mlx_color;
-			p_ray->pixel.color.ur = color.ur;
-			p_ray->pixel.color.ug = color.ug;
-			p_ray->pixel.color.ub = color.ub;
-			p_ray->pixel.color.ua = color.ua;
-		}
-	}
 }
 
 t_vector3	triangle_normal_barycentric(t_triangle *p_tri, t_ray *p_ray)
