@@ -6,7 +6,7 @@
 /*   By: username <your@email.com>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 15:10:36 by username          #+#    #+#             */
-/*   Updated: 2025/03/29 21:26:38 by username         ###   ########.fr       */
+/*   Updated: 2025/03/29 22:02:19 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	intersect_bvh(t_ray *ray, uint32_t idx, t_bvh *bvh, t_world *p_world)
 {
 	t_bvhnode	node;
 	uint32_t	i;
-	
+
 	if (!bvh)
 		return ;
 	node = bvh->nodes[idx];

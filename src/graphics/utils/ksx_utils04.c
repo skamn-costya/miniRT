@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 15:00:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/29 22:05:11 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,19 @@ void	ksx_color_unit_fraction(t_color *p_color)
 	p_color->ub = p_color->b / 255.f;
 }
 
+#ifdef BONUS
+
+// ksx_time_print - Remove before evaluation
 void	ksx_time_print(void)
 {
-	// ksx_time_print - Remove before evaluation
 	time_t		timer;
-    char		buffer[25];
-    struct tm*	tm_info;
+	char		buffer[25];
+	struct tm	*tm_info;
 
-    timer = time(NULL);
-    tm_info = localtime(&timer);
-
-    strftime(buffer, 25, "%Y-%m-%d %H:%M:%S", tm_info);
-    puts(buffer);
+	timer = time(NULL);
+	tm_info = localtime(&timer);
+	strftime(buffer, 25, "%Y-%m-%d %H:%M:%S", tm_info);
+	puts(buffer);
 }
 
+#endif

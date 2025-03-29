@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/21 19:35:07 by username          #+#    #+#             */
-/*   Updated: 2025/03/29 21:51:19 by username         ###   ########.fr       */
+/*   Updated: 2025/03/29 22:01:31 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,6 @@ void	bvh_build_world(t_graphics *grph)
 	t_object	*obj;
 
 	i = 0;
-	ksx_time_print();
 	bvh_free_world(&grph->world);
 	while (i < grph->world.size_obj)
 	{
