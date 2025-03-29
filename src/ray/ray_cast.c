@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/29 19:11:04 by username         ###   ########.fr       */
+/*   Updated: 2025/03/29 19:53:32 by username         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ray_cast(t_graphics *p_grph)
 	t_mondata	mondata;
 
 	ksx_time_print();
+	printf("Ray tracing\n");
 	ksx_ray_thrd_init(&mondata, thrddata, p_grph);
 	pthread_create(&pthrd[THREADS], NULL, &ksx_ray_thrd_mon,
 		&mondata);
