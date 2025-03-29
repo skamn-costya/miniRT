@@ -61,20 +61,17 @@ void	ksx_color_unit_fraction(t_color *p_color)
 	p_color->ub = p_color->b / 255.f;
 }
 
-#ifdef BONUS
-
 void	ksx_time_print(void)
 {
 	// ksx_time_print - Remove before evaluation
 	time_t		timer;
-    char		buffer[26];
+    char		buffer[25];
     struct tm*	tm_info;
 
     timer = time(NULL);
     tm_info = localtime(&timer);
 
-    strftime(buffer, 26, "%Y-%m-%d %H:%M:%S", tm_info);
+    strftime(buffer, 25, "%Y-%m-%d %H:%M:%S", tm_info);
     puts(buffer);
 }
 
-#endif

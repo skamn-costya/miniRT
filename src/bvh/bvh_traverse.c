@@ -90,7 +90,6 @@ inline static void	ray_p_check_tri(t_triangle *p_tri,
 	t_ray *p_ray)
 {
 	t_vector3	v3;
-	t_color		color;
 
 	if (p_ray->length < p_ray->min_length)
 	{
@@ -103,14 +102,6 @@ inline static void	ray_p_check_tri(t_triangle *p_tri,
 		p_ray->norm = triangle_normal_barycentric(p_tri, p_ray);
 		p_ray->pixel.color = ((t_object *)p_tri->p_object)->color;
 		if (((t_object *)p_tri->p_object)->p_texture)
-		{
-			color = ray_txtr_object((t_object *)p_tri->p_object,
-					&p_ray->point.op, &p_ray->pixel.color);
-			p_ray->pixel.color.mlx_color = color.mlx_color;
-			p_ray->pixel.color.ur = color.ur;
-			p_ray->pixel.color.ug = color.ug;
-			p_ray->pixel.color.ub = color.ub;
-			p_ray->pixel.color.ua = color.ua;
-		}
+			ray_txtr_object((t_object *)p_tri->p_object, p_ray);
 	}
 }
