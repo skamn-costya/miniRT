@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 17:23:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:19:45 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@
 # define CYLINDER_ANGLE 4.5f
 
 # define ANGLE 2.5f
-# define STEP 5.f
+# define STEP .5f
 # define SCALE .05f
 # define MIN_AXIS .051f
 # define MAX_AXIS 5.f
@@ -535,7 +535,7 @@ mlx_t		*ksx_init(void);
 int			ksx_prep(void *p_vars);
 t_pixel		ksx_get_pixel(mlx_image_t *p_img, uint32_t x, uint32_t y);
 void		ksx_set_pixel(mlx_image_t *p_img, t_pixel *p_pix);
-void		applyDepthAttenuation(t_color *p_color, float depth, float k);
+// void		applyDepthAttenuation(t_color *p_color, float depth, float k);
 
 mlx_image_t	*ksx_create_image(mlx_t *mlx, uint32_t bg_color);
 int32_t		ksx_image_to_window(mlx_t *p_mlx, mlx_image_t *p_img, int32_t z);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/22 13:26:20 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/29 14:30:12 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:55:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,6 @@ t_triangle	*get_f_of(t_fline *p_fline, t_object *p_object, int *p_idx)
 		ksx_obj_nrm2tri(p_object, *p_idx, i, 2);
 	else if (p_object->pp_vnrm)
 		ksx_obj_nrm2tri(p_object, *p_idx, i, 0);
-
 	(*p_idx)++;
 	p_object->size_tri = *p_idx;
 	return (p_object->pp_tri[*p_idx - 1]);

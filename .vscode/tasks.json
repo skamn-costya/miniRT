@@ -6,8 +6,8 @@
 			"command": "make",
 			"args": [
 				"fclean",
-				// "BONUS"
-				"all"
+				"BONUS"
+				// "all"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}"

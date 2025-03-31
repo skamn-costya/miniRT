@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 14:05:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:58:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	ksx_set_world_defaults(t_graphics *p_grph)
 	p_grph->world.flags = 0b00000000;
 	p_grph->world.basis.o = ksx_vec3_set(0.f, 0.f, 0.f);
 	ksx_basis_set_norm(&p_grph->world.basis, &p_grph->world.basis.o);
-	p_grph->world.far = ksx_vec3_set(0.f, 0.f, 0.f);;
+	p_grph->world.far = ksx_vec3_set(0.f, 0.f, 0.f);
 	p_grph->world.pp_box = NULL;
 	p_grph->world.size_box = 0;
 	p_grph->world.pp_obj = NULL;
@@ -128,13 +128,13 @@ static void	ksx_init_world_3(t_graphics *p_grph, t_obj_descr *p_obj_descr)
 	if (p_obj_descr->id == LIGHT)
 	{
 		p_light = ksx_create_light(p_obj_descr->coord, p_obj_descr->ratio,
-			p_obj_descr->color);
+				p_obj_descr->color);
 		ksx_lgt2world(p_light, &p_grph->world);
 	}
 	if (p_obj_descr->id == PLANE)
 	{
 		p_plane = ksx_create_plane(p_obj_descr->coord, p_obj_descr->norm,
-			p_obj_descr->color);
+				p_obj_descr->color);
 		ksx_pln2world(p_plane, &p_grph->world);
 	}
 }

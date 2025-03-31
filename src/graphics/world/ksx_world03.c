@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 14:01:36 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:58:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 static void	ksx_obj_texture(t_object *p_object, t_world *p_world)
 {
 	if (!p_world->pp_txtr)
-		return;
+		return ;
 	if (p_object->color.r == 0 && p_object->color.g == 0)
 	{
 		if (p_object->color.b < MAX_TXTR - 1)
@@ -84,7 +84,8 @@ void	ksx_world_clean(t_world *p_world)
 	}
 	ksx_free_pointers((void ***) &p_world->pp_lgt);
 	ksx_free_pointers((void ***) &p_world->pp_pln);
-	p_world->pp_txtr = (t_texture **)pp_del_all((void **)p_world->pp_txtr, &ray_txtr_free_data);
+	p_world->pp_txtr = (t_texture **)pp_del_all((void **)p_world->pp_txtr,
+			&ray_txtr_free_data);
 	free(p_world->pp_box);
 	free(p_world->pp_obj);
 	p_world->pp_obj = NULL;

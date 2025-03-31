@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/03 15:47:51 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:21:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,52 +36,24 @@ void	key_adswze(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 
 void	key_a(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	if (p_keydata->modifier == MLX_SHIFT)
-	{
-		;
-		// ksx_qrotation_wbasis(&p_grph->world.pp_obj[p_grph->obj_idx]->basis,
-		// 	ANGLE, ksx_vec3_set(1, 0, 0));
-		// ksx_translate_obj(p_grph->world.pp_obj[p_grph->obj_idx]);
-	}
-	else
+	if (p_keydata->modifier != MLX_SHIFT)
 		p_grph->world.pp_obj[p_grph->obj_idx]->basis.w_o.x -= STEP;
 }
 
 void	key_d(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	if (p_keydata->modifier == MLX_SHIFT)
-	{
-		;
-		// ksx_qrotation_wbasis(&p_grph->world.pp_obj[p_grph->obj_idx]->basis,
-		// 	-ANGLE, ksx_vec3_set(1, 0, 0));
-		// ksx_translate_obj(p_grph->world.pp_obj[p_grph->obj_idx]);
-	}
-	else
+	if (p_keydata->modifier != MLX_SHIFT)
 		p_grph->world.pp_obj[p_grph->obj_idx]->basis.w_o.x += STEP;
 }
 
 void	key_s(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	if (p_keydata->modifier == MLX_SHIFT)
-	{
-		;
-		// ksx_qrotation_wbasis(&p_grph->world.pp_obj[p_grph->obj_idx]->basis,
-		// 	ANGLE, ksx_vec3_set(0, 1.f, 0));
-		// ksx_translate_obj(p_grph->world.pp_obj[p_grph->obj_idx]);
-	}
-	else
+	if (p_keydata->modifier != MLX_SHIFT)
 		p_grph->world.pp_obj[p_grph->obj_idx]->basis.w_o.y -= STEP;
 }
 
 void	key_w(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	if (p_keydata->modifier == MLX_SHIFT)
-	{
-		;
-		// ksx_qrotation_wbasis(&p_grph->world.pp_obj[p_grph->obj_idx]->basis,
-		// 	-ANGLE, ksx_vec3_set(0, 1.f, 0));
-		// ksx_translate_obj(p_grph->world.pp_obj[p_grph->obj_idx]);
-	}
-	else
+	if (p_keydata->modifier != MLX_SHIFT)
 		p_grph->world.pp_obj[p_grph->obj_idx]->basis.w_o.y += STEP;
 }

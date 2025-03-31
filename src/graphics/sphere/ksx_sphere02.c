@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 15:13:26 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:06:04 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,13 @@ void	ksx_sphere_norns(t_object *p_object)
 		idx[1] = 0;
 		while (idx[1] < p_object->size_tri)
 		{
-			if(p_object->pp_tri[idx[1]]->p_ver1 == p_object->pp_vrtx[idx[0]])
+			if (p_object->pp_tri[idx[1]]->p_ver1 == p_object->pp_vrtx[idx[0]])
 				p_object->pp_tri[idx[1]]->p_norm1 = p_object->pp_vnrm[idx[0]];
-			else if(p_object->pp_tri[idx[1]]->p_ver2 == p_object->pp_vrtx[idx[0]])
+			else if (p_object->pp_tri[idx[1]]->p_ver2
+				== p_object->pp_vrtx[idx[0]])
 				p_object->pp_tri[idx[1]]->p_norm2 = p_object->pp_vnrm[idx[0]];
-			else if(p_object->pp_tri[idx[1]]->p_ver3 == p_object->pp_vrtx[idx[0]])
+			else if (p_object->pp_tri[idx[1]]->p_ver3
+				== p_object->pp_vrtx[idx[0]])
 				p_object->pp_tri[idx[1]]->p_norm3 = p_object->pp_vnrm[idx[0]];
 			idx[1]++;
 		}

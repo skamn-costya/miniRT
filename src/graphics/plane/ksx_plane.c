@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 22:03:33 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:11:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_plane	**ksx_pln2world(t_plane *p_plane, t_world *p_world)
 static void	ksx_plane_texture(t_plane *p_plane, t_world *p_world)
 {
 	if (!p_world->pp_txtr)
-		return;
+		return ;
 	if (p_plane->color.r == 0 && p_plane->color.g == 0)
 	{
 		if (p_plane->color.b < MAX_TXTR - 1)

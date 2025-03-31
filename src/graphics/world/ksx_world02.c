@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/18 00:36:02 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:57:05 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	ksx_world_obj_tm(t_world *p_world, t_object *p_object)
 	idx = -1;
 	while (++idx < p_object->size_vnrm)
 		p_object->pp_vnrm[idx]->wp = ksx_m4_vec3(&p_world->tm,
-			&p_object->pp_vnrm[idx]->lp);
+				&p_object->pp_vnrm[idx]->lp);
 	pp_box = p_object->pp_box;
 	while (pp_box && *pp_box)
 	{
@@ -60,8 +60,6 @@ static void	ksx_world_obj_tm_1(t_world *p_world,
 
 	ksx_transform(&p_object->pp_vrtx[idx]->lp,
 		&p_world->tm, &p_object->pp_vrtx[idx]->wp);
-	// ksx_transform(&p_object->pp_vrtx[idx]->lnorm,
-	// 	&p_world->tm, &p_object->pp_vrtx[idx]->wnorm);
 	f = fabs(p_object->pp_vrtx[idx]->wp.x);
 	if (f > p_world->far.z)
 		p_world->far.z = f;

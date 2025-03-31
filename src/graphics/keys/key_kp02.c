@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 15:02:33 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/24 16:28:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:29:31 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	key_kp_1(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 	}
 	else
 		ksx_qrotation_basis(&p_grph->world.pp_obj[p_grph->obj_idx]->basis,
-			ANGLE, ksx_vec3_set(0, 0, 1));
+			-ANGLE, ksx_vec3_set(0, 0, 1));
 }
 
 void	key_kp_9(mlx_key_data_t *p_keydata, t_graphics *p_grph)
@@ -50,7 +50,7 @@ void	key_kp_9(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 	}
 	else
 		ksx_qrotation_basis(&p_grph->world.pp_obj[p_grph->obj_idx]->basis,
-			-ANGLE, ksx_vec3_set(0, 0, 1));
+			ANGLE, ksx_vec3_set(0, 0, 1));
 }
 
 void	key_kp_minus(mlx_key_data_t *p_keydata, t_graphics *p_grph)
@@ -78,35 +78,15 @@ void	key_kp_minus(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 
 void	key_kp_plus(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
-	
+	float	scale;
+
+	scale = SCALE;
 	if (p_keydata->modifier == MLX_SHIFT)
-	{
-		ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.i,
-			ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.i) + (SCALE * 1000));
-		ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.j,
-			ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.j) + (SCALE * 1000));
-		ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.k,
-			ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.k) + (SCALE * 1000));
-	}
-	else
-	{
-		ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.i,
-			ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.i) + SCALE);
-		ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.j,
-			ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.j) + SCALE);
-		ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.k,
-			ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.k) + SCALE);
-	}
-	// if (ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.i)
-	// 	> MAX_AXIS)
-	// 	ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.i,
-	// 		MAX_AXIS);
-	// if (ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.j)
-	// 	> MAX_AXIS)
-	// 	ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.j,
-	// 		MAX_AXIS);
-	// if (ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.k)
-	// 	> MAX_AXIS)
-	// 	ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.k,
-	// 		MAX_AXIS);
+		scale *= 1000;
+	ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.i,
+		ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.i) + scale);
+	ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.j,
+		ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.j) + scale);
+	ksx_vec3_resize(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.k,
+		ksx_vec3_mag(&p_grph->world.pp_obj[p_grph->obj_idx]->basis.k) + scale);
 }

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:55:19 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/29 21:49:18 by username         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:59:05 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,14 @@ mlx_t	*ksx_init(void)
 	return (mlx);
 }
 
+// I think this is not needed in MLX42 - (i just think :P)
+// mlx_delete_image (p_grph->mlx, p_grph->img_bg);
+// mlx_delete_image (p_grph->mlx, p_grph->img_ray);
+// mlx_delete_image (p_grph->mlx, p_grph->img_proj);
+// bvh_free_world(&p_grph->world); // To free all BVH resources
 int	graceful_shutdown(t_graphics *p_grph)
 {
-	// I think this is not needed in MLX42 - (i just think :P)
-	// mlx_delete_image (p_grph->mlx, p_grph->img_bg);
-	// mlx_delete_image (p_grph->mlx, p_grph->img_ray);
-	// mlx_delete_image (p_grph->mlx, p_grph->img_proj);
-	bvh_free_world(&p_grph->world); // To free all BVH resources
+	bvh_free_world(&p_grph->world);
 	mlx_close_window(p_grph->mlx);
 	mlx_terminate(p_grph->mlx);
 	free (p_grph->mlx);

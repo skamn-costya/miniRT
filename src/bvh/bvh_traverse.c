@@ -6,14 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 15:10:36 by username          #+#    #+#             */
-/*   Updated: 2025/03/31 21:31:37 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:53:57 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bvh.h"
 
 static void	ray_p_check_tri(t_triangle *p_tri,
-						t_ray *p_ray);
+				t_ray *p_ray);
 
 static void	zero_less_dir(t_vector3 *vec, float *dir)
 {

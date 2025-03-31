@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 22:45:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:53:07 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 #include <stdio.h>
 
 static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
-						t_ray *p_ray);
-static void		ray_txtr_plane(t_plane *p_plane, t_ray *p_ray);
+				t_ray *p_ray);
+static void	ray_txtr_plane(t_plane *p_plane, t_ray *p_ray);
 
 void	ray_p2planes(t_world *p_world, t_ray *p_ray)
 {

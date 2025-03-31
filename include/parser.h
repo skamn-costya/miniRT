@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:13:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/22 07:04:17 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:57:14 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,16 @@ t_list		*create_line_list(int fd);
 // parser02.c
 t_list		*create_obj_list(t_list **pp_line_list);
 t_obj_descr	*create_obj(t_list **pp_line_list, t_list **pp_obj_list);
+t_obj_descr	*par_create_ambient(t_list **pp_line_list,
+				t_list **pp_obj_list, t_fline *p_fline);
+t_obj_descr	*par_create_camera(t_list **pp_line_list,
+				t_list **pp_obj_list, t_fline *p_fline);
+t_obj_descr	*par_create_light(t_list **pp_line_list,
+				t_list **pp_obj_list, t_fline *p_fline);
 
 // parser03.c
+void		create_obj_list01(t_fline *p_fline,
+				t_list **pp_line_list, t_list **pp_obj_list);
 t_obj_descr	*par_create_sphere(t_list **pp_line_list,
 				t_list **pp_obj_list, t_fline *p_fline);
 t_obj_descr	*par_create_plane(t_list **pp_line_list,

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 11:20:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/26 16:28:46 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:21:40 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include "ksx_m4_math.h"
 #include "ksx_basis.h"
 #include "ray.h"
-
 
 void	key_f9(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {

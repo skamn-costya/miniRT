@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/29 13:12:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 23:13:01 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,22 @@ t_object	*ksx_create_cone(t_vector3 center, t_vector3 norm,
 static void	ksx_init_cone_box(t_object *p_object)
 {
 	ksx_box_add_new(&p_object->pp_box);
-	p_object->pp_box[0]->ver[0].op = ksx_vec3_set(p_object->size1, p_object->size2, p_object->size1);
-	p_object->pp_box[0]->ver[1].op = ksx_vec3_set(-p_object->size1, p_object->size2, p_object->size1);
-	p_object->pp_box[0]->ver[2].op = ksx_vec3_set(-p_object->size1, p_object->size2, -p_object->size1);
-	p_object->pp_box[0]->ver[3].op = ksx_vec3_set(p_object->size1, p_object->size2, -p_object->size1);
-	p_object->pp_box[0]->ver[4].op = ksx_vec3_set(p_object->size1, -p_object->size2, p_object->size1);
-	p_object->pp_box[0]->ver[5].op = ksx_vec3_set(-p_object->size1, -p_object->size2, p_object->size1);
-	p_object->pp_box[0]->ver[6].op = ksx_vec3_set(-p_object->size1, -p_object->size2, -p_object->size1);
-	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1, -p_object->size2, -p_object->size1);
+	p_object->pp_box[0]->ver[0].op = ksx_vec3_set(p_object->size1,
+			p_object->size2, p_object->size1);
+	p_object->pp_box[0]->ver[1].op = ksx_vec3_set(-p_object->size1,
+			p_object->size2, p_object->size1);
+	p_object->pp_box[0]->ver[2].op = ksx_vec3_set(-p_object->size1,
+			p_object->size2, -p_object->size1);
+	p_object->pp_box[0]->ver[3].op = ksx_vec3_set(p_object->size1,
+			p_object->size2, -p_object->size1);
+	p_object->pp_box[0]->ver[4].op = ksx_vec3_set(p_object->size1,
+			-p_object->size2, p_object->size1);
+	p_object->pp_box[0]->ver[5].op = ksx_vec3_set(-p_object->size1,
+			-p_object->size2, p_object->size1);
+	p_object->pp_box[0]->ver[6].op = ksx_vec3_set(-p_object->size1,
+			-p_object->size2, -p_object->size1);
+	p_object->pp_box[0]->ver[7].op = ksx_vec3_set(p_object->size1,
+			-p_object->size2, -p_object->size1);
 	ksx_box_triangles(p_object->pp_box[0], p_object);
 }
 
@@ -77,10 +85,10 @@ static void	ksx_init_cone(t_object *p_obj)
 	ksx_obj_add_vnrm(p_obj, (size * 3) + 2);
 	idx = 0;
 	p_obj->pp_vrtx[idx]->op = ksx_vec3_set(0, p_obj->size2, 0);
-	p_obj->pp_vnrm[idx]->op = ksx_vec3_set(0, 1.f , 0);
+	p_obj->pp_vnrm[idx]->op = ksx_vec3_set(0, 1.f, 0);
 	idx++;
 	p_obj->pp_vrtx[idx]->op = ksx_vec3_set(0, -p_obj->size2, 0);
-	p_obj->pp_vnrm[idx]->op = ksx_vec3_set(0, -1.f , 0);
+	p_obj->pp_vnrm[idx]->op = ksx_vec3_set(0, -1.f, 0);
 	idx++;
 	while (idx < size + 2)
 	{
@@ -109,11 +117,13 @@ void	ksx_init_cone_tri(t_object *p_object, uint32_t size)
 		idx[1] = idx[0] + 1;
 		if (idx[1] == size)
 			idx[1] = 0;
-		ksx_tri_set_vertexes(pp_tri[idx[0]], pp_ver_a[idx[0]], pp_ver_a[idx[1]], p_object->pp_vrtx[0]);
+		ksx_tri_set_vertexes(pp_tri[idx[0]], pp_ver_a[idx[0]],
+			pp_ver_a[idx[1]], p_object->pp_vrtx[0]);
 		pp_tri[idx[0]]->p_norm1 = p_object->pp_vnrm[idx[0] + size + 2];
 		pp_tri[idx[0]]->p_norm2 = p_object->pp_vnrm[idx[1] + size + 2];
 		pp_tri[idx[0]]->p_norm3 = p_object->pp_vnrm[idx[1] + size + 2];
-		ksx_tri_set_vertexes(pp_tri[idx[0] + size], pp_ver_a[idx[0]], pp_ver_a[idx[1]], p_object->pp_vrtx[1]);
+		ksx_tri_set_vertexes(pp_tri[idx[0] + size], pp_ver_a[idx[0]],
+			pp_ver_a[idx[1]], p_object->pp_vrtx[1]);
 		pp_tri[idx[0] + size]->p_norm1 = p_object->pp_vnrm[1];
 		pp_tri[idx[0] + size]->p_norm2 = p_object->pp_vnrm[1];
 		pp_tri[idx[0] + size]->p_norm3 = p_object->pp_vnrm[1];
