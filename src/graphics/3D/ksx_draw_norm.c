@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:38:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 17:46:22 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 21:31:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 #include <math.h>
 #include <stdio.h>
 
-inline static t_vector3	ksx_draw_norms_1(t_object *p_object, uint32_t idx);
-inline static t_vector3	ksx_draw_norms_2(t_object *p_object, uint32_t idx);
-inline static t_vector3	ksx_draw_norms_3(t_object *p_object, uint32_t idx);
+static t_vector3	ksx_draw_norms_1(t_object *p_object, uint32_t idx);
+static t_vector3	ksx_draw_norms_2(t_object *p_object, uint32_t idx);
+static t_vector3	ksx_draw_norms_3(t_object *p_object, uint32_t idx);
 
 void	ksx_draw_norms(t_object *p_object,
 		mlx_image_t *p_image, t_camera *p_camera)
@@ -52,7 +52,7 @@ void	ksx_draw_norms(t_object *p_object,
 	}
 }
 
-inline static t_vector3	ksx_draw_norms_1(t_object *p_object, uint32_t idx)
+static t_vector3	ksx_draw_norms_1(t_object *p_object, uint32_t idx)
 {
 	t_vector3	v3;
 
@@ -62,7 +62,7 @@ inline static t_vector3	ksx_draw_norms_1(t_object *p_object, uint32_t idx)
 	return (v3);
 }
 
-inline static t_vector3	ksx_draw_norms_2(t_object *p_object, uint32_t idx)
+static t_vector3	ksx_draw_norms_2(t_object *p_object, uint32_t idx)
 {
 	t_vector3	v3;
 
@@ -72,7 +72,7 @@ inline static t_vector3	ksx_draw_norms_2(t_object *p_object, uint32_t idx)
 	return (v3);
 }
 
-inline static t_vector3	ksx_draw_norms_3(t_object *p_object, uint32_t idx)
+static t_vector3	ksx_draw_norms_3(t_object *p_object, uint32_t idx)
 {
 	t_vector3	v3;
 

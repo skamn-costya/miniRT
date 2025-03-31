@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 13:37:36 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/29 21:24:05 by username         ###   ########.fr       */
+/*   Updated: 2025/03/31 21:31:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-inline static void	ksx_create_object_1(t_object	*p_object);
+static void	ksx_create_object_1(t_object	*p_object);
 
 t_object	*ksx_create_object(t_vector3 *p_center)
 {
@@ -44,7 +44,7 @@ t_object	*ksx_create_object(t_vector3 *p_center)
 	return (p_object);
 }
 
-inline static void	ksx_create_object_1(t_object	*p_object)
+static void	ksx_create_object_1(t_object	*p_object)
 {
 	p_object->color.material.ka = 1.f;
 	p_object->color.material.kd = .2f;

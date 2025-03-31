@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   bvh_traverse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: username <your@email.com>                  +#+  +:+       +#+        */
+/*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 15:10:36 by username          #+#    #+#             */
-/*   Updated: 2025/03/29 22:02:19 by username         ###   ########.fr       */
+/*   Updated: 2025/03/31 21:31:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bvh.h"
 
-inline static void	ray_p_check_tri(t_triangle *p_tri,
+static void	ray_p_check_tri(t_triangle *p_tri,
 						t_ray *p_ray);
 
 static void	zero_less_dir(t_vector3 *vec, float *dir)
@@ -88,7 +88,7 @@ void	intersect_bvh(t_ray *ray, uint32_t idx, t_bvh *bvh, t_world *p_world)
 	}
 }
 
-inline static void	ray_p_check_tri(t_triangle *p_tri,
+static void	ray_p_check_tri(t_triangle *p_tri,
 	t_ray *p_ray)
 {
 	t_vector3	v3;

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 14:18:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:45:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,7 @@ void	ray_txtr_object(t_object *p_object, t_ray *p_ray)
 	else
 		result = ray_uv_debug_color(uv[0], uv[1]);
 	ksx_color_unit_fraction(&result);
-	p_ray->pixel.color.mlx_color = result.mlx_color;
-	p_ray->pixel.color.ur = result.ur;
-	p_ray->pixel.color.ug = result.ug;
-	p_ray->pixel.color.ub = result.ub;
-	p_ray->pixel.color.ua = result.ua;
+	p_ray->pixel.color = result;
 }
 
 t_color	ray_uv_debug_color(float u, float v)

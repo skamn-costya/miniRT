@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 21:14:08 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 21:31:37 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "math.h"
 #include <stdio.h>
 
-static inline void	clamp_color(t_color *p_color)
+static void	clamp_color(t_color *p_color)
 {
 	p_color->ur = fminf(fmaxf(0.f, p_color->ur), 1.f);
 	p_color->ug = fminf(fmaxf(0.f, p_color->ug), 1.f);

@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 18:39:21 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:45:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include "math.h"
 #include <stdio.h>
 
-inline static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
+static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
 						t_ray *p_ray);
 static void		ray_txtr_plane(t_plane *p_plane, t_ray *p_ray);
 
@@ -50,7 +50,7 @@ void	ray_p2pln(t_plane *p_plane, t_ray *p_ray)
 		ray_p_check_plane (p_plane, &v3[1], p_ray);
 }
 
-inline static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
+static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
 	t_ray *p_ray)
 {
 	if (p_ray->length < p_ray->min_length)
@@ -71,10 +71,6 @@ static void	ray_txtr_plane(t_plane *p_plane, t_ray *p_ray)
 	float		uv[2];
 	t_color		result;
 
-	p_plane->color.material.ka = 1.f;
-	p_plane->color.material.kd = .64f;
-	p_plane->color.material.ks = .5f;
-	p_plane->color.material.ns = 3.f;
 	ray_txtr_uv_plan(&p_ray->point.cp, &uv[0], &uv[1], p_plane);
 	if (p_ray->pixel.color.b < MAX_TXTR - 1)
 	{
@@ -87,9 +83,5 @@ static void	ray_txtr_plane(t_plane *p_plane, t_ray *p_ray)
 	else
 		result = ray_uv_debug_color(uv[0], uv[1]);
 	ksx_color_unit_fraction(&result);
-	p_ray->pixel.color.mlx_color = result.mlx_color;
-	p_ray->pixel.color.ur = result.ur;
-	p_ray->pixel.color.ug = result.ug;
-	p_ray->pixel.color.ub = result.ub;
-	p_ray->pixel.color.ua = result.ua;
+	p_ray->pixel.color = result;
 }

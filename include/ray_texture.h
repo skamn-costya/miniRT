@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:45:28 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 14:05:52 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 22:01:41 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include "ksx_graphics.h"
 # include "ray.h"
 
-#define	MAX_TXTR	9
+#define	MAX_TXTR	10
 
 # define PI_1	0.31830988618379069
 # define PI_12	0.15915494309189535
