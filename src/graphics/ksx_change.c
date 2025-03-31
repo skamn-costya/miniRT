@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 17:27:51 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 19:14:41 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,5 @@ inline static void	ksx_change_camera_plane(t_graphics *p_grph)
 			&p_plane->basis.c_o);
 		p_plane->norm.cp = ksx_m4_vec3(&p_grph->camera.vm, &p_plane->norm.wp);
 		p_plane->norm.cp = ksx_vec3_unit(&p_plane->norm.cp);
-		ksx_basis_set_norm(&p_plane->basis, &p_plane->norm.cp);
 	}
 }
