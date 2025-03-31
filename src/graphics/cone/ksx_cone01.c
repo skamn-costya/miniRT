@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 23:55:12 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 23:13:01 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 00:43:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_object	*ksx_create_cone(t_vector3 center, t_vector3 norm,
 		return (NULL);
 	p_object->color.mlx_color = color.mlx_color;
 	ksx_color_unit_fraction(&p_object->color);
+	p_object->ray_txtr_uv = &ray_txtr_uv_cylinder;
 	p_object->size1 = dia_ht[0] * .5f;
 	p_object->size2 = dia_ht[1] * .5f;
 	norm = ksx_vec3_unit(&norm);
