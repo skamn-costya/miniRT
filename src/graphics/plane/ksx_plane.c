@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 00:04:22 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:02:03 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,28 +66,16 @@ t_plane	**ksx_pln2world(t_plane *p_plane, t_world *p_world)
 
 static void	ksx_plane_texture(t_plane *p_plane, t_world *p_world)
 {
-
+	if (!p_world->pp_txtr)
+		return;
 	if (p_plane->color.r == 0 && p_plane->color.g == 0)
 	{
-		if (p_plane->color.b == 1)
-			p_plane->p_texture = ray_txtr_load(p_world, "./textures/2k_sun.png",
-				"./textures/sunbump.png");
-		else if (p_plane->color.b == 2)
-			p_plane->p_texture = ray_txtr_load(p_world, "./textures/earthmap1k.png",
-				"./textures/earthbump1k.png");
-		else if (p_plane->color.b == 3)
-			p_plane->p_texture = ray_txtr_load(p_world, "./textures/moonmap4k.png",
-				"./textures/moonbump4k.png");
-		else if (p_plane->color.b == 4)
-			p_plane->p_texture = ray_txtr_load(p_world, "./textures/plutomap2k.png",
-				"./textures/plutobump2k.png");
-		else if (p_plane->color.b == 5)
-			p_plane->p_texture = ray_txtr_load(p_world, "./textures/marble_map.png",
-				"./textures/marble_bump.png");
-		else if (p_plane->color.b == 8)
-			p_plane->p_texture = (t_texture *)8;
-		else if (p_plane->color.b == 9)
-			p_plane->p_texture = (t_texture *)9;
+		if (p_plane->color.b < MAX_TXTR - 1)
+			p_plane->p_texture = p_world->pp_txtr[p_plane->color.b - 1];
+		if (p_plane->color.b == MAX_TXTR - 1)
+			p_plane->p_texture = (t_texture *)MAX_TXTR - 1;
+		else if (p_plane->color.b == MAX_TXTR)
+			p_plane->p_texture = (t_texture *)MAX_TXTR;
 	}
 }
 

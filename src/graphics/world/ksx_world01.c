@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/23 14:11:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:05:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ static void	ksx_set_world_defaults(t_graphics *p_grph)
 	p_grph->world.pp_pln = NULL;
 	p_grph->world.size_pln = 0;
 	p_grph->world.pp_txtr = NULL;
+	ray_txtr_files_load(&p_grph->world);
 	p_grph->world.p_camera = &p_grph->camera;
 }
 

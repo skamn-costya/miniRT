@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 01:15:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:40:20 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@
 #include "math.h"
 #include <stdio.h>
 
-inline static void	ray_p2pln01(t_plane *p_plane, t_ray *p_ray);
+inline static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
+						t_ray *p_ray);
+static void		ray_txtr_plane(t_plane *p_plane, t_ray *p_ray);
 
 void	ray_p2planes(t_world *p_world, t_ray *p_ray)
 {
@@ -45,21 +47,27 @@ void	ray_p2pln(t_plane *p_plane, t_ray *p_ray)
 	v3[2] = ksx_vec3_sub(&v3[1], &p_ray->origin);
 	p_ray->length = ksx_vec3_mag(&v3[2]);
 	if (p_ray->length > EPSILON && p_ray->length < p_ray->min_length)
+		ray_p_check_plane (p_plane, &v3[1], p_ray);
+}
+
+inline static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
+	t_ray *p_ray)
+{
+	if (p_ray->length < p_ray->min_length)
 	{
-		p_ray->length = f[1];
 		p_ray->min_length = p_ray->length;
-		p_ray->point.cp = v3[1];
-		p_ray->pixel.color = p_plane->color;
-		ray_p2pln01(p_plane, p_ray);
+		p_ray->point.cp = *p_point;
 		p_ray->p_tri = NULL;
 		p_ray->p_pln = p_plane;
 		p_ray->norm = p_plane->norm.cp;
+		p_ray->pixel.color = p_plane->color;
+		if (p_plane->p_texture)
+			ray_txtr_plane(p_plane, p_ray);
 	}
 }
 
-inline static void	ray_p2pln01(t_plane *p_plane, t_ray *p_ray)
+static void	ray_txtr_plane(t_plane *p_plane, t_ray *p_ray)
 {
-	t_vector3	v3;
 	float		uv[2];
 	t_color		result;
 
@@ -67,13 +75,16 @@ inline static void	ray_p2pln01(t_plane *p_plane, t_ray *p_ray)
 	p_plane->color.material.kd = .64f;
 	p_plane->color.material.ks = .5f;
 	p_plane->color.material.ns = 3.f;
-	v3 = p_ray->point.op;
-	ray_txtr_uv_plan(&v3, &uv[0], &uv[1], p_plane);
-	if (p_plane->p_texture && p_ray->pixel.color.b < 8)
+	ray_txtr_uv_plan(&p_ray->point.op, &uv[0], &uv[1], p_plane);
+	if (p_ray->pixel.color.b < MAX_TXTR - 1)
+	{
 		result = ray_txtr_sample(p_plane->p_texture, uv[0], uv[1]);
-	else if (p_plane->p_texture && p_ray->pixel.color.b == 8)
+		p_ray->norm = ray_bump_object(&p_ray->norm,
+				p_plane->p_texture, uv[0], uv[1]);
+	}
+	else if (p_ray->pixel.color.b == MAX_TXTR - 1)
 		result = ray_uv_checker(uv[0], uv[1], 20);
-	else if (p_plane->p_texture)
+	else
 		result = ray_uv_debug_color(uv[0], uv[1]);
 	ksx_color_unit_fraction(&result);
 	p_ray->pixel.color.mlx_color = result.mlx_color;
@@ -81,7 +92,4 @@ inline static void	ray_p2pln01(t_plane *p_plane, t_ray *p_ray)
 	p_ray->pixel.color.ug = result.ug;
 	p_ray->pixel.color.ub = result.ub;
 	p_ray->pixel.color.ua = result.ua;
-	if (p_plane->p_texture && p_plane->p_texture->p_bumpdata)
-		p_ray->norm = ray_bump_object(&p_ray->norm,
-				p_plane->p_texture, uv[0], uv[1]);
 }

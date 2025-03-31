@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:57:57 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 14:51:15 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:01:49 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -467,6 +467,7 @@ typedef struct s_texture
 	char			*name;
 	mlx_texture_t	*p_mapdata;
 	mlx_texture_t	*p_bumpdata;
+	t_color			color;
 }	t_texture;
 
 typedef struct s_plane
@@ -474,6 +475,7 @@ typedef struct s_plane
 	t_vertex	point;
 	t_vertex	norm;
 	t_color		color;
+	t_basis		basis;
 	t_texture	*p_texture;
 }	t_plane;
 

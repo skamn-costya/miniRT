@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 17:00:00 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 16:47:21 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ksx_change(t_graphics *p_grph)
 	t_object	*p_object;
 	int32_t		idx;
 
-	if (!p_grph->world.pp_obj)
+	if (!p_grph->world.pp_obj && !p_grph->world.pp_pln)
 		return ;
 	pp_object = p_grph->world.pp_obj;
 	idx = 0;
@@ -62,7 +62,7 @@ void	ksx_change_world(t_graphics *p_grph)
 	t_object	*p_object;
 	int32_t		idx;
 
-	if (!p_grph->world.pp_obj)
+	if (!p_grph->world.pp_obj && !p_grph->world.pp_pln)
 		return ;
 	pp_object = p_grph->world.pp_obj;
 	idx = 0;
@@ -84,7 +84,7 @@ void	ksx_change_camera(t_graphics *p_grph)
 
 	ksx_camera_set_vm(&p_grph->camera);
 	ksx_camera_refresh_pm(p_grph, p_grph->camera.fov);
-	if (!p_grph->world.pp_obj)
+	if (!p_grph->world.pp_obj && !p_grph->world.pp_pln)
 		return ;
 	idx = -1;
 	while (++idx < p_grph->world.size_obj)

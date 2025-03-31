@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 20:00:09 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:05:47 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@
 #include "libft.h"
 #include <stdio.h>
 #include <math.h>
+
+void	ray_txtr_files_load(t_world *p_world)
+{
+	ray_txtr_load(p_world, "./textures/2k_sun.png", "./textures/sunbump.png");
+	ray_txtr_load(p_world, "./textures/earthmap1k.png", "./textures/earthbump1k.png");
+	ray_txtr_load(p_world, "./textures/moonmap4k.png", "./textures/moonbump4k.png");
+	ray_txtr_load(p_world, "./textures/plutomap2k.png", "./textures/plutobump2k.png");
+	ray_txtr_load(p_world, "./textures/marble_map.png", "./textures/marble_bump.png");
+	ray_txtr_load(p_world, "./textures/SQ_map.png", "./textures/SQ_bump.png");
+	ray_txtr_load(p_world, "./textures/BR_map.png", "./textures/BR_bump.png");
+	ray_txtr_load(p_world, "./textures/SW_map.png", "./textures/SW_bump.png");
+}
 
 t_texture	*ray_txtr_load(t_world *p_world, char *p_mapname, char *p_bumpname)
 {

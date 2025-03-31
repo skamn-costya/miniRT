@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/30 23:16:32 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:01:36 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,16 @@ t_object	**ksx_obj2world(t_object *p_object, t_world *p_world)
 
 static void	ksx_obj_texture(t_object *p_object, t_world *p_world)
 {
-
+	if (!p_world->pp_txtr)
+		return;
 	if (p_object->color.r == 0 && p_object->color.g == 0)
 	{
-		if (p_object->color.b == 1)
-			p_object->p_texture = ray_txtr_load(p_world, "./textures/2k_sun.png",
-				"./textures/sunbump.png");
-		else if (p_object->color.b == 2)
-			p_object->p_texture = ray_txtr_load(p_world, "./textures/earthmap1k.png",
-				"./textures/earthbump1k.png");
-		else if (p_object->color.b == 3)
-			p_object->p_texture = ray_txtr_load(p_world, "./textures/moonmap4k.png",
-				"./textures/moonbump4k.png");
-		else if (p_object->color.b == 4)
-			p_object->p_texture = ray_txtr_load(p_world, "./textures/plutomap2k.png",
-				"./textures/plutobump2k.png");
-		else if (p_object->color.b == 5)
-			p_object->p_texture = ray_txtr_load(p_world, "./textures/marble_map.png",
-				"./textures/marble_bump.png");
-		else if (p_object->color.b == 8)
-			p_object->p_texture = (t_texture *)8;
-		else if (p_object->color.b == 9)
-			p_object->p_texture = (t_texture *)9;
+		if (p_object->color.b < MAX_TXTR - 1)
+			p_object->p_texture = p_world->pp_txtr[p_object->color.b - 1];
+		if (p_object->color.b == MAX_TXTR - 1)
+			p_object->p_texture = (t_texture *)MAX_TXTR - 1;
+		else if (p_object->color.b == MAX_TXTR)
+			p_object->p_texture = (t_texture *)MAX_TXTR;
 	}
 }
 

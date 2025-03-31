@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:45:28 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/30 23:49:13 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 14:05:52 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,12 @@
 # include "ksx_graphics.h"
 # include "ray.h"
 
+#define	MAX_TXTR	9
+
 # define PI_1	0.31830988618379069
 # define PI_12	0.15915494309189535
 
+void		ray_txtr_files_load(t_world *p_world);
 t_texture	*ray_txtr_load(t_world *p_world, char *p_mapname, char *p_bumpname);
 
 void		ray_txtr_uv_plan(t_vector3 *p_point, float *p_u, float *p_v,
