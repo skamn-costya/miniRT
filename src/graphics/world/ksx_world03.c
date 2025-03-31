@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 21:44:09 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 14:45:51 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/30 23:16:32 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,12 @@ static void	ksx_obj_texture(t_object *p_object, t_world *p_world)
 			p_object->p_texture = ray_txtr_load(p_world, "./textures/plutomap2k.png",
 				"./textures/plutobump2k.png");
 		else if (p_object->color.b == 5)
-			p_object->p_texture = (t_texture *)5;
-		else if (p_object->color.b == 6)
-			p_object->p_texture = (t_texture *)6;
+			p_object->p_texture = ray_txtr_load(p_world, "./textures/marble_map.png",
+				"./textures/marble_bump.png");
+		else if (p_object->color.b == 8)
+			p_object->p_texture = (t_texture *)8;
+		else if (p_object->color.b == 9)
+			p_object->p_texture = (t_texture *)9;
 	}
 }
 

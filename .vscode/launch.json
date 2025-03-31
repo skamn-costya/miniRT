@@ -9,8 +9,9 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceRoot}/minirt",
+			"args": ["./files.rt/room_txtr.rt"],
 			// "args": ["./files.rt/room.rt"],
-			"args": ["./files.rt/example.rt"],
+			// "args": ["./files.rt/example.rt"],
 			// "args": ["./files.rt/temple_m.rt"],
 			// "args": ["./files.rt/temple_m2.rt"],
 			// "args": ["./files.rt/cylinder.rt"],
@@ -54,7 +55,7 @@
 				}
 			],
 			// "preLaunchTask": "C/C++: gcc build subproject",
-			// "preLaunchTask":"make project",
+			"preLaunchTask":"make project",
 			"miDebuggerPath": "/usr/bin/gdb"
 		}
 	]

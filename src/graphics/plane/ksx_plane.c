@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/21 10:44:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 00:04:22 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 #include "ksx_basis.h"
 #include "ksx_utils.h"
 #include "ksx_vec3_math.h"
+#include "ray_texture.h"
 #include <stdlib.h>
+
+static void	ksx_plane_texture(t_plane *p_plane, t_world *p_world);
 
 t_plane	*ksx_create_plane(t_vector3 point, t_vector3 norm, t_color color)
 {
@@ -57,7 +60,35 @@ t_plane	**ksx_pln2world(t_plane *p_plane, t_world *p_world)
 	p_world->size_pln++;
 	free (p_world->pp_pln);
 	p_world->pp_pln = pp_plane;
+	ksx_plane_texture(p_plane, p_world);
 	return (pp_plane);
+}
+
+static void	ksx_plane_texture(t_plane *p_plane, t_world *p_world)
+{
+
+	if (p_plane->color.r == 0 && p_plane->color.g == 0)
+	{
+		if (p_plane->color.b == 1)
+			p_plane->p_texture = ray_txtr_load(p_world, "./textures/2k_sun.png",
+				"./textures/sunbump.png");
+		else if (p_plane->color.b == 2)
+			p_plane->p_texture = ray_txtr_load(p_world, "./textures/earthmap1k.png",
+				"./textures/earthbump1k.png");
+		else if (p_plane->color.b == 3)
+			p_plane->p_texture = ray_txtr_load(p_world, "./textures/moonmap4k.png",
+				"./textures/moonbump4k.png");
+		else if (p_plane->color.b == 4)
+			p_plane->p_texture = ray_txtr_load(p_world, "./textures/plutomap2k.png",
+				"./textures/plutobump2k.png");
+		else if (p_plane->color.b == 5)
+			p_plane->p_texture = ray_txtr_load(p_world, "./textures/marble_map.png",
+				"./textures/marble_bump.png");
+		else if (p_plane->color.b == 8)
+			p_plane->p_texture = (t_texture *)8;
+		else if (p_plane->color.b == 9)
+			p_plane->p_texture = (t_texture *)9;
+	}
 }
 
 // А(х-a) + В(y-b) + C(z-c)=0 

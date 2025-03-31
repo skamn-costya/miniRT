@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:45:28 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 16:29:04 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/30 23:49:13 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 
 t_texture	*ray_txtr_load(t_world *p_world, char *p_mapname, char *p_bumpname);
 
-void		ray_txtr_uv_plan(t_vector3 *p_point, float *p_u, float *p_v);
+void		ray_txtr_uv_plan(t_vector3 *p_point, float *p_u, float *p_v,
+				t_plane *p_plane);
 void		ray_txtr_uv_spheres(t_vector3 *p_point, float *p_u, float *p_v);
 void		ray_txtr_uv_cylinder(t_vector3 *p_point, float *p_u, float *p_v);
 t_color		ray_txtr_sample(t_texture *p_txtr, float u, float v);
