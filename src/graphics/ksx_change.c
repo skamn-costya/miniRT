@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 20:23:41 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 16:47:21 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:27:51 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 #include "ksx_camera.h"
 #include <math.h>
 #include <stdio.h>
+
+inline static void	ksx_change_camera_plane(t_graphics *p_grph);
 
 void	ksx_change(t_graphics *p_grph)
 {
@@ -79,7 +81,6 @@ void	ksx_change_world(t_graphics *p_grph)
 
 void	ksx_change_camera(t_graphics *p_grph)
 {
-	t_plane		*p_plane;
 	int32_t		idx;
 
 	ksx_camera_set_vm(&p_grph->camera);
@@ -89,18 +90,27 @@ void	ksx_change_camera(t_graphics *p_grph)
 	idx = -1;
 	while (++idx < p_grph->world.size_obj)
 		ksx_camera_obj_vm (p_grph->world.pp_obj[idx], &p_grph->camera.vm);
-	idx = -1;
-	while (++idx < p_grph->world.size_pln)
-	{
-		p_plane = p_grph->world.pp_pln [idx];
-		ksx_transform(&p_plane->point.wp, &p_grph->camera.vm,
-			&p_plane->point.cp);
-		p_plane->norm.cp = ksx_m4_vec3(&p_grph->camera.vm, &p_plane->norm.wp);
-		p_plane->norm.cp = ksx_vec3_unit(&p_plane->norm.cp);
-	}
+	ksx_change_camera_plane(p_grph);
 	idx = -1;
 	while (++idx < p_grph->world.size_lgt)
 		ksx_transform(&p_grph->world.pp_lgt[idx]->point.wp, &p_grph->camera.vm,
 			&p_grph->world.pp_lgt[idx]->point.cp);
 	p_grph->camera.flags &= ~CHANGE;
+}
+
+inline static void	ksx_change_camera_plane(t_graphics *p_grph)
+{
+	t_plane		*p_plane;
+	int32_t		idx;
+
+	idx = -1;
+	while (++idx < p_grph->world.size_pln)
+	{
+		p_plane = p_grph->world.pp_pln [idx];
+		ksx_transform(&p_plane->basis.w_o, &p_grph->camera.vm,
+			&p_plane->basis.c_o);
+		p_plane->norm.cp = ksx_m4_vec3(&p_grph->camera.vm, &p_plane->norm.wp);
+		p_plane->norm.cp = ksx_vec3_unit(&p_plane->norm.cp);
+		ksx_basis_set_norm(&p_plane->basis, &p_plane->norm.cp);
+	}
 }

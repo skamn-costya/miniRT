@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 01:44:06 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 18:48:27 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,22 @@
 void	ray_txtr_uv_plan(t_vector3 *p_point, float *p_u, float *p_v,
 			t_plane *p_plane)
 {
-	t_vector3 vec3[3];
+	t_vector3	vec3;
+	float		u_local;
+	float		v_local;
 
-    // Choose a reference vector that is not parallel to the plane's normal.
-    // If the normal is nearly vertical (e.g., (0,0,1) or (0,0,-1)), choose (1, 0, 0).
-    if (fabs(p_plane->norm.cp.z) > 0.999f)
-        vec3[0] = ksx_vec3_set(1, 0, 0);
-    else
-        vec3[0] = ksx_vec3_set(0, 0, 1);
-
-    // Now compute tangent by crossing the normal with the reference vector.
-    vec3[0] = ksx_vec3_cross(&p_plane->norm.cp, &vec3[0]);
-    vec3[0] = ksx_vec3_unit(&vec3[0]);
-
-    // Compute bitangent.
-    vec3[1] = ksx_vec3_cross(&p_plane->norm.cp, &vec3[0]);
-    vec3[1] = ksx_vec3_unit(&vec3[1]);
-
-    // Compute the local offset vector from the plane's reference point.
-    vec3[2] = ksx_vec3_sub(p_point, &p_plane->point.cp);
-
-    // Project the offset vector onto the tangent and bitangent.
-    *p_u = ksx_vec3_dot(&vec3[2], &vec3[0]);
-    *p_v = ksx_vec3_dot(&vec3[2], &vec3[1]);
+	vec3 = ksx_vec3_sdiv(p_point, 10);
+	vec3 = ksx_vec3_sub(&vec3, &p_plane->basis.c_o);
+	u_local = ksx_vec3_dot(&vec3, &p_plane->basis.i);
+	v_local = ksx_vec3_dot(&vec3, &p_plane->basis.k);
+	u_local = u_local - (int32_t)u_local;
+	v_local = v_local - (int32_t)v_local;
+	if (u_local < 0)
+		u_local += 1;
+	if (v_local < 0)
+		v_local += 1;
+	*p_u = u_local;
+    *p_v = v_local;
 }
 
 // /= .85f;  // Scale UV -> [0, 1]

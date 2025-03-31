@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 14:40:20 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 18:39:21 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ray_p2pln(t_plane *p_plane, t_ray *p_ray)
 	f[0] = ksx_vec3_dot(&p_ray->direction, &p_plane->norm.cp);
 	if (fabsf(f[0]) < EPSILON)
 		return ;
-	v3[0] = ksx_vec3_sub(&p_plane->point.cp, &p_ray->origin);
+	v3[0] = ksx_vec3_sub(&p_plane->basis.c_o, &p_ray->origin);
 	f[1] = ksx_vec3_dot(&v3[0], &p_plane->norm.cp) / f[0];
 	if (f[1] < 0)
 		return ;
@@ -75,7 +75,7 @@ static void	ray_txtr_plane(t_plane *p_plane, t_ray *p_ray)
 	p_plane->color.material.kd = .64f;
 	p_plane->color.material.ks = .5f;
 	p_plane->color.material.ns = 3.f;
-	ray_txtr_uv_plan(&p_ray->point.op, &uv[0], &uv[1], p_plane);
+	ray_txtr_uv_plan(&p_ray->point.cp, &uv[0], &uv[1], p_plane);
 	if (p_ray->pixel.color.b < MAX_TXTR - 1)
 	{
 		result = ray_txtr_sample(p_plane->p_texture, uv[0], uv[1]);
@@ -83,7 +83,7 @@ static void	ray_txtr_plane(t_plane *p_plane, t_ray *p_ray)
 				p_plane->p_texture, uv[0], uv[1]);
 	}
 	else if (p_ray->pixel.color.b == MAX_TXTR - 1)
-		result = ray_uv_checker(uv[0], uv[1], 20);
+		result = ray_uv_checker(uv[0], uv[1], 4);
 	else
 		result = ray_uv_debug_color(uv[0], uv[1]);
 	ksx_color_unit_fraction(&result);

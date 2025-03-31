@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:13:24 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 14:02:03 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/03/31 17:27:39 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "ksx_utils.h"
 #include "ksx_vec3_math.h"
 #include "ray_texture.h"
+#include "ksx_basis.h"
 #include <stdlib.h>
 
 static void	ksx_plane_texture(t_plane *p_plane, t_world *p_world);
@@ -26,8 +27,9 @@ t_plane	*ksx_create_plane(t_vector3 point, t_vector3 norm, t_color color)
 	p_plane = (t_plane *) malloc(sizeof(t_plane));
 	if (!p_plane)
 		ksx_error("memory allocation failure", __FILE__, __LINE__);
-	p_plane->point.wp = point;
 	p_plane->norm.wp = ksx_vec3_unit(&norm);
+	p_plane->basis.w_o = point;
+	ksx_basis_set_norm(&p_plane->basis, &p_plane->norm.wp);
 	p_plane->color = color;
 	ksx_color_unit_fraction(&p_plane->color);
 	p_plane->color.material.ka = 1.f;
