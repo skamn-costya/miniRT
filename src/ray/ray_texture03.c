@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/04/01 13:05:35 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:11:10 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,12 @@
 #include <stdio.h>
 #include <math.h>
 
-void	ray_txtr_object(t_object *p_object, t_ray *p_ray)
+void	ray_txtr_object(const t_object *p_object, t_ray *p_ray)
 {
 	t_vector3	v3;
 	float		uv[2];
 	t_color		result;
 
-	p_object->color.material.ka = 1.f;
-	p_object->color.material.kd = .64f;
-	p_object->color.material.ks = .5f;
-	p_object->color.material.ns = 3.f;
 	v3 = p_ray->point.op;
 	p_object->ray_txtr_uv(&v3, &uv[0], &uv[1]);
 	if (p_ray->pixel.color.b < MAX_TXTR - 1)

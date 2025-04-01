@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 16:57:45 by username          #+#    #+#             */
-/*   Updated: 2025/03/28 21:14:42 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:27:23 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,11 @@ typedef struct s_ray
 
 typedef struct s_thrddata
 {
-	t_graphics	*p_grph;
-	int32_t		start;
-	int32_t		finish;
-	int8_t		flags;
+	t_graphics		*p_grph;
+	int32_t			start;
+	int32_t			finish;
+	int8_t			flags;
+	pthread_mutex_t	mutex;
 }	t_thrddata;
 
 typedef struct s_mondata

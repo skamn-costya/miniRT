@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/27 00:44:16 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:31:08 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,18 @@ void	*ksx_ray_thrd_mon(void *p_data)
 		count = 0;
 		while (idx < THREADS)
 		{
+			pthread_mutex_lock(&p_mondata->p_thrddata[idx].mutex);
 			if (p_mondata->p_thrddata[idx].flags & F_TH_FINISH)
 				count++;
+			pthread_mutex_unlock(&p_mondata->p_thrddata[idx].mutex);
 			idx++;
 		}
 		if (count == THREADS)
 			return (p_data);
 	}
+	idx = -1;
+	while (++idx < THREADS)
+		pthread_mutex_destroy(&p_mondata->p_thrddata[idx].mutex);
 	return (p_data);
 }
 

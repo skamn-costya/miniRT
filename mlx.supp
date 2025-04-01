@@ -41,7 +41,7 @@
 	obj:*/libglfw.so.*
 }
 {
-	ignore_libglfw_leaks
+	ignore_libX11_leaks
     Memcheck:Leak
 	match-leak-kinds:all
 	...

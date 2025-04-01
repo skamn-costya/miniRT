@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/04/01 14:38:59 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:32:09 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,20 @@ void	ray_cast(t_graphics *p_grph)
 
 #else 
 
-void	*ksx_ray_thrd(void *p_data);
+void		*ksx_ray_thrd(void *p_data);
+
+inline static void	ksx_ray_thrd_(int32_t idx[], t_thrddata *p_thrddata,
+	pthread_t *p_pthrd)
+{
+	p_thrddata->start = idx[0] * idx[1];
+	p_thrddata->finish = idx[0] * idx[1] + idx[1];
+	pthread_mutex_init(&p_thrddata->mutex, NULL);
+	pthread_mutex_lock(&p_thrddata->mutex);
+	p_thrddata->flags |= F_TH_START;
+	pthread_mutex_unlock(&p_thrddata->mutex);
+	pthread_create(p_pthrd, NULL, &ksx_ray_thrd, p_thrddata);
+	pthread_detach(*p_pthrd);
+}
 
 void	ray_cast(t_graphics *p_grph)
 {
@@ -63,19 +76,15 @@ void	ray_cast(t_graphics *p_grph)
 	bvh_build_world(p_grph);
 	ksx_time_print("Ray tracing start");
 	ksx_ray_thrd_init(&mondata, thrddata, p_grph);
-	pthread_create(&pthrd[THREADS], NULL, &ksx_ray_thrd_mon,
-		&mondata);
+	
 	mlx_delete_image(p_grph->mlx, p_grph->img_ray);
 	p_grph->img_ray = ksx_create_image(p_grph->mlx, TRANSPARENT);
 	idx[0] = -1;
 	idx[1] = p_grph->img_proj->width * p_grph->img_proj->height / THREADS;
 	while (++idx[0] < THREADS)
-	{
-		thrddata[idx[0]].start = idx[0] * idx[1];
-		thrddata[idx[0]].finish = idx[0] * idx[1] + idx[1];
-		pthread_create(&pthrd[idx[0]], NULL, &ksx_ray_thrd, &thrddata[idx[0]]);
-		pthread_detach(pthrd[idx[0]]);
-	}
+		ksx_ray_thrd_(idx, &thrddata[idx[0]], &pthrd[idx[0]]);
+	pthread_create(&pthrd[THREADS], NULL, &ksx_ray_thrd_mon,
+		&mondata);
 	pthread_join(pthrd[THREADS], NULL);
 	ksx_time_print("Ray tracing finish");
 	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
@@ -89,7 +98,6 @@ void	*ksx_ray_thrd(void *p_data)
 
 	p_thrddata = (t_thrddata *)p_data;
 	idx = p_thrddata->start;
-	p_thrddata->flags |= F_TH_START;
 	while (idx < p_thrddata->finish)
 	{
 		ray = ray_generate(idx % p_thrddata->p_grph->img_proj->width, idx
@@ -104,7 +112,9 @@ void	*ksx_ray_thrd(void *p_data)
 		}
 		idx++;
 	}
+	pthread_mutex_lock(&p_thrddata->mutex);
 	p_thrddata->flags |= F_TH_FINISH;
+	pthread_mutex_unlock(&p_thrddata->mutex);
 	return (p_data);
 }
 

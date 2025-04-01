@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:45:28 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 22:49:48 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:10:21 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_color		ray_txtr_sample(t_texture *p_txtr, float u, float v);
 float		ray_bump_sample(t_texture *p_txtr, float u, float v);
 void		ray_txtr_free_data(void *p_txtr);
 
-void		ray_txtr_object(t_object *p_object, t_ray *p_ray);
+void		ray_txtr_object(const t_object *p_object, t_ray *p_ray);
 t_vector3	ray_bump_object(t_vector3 *p_normal, t_texture *p_txtr,
 				float u, float v);
 // t_color		ray_txtr_object(t_object *p_object, t_vector3 *p_point,
