@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/29 22:05:49 by username         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:59:25 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ int	main(int argc, char *argv[])
 	t_list		*p_list;
 
 	if (argc != 2)
-		return (printf("Incorrect number of arguments.\n"), EXIT_SUCCESS);
+		return (ksx_print_error("Incorrect number of arguments."),
+			EXIT_SUCCESS);
 	p_list = check_file(argv[1]);
 	if (!p_list)
-		return (printf("Incorrect the scene file.\n"), EXIT_SUCCESS);
+		return (ksx_print_error("Incorrect the scene file."), EXIT_SUCCESS);
 	garbage_collector((void **) &p_list);
 	ksx_init_grph(&grph, &garbage_collector);
 	ksx_init_world(&grph, p_list);

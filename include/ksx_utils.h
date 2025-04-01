@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:22:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/28 14:52:55 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:43:17 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,6 @@ void		ksx_print_vector(t_vector3 *p_vec);
 void		ksx_print_vertex(t_vertex *p_ver, int32_t idx);
 void		ksx_print_tri(t_triangle *p_tri, int32_t idx);
 void		ksx_print_basis(t_basis *p_basis);
+void		ksx_print_error(char *str);
 
 #endif	// KSX_UTILS_H //

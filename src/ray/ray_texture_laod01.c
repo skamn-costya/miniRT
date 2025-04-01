@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/04/01 00:48:19 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:20:00 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ static void	ray_txtr_file00_load(t_world *p_world)
 	ray_txtr_load(p_world, "./textures/2k_sun.png", NULL);
 	if (p_world->pp_txtr && p_world->pp_txtr[idx])
 	{
-		p_world->pp_txtr[idx]->color.material.ka = 1.f;
-		p_world->pp_txtr[idx]->color.material.kd = 1.f;
+		p_world->pp_txtr[idx]->color.material.ka = 5.f;
+		p_world->pp_txtr[idx]->color.material.kd = 0.f;
 		p_world->pp_txtr[idx]->color.material.ks = 0.f;
 		p_world->pp_txtr[idx]->color.material.ns = 0.f;
 	}

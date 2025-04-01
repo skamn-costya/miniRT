@@ -6,13 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 23:06:35 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:57:34 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ksx_graphics.h"
 #include "ksx_utils.h"
 #include "ksx_vec3_math.h"
+#include "ANSI_color_codes.h"
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -56,4 +57,10 @@ void	ksx_print_basis(t_basis *p_basis)
 	ksx_print_vector(&p_basis->k);
 	printf("w_o: ");
 	ksx_print_vector(&p_basis->w_o);
+}
+
+void	ksx_print_error(char *str)
+{
+	printf("%sError%s\n", RED, RESET);
+	printf("%s\n", str);
 }

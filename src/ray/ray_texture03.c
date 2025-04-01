@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 22:45:32 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:05:35 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ t_color	ray_uv_debug_color(float u, float v)
 	color.g = (uint8_t)(v * 255);
 	color.b = (uint8_t)((1 - v) * 255);
 	color.a = 255;
+	color.material.ka = 1.f;
+	color.material.kd = .6f;
+	color.material.ks = .4f;
+	color.material.ns = 512.f;
 	return (color);
 }
 
@@ -67,6 +71,10 @@ t_color	ray_uv_checker(float u, float v, int scale)
 	int		x;
 	int		y;
 
+	color.material.ka = 1.f;
+	color.material.kd = .6f;
+	color.material.ks = .6f;
+	color.material.ns = 1024.f;
 	x = (int)(u * scale) % 2;
 	y = (int)(v / 2.f * scale) % 2;
 	if (x == y)

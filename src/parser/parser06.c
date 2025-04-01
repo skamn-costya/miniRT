@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser05.c                                         :+:      :+:    :+:   */
+/*   parser06.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/25 00:02:29 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/04 13:58:53 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:52:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minirt.h"
 #include "parser.h"
+#include "ksx_utils.h"
 #include <stdio.h>
 
 char	*comma_trim(char *str)
@@ -51,8 +52,7 @@ void	free_t_obj_descr(void *p_obj_descr)
 
 void	parser_crash_exit(t_list **pp_line_list, t_list **pp_obj_list)
 {
-	printf("\033[0;31mError:\033[0m\n\tWrong file format or ");
-	printf("Memory allocation failed\n\tExit from the process\n");
+	ksx_print_error("Wrong file format or memory allocation failed.");
 	if (pp_line_list)
 		ft_lstclear(pp_line_list, &free_t_fline);
 	if (pp_obj_list)

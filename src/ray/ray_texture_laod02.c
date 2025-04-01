@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/20 16:44:14 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 22:15:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:26:11 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	ray_txtr_file05_load(t_world *p_world)
 	ray_txtr_load(p_world, "./textures/SQ_map.png", "./textures/SQ_bump.png");
 	if (p_world->pp_txtr && p_world->pp_txtr[idx])
 	{
-		p_world->pp_txtr[idx]->color.material.ka = 1.f;
+		p_world->pp_txtr[idx]->color.material.ka = 2.f;
 		p_world->pp_txtr[idx]->color.material.kd = .8f;
 		p_world->pp_txtr[idx]->color.material.ks = 0.5f;
 		p_world->pp_txtr[idx]->color.material.ns = 128.f;

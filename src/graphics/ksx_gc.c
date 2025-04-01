@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:08:16 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/14 13:23:50 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 12:58:43 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ksx_garbage_collector(t_graphics *p_grph)
 
 void	ksx_error(char *error, char *file_name, int str_num)
 {
-	printf("%sERROR:%s %s.\nFile: %s\nString: %d\n\n",
-		RED, RESET, error, file_name, str_num);
+	printf("%sError%s\n", RED, RESET);
+	printf("%s\nFile: %s\nString: %d\n",	error, file_name, str_num);
 	ksx_garbage_collector(NULL);
 }
