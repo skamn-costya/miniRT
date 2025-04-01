@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 17:56:45 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/29 22:05:11 by username         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:23:21 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ksx_color_unit_fraction(t_color *p_color)
 #ifdef BONUS
 
 // ksx_time_print - Remove before evaluation
-void	ksx_time_print(void)
+void	ksx_time_print(char *str)
 {
 	time_t		timer;
 	char		buffer[25];
@@ -73,7 +73,10 @@ void	ksx_time_print(void)
 	timer = time(NULL);
 	tm_info = localtime(&timer);
 	strftime(buffer, 25, "%Y-%m-%d %H:%M:%S", tm_info);
-	puts(buffer);
+	if (str)
+		printf("%s - %s\n", buffer, str);
+	else
+		puts(buffer);
 }
 
 #endif

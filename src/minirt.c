@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/26 17:45:38 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/04/01 12:59:25 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:32:14 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,18 @@ static int	ksx_init_grph(t_graphics *p_grph, void (*f)(void *))
 	p_grph->f_gc = f;
 	p_grph->mlx = ksx_init();
 	if (!p_grph->mlx)
-		return (printf("MLX init failed!\n"), FALSE);
+		return (ksx_print_error("MLX init failed."), FALSE);
 	p_grph->img_bg = ksx_load_bg(p_grph);
 	if (!p_grph->img_bg)
-		return (printf("Create background failed!\n"), FALSE);
+		return (ksx_print_error("Create background failed."), FALSE);
 	p_grph->img_proj = ksx_create_image(p_grph->mlx, TRANSPARENT);
 	if (!p_grph->img_proj)
-		return (printf("Create image failed!\n"), FALSE);
+		return (ksx_print_error("Create image failed."), FALSE);
 	p_grph->img_ray = NULL;
 	if (ksx_image_to_window(p_grph->mlx, p_grph->img_bg, 0) < 0)
-		return (printf("background to window failed!\n"), FALSE);
+		return (ksx_print_error("background to window failed."), FALSE);
 	if (ksx_image_to_window(p_grph->mlx, p_grph->img_proj, 2) < 0)
-		return (printf("Image to window failed!\n"), FALSE);
+		return (ksx_print_error("Image to window failed."), FALSE);
 	return (TRUE);
 }
 
@@ -114,11 +114,9 @@ void	my_keyhook(mlx_key_data_t keydata, void *param)
 		&& keydata.action == MLX_RELEASE)
 		key_90__(&keydata, p_grph);
 	else if (keydata.key == MLX_KEY_TAB && keydata.action == MLX_RELEASE)
-	{
-		p_grph->obj_idx++;
-		if (p_grph->obj_idx >= p_grph->world.size_obj)
-			p_grph->obj_idx = 0;
-	}
+		key_tab(&keydata, p_grph);
+	else if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_RELEASE)
+		key_esc(&keydata, p_grph);
 	ksx_draw (p_grph);
 }
 

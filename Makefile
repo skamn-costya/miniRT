@@ -129,7 +129,8 @@ KYES_FN =	key_kp01.c \
 			key_f.c \
 			key_f5_f8.c \
 			key_f9_f12.c \
-			key_90-=.c
+			key_90-=.c \
+			key_tab_esc.c
 KYES =	$(addprefix $(KYES_DIR), $(KYES_FN))
 
 # Boxes

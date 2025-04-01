@@ -6,14 +6,14 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/29 15:10:36 by username          #+#    #+#             */
-/*   Updated: 2025/03/31 22:53:57 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:49:46 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bvh.h"
 
-static void	ray_p_check_tri(t_triangle *p_tri,
-				t_ray *p_ray);
+inline static void	ray_p_check_tri(t_triangle *p_tri,
+						t_ray *p_ray);
 
 static void	zero_less_dir(t_vector3 *vec, float *dir)
 {
@@ -88,7 +88,7 @@ void	intersect_bvh(t_ray *ray, uint32_t idx, t_bvh *bvh, t_world *p_world)
 	}
 }
 
-static void	ray_p_check_tri(t_triangle *p_tri,
+inline static void	ray_p_check_tri(t_triangle *p_tri,
 	t_ray *p_ray)
 {
 	t_vector3	v3;

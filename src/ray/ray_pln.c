@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 21:10:25 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/31 22:53:07 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 13:50:16 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 #include "math.h"
 #include <stdio.h>
 
-static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
-				t_ray *p_ray);
-static void	ray_txtr_plane(t_plane *p_plane, t_ray *p_ray);
+inline static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
+						t_ray *p_ray);
+static void		ray_txtr_plane(t_plane *p_plane, t_ray *p_ray);
 
 void	ray_p2planes(t_world *p_world, t_ray *p_ray)
 {
@@ -50,7 +50,7 @@ void	ray_p2pln(t_plane *p_plane, t_ray *p_ray)
 		ray_p_check_plane (p_plane, &v3[1], p_ray);
 }
 
-static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
+inline static void	ray_p_check_plane(t_plane *p_plane, t_vector3 *p_point,
 	t_ray *p_ray)
 {
 	if (p_ray->length < p_ray->min_length)

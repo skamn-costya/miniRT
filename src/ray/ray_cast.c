@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:23:15 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/03/29 22:00:01 by username         ###   ########.fr       */
+/*   Updated: 2025/04/01 14:38:59 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ void	ray_cast(t_graphics *p_grph)
 	pthread_t	pthrd[THREADS + 1];
 	t_mondata	mondata;
 
-	ksx_time_print();
+	ksx_time_print("BVH building");
 	bvh_build_world(p_grph);
-	ksx_time_print();
-	printf("Ray tracing\n");
+	ksx_time_print("Ray tracing start");
 	ksx_ray_thrd_init(&mondata, thrddata, p_grph);
 	pthread_create(&pthrd[THREADS], NULL, &ksx_ray_thrd_mon,
 		&mondata);
@@ -75,9 +74,10 @@ void	ray_cast(t_graphics *p_grph)
 		thrddata[idx[0]].start = idx[0] * idx[1];
 		thrddata[idx[0]].finish = idx[0] * idx[1] + idx[1];
 		pthread_create(&pthrd[idx[0]], NULL, &ksx_ray_thrd, &thrddata[idx[0]]);
+		pthread_detach(pthrd[idx[0]]);
 	}
-	pthread_join (pthrd[THREADS], NULL);
-	ksx_time_print();
+	pthread_join(pthrd[THREADS], NULL);
+	ksx_time_print("Ray tracing finish");
 	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
 }
 

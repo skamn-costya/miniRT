@@ -6,7 +6,7 @@
 /*   By: ksorokol <ksorokol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 15:08:16 by ksorokol          #+#    #+#             */
-/*   Updated: 2025/02/20 18:12:14 by ksorokol         ###   ########.fr       */
+/*   Updated: 2025/04/01 15:06:05 by ksorokol         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	garbage_collector(void *p_mtc)
 	exit (EXIT_SUCCESS);
 }
 
-void	error(char *error, char *file_name, int str_num)
-{
-	printf("%sERROR:%s %s.\nFile: %s\nString: %d\n\n",
-		RED, RESET, error, file_name, str_num);
-	garbage_collector(NULL);
-}
+// void	error(char *error, char *file_name, int str_num)
+// {
+// 	printf("%sERROR:%s %s.\nFile: %s\nString: %d\n\n",
+// 		RED, RESET, error, file_name, str_num);
+// 	garbage_collector(NULL);
+// }
