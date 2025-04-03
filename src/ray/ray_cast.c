@@ -45,6 +45,7 @@ void	ray_cast(t_graphics *p_grph)
 			ksx_set_pixel(p_grph->img_ray, &ray.pixel);
 		}
 	}
+	printf("Ray tracing finished\n");
 	ksx_image_to_window(p_grph->mlx, p_grph->img_ray, 1);
 }
 
@@ -76,7 +77,6 @@ void	ray_cast(t_graphics *p_grph)
 	bvh_build_world(p_grph);
 	ksx_time_print("Ray tracing start");
 	ksx_ray_thrd_init(&mondata, thrddata, p_grph);
-	
 	mlx_delete_image(p_grph->mlx, p_grph->img_ray);
 	p_grph->img_ray = ksx_create_image(p_grph->mlx, TRANSPARENT);
 	idx[0] = -1;
