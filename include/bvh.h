@@ -38,9 +38,11 @@ t_vector3	max_vec(t_vector3 a, t_vector3 b);
 t_vector3	min_vec(t_vector3 a, t_vector3 b);
 
 // Debug
-void		bvh_draw_obj(t_object *obj, t_graphics *grph);
-void		bvh_draw_box(t_bvhnode *bvh_node, t_graphics *grph, uint32_t color);
-void		bvh_draw_world(t_graphics *grph);
+void		bvh_draw_obj(t_object *obj, t_graphics *grph,
+				mlx_image_t *p_img);
+void		bvh_draw_box(t_bvhnode *bvh_node, t_graphics *grph,
+				uint32_t color, mlx_image_t	*p_img);
+void		bvh_draw_world(t_graphics *grph, mlx_image_t *p_img);
 void		intersect_bvh(t_ray *ray, uint32_t idx,
 				t_bvh *bvh, t_world *p_world);
 

@@ -43,7 +43,8 @@ static void	bvh_project_vertices(t_vector3 v[8], t_pixel p[8],
 	}
 }
 
-void	bvh_draw_box(t_bvhnode *bvh_node, t_graphics *grph, uint32_t color)
+void	bvh_draw_box(t_bvhnode *bvh_node, t_graphics *grph,
+			uint32_t color, mlx_image_t *p_img)
 {
 	t_vector3	v[8];
 	t_pixel		p[8];
@@ -59,30 +60,30 @@ void	bvh_draw_box(t_bvhnode *bvh_node, t_graphics *grph, uint32_t color)
 	i = 0;
 	while (i < 12)
 	{
-		ksx_line(grph->img_ray, &p[edges[i][0]], &p[edges[i][1]]);
+		ksx_line(p_img, &p[edges[i][0]], &p[edges[i][1]]);
 		i++;
 	}
 }
 
-void	bvh_draw_obj(t_object *obj, t_graphics *grph)
+void	bvh_draw_obj(t_object *obj, t_graphics *grph, mlx_image_t *p_img)
 {
 	uint32_t	i;
 	uint32_t	color;
 
 	i = 0;
-	color = 0xFF3ADFFF;
+	color = 0x70C795E8;
 	while (i < obj->bvh->used_n)
 	{
-		bvh_draw_box(&obj->bvh->nodes[i], grph, color);
+		bvh_draw_box(&obj->bvh->nodes[i], grph, color, p_img);
 		i++;
 	}
 }
 
-void	bvh_draw_world(t_graphics *grph)
+void	bvh_draw_world(t_graphics *grph, mlx_image_t *p_img)
 {
 	int32_t	i;
 
 	i = -1;
 	while (++i < grph->world.size_obj)
-		bvh_draw_obj(grph->world.pp_obj[i], grph);
+		bvh_draw_obj(grph->world.pp_obj[i], grph, p_img);
 }

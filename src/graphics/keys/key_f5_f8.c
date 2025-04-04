@@ -34,7 +34,7 @@ void	key_f6(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 void	key_f7(mlx_key_data_t *p_keydata, t_graphics *p_grph)
 {
 	(void) p_keydata;
-	(void) p_grph;
+	p_grph->camera.flags ^= DRAW_BVH;
 }
 
 void	key_f8(mlx_key_data_t *p_keydata, t_graphics *p_grph)

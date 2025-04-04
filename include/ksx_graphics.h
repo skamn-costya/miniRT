@@ -88,6 +88,8 @@
 # define DRAW_NORM	0b00100000
 // 64
 # define CAM_PM		0b01000000
+// 128
+# define DRAW_BVH	0b10000000
 
 // # define RORATE_X 0b00000100
 // # define RORATE_Y 0b00001000
