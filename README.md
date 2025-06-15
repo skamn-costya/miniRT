@@ -27,7 +27,7 @@
 
 ## 📁 File Format (.rt)
 
-Example of a minimal valid scene file:
+Example of a minimal valid scene file:  
 A 0.2 255,255,255  
 C 0,0,0 0,0,1 70  
 L 10,10,10 0.6 255,255,255  
