@@ -50,7 +50,7 @@ Through miniRT, we learned:
 Ray tracing fundamentals  
 Vector and matrix math  
 3D geometry and camera projection  
-Graphics window management with MiniLibX  
+Graphics window management with MLX42  
 Code structuring and parsing techniques  
 Handling floating-point precision  
 Performance optimizations for real-time rendering  
