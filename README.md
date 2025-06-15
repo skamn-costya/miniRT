@@ -16,7 +16,7 @@
 - Phong lighting model
 - Basic input handling (e.g., closing the window with ESC or the window button)
 
-## ✨ Bonus (if implemented)
+## ✨ Bonus
 
 - Additional shapes (cone, triangle, etc.)
 - Support some .obj file (triangles only)
