@@ -23,7 +23,6 @@
 - Anti-aliasing
 - Shadows
 - Reflection and/or refraction
-- Save rendered image to BMP
 - Scene manipulation via keyboard
 
 ## 📁 File Format (.rt)
